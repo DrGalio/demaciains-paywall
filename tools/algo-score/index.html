@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithm Score Checker — Free Tool | Demaciains</title>
+<meta name="description" content="Paste your social media post and get an instant algorithm compatibility score. Free analysis for Instagram, TikTok, YouTube, LinkedIn, and X/Twitter.">
+<meta property="og:title" content="Algorithm Score Checker — Free Tool">
+<meta property="og:description" content="Get instant algorithm compatibility scores for your social media posts. Free, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://drgalio.github.io/demaciains-paywall/tools/algo-score/">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --text: #e8e8f0;
+    --text-dim: #8888a0;
+    --accent: #6366f1;
+    --accent-glow: rgba(99,102,241,0.3);
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --orange: #f97316;
+    --cyan: #06b6d4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  header p {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.15);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .platform-selector {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .platform-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .platform-btn:hover { border-color: var(--accent); color: var(--text); }
+  .platform-btn.active {
+    background: rgba(99,102,241,0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .input-area {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 1rem;
+    resize: vertical;
+    outline: none;
+    font-family: inherit;
+    line-height: 1.6;
+  }
+  textarea::placeholder { color: var(--text-dim); }
+  .input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .char-count { color: var(--text-dim); font-size: 0.85rem; }
+  .analyze-btn {
+    padding: 0.6rem 2rem;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .analyze-btn:hover { transform: translateY(-1px); box-shadow: 0 0 30px var(--accent-glow); }
+  .analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* Results */
+  .results { display: none; margin-top: 2rem; }
+  .results.show { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  .score-hero {
+    text-align: center;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+  .score-ring {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1rem;
+    position: relative;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring circle {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+  }
+  .score-ring .bg { stroke: var(--surface2); }
+  .score-ring .fg { transition: stroke-dashoffset 1.5s ease; }
+  .score-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: 800;
+  }
+  .score-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .score-sublabel { color: var(--text-dim); font-size: 0.9rem; }
+
+  .breakdown {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .factor {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .factor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .factor-name { font-weight: 600; font-size: 0.95rem; }
+  .factor-score { font-weight: 700; font-size: 0.9rem; }
+  .factor-bar {
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  .factor-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s ease;
+  }
+  .factor-tip {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .factor-tip strong { color: var(--text); }
+
+  .tips-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .tips-section h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+  .tip-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+  .tip-item:last-child { border-bottom: none; }
+  .tip-item .priority {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    text-transform: uppercase;
+  }
+  .priority-high { background: rgba(239,68,68,0.15); color: var(--red); }
+  .priority-med { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .priority-low { background: rgba(34,197,94,0.15); color: var(--green); }
+
+  .cta-box {
+    background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(6,182,212,0.1));
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .cta-box h3 { margin-bottom: 0.5rem; }
+  .cta-box p { color: var(--text-dim); margin-bottom: 1rem; font-size: 0.95rem; }
+  .cta-btn {
+    display: inline-block;
+    padding: 0.7rem 2rem;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 0 20px var(--accent-glow); }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <span class="badge">⚡ Free Tool</span>
+    <h1>Algorithm Score Checker</h1>
+    <p>Paste your social media post and get an instant algorithm compatibility score with actionable tips.</p>
+  </header>
+
+  <div class="platform-selector">
+    <button class="platform-btn active" data-platform="instagram">📸 Instagram</button>
+    <button class="platform-btn" data-platform="tiktok">🎵 TikTok</button>
+    <button class="platform-btn" data-platform="youtube">▶️ YouTube</button>
+    <button class="platform-btn" data-platform="linkedin">💼 LinkedIn</button>
+    <button class="platform-btn" data-platform="twitter">𝕏 Twitter/X</button>
+  </div>
+
+  <div class="input-area">
+    <textarea id="postInput" placeholder="Paste your post caption, tweet, video description, or content here..."></textarea>
+    <div class="input-footer">
+      <span class="char-count" id="charCount">0 characters</span>
+      <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">Analyze Score →</button>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="score-hero">
+      <div class="score-ring">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <circle class="bg" cx="75" cy="75" r="65" />
+          <circle class="fg" id="scoreCircle" cx="75" cy="75" r="65"
+            stroke-dasharray="408.4" stroke-dashoffset="408.4" />
+        </svg>
+        <div class="score-value" id="scoreValue">0</div>
+      </div>
+      <div class="score-label" id="scoreLabel">Analyzing...</div>
+      <div class="score-sublabel" id="scoreSublabel"></div>
+    </div>
+
+    <div class="breakdown" id="breakdown"></div>
+
+    <div class="tips-section" id="tipsSection">
+      <h3>🎯 Priority Improvements</h3>
+      <div id="tipsList"></div>
+    </div>
+
+    <div class="cta-box" id="ctaBox">
+      <h3>📚 Want the Full Algorithm Breakdown?</h3>
+      <p id="ctaText">Get the complete ranking signal analysis, exploitation framework, and ready-to-use prompts.</p>
+      <a href="#" class="cta-btn" id="ctaLink">Get the Algorithm Guide →</a>
+    </div>
+  </div>
+
+  <footer>
+    Built by <a href="https://drgalio.github.io/demaciains-paywall/">Demaciains</a> · Free, no signup, no tracking · Data stays in your browser
+  </footer>
+</div>
+
+<script>
+// Platform-specific algorithm weights and rules
+const PLATFORMS = {
+  instagram: {
+    name: 'Instagram',
+    ctaUrl: 'https://drgalio.github.io/demaciains-paywall/products/01-instagram-algorithm-april-2026.pdf',
+    ctaText: 'Get the complete Instagram Algorithm guide — all 47 ranking signals decoded.',
+    weights: { engagement_hook: 25, hashtag_strategy: 20, length_optimal: 15, emoji_usage: 10, cta_present: 15, question_asked: 10, storytelling: 5 },
+    optimalLength: { min: 125, max: 300 },
+    maxHashtags: 5,
+    optimalHashtags: { min: 3, max: 5 },
+    factors: {
+      engagement_hook: { name: '🪝 Engagement Hook', tip: 'Start with a pattern interrupt: bold claim, question, or contrarian take in the first line.' },
+      hashtag_strategy: { name: '#️⃣ Hashtag Strategy', tip: `Use 3-5 relevant hashtags. Mix 1-2 broad + 2-3 niche. Put in caption, not comments.` },
+      length_optimal: { name: '📏 Caption Length', tip: `Optimal: 125-300 characters for reach, 500-1000 for saves/shares.` },
+      emoji_usage: { name: '😊 Emoji Usage', tip: 'Use 2-5 emojis as visual anchors. Place at sentence starts for scannability.' },
+      cta_present: { name: '📢 Call to Action', tip: 'End with a clear CTA: "Save this", "Tag someone", "Comment your answer".' },
+      question_asked: { name: '❓ Engagement Question', tip: 'Questions drive comments, which the algorithm heavily weights for distribution.' },
+      storytelling: { name: '📖 Storytelling', tip: 'Personal stories and relatable moments generate saves and shares — the highest-weight signals.' }
+    }
+  },
+  tiktok: {
+    name: 'TikTok',
+    ctaUrl: 'https://drgalio.github.io/demaciains-paywall/products/02-tiktok-algorithm-april-2026.pdf',
+    ctaText: 'Get the complete TikTok Algorithm guide — FYP signals decoded.',
+    weights: { hook_first3: 30, trending_audio: 20, hashtag_trend: 15, short_punchy: 15, engagement_cta: 10, relatability: 10 },
+    optimalLength: { min: 50, max: 150 },
+    maxHashtags: 4,
+    optimalHashtags: { min: 2, max: 4 },
+    factors: {
+      hook_first3: { name: '⚡ First 3 Seconds Hook', tip: 'The hook decides everything. Start with conflict, surprise, or a bold claim. NO "Hey guys" intros.' },
+      trending_audio: { name: '🎵 Trending Elements', tip: 'Use trending sounds, formats, or references. The algorithm boosts content riding trends.' },
+      hashtag_trend: { name: '#️⃣ Hashtag Strategy', tip: 'Use 2-4 hashtags including 1 trending + 1 niche. #fyp alone is saturated.' },
+      short_punchy: { name: '✂️ Punchy Brevity', tip: 'Short, punchy captions (50-150 chars) perform best. Let the video speak.' },
+      engagement_cta: { name: '💬 Engagement Bait', tip: '"Comment if you agree", "Part 2?", "Wait for it" — drive the engagement signals TikTok rewards.' },
+      relatability: { name: '🪞 Relatability', tip: '"POV", "When you...", relatable moments get shared. Shares = algorithm gold.' }
+    }
+  },
+  youtube: {
+    name: 'YouTube',
+    ctaUrl: 'https://drgalio.github.io/demaciains-paywall/products/03-youtube-algorithm-april-2026.pdf',
+    ctaText: 'Get the complete YouTube Algorithm guide — recommendation engine breakdown.',
+    weights: { title_hook: 25, description_seo: 20, keywords: 15, cta_engagement: 15, length_descriptive: 10, chapters: 10, hashtags_yt: 5 },
+    optimalLength: { min: 200, max: 1000 },
+    maxHashtags: 3,
+    optimalHashtags: { min: 1, max: 3 },
+    factors: {
+      title_hook: { name: '🎯 Title Quality', tip: 'Use numbers, power words, or curiosity gaps. Keep under 60 chars for full display.' },
+      description_seo: { name: '📝 Description SEO', tip: 'First 2-3 lines are critical (shown in search). Front-load keywords naturally.' },
+      keywords: { name: '🔑 Keywords', tip: 'Include 3-5 target keywords naturally in title + description. Think what users search.' },
+      cta_engagement: { name: '👍 Engagement CTA', tip: 'Ask for likes, comments, subscribes. "If this helped, like & subscribe" works.' },
+      length_descriptive: { name: '📏 Description Length', tip: '200-1000 words. More text = more keyword surface for search.' },
+      chapters: { name: '📑 Chapters/Timestamps', tip: 'Add timestamps. They improve CTR, watch time, and search snippets.' },
+      hashtags_yt: { name: '#️⃣ Hashtags', tip: '1-3 hashtags in description. First 3 appear above title. Choose wisely.' }
+    }
+  },
+  linkedin: {
+    name: 'LinkedIn',
+    ctaUrl: 'https://drgalio.github.io/demaciains-paywall/products/04-linkedin-algorithm-april-2026.pdf',
+    ctaText: 'Get the complete LinkedIn Algorithm guide — professional reach strategies.',
+    weights: { hook_line: 25, line_breaks: 20, value_content: 20, engagement_prompt: 15, professional_tone: 10, optimal_length_li: 10 },
+    optimalLength: { min: 150, max: 1300 },
+    maxHashtags: 5,
+    optimalHashtags: { min: 0, max: 3 },
+    factors: {
+      hook_line: { name: '🪝 Opening Line', tip: 'First line must stop the scroll. Bold statement, contrarian take, or surprising stat.' },
+      line_breaks: { name: '↕️ Readability', tip: 'Short paragraphs (1-2 lines), lots of white space. LinkedIn rewards dwell time.' },
+      value_content: { name: '💎 Value Density', tip: 'Share frameworks, lessons, data. "Here\'s what I learned" posts get saved & shared.' },
+      engagement_prompt: { name: '💬 Discussion Prompt', tip: 'End with a question or "Agree or disagree?" to drive comments.' },
+      professional_tone: { name: '👔 Professional Voice', tip: 'LinkedIn rewards authentic professional insights over casual/meme content.' },
+      optimal_length_li: { name: '📏 Optimal Length', tip: '150-1300 characters. "See more" click is a positive signal — but only if hook was strong.' }
+    }
+  },
+  twitter: {
+    name: 'Twitter/X',
+    ctaUrl: 'https://drgalio.github.io/demaciains-paywall/products/05-twitter-x-algorithm-april-2026.pdf',
+    ctaText: 'Get the complete X/Twitter Algorithm guide — timeline optimization.',
+    weights: { hook_tweet: 25, thread_structure: 20, optimal_tweet_len: 15, engagement_bait: 15, timing_relevance: 15, media_bonus: 10 },
+    optimalLength: { min: 100, max: 280 },
+    maxHashtags: 2,
+    optimalHashtags: { min: 0, max: 1 },
+    factors: {
+      hook_tweet: { name: '⚡ Hook/Opener', tip: 'Lead with value or hot take. "Most people don\'t know..." or numbered lists work.' },
+      thread_structure: { name: '🧵 Thread Quality', tip: 'If >280 chars, format as thread. Number tweets (1/7). Each tweet should stand alone.' },
+      optimal_tweet_len: { name: '📏 Tweet Length', tip: 'Sweet spots: 70-100 chars (engagement) or 240-280 chars (threads/depth).' },
+      engagement_bait: { name: '💬 Engagement', tip: '"RT if you agree", polls, hot takes — drive replies and retweets for algorithm boost.' },
+      timing_relevance: { name: '⏰ Relevance', tip: 'Tie to trending topics, news, or events. Timely tweets get boosted in "For You".' },
+      media_bonus: { name: '🖼️ Media Attachments', tip: 'Images/videos get 2-3x more engagement. Alt text adds accessibility + keyword signal.' }
+    }
+  }
+};
+
+let currentPlatform = 'instagram';
+
+// Platform selector
+document.querySelectorAll('.platform-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPlatform = btn.dataset.platform;
+    document.getElementById('results').classList.remove('show');
+  });
+});
+
+// Char counter
+const textarea = document.getElementById('postInput');
+const charCount = document.getElementById('charCount');
+textarea.addEventListener('input', () => {
+  charCount.textContent = `${textarea.value.length} characters`;
+});
+
+function analyze() {
+  const text = textarea.value.trim();
+  if (!text) return;
+  
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true;
+  btn.textContent = 'Analyzing...';
+
+  setTimeout(() => {
+    const platform = PLATFORMS[currentPlatform];
+    const scores = {};
+    const tips = [];
+
+    // 1. Engagement Hook
+    const firstLine = text.split('\n')[0].trim();
+    const hookPatterns = [/^(most people|nobody|everyone|here'?s why|stop|don'?t|never|always|the secret|unpopular opinion|hot take|pov|when you|imagine|what if|why )/i, /\?$/, /^\d+[\.\)]/, /^"/, /🔥|💡|⚡|🚨|❌|✅/];
+    let hookScore = 30;
+    if (firstLine.length < 80 && firstLine.length > 10) hookScore += 20;
+    hookPatterns.forEach(p => { if (p.test(firstLine)) hookScore += 10; });
+    scores.engagement_hook = scores.hook_first3 = scores.hook_line = scores.hook_tweet = scores.title_hook = Math.min(100, hookScore);
+
+    // 2. Length
+    const len = text.length;
+    const opt = platform.optimalLength;
+    let lenScore;
+    if (len >= opt.min && len <= opt.max) lenScore = 100;
+    else if (len < opt.min) lenScore = Math.max(20, (len / opt.min) * 100);
+    else lenScore = Math.max(20, 100 - ((len - opt.max) / opt.max) * 50);
+    scores.length_optimal = scores.short_punchy = scores.length_descriptive = scores.optimal_length_li = scores.optimal_tweet_len = Math.round(lenScore);
+
+    // 3. Hashtags
+    const hashtags = text.match(/#\w+/g) || [];
+    const hc = hashtags.length;
+    const oh = platform.optimalHashtags;
+    let hashScore;
+    if (hc === 0 && oh.min === 0) hashScore = 80;
+    else if (hc >= oh.min && hc <= oh.max) hashScore = 100;
+    else if (hc < oh.min) hashScore = (hc / oh.min) * 70;
+    else hashScore = Math.max(20, 100 - (hc - oh.max) * 20);
+    scores.hashtag_strategy = scores.hashtag_trend = scores.keywords = scores.hashtags_yt = Math.round(hashScore);
+
+    // 4. Emoji usage
+    const emojiCount = (text.match(/[\u{1F300}-\u{1F9FF}]/gu) || []).length;
+    let emojiScore = 50;
+    if (emojiCount >= 2 && emojiCount <= 5) emojiScore = 100;
+    else if (emojiCount === 1) emojiScore = 70;
+    else if (emojiCount > 5) emojiScore = Math.max(30, 100 - (emojiCount - 5) * 15);
+    scores.emoji_usage = Math.round(emojiScore);
+
+    // 5. CTA present
+    const ctaPatterns = [/save this/i, /share this/i, /tag someone/i, /comment/i, /drop a/i, /let me know/i, /thoughts/i, /agree|disagree/i, /follow/i, /subscribe/i, /like/i, /check (out|the) (link|bio|comments)/i, /swipe/i, /👇|👉|🔗/];
+    let ctaScore = 20;
+    ctaPatterns.forEach(p => { if (p.test(text)) ctaScore += 15; });
+    scores.cta_present = scores.cta_engagement = scores.engagement_cta = scores.engagement_prompt = scores.engagement_bait = Math.min(100, Math.round(ctaScore));
+
+    // 6. Question asked
+    const questionCount = (text.match(/\?/g) || []).length;
+    let qScore = questionCount > 0 ? Math.min(100, 50 + questionCount * 25) : 15;
+    scores.question_asked = Math.round(qScore);
+
+    // 7. Storytelling
+    const storyPatterns = [/I (was|had|went|tried|learned|realized|used to)/i, /one day|last (week|month|year)|yesterday/i, /(story|lesson|mistake|failure|success)/i, /my (experience|journey|client|boss|team)/i, /here'?s what happened/i];
+    let storyScore = 20;
+    storyPatterns.forEach(p => { if (p.test(text)) storyScore += 16; });
+    scores.storytelling = scores.value_content = scores.relatability = scores.description_seo = scores.professional_tone = Math.min(100, Math.round(storyScore));
+
+    // Extra platform-specific factors
+    if (currentPlatform === 'tiktok') {
+      let trendScore = 40;
+      if (/pov|storytime|wait for it|part \d/i.test(text)) trendScore += 30;
+      if (/\?/.test(text)) trendScore += 15;
+      scores.trending_audio = Math.min(100, trendScore);
+    }
+    if (currentPlatform === 'youtube') {
+      scores.chapters = /\d{1,2}:\d{2}/.test(text) ? 100 : 10;
+    }
+    if (currentPlatform === 'linkedin') {
+      const breaks = (text.match(/\n/g) || []).length;
+      scores.line_breaks = Math.min(100, 30 + breaks * 10);
+    }
+    if (currentPlatform === 'twitter') {
+      let threadScore = 50;
+      if (/\d+\/\d+|thread|🧵/i.test(text)) threadScore = 100;
+      else if (len > 280) threadScore = 30;
+      scores.thread_structure = threadScore;
+      scores.timing_relevance = 50; // Can't determine from text alone
+      scores.media_bonus = 40; // Can't determine from text alone
+    }
+
+    // Calculate weighted total
+    let totalWeight = 0, weightedSum = 0;
+    for (const [key, weight] of Object.entries(platform.weights)) {
+      const score = scores[key] || 50;
+      weightedSum += score * weight;
+      totalWeight += weight;
+    }
+    const totalScore = Math.round(weightedSum / totalWeight);
+
+    // Generate tips
+    const factorEntries = Object.entries(platform.weights)
+      .map(([key, weight]) => ({ key, weight, score: scores[key] || 50, ...platform.factors[key] }))
+      .sort((a, b) => a.score - b.score);
+
+    factorEntries.forEach(f => {
+      if (f.score < 60) tips.push({ priority: 'high', text: `${f.name}: ${f.tip}` });
+      else if (f.score < 80) tips.push({ priority: 'med', text: `${f.name}: ${f.tip}` });
+    });
+
+    renderResults(totalScore, factorEntries, tips, platform);
+    btn.disabled = false;
+    btn.textContent = 'Analyze Score →';
+  }, 800);
+}
+
+function renderResults(score, factors, tips, platform) {
+  const results = document.getElementById('results');
+  results.classList.add('show');
+
+  // Score ring
+  const circle = document.getElementById('scoreCircle');
+  const circumference = 2 * Math.PI * 65;
+  const offset = circumference - (score / 100) * circumference;
+  circle.style.strokeDashoffset = offset;
+  
+  let color;
+  if (score >= 80) color = '#22c55e';
+  else if (score >= 60) color = '#eab308';
+  else if (score >= 40) color = '#f97316';
+  else color = '#ef4444';
+  circle.style.stroke = color;
+
+  document.getElementById('scoreValue').textContent = score;
+  document.getElementById('scoreValue').style.color = color;
+  
+  let label;
+  if (score >= 85) label = '🔥 Algorithm Gold — High Distribution Potential';
+  else if (score >= 70) label = '✅ Solid — Good Algorithm Compatibility';
+  else if (score >= 50) label = '⚠️ Decent — Room for Improvement';
+  else label = '🚫 Needs Work — Low Algorithm Compatibility';
+  document.getElementById('scoreLabel').textContent = label;
+  document.getElementById('scoreSublabel').textContent = `${platform.name} algorithm analysis based on ${factors.length} ranking factors`;
+
+  // Factor breakdown
+  const breakdown = document.getElementById('breakdown');
+  breakdown.innerHTML = factors.map(f => {
+    let barColor;
+    if (f.score >= 80) barColor = 'var(--green)';
+    else if (f.score >= 60) barColor = 'var(--yellow)';
+    else if (f.score >= 40) barColor = 'var(--orange)';
+    else barColor = 'var(--red)';
+    return `
+      <div class="factor">
+        <div class="factor-header">
+          <span class="factor-name">${f.name}</span>
+          <span class="factor-score" style="color:${barColor}">${f.score}/100</span>
+        </div>
+        <div class="factor-bar"><div class="factor-bar-fill" style="width:${f.score}%;background:${barColor}"></div></div>
+        <div class="factor-tip"><strong>Tip:</strong> ${f.tip}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Tips
+  const tipsList = document.getElementById('tipsList');
+  if (tips.length === 0) {
+    tipsList.innerHTML = '<div class="tip-item"><span class="priority priority-low">Excellent</span> Your post is well-optimized! Focus on timing and audience targeting.</div>';
+  } else {
+    tipsList.innerHTML = tips.map(t => `
+      <div class="tip-item">
+        <span class="priority priority-${t.priority}">${t.priority === 'high' ? 'Critical' : 'Improve'}</span>
+        ${t.text}
+      </div>
+    `).join('');
+  }
+
+  // CTA
+  document.getElementById('ctaText').textContent = platform.ctaText;
+  document.getElementById('ctaLink').href = platform.ctaUrl;
+
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
