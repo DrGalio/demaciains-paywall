@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gym & Fitness Studio AI Agent Config Pack — Demaciains</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #00c853;
+    --accent-hover: #00a844;
+    --surface: #16213e;
+    --surface-light: #0f3460;
+    --text: #eee;
+    --text-muted: #a8b2d1;
+    --white: #fff;
+    --success: #00c853;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--primary);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+  header { text-align: center; padding: 4rem 0 3rem; }
+  header h1 {
+    font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--accent), #69f0ae);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+  header .tagline { font-size: 1.3rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+  .badge {
+    display: inline-block; padding: 0.4rem 1rem; border-radius: 20px;
+    background: rgba(0,200,83,0.15); color: var(--accent); font-size: 0.85rem;
+    font-weight: 600; margin-bottom: 1.5rem; border: 1px solid rgba(0,200,83,0.3);
+  }
+  .price-block {
+    text-align: center; padding: 2rem; margin: 2rem 0;
+    background: var(--surface); border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .price { font-size: 3rem; font-weight: 800; color: var(--accent); }
+  .price-note { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+  .cta {
+    display: inline-block; padding: 1rem 2.5rem; margin-top: 1.5rem;
+    background: linear-gradient(135deg, var(--accent), #00a844);
+    color: var(--white); font-weight: 700; font-size: 1.1rem;
+    border: none; border-radius: var(--radius); cursor: pointer;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,200,83,0.3); }
+  section { margin: 3rem 0; }
+  h2 {
+    font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem; border-bottom: 2px solid rgba(0,200,83,0.2);
+  }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+  .feature-card {
+    background: var(--surface); padding: 1.5rem; border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .feature-card h3 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
+  .includes-list { list-style: none; }
+  .includes-list li {
+    padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .includes-list li::before { content: '✅'; font-size: 1.2rem; }
+  .pain-point {
+    background: rgba(233,69,96,0.1); border-left: 3px solid #e94560;
+    padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .pain-point strong { color: #e94560; }
+  .roi-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .roi-table th, .roi-table td {
+    padding: 0.75rem 1rem; text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .roi-table th { color: var(--accent); font-weight: 600; }
+  .roi-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .cta-center { text-align: center; margin: 3rem 0; }
+  footer {
+    text-align: center; padding: 3rem 0; color: var(--text-muted);
+    border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  @media (max-width: 600px) {
+    header h1 { font-size: 2rem; }
+    .price { font-size: 2.2rem; }
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="badge">💪 AI Agent Config Pack</div>
+  <h1>Gym & Fitness Studio AI Assistant</h1>
+  <p class="tagline">A complete, ready-to-paste AI configuration that turns ChatGPT, Claude, or Gemini into your gym's virtual front desk — handling class schedules, membership questions, personal training, workout plans, nutrition guidance, and member support 24/7.</p>
+</header>
+
+<div class="price-block">
+  <div class="price">$29</div>
+  <div class="price-note">One-time purchase · Instant download · Works forever</div>
+  <a href="https://drgalio.gumroad.com/l/gym-fitness-ai-config" class="cta">Get Instant Access →</a>
+</div>
+
+<section>
+  <h2>The Problem</h2>
+  <div class="pain-point">
+    <strong>Every missed inquiry is a missed member.</strong> Gyms lose 25-35% of after-hours inquiries because there's no one to answer. Front desk staff spend 12-18 hours per week answering the same questions: "What classes do you have?", "How much is a membership?", "Can I try before I buy?"
+  </div>
+  <div class="pain-point">
+    <strong>Prospects Google "gyms near me" at 11 PM</strong> and land on your website — but there's no one to answer their questions. By morning, they've signed up at the gym down the street that had a chatbot.
+  </div>
+  <div class="pain-point">
+    <strong>Member churn from poor communication is silent and costly.</strong> Members who can't easily get answers about classes, schedules, or their account quietly cancel. You never hear from them — they just disappear.
+  </div>
+</section>
+
+<section>
+  <h2>The Solution</h2>
+  <p>Our Gym & Fitness Studio AI Config Pack gives you a professionally crafted AI assistant that knows your gym inside and out. Paste it into any major AI platform and your virtual front desk is live in 15 minutes.</p>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>📅 Class Schedules</h3>
+      <p>Answers questions about class types, times, difficulty levels, and what to expect — instantly, any hour.</p>
+    </div>
+    <div class="feature-card">
+      <h3>💳 Membership Help</h3>
+      <p>Explains membership tiers, pricing, and benefits. Helps prospects compare options and choose the right plan.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🏋️ Workout Guidance</h3>
+      <p>Provides workout plan frameworks for beginners, intermediates, and advanced members — with appropriate disclaimers.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🥗 Nutrition Basics</h3>
+      <p>Shares general nutrition principles and supplement information with proper disclaimers and professional referrals.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🤕 Injury Modifications</h3>
+      <p>Suggests safe exercise alternatives for common injuries and limitations — always with physician consult disclaimers.</p>
+    </div>
+    <div class="feature-card">
+      <h3>👤 Personal Training</h3>
+      <p>Explains PT packages, trainer specialties, and helps members decide if personal training is right for them.</p>
+    </div>
+    <div class="feature-card">
+      <h3>📖 Gym Etiquette</h3>
+      <p>Covers facility rules, equipment usage tips, and locker room etiquette — keeping your gym running smoothly.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🔄 Membership Changes</h3>
+      <p>Handles cancellation and freeze requests with empathy and transparency — reducing churn from bad exit experiences.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🎯 New Member Onboarding</h3>
+      <p>Walks new members through their first visit, what to expect, and how to get the most from their membership.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What's Included</h2>
+  <ul class="includes-list">
+    <li><strong>System Prompt</strong> — 3,000+ word AI personality and behavior configuration covering all gym operations</li>
+    <li><strong>Knowledge Base Template</strong> — Customizable gym info (memberships, schedules, pricing, trainers, amenities, 20+ FAQs, policies)</li>
+    <li><strong>10 Conversation Starters</strong> — Pre-built prompts for highest-value member and prospect interactions</li>
+    <li><strong>Setup Guide</strong> — Step-by-step instructions for ChatGPT, Claude, and Gemini with ROI calculator</li>
+    <li><strong>Customization Checklist</strong> — Don't miss a placeholder with your gym's info</li>
+  </ul>
+</section>
+
+<section>
+  <h2>ROI — What It's Worth</h2>
+  <table class="roi-table">
+    <tr><th>Metric</th><th>Before</th><th>After</th></tr>
+    <tr><td>After-hours inquiries answered</td><td>0%</td><td>100%</td></tr>
+    <tr><td>Front desk time on routine Q&A</td><td>12-18 hrs/week</td><td>2-3 hrs/week</td></tr>
+    <tr><td>Member inquiry response time</td><td>2-8 hours</td><td>Instant</td></tr>
+    <tr><td>New member conversion rate</td><td>~25%</td><td>~35-45%</td></tr>
+    <tr><td>Member churn (communication-related)</td><td>5-8%/month</td><td>2-4%/month</td></tr>
+    <tr><td><strong>Estimated monthly value</strong></td><td>—</td><td><strong>$1,650-4,100</strong></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Works With</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>ChatGPT Custom GPT</h3>
+      <p>Create a branded GPT your whole team can access. Embed on your website for 24/7 prospect support.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Claude Projects</h3>
+      <p>Set up a Claude Project with your gym data. Best for privacy-conscious studios and internal team use.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Gemini Gems</h3>
+      <p>Create a Gem for your Google Workspace team. Best for gyms already using Google tools.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-center">
+  <a href="https://drgalio.gumroad.com/l/gym-fitness-ai-config" class="cta">Get the Gym & Fitness AI Pack — $29 →</a>
+  <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">Instant download · One-time payment · Works forever</p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://drgalio.github.io/demaciains-paywall/">Demaciains</a> · AI-powered digital products</p>
+  <p style="margin-top: 0.5rem;">Questions? Need a custom AI agent for your gym? <a href="mailto:galio@sharebot.net">Contact us</a></p>
+</footer>
+
+</div>
+</body>
+</html>
