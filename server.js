@@ -1,13 +1,17 @@
 // x402 Paywall Server for Demaciains PDF Products
 // Each product requires USDC payment via x402 protocol on Base
+// Facilitator: ChaosChain (gasless, non-custodial, no API keys)
 const express = require('express');
 const { paymentMiddleware } = require('@x402/express');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Treasury wallet address (Base network)
+// Treasury wallet address (Base network) — receives USDC directly
 const TREASURY_ADDRESS = '0x83F31CE0F8b1f27a6Ad91693709febb728c71563';
+
+// ChaosChain facilitator — gasless, no API key, non-custodial
+const FACILITATOR_URL = process.env.FACILITATOR_URL || 'https://facilitator.chaoscha.in';
 
 // Product catalog
 const PRODUCTS = {
@@ -86,7 +90,7 @@ for (const [slug, product] of Object.entries(PRODUCTS)) {
   };
 }
 
-app.use(paymentMiddleware(TREASURY_ADDRESS, paymentRoutes));
+app.use(paymentMiddleware(TREASURY_ADDRESS, paymentRoutes, { facilitatorUrl: FACILITATOR_URL }));
 
 // Homepage — product catalog
 app.get('/', (req, res) => {
