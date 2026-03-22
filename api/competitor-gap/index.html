@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Competitor Gap — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.gap-card{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.gap-card h3{color:#f59e0b;font-size:.95em;margin-bottom:8px}
+.gap-card .diff{float:right;padding:2px 10px;border-radius:4px;font-size:.8em}
+.diff-LOW{background:#064e3b;color:#6ee7b7}.diff-MEDIUM{background:#713f12;color:#fbbf24}.diff-HIGH{background:#7f1d1d;color:#fca5a5}
+.gap-card .row{display:flex;justify-content:space-between;padding:4px 0;font-size:.85em}
+.gap-card .label{color:#64748b}.gap-card .val{color:#e0e0e0;text-align:right;max-width:60%}
+.comps{background:#0f172a;border-radius:6px;padding:10px 14px;margin:10px 0;font-size:.8em;color:#64748b}
+.comps span{color:#60a5fa}
+input{background:#1e293b;color:#e0e0e0;border:1px solid #334155;border-radius:4px;padding:6px 10px;font-size:.85em;font-family:inherit;width:250px}
+button{background:#6366f1;color:#fff;border:none;border-radius:4px;padding:6px 14px;cursor:pointer;font-size:.85em;font-family:inherit;margin-left:8px}
+button:hover{background:#4f46e5}
+.filter{margin-bottom:16px;display:flex;gap:8px;align-items:center}
+.raw{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-top:20px}
+.raw summary{color:#6366f1;cursor:pointer;font-size:.85em}
+.raw pre{color:#22c55e;font-size:.75em;overflow-x:auto;margin-top:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>🔍 Competitor Gap Analysis <span class="live">LIVE</span></h1>
+<div class="meta">GET /api/competitor-gap?niche= • $0.50 USDC • x402 on Base • Generated: <span id="ts">—</span></div>
+</div>
+<div class="filter">
+<input id="nicheInput" placeholder="Enter niche (e.g. ai tools, saas, api)..." value="ai agent tools">
+<button onclick="render()">Analyze</button>
+</div>
+<div class="comps" id="compList"></div>
+<div id="gaps"></div>
+<div class="raw"><details><summary>📋 Raw JSON Response</summary><pre id="rawJson"></pre></details></div>
+
+<script src="/api/engine/data-engine.js"></script>
+<script>
+function render() {
+  const niche = document.getElementById('nicheInput').value || 'ai tools';
+  const data = DemaciainsEngine.competitorGap(niche);
+  document.getElementById('ts').textContent = new Date(data.generated).toLocaleString();
+  document.getElementById('compList').innerHTML = `Competitors analyzed: ${data.competitors_analyzed.map(c => `<span>${c}</span>`).join(', ')} • Confidence: ${Math.round(data.meta.gap_confidence * 100)}%`;
+  
+  let html = '';
+  data.gaps.forEach((g, i) => {
+    html += `<div class="gap-card">
+      <h3><span class="diff diff-${g.difficulty}">${g.difficulty}</span>${g.gap_type.replace(/_/g,' ').toUpperCase()}</h3>
+      <div class="row"><span class="label">Gap</span><span class="val">${g.gap_description}</span></div>
+      <div class="row"><span class="label">Opportunity</span><span class="val">${g.opportunity}</span></div>
+      <div class="row"><span class="label">Est. Market Capture</span><span class="val">${g.estimated_capture}</span></div>
+      <div class="row"><span class="label">Time to Exploit</span><span class="val">${g.time_to_exploit}</span></div>
+    </div>`;
+  });
+  document.getElementById('gaps').innerHTML = html;
+  document.getElementById('rawJson').textContent = JSON.stringify(data, null, 2);
+}
+render();
+</script>
+</body>
+</html>

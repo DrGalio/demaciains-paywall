@@ -1,7 +1,14 @@
 {
   "name": "Demaciains Research Services",
   "description": "Market research, gap analysis, trend signals, algorithm reports, and prompt engineering products for AI agents and humans. Payments via x402 protocol on Base network.",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "engine": "Demaciains Dynamic Data Engine v2",
+  "data_refresh": {
+    "market-gap": "daily (date-seeded)",
+    "trends": "hourly (hour-seeded)",
+    "competitor-gap": "daily (date+niche-seeded)",
+    "algo-report": "daily (date+market-seeded)"
+  },
   "protocol": "x402",
   "wallet": "0x83F31CE0F8b1f27a6Ad91693709febb728c71563",
   "network": "base",

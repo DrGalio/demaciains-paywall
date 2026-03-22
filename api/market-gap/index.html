@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Market Gap Report — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.gap{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.gap h3{color:#f59e0b;font-size:.95em;margin-bottom:8px}
+.gap .score{float:right;background:#1e1b4b;color:#a5b4fc;padding:2px 10px;border-radius:4px;font-size:.8em}
+.gap .row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:.85em}
+.gap .row:last-child{border-bottom:none}
+.gap .label{color:#64748b}.gap .val{color:#e0e0e0;text-align:right;max-width:60%}
+.gap .action{background:#0f172a;border-left:3px solid #6366f1;padding:8px 12px;margin-top:8px;font-size:.8em;color:#a5b4fc}
+.raw{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-top:20px}
+.raw summary{color:#6366f1;cursor:pointer;font-size:.85em}
+.raw pre{color:#22c55e;font-size:.75em;overflow-x:auto;margin-top:10px;white-space:pre-wrap}
+.refresh{display:inline-block;margin-left:10px;color:#64748b;font-size:.75em}
+select,input{background:#1e293b;color:#e0e0e0;border:1px solid #334155;border-radius:4px;padding:4px 8px;font-size:.8em;font-family:inherit}
+button{background:#6366f1;color:#fff;border:none;border-radius:4px;padding:4px 12px;cursor:pointer;font-size:.8em;font-family:inherit}
+button:hover{background:#4f46e5}
+.filter{margin-bottom:16px;display:flex;gap:8px;align-items:center}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>📊 Market Gap Report <span class="live">LIVE</span></h1>
+<div class="meta">GET /api/market-gap • $1.00 USDC • x402 on Base • Generated: <span id="ts">—</span><span class="refresh" id="refresh"></span></div>
+</div>
+<div class="filter">
+<label style="color:#64748b;font-size:.8em">Filter niche:</label>
+<input id="nicheInput" placeholder="e.g. agent, saas, api..." style="width:200px">
+<button onclick="regenerate()">Regenerate</button>
+</div>
+<div id="gaps"></div>
+<div class="raw"><details><summary>📋 Raw JSON Response</summary><pre id="rawJson"></pre></details></div>
+
+<script src="/api/engine/data-engine.js"></script>
+<script>
+function render(filter) {
+  const data = DemaciainsEngine.marketGap(filter || null);
+  document.getElementById('ts').textContent = new Date(data.generated).toLocaleString();
+  document.getElementById('refresh').textContent = `• Seed: date-based • Refreshes daily`;
+  
+  let html = '';
+  data.gaps.forEach(g => {
+    html += `<div class="gap">
+      <h3><span class="score">Gap: ${g.gap_score}</span>#${g.rank} ${g.niche}</h3>
+      <div class="row"><span class="label">Search Volume</span><span class="val">${g.search_volume_monthly.toLocaleString()}/mo</span></div>
+      <div class="row"><span class="label">Growth Rate</span><span class="val">${g.growth_rate}</span></div>
+      <div class="row"><span class="label">Competition</span><span class="val">${g.competition_density}</span></div>
+      <div class="row"><span class="label">Build Complexity</span><span class="val">${g.build_complexity}</span></div>
+      <div class="row"><span class="label">Revenue Potential</span><span class="val">${g.revenue_potential}</span></div>
+      <div class="row"><span class="label">Time to Market</span><span class="val">${g.time_to_market}</span></div>
+      <div class="action">💡 ${g.evidence}<br>🎯 ${g.action}</div>
+    </div>`;
+  });
+  document.getElementById('gaps').innerHTML = html;
+  document.getElementById('rawJson').textContent = JSON.stringify(data, null, 2);
+}
+function regenerate() { render(document.getElementById('nicheInput').value); }
+render();
+</script>
+</body>
+</html>

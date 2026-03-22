@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Algorithm Report — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.pattern{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.pattern h3{color:#f59e0b;font-size:.95em;margin-bottom:8px}
+.pattern .conf{float:right;padding:2px 10px;border-radius:4px;font-size:.8em}
+.conf-HIGH{background:#064e3b;color:#6ee7b7}.conf-MEDIUM{background:#713f12;color:#fbbf24}.conf-LOW{background:#7f1d1d;color:#fca5a5}
+.pattern .row{display:flex;justify-content:space-between;padding:4px 0;font-size:.85em}
+.pattern .label{color:#64748b}.pattern .val{color:#e0e0e0;text-align:right;max-width:60%}
+.pattern .action{background:#0f172a;border-left:3px solid #22c55e;padding:8px 12px;margin-top:8px;font-size:.8em;color:#6ee7b7}
+.bar{height:4px;background:#1a1a1a;border-radius:2px;margin-top:8px}
+.bar-fill{height:100%;border-radius:2px;transition:width .5s}
+input{background:#1e293b;color:#e0e0e0;border:1px solid #334155;border-radius:4px;padding:6px 10px;font-size:.85em;font-family:inherit;width:250px}
+button{background:#6366f1;color:#fff;border:none;border-radius:4px;padding:6px 14px;cursor:pointer;font-size:.85em;font-family:inherit;margin-left:8px}
+button:hover{background:#4f46e5}
+.filter{margin-bottom:16px;display:flex;gap:8px;align-items:center}
+.raw{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-top:20px}
+.raw summary{color:#6366f1;cursor:pointer;font-size:.85em}
+.raw pre{color:#22c55e;font-size:.75em;overflow-x:auto;margin-top:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>🔬 Algorithm Performance Report <span class="live">LIVE</span></h1>
+<div class="meta">GET /api/algo-report?market= • $2.00 USDC • x402 on Base • Generated: <span id="ts">—</span></div>
+</div>
+<div class="filter">
+<input id="marketInput" placeholder="Enter market (e.g. x402, saas, ecommerce)..." value="x402 agent commerce">
+<button onclick="render()">Generate Report</button>
+</div>
+<div id="patterns"></div>
+<div class="raw"><details><summary>📋 Raw JSON Response</summary><pre id="rawJson"></pre></details></div>
+
+<script src="/api/engine/data-engine.js"></script>
+<script>
+function render() {
+  const market = document.getElementById('marketInput').value || 'x402 agent commerce';
+  const data = DemaciainsEngine.algoReport(market);
+  document.getElementById('ts').textContent = new Date(data.generated).toLocaleString();
+  
+  let html = `<div style="color:#64748b;font-size:.8em;margin-bottom:16px">
+    Data points: ${data.meta.data_points_analyzed.toLocaleString()} • 
+    Backtest: ${data.meta.backtest_window} • 
+    Overall confidence: ${Math.round(data.meta.overall_confidence * 100)}%
+  </div>`;
+  
+  data.patterns.forEach(p => {
+    const pct = Math.round(p.confidence * 100);
+    const color = pct > 85 ? '#22c55e' : pct > 70 ? '#f59e0b' : '#ef4444';
+    html += `<div class="pattern">
+      <h3><span class="conf conf-${p.statistical_significance}">${p.confidence} (${p.statistical_significance})</span>Pattern #${p.rank}</h3>
+      <p style="color:#e0e0e0;margin-bottom:8px;font-size:.9em">${p.pattern}</p>
+      <div class="row"><span class="label">Backtest Period</span><span class="val">${p.backtest_period}</span></div>
+      <div class="row"><span class="label">Evidence</span><span class="val">${p.evidence}</span></div>
+      <div class="row"><span class="label">Expected Impact</span><span class="val">${p.expected_impact}</span></div>
+      <div class="action">🎯 ${p.action}</div>
+      <div class="bar"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>
+    </div>`;
+  });
+  document.getElementById('patterns').innerHTML = html;
+  document.getElementById('rawJson').textContent = JSON.stringify(data, null, 2);
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Trend Signals — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.trend{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.trend h3{color:#f59e0b;font-size:.95em;margin-bottom:8px}
+.trend .strength{float:right;background:#064e3b;color:#6ee7b7;padding:2px 10px;border-radius:4px;font-size:.8em}
+.bar{height:4px;background:#1a1a1a;border-radius:2px;margin-top:8px}
+.bar-fill{height:100%;border-radius:2px;transition:width .5s}
+.trend .row{display:flex;justify-content:space-between;padding:4px 0;font-size:.85em}
+.trend .label{color:#64748b}.trend .val{color:#e0e0e0}
+.kw{display:inline-block;background:#1e1b4b;color:#a5b4fc;padding:1px 6px;border-radius:3px;font-size:.7em;margin:2px}
+.raw{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-top:20px}
+.raw summary{color:#6366f1;cursor:pointer;font-size:.85em}
+.raw pre{color:#22c55e;font-size:.75em;overflow-x:auto;margin-top:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>🔥 Trend Signals <span class="live">LIVE</span></h1>
+<div class="meta">GET /api/trends • $0.25 USDC • x402 on Base • Hourly refresh • Generated: <span id="ts">—</span></div>
+</div>
+<div id="trends"></div>
+<div class="raw"><details><summary>📋 Raw JSON Response</summary><pre id="rawJson"></pre></details></div>
+
+<script src="/api/engine/data-engine.js"></script>
+<script>
+const data = DemaciainsEngine.trends();
+document.getElementById('ts').textContent = new Date(data.generated).toLocaleString();
+let html = '';
+data.trends.forEach(t => {
+  const pct = Math.round(t.signal_strength * 100);
+  const color = pct > 85 ? '#22c55e' : pct > 70 ? '#f59e0b' : '#ef4444';
+  html += `<div class="trend">
+    <h3><span class="strength">${pct}%</span>#${t.rank} ${t.pain_point}</h3>
+    <div class="row"><span class="label">Source</span><span class="val">${t.source}</span></div>
+    <div class="row"><span class="label">Velocity</span><span class="val">${t.velocity} (${t.mention_velocity})</span></div>
+    <div class="row"><span class="label">First Detected</span><span class="val">${t.first_detected}</span></div>
+    <div style="margin-top:6px">${t.related_keywords.map(k => `<span class="kw">${k}</span>`).join('')}</div>
+    <div class="bar"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>
+  </div>`;
+});
+document.getElementById('trends').innerHTML = html;
+document.getElementById('rawJson').textContent = JSON.stringify(data, null, 2);
+</script>
+</body>
+</html>
