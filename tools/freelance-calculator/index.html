@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceRate — Calculate Your Real Hourly Rate</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #f1f5f9; min-height: 100vh; }
+        .container { max-width: 700px; margin: 0 auto; padding: 32px 20px; }
+        h1 { font-size: 36px; text-align: center; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #94a3b8; margin-bottom: 32px; }
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .card h3 { margin-bottom: 16px; font-size: 16px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; color: #94a3b8; margin-bottom: 6px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 14px; background: #0f172a; border: 1px solid #334155; border-radius: 10px; color: #f1f5f9; font-size: 15px; }
+        .form-group input:focus { outline: none; border-color: #3b82f6; }
+        .btn { padding: 14px; border-radius: 10px; border: none; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; background: #3b82f6; color: white; margin-top: 8px; }
+        .btn:hover { background: #2563eb; }
+        .results { display: none; }
+        .results.active { display: block; }
+        .rate-display { text-align: center; padding: 32px; background: linear-gradient(135deg, #1e293b, #0f172a); border: 2px solid #3b82f6; border-radius: 16px; margin-bottom: 20px; }
+        .rate-label { font-size: 14px; color: #94a3b8; margin-bottom: 4px; }
+        .rate-value { font-size: 56px; font-weight: 800; color: #3b82f6; }
+        .rate-sub { font-size: 14px; color: #64748b; margin-top: 4px; }
+        .breakdown { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+        .breakdown-item { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; text-align: center; }
+        .breakdown-value { font-size: 24px; font-weight: 700; }
+        .breakdown-label { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .comparison { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; }
+        .comparison h3 { margin-bottom: 12px; }
+        .comp-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #334155; font-size: 14px; }
+        .comp-row:last-child { border-bottom: none; }
+        .share-bar { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
+        .share-btn { padding: 10px 20px; border-radius: 8px; background: #334155; border: none; color: #f1f5f9; cursor: pointer; font-size: 13px; }
+        @media (max-width: 600px) { .form-row, .breakdown { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 FreelanceRate</h1>
+        <p class="subtitle">Calculate your REAL hourly rate — not what you charge, what you actually earn</p>
+        
+        <div class="card">
+            <h3>💵 Income Goals</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Target annual income (after tax)</label>
+                    <input type="number" id="income" value="80000" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Tax rate (%)</label>
+                    <input type="number" id="tax" value="25" oninput="calculate()">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>⏰ Time Availability</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Weeks off per year</label>
+                    <input type="number" id="weeks-off" value="4" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Billable hours per week</label>
+                    <input type="number" id="billable" value="25" oninput="calculate()">
+                </div>
+            </div>
+            <p style="font-size:13px;color:#64748b;">Most freelancers only bill 20-25h/week. The rest goes to admin, marketing, meetings.</p>
+        </div>
+        
+        <div class="card">
+            <h3>📊 Business Expenses (Annual)</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Software & tools</label>
+                    <input type="number" id="expense-software" value="2000" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Insurance</label>
+                    <input type="number" id="expense-insurance" value="3000" oninput="calculate()">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Equipment & office</label>
+                    <input type="number" id="expense-office" value="1500" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Other expenses</label>
+                    <input type="number" id="expense-other" value="1000" oninput="calculate()">
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calculate()">Calculate My Real Rate</button>
+        
+        <div class="results" id="results" style="margin-top:24px;">
+            <div class="rate-display">
+                <div class="rate-label">Your Minimum Hourly Rate</div>
+                <div class="rate-value" id="hourly-rate">$0</div>
+                <div class="rate-sub">Before this, you're losing money</div>
+            </div>
+            
+            <div class="breakdown">
+                <div class="breakdown-item">
+                    <div class="breakdown-value" id="pre-tax">$0</div>
+                    <div class="breakdown-label">Pre-tax needed</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value" id="total-hours">0</div>
+                    <div class="breakdown-label">Billable hours/year</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value" id="daily-rate">$0</div>
+                    <div class="breakdown-label">Daily rate (8h)</div>
+                </div>
+            </div>
+            
+            <div class="breakdown">
+                <div class="breakdown-item">
+                    <div class="breakdown-value" style="color:#22c55e;" id="target-rate">$0</div>
+                    <div class="breakdown-label">Target rate (20% profit)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value" style="color:#eab308;" id="premium-rate">$0</div>
+                    <div class="breakdown-label">Premium rate (50% profit)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value" id="monthly-income">$0</div>
+                    <div class="breakdown-label">Monthly gross needed</div>
+                </div>
+            </div>
+            
+            <div class="comparison">
+                <h3>📈 Project Pricing Guide</h3>
+                <div class="comp-row"><span>1-day project</span><span id="p1">$0</span></div>
+                <div class="comp-row"><span>1-week project</span><span id="p2">$0</span></div>
+                <div class="comp-row"><span>2-week project</span><span id="p3">$0</span></div>
+                <div class="comp-row"><span>1-month project</span><span id="p4">$0</span></div>
+                <div class="comp-row"><span>3-month retainer</span><span id="p5">$0</span></div>
+            </div>
+            
+            <div class="share-bar">
+                <button class="share-btn" onclick="copyResult()">📋 Copy Results</button>
+                <button class="share-btn" onclick="window.print()">🖨️ Print</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const taxRate = parseFloat(document.getElementById('tax').value) / 100 || 0.25;
+            const weeksOff = parseFloat(document.getElementById('weeks-off').value) || 4;
+            const billablePerWeek = parseFloat(document.getElementById('billable').value) || 25;
+            
+            const expenses = ['software', 'insurance', 'office', 'other'].reduce((sum, key) => 
+                sum + (parseFloat(document.getElementById('expense-' + key).value) || 0), 0);
+            
+            const workingWeeks = 52 - weeksOff;
+            const totalBillableHours = workingWeeks * billablePerWeek;
+            const preTaxNeeded = income / (1 - taxRate) + expenses;
+            const minimumRate = preTaxNeeded / totalBillableHours;
+            const targetRate = minimumRate * 1.2;
+            const premiumRate = minimumRate * 1.5;
+            
+            document.getElementById('hourly-rate').textContent = '$' + Math.ceil(minimumRate);
+            document.getElementById('pre-tax').textContent = '$' + Math.round(preTaxNeeded).toLocaleString();
+            document.getElementById('total-hours').textContent = totalBillableHours;
+            document.getElementById('daily-rate').textContent = '$' + Math.round(minimumRate * 8);
+            document.getElementById('target-rate').textContent = '$' + Math.ceil(targetRate);
+            document.getElementById('premium-rate').textContent = '$' + Math.ceil(premiumRate);
+            document.getElementById('monthly-income').textContent = '$' + Math.round(income / 12).toLocaleString();
+            
+            const daily = Math.round(targetRate * 8);
+            document.getElementById('p1').textContent = '$' + daily;
+            document.getElementById('p2').textContent = '$' + (daily * 5).toLocaleString();
+            document.getElementById('p3').textContent = '$' + (daily * 10).toLocaleString();
+            document.getElementById('p4').textContent = '$' + (daily * 22).toLocaleString();
+            document.getElementById('p5').textContent = '$' + (daily * 22 * 3).toLocaleString();
+            
+            document.getElementById('results').classList.add('active');
+        }
+        
+        function copyResult() {
+            const rate = document.getElementById('hourly-rate').textContent;
+            const target = document.getElementById('target-rate').textContent;
+            const text = `My freelance rates:\n• Minimum: ${rate}/hr\n• Target: ${target}/hr\n• Calculated at freelancerate.app`;
+            navigator.clipboard.writeText(text);
+            alert('Copied!');
+        }
+        
+        calculate();
+    </script>
+<!-- Demaciains Cross-Promotion Banner -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1e293b,#0f172a);border-top:2px solid #3b82f6;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <span style="color:#94a3b8;font-size:14px;">⚡ Want to earn more? Check our <strong style="color:#f1f5f9;">AI Prompt Packs</strong> & <strong style="color:#f1f5f9;">Algorithm Guides</strong></span>
+  <a href="https://drgalio.github.io/demaciains-paywall/" style="background:#3b82f6;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;">Browse Products →</a>
+  <span onclick="this.parentElement.style.display='none'" style="color:#64748b;cursor:pointer;font-size:18px;margin-left:8px;">✕</span>
+</div>
+<style>body{padding-bottom:60px!important;}</style>
+</body>
+</html>

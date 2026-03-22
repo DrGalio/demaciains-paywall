@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialProof — Collect & Display Testimonials</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #fafafa; --surface: #ffffff; --text: #18181b; --text2: #71717a; --accent: #2563eb; --green: #16a34a; --border: #e4e4e7; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        
+        .hero { text-align: center; padding: 48px 0 32px; }
+        .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+        .hero p { color: var(--text2); font-size: 16px; }
+        
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-family: inherit; }
+        .form-group textarea { height: 100px; resize: vertical; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+        
+        .stars { display: flex; gap: 4px; margin-bottom: 16px; }
+        .star { font-size: 28px; cursor: pointer; color: #d4d4d8; transition: color 0.15s; }
+        .star.active, .star:hover { color: #facc15; }
+        
+        .btn { padding: 12px 24px; border-radius: 10px; border: none; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { opacity: 0.9; }
+        
+        .testimonial-wall { margin-top: 32px; }
+        .testimonial-wall h2 { font-size: 24px; margin-bottom: 20px; text-align: center; }
+        
+        .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .testimonial-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; }
+        .testimonial-name { font-weight: 600; }
+        .testimonial-role { font-size: 13px; color: var(--text2); }
+        .testimonial-stars { color: #facc15; margin-bottom: 8px; }
+        .testimonial-text { font-size: 15px; line-height: 1.6; color: #3f3f46; }
+        .testimonial-date { font-size: 12px; color: var(--text2); margin-top: 8px; }
+        
+        .widget-preview { background: #f4f4f5; border-radius: 12px; padding: 20px; margin-top: 24px; }
+        .widget-preview h3 { margin-bottom: 12px; }
+        .embed-code { background: #18181b; color: #a1a1aa; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 12px; overflow-x: auto; white-space: pre; }
+        
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+        .stat { text-align: center; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+        .stat-value { font-size: 24px; font-weight: 800; color: var(--accent); }
+        .stat-label { font-size: 12px; color: var(--text2); }
+        
+        .tab-bar { display: flex; gap: 4px; margin-bottom: 20px; background: var(--surface); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+        .tab { flex: 1; padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.15s; }
+        .tab.active { background: var(--accent); color: white; }
+        .tab:hover:not(.active) { background: #f4f4f5; }
+        
+        .success-msg { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 16px; border-radius: 10px; text-align: center; margin-bottom: 20px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>⭐ SocialProof</h1>
+            <p>Collect testimonials from your clients. Display them beautifully. Build trust instantly.</p>
+        </div>
+        
+        <div class="tab-bar">
+            <div class="tab active" onclick="showTab('collect')">✍️ Collect</div>
+            <div class="tab" onclick="showTab('display')">🖼️ Display</div>
+            <div class="tab" onclick="showTab('widget')">📋 Embed</div>
+        </div>
+        
+        <!-- Collect Tab -->
+        <div id="tab-collect">
+            <div class="success-msg" id="success-msg">✅ Testimonial submitted successfully! It will appear on your wall.</div>
+            
+            <div class="card">
+                <h3 style="margin-bottom:16px;">Leave a Testimonial</h3>
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="t-name" placeholder="Jane Smith">
+                </div>
+                <div class="form-group">
+                    <label>Your Role / Company</label>
+                    <input type="text" id="t-role" placeholder="CEO at Acme Corp">
+                </div>
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="stars" id="star-rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Your Testimonial</label>
+                    <textarea id="t-text" placeholder="Share your experience... What problem did this solve? What results did you get?"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="submitTestimonial()">Submit Testimonial</button>
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-bottom:12px;">📤 Share This Link</h3>
+                <p style="color:var(--text2);font-size:14px;margin-bottom:12px;">Send this page to your clients to collect testimonials:</p>
+                <input type="text" readonly value="https://yourdomain.com/testimonial" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:#f4f4f5;">
+            </div>
+        </div>
+        
+        <!-- Display Tab -->
+        <div id="tab-display" style="display:none;">
+            <div class="stats">
+                <div class="stat"><div class="stat-value" id="stat-count">0</div><div class="stat-label">Testimonials</div></div>
+                <div class="stat"><div class="stat-value" id="stat-avg">0</div><div class="stat-label">Avg Rating</div></div>
+                <div class="stat"><div class="stat-value" id="stat-5star">0</div><div class="stat-label">5-Star Reviews</div></div>
+            </div>
+            
+            <div class="testimonial-wall" id="testimonial-wall">
+                <h2>What Our Clients Say</h2>
+                <div id="testimonials-list"></div>
+            </div>
+        </div>
+        
+        <!-- Widget Tab -->
+        <div id="tab-widget" style="display:none;">
+            <div class="card">
+                <h3 style="margin-bottom:12px;">📋 Embed Widget</h3>
+                <p style="color:var(--text2);font-size:14px;margin-bottom:16px;">Copy this code and paste it into your website:</p>
+                <div class="embed-code" id="embed-code">&lt;!-- SocialProof Widget --&gt;
+&lt;div id="socialproof-wall"&gt;
+  &lt;script src="https://yourdomain.com/widget.js"&gt;&lt;/script&gt;
+&lt;/div&gt;</div>
+                <button class="btn btn-primary" style="margin-top:12px;" onclick="copyEmbed()">📋 Copy Embed Code</button>
+            </div>
+            
+            <div class="widget-preview">
+                <h3>Preview</h3>
+                <div id="widget-preview-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let testimonials = JSON.parse(localStorage.getItem('socialproof_testimonials') || '[]');
+        let selectedRating = 0;
+        
+        // Star rating
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.dataset.value);
+                document.querySelectorAll('.star').forEach(s => {
+                    s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating);
+                });
+            });
+        });
+        
+        function submitTestimonial() {
+            const name = document.getElementById('t-name').value.trim();
+            const role = document.getElementById('t-role').value.trim();
+            const text = document.getElementById('t-text').value.trim();
+            
+            if (!name || !text || !selectedRating) {
+                alert('Please fill in your name, rating, and testimonial.');
+                return;
+            }
+            
+            testimonials.unshift({
+                id: Date.now(),
+                name,
+                role,
+                rating: selectedRating,
+                text,
+                date: new Date().toISOString().split('T')[0]
+            });
+            
+            localStorage.setItem('socialproof_testimonials', JSON.stringify(testimonials));
+            
+            document.getElementById('t-name').value = '';
+            document.getElementById('t-role').value = '';
+            document.getElementById('t-text').value = '';
+            selectedRating = 0;
+            document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+            
+            document.getElementById('success-msg').style.display = 'block';
+            setTimeout(() => document.getElementById('success-msg').style.display = 'none', 3000);
+            
+            renderTestimonials();
+            updateStats();
+        }
+        
+        function renderTestimonials() {
+            const list = document.getElementById('testimonials-list');
+            list.innerHTML = testimonials.map(t => `
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="avatar">${t.name.charAt(0)}</div>
+                        <div>
+                            <div class="testimonial-name">${t.name}</div>
+                            <div class="testimonial-role">${t.role || ''}</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">${'★'.repeat(t.rating)}${'☆'.repeat(5-t.rating)}</div>
+                    <div class="testimonial-text">"${t.text}"</div>
+                    <div class="testimonial-date">${t.date}</div>
+                </div>
+            `).join('');
+            
+            // Widget preview
+            document.getElementById('widget-preview-content').innerHTML = list.innerHTML;
+        }
+        
+        function updateStats() {
+            document.getElementById('stat-count').textContent = testimonials.length;
+            document.getElementById('stat-avg').textContent = testimonials.length ? (testimonials.reduce((s,t)=>s+t.rating,0)/testimonials.length).toFixed(1) : '0';
+            document.getElementById('stat-5star').textContent = testimonials.filter(t=>t.rating===5).length;
+        }
+        
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-collect').style.display = tab === 'collect' ? '' : 'none';
+            document.getElementById('tab-display').style.display = tab === 'display' ? '' : 'none';
+            document.getElementById('tab-widget').style.display = tab === 'widget' ? '' : 'none';
+        }
+        
+        function copyEmbed() {
+            navigator.clipboard.writeText(document.getElementById('embed-code').textContent);
+            alert('Embed code copied!');
+        }
+        
+        // Init
+        renderTestimonials();
+        updateStats();
+    </script>
+<!-- Demaciains Cross-Promotion Banner -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1e293b,#0f172a);border-top:2px solid #3b82f6;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <span style="color:#94a3b8;font-size:14px;">⚡ Want to earn more? Check our <strong style="color:#f1f5f9;">AI Prompt Packs</strong> & <strong style="color:#f1f5f9;">Algorithm Guides</strong></span>
+  <a href="https://drgalio.github.io/demaciains-paywall/" style="background:#3b82f6;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;">Browse Products →</a>
+  <span onclick="this.parentElement.style.display='none'" style="color:#64748b;cursor:pointer;font-size:18px;margin-left:8px;">✕</span>
+</div>
+<style>body{padding-bottom:60px!important;}</style>
+</body>
+</html>

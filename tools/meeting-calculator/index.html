@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeetingCost — How Much Does This Meeting Cost?</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fafafa; }
+        .container { max-width: 600px; margin: 0 auto; padding: 32px 20px; }
+        h1 { font-size: 42px; text-align: center; margin-bottom: 4px; }
+        .subtitle { text-align: center; color: #71717a; margin-bottom: 32px; font-size: 16px; }
+        .card { background: #18181b; border: 1px solid #27272a; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid #27272a; border-radius: 10px; color: #fafafa; font-size: 16px; }
+        .form-group input:focus { outline: none; border-color: #ef4444; }
+        .btn { padding: 14px; border-radius: 10px; border: none; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; background: #ef4444; color: white; }
+        .btn:hover { background: #dc2626; }
+        
+        .cost-display { text-align: center; padding: 40px; background: linear-gradient(135deg, #18181b, #0a0a0a); border: 2px solid #ef4444; border-radius: 16px; margin: 24px 0; }
+        .cost-label { font-size: 14px; color: #71717a; }
+        .cost-value { font-size: 64px; font-weight: 800; color: #ef4444; margin: 8px 0; }
+        .cost-sub { font-size: 14px; color: #52525b; }
+        
+        .insights { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .insight { background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 16px; text-align: center; }
+        .insight-value { font-size: 24px; font-weight: 700; }
+        .insight-label { font-size: 12px; color: #71717a; margin-top: 4px; }
+        .red { color: #ef4444; }
+        .yellow { color: #eab308; }
+        .green { color: #22c55e; }
+        
+        .timer { text-align: center; padding: 24px; background: #18181b; border: 1px solid #27272a; border-radius: 16px; margin: 20px 0; }
+        .timer-value { font-size: 48px; font-weight: 800; font-family: monospace; color: #ef4444; }
+        .timer-label { font-size: 13px; color: #71717a; margin-top: 4px; }
+        .timer-btns { display: flex; gap: 8px; margin-top: 12px; }
+        .timer-btn { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #27272a; background: #0a0a0a; color: #fafafa; cursor: pointer; font-size: 14px; }
+        .timer-btn.active { background: #ef4444; border-color: #ef4444; }
+        
+        .alternatives { background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 20px; margin-top: 20px; }
+        .alternatives h3 { margin-bottom: 12px; }
+        .alt-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #27272a; font-size: 14px; }
+        .alt-item:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💸 MeetingCost</h1>
+        <p class="subtitle">How much money is this meeting burning?</p>
+        
+        <div class="card">
+            <div class="form-group">
+                <label>Number of attendees</label>
+                <input type="number" id="attendees" value="6" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>Average hourly salary ($)</label>
+                <input type="number" id="salary" value="50" oninput="calculate()">
+                <p style="font-size:12px;color:#52525b;margin-top:4px;">Use $35 for juniors, $50 for mid, $75 for senior, $100+ for executives</p>
+            </div>
+            <div class="form-group">
+                <label>Meeting duration (minutes)</label>
+                <input type="number" id="duration" value="60" oninput="calculate()">
+            </div>
+        </div>
+        
+        <div class="cost-display">
+            <div class="cost-label">This meeting costs</div>
+            <div class="cost-value" id="total-cost">$0</div>
+            <div class="cost-sub">of company money</div>
+        </div>
+        
+        <div class="insights">
+            <div class="insight">
+                <div class="insight-value red" id="per-min">$0</div>
+                <div class="insight-label">Per minute</div>
+            </div>
+            <div class="insight">
+                <div class="insight-value yellow" id="weekly-cost">$0</div>
+                <div class="insight-label">If weekly recurring</div>
+            </div>
+            <div class="insight">
+                <div class="insight-value red" id="yearly-cost">$0</div>
+                <div class="insight-label">Annual cost</div>
+            </div>
+            <div class="insight">
+                <div class="insight-value green" id="salary-equiv">$0</div>
+                <div class="insight-label">Could pay someone/mo</div>
+            </div>
+        </div>
+        
+        <div class="timer">
+            <div class="timer-label">⏱️ LIVE MEETING TIMER — Cost accumulating</div>
+            <div class="timer-value" id="live-cost">$0.00</div>
+            <div class="timer-label" id="elapsed">00:00 elapsed</div>
+            <div class="timer-btns">
+                <button class="timer-btn" id="start-btn" onclick="toggleTimer()">▶️ Start</button>
+                <button class="timer-btn" onclick="resetTimer()">🔄 Reset</button>
+            </div>
+        </div>
+        
+        <div class="alternatives">
+            <h3>🤔 What else could this cost pay for?</h3>
+            <div id="alts"></div>
+        </div>
+    </div>
+
+    <script>
+        let timerRunning = false;
+        let timerInterval = null;
+        let elapsedSeconds = 0;
+        
+        function calculate() {
+            const attendees = parseInt(document.getElementById('attendees').value) || 1;
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const duration = parseInt(document.getElementById('duration').value) || 0;
+            
+            const costPerHour = attendees * salary;
+            const totalCost = costPerHour * (duration / 60);
+            const perMin = costPerHour / 60;
+            
+            document.getElementById('total-cost').textContent = '$' + totalCost.toFixed(0);
+            document.getElementById('per-min').textContent = '$' + perMin.toFixed(0);
+            document.getElementById('weekly-cost').textContent = '$' + (totalCost * 52).toLocaleString(undefined, {maximumFractionDigits: 0});
+            document.getElementById('yearly-cost').textContent = '$' + (totalCost * 52).toLocaleString(undefined, {maximumFractionDigits: 0});
+            document.getElementById('salary-equiv').textContent = '$' + Math.round(totalCost * 52 / 12).toLocaleString();
+            
+            // Alternatives
+            const yearlyWaste = totalCost * 52;
+            document.getElementById('alts').innerHTML = `
+                <div class="alt-item"><span>Senior developer (1 month)</span><span>${yearlyWaste > 10000 ? '✅' : '❌'} $${Math.round(yearlyWaste/12).toLocaleString()}</span></div>
+                <div class="alt-item"><span>Marketing campaign</span><span>${yearlyWaste > 5000 ? '✅' : '❌'} $5,000</span></div>
+                <div class="alt-item"><span>New laptop for team</span><span>${yearlyWaste > 2000 ? '✅' : '❌'} $2,000</span></div>
+                <div class="alt-item"><span>Team training course</span><span>${yearlyWaste > 500 ? '✅' : '❌'} $500</span></div>
+                <div class="alt-item"><span>Monthly coffee budget</span><span>✅ $${Math.round(yearlyWaste/12).toLocaleString()}</span></div>
+            `;
+            
+            window._costPerSecond = perMin / 60;
+        }
+        
+        function toggleTimer() {
+            timerRunning = !timerRunning;
+            const btn = document.getElementById('start-btn');
+            btn.textContent = timerRunning ? '⏸️ Pause' : '▶️ Start';
+            btn.classList.toggle('active', timerRunning);
+            
+            if (timerRunning) {
+                timerInterval = setInterval(() => {
+                    elapsedSeconds++;
+                    const cost = elapsedSeconds * (window._costPerSecond || 0);
+                    document.getElementById('live-cost').textContent = '$' + cost.toFixed(2);
+                    const min = Math.floor(elapsedSeconds / 60);
+                    const sec = elapsedSeconds % 60;
+                    document.getElementById('elapsed').textContent = `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')} elapsed`;
+                }, 1000);
+            } else {
+                clearInterval(timerInterval);
+            }
+        }
+        
+        function resetTimer() {
+            timerRunning = false;
+            clearInterval(timerInterval);
+            elapsedSeconds = 0;
+            document.getElementById('start-btn').textContent = '▶️ Start';
+            document.getElementById('start-btn').classList.remove('active');
+            document.getElementById('live-cost').textContent = '$0.00';
+            document.getElementById('elapsed').textContent = '00:00 elapsed';
+        }
+        
+        calculate();
+    </script>
+<!-- Demaciains Cross-Promotion Banner -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1e293b,#0f172a);border-top:2px solid #3b82f6;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <span style="color:#94a3b8;font-size:14px;">⚡ Want to earn more? Check our <strong style="color:#f1f5f9;">AI Prompt Packs</strong> & <strong style="color:#f1f5f9;">Algorithm Guides</strong></span>
+  <a href="https://drgalio.github.io/demaciains-paywall/" style="background:#3b82f6;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;">Browse Products →</a>
+  <span onclick="this.parentElement.style.display='none'" style="color:#64748b;cursor:pointer;font-size:18px;margin-left:8px;">✕</span>
+</div>
+<style>body{padding-bottom:60px!important;}</style>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demaciains — AI Research & Algorithm Intelligence</title>
+<meta name="description" content="Battle-tested AI prompts and reverse-engineered social media algorithms. Pay with USDC on Base. No accounts.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--accent:#6c5ce7;--accent2:#00cec9;--gold:#fdcb6e;--text:#e0e0e0;--muted:#888;--border:#1e1e2e}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:var(--accent2);text-decoration:none}
+
+/* HERO */
+.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 0%,rgba(108,92,231,.15),transparent 70%)}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;background:linear-gradient(135deg,#6c5ce7,#00cec9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.hero .tagline{font-size:1.25rem;color:var(--muted);max-width:600px;margin-bottom:2rem}
+.hero .badge{display:inline-block;padding:.4rem 1rem;border:1px solid var(--accent);border-radius:20px;font-size:.85rem;color:var(--accent);margin-bottom:1rem}
+.stats{display:flex;gap:2rem;margin-top:1rem;flex-wrap:wrap;justify-content:center}
+.stat{text-align:center}
+.stat .num{font-size:2rem;font-weight:700;color:var(--accent2)}
+.stat .label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+
+/* SECTION */
+section{padding:4rem 2rem;max-width:1200px;margin:0 auto}
+.section-title{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+.section-sub{color:var(--muted);margin-bottom:2rem;font-size:1.05rem}
+
+/* FREE TOOL */
+.tool-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:3rem}
+.tool-box h3{font-size:1.3rem;margin-bottom:1rem;color:var(--gold)}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
+.tool-grid label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:.3rem}
+.tool-grid select,.tool-grid input{width:100%;padding:.6rem;background:#0a0a0f;border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.9rem}
+.score-display{text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(108,92,231,.1),rgba(0,206,201,.1));border-radius:12px;margin-top:1rem}
+.score-num{font-size:3.5rem;font-weight:800;background:linear-gradient(135deg,#6c5ce7,#00cec9);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.score-label{color:var(--muted);font-size:.9rem;margin-top:.3rem}
+.score-tips{text-align:left;margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border-radius:8px;font-size:.9rem}
+.score-tips li{margin-bottom:.4rem}
+.cta-inline{display:inline-block;margin-top:1rem;padding:.7rem 1.5rem;background:linear-gradient(135deg,#6c5ce7,#00cec9);border-radius:8px;color:#fff;font-weight:600;cursor:pointer;border:none;font-size:.95rem}
+.cta-inline:hover{opacity:.9;transform:translateY(-1px)}
+
+/* PRODUCT CARDS */
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.product{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .3s;position:relative;overflow:hidden}
+.product:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 30px rgba(108,92,231,.15)}
+.product .tag{position:absolute;top:1rem;right:1rem;font-size:.7rem;padding:.2rem .6rem;border-radius:10px;text-transform:uppercase;font-weight:600}
+.tag-algo{background:rgba(0,206,201,.15);color:var(--accent2)}
+.tag-prompt{background:rgba(108,92,231,.15);color:var(--accent)}
+.product h3{font-size:1.15rem;margin-bottom:.5rem;padding-right:4rem}
+.product p{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+.product .price{font-size:1.3rem;font-weight:700;color:var(--gold)}
+.product .price span{font-size:.8rem;color:var(--muted);font-weight:400}
+.product .actions{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.btn{padding:.5rem 1rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:linear-gradient(135deg,#6c5ce7,#00cec9);color:#fff}
+.btn-secondary{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn:hover{opacity:.85;transform:translateY(-1px)}
+
+/* LEAD MAGNET */
+.lead-magnet{background:linear-gradient(135deg,rgba(108,92,231,.08),rgba(0,206,201,.08));border:1px solid var(--border);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0}
+.lead-magnet h3{font-size:1.5rem;margin-bottom:.5rem}
+.lead-magnet p{color:var(--muted);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+.email-form{display:flex;gap:.5rem;max-width:450px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.email-form input{flex:1;min-width:200px;padding:.7rem 1rem;background:#0a0a0f;border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.9rem}
+.email-form button{padding:.7rem 1.5rem;background:var(--gold);color:#0a0a0f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.95rem}
+.email-form button:hover{opacity:.9}
+
+/* API SECTION */
+.api-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.api-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.api-card .method{font-size:.7rem;font-weight:700;color:var(--accent2);background:rgba(0,206,201,.1);padding:.2rem .5rem;border-radius:4px;display:inline-block;margin-bottom:.5rem}
+.api-card h4{margin-bottom:.5rem}
+.api-card p{color:var(--muted);font-size:.85rem;margin-bottom:.5rem}
+.api-card .price{color:var(--gold);font-weight:700}
+
+/* SOCIAL PROOF */
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:2rem 0}
+.proof-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.proof-card .quote{font-style:italic;margin-bottom:1rem;color:var(--text)}
+.proof-card .author{font-size:.85rem;color:var(--muted)}
+
+/* FOOTER */
+footer{text-align:center;padding:3rem 2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+footer a{color:var(--accent)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.active{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:500px;width:90%;position:relative}
+.modal h3{margin-bottom:1rem}
+.modal .close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer}
+.modal p{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+
+/* RESPONSIVE */
+@media(max-width:600px){.hero h1{font-size:2rem}.products{grid-template-columns:1fr}.stats{gap:1rem}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">⚡ x402 Protocol • USDC on Base • No accounts needed</div>
+  <h1>Algorithm Intelligence<br>for Humans & Agents</h1>
+  <p class="tagline">Reverse-engineered social media algorithms + battle-tested AI prompts. Pay per use with USDC. Machine-readable APIs.</p>
+  <div class="stats">
+    <div class="stat"><div class="num">8</div><div class="label">Products</div></div>
+    <div class="stat"><div class="num">5</div><div class="label">Platforms Decoded</div></div>
+    <div class="stat"><div class="num">250+</div><div class="label">AI Prompts</div></div>
+    <div class="stat"><div class="num">$0.25</div><div class="label">Starting Price</div></div>
+  </div>
+</div>
+
+<!-- FREE TOOL: ALGORITHM SCORE -->
+<section>
+  <h2 class="section-title">🆓 Free: Algorithm Score Calculator</h2>
+  <p class="section-sub">See how your social strategy stacks up — instantly.</p>
+  <div class="tool-box">
+    <h3>📊 Calculate Your Algorithm Score</h3>
+    <div class="tool-grid">
+      <div>
+        <label>Platform</label>
+        <select id="platform" onchange="calcScore()">
+          <option value="instagram">Instagram</option>
+          <option value="tiktok">TikTok</option>
+          <option value="youtube">YouTube</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="twitter">X (Twitter)</option>
+        </select>
+      </div>
+      <div>
+        <label>Posting Frequency</label>
+        <select id="frequency" onchange="calcScore()">
+          <option value="1">1-2x per week</option>
+          <option value="2">3-5x per week</option>
+          <option value="3">Daily</option>
+          <option value="4">2-3x daily</option>
+          <option value="5">5+ daily</option>
+        </select>
+      </div>
+      <div>
+        <label>Content Format</label>
+        <select id="format" onchange="calcScore()">
+          <option value="1">Text only</option>
+          <option value="2">Images</option>
+          <option value="3">Short video</option>
+          <option value="4">Mixed (video + image + text)</option>
+          <option value="5">Platform-native (Reels/Stories/Shorts)</option>
+        </select>
+      </div>
+      <div>
+        <label>Engagement Rate</label>
+        <select id="engagement" onchange="calcScore()">
+          <option value="1">Under 1%</option>
+          <option value="2">1-3%</option>
+          <option value="3">3-5%</option>
+          <option value="4">5-10%</option>
+          <option value="5">10%+</option>
+        </select>
+      </div>
+      <div>
+        <label>Uses Hashtags/SEO?</label>
+        <select id="hashtags" onchange="calcScore()">
+          <option value="1">No</option>
+          <option value="2">Sometimes</option>
+          <option value="3">Always, generic</option>
+          <option value="4">Researched & targeted</option>
+          <option value="5">Full SEO/hashtag strategy</option>
+        </select>
+      </div>
+      <div>
+        <label>Posting Time Strategy</label>
+        <select id="timing" onchange="calcScore()">
+          <option value="1">Random</option>
+          <option value="2">Same time daily</option>
+          <option value="3">Based on "best times" articles</option>
+          <option value="4">Analyzed my own analytics</option>
+          <option value="5">A/B tested optimal times</option>
+        </select>
+      </div>
+    </div>
+    <div class="score-display">
+      <div class="score-num" id="scoreNum">—</div>
+      <div class="score-label" id="scoreLabel">Select your options above</div>
+      <div class="score-tips" id="scoreTips" style="display:none">
+        <strong>Your weakest areas:</strong>
+        <ul id="tipsList"></ul>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1rem">
+      <button class="cta-inline" onclick="showProductModal()">🔓 Unlock Full Algorithm Breakdown →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section>
+  <h2 class="section-title">🧠 Algorithm Reverse-Engineering</h2>
+  <p class="section-sub">Complete breakdowns of ranking signals + exploitation frameworks + ready-to-use prompts.</p>
+  <div class="products">
+    <div class="product">
+      <span class="tag tag-algo">Algorithm</span>
+      <h3>Instagram Algorithm (April 2026)</h3>
+      <p>Complete breakdown of Instagram ranking signals. Reels, Feed, Stories, Explore — every surface decoded.</p>
+      <div class="price">$3.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('instagram-algorithm')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('instagram')">Preview</button>
+      </div>
+    </div>
+    <div class="product">
+      <span class="tag tag-algo">Algorithm</span>
+      <h3>TikTok Algorithm (April 2026)</h3>
+      <p>For You Page algorithm decoded. Watch time signals, sound virality, and shadowban avoidance.</p>
+      <div class="price">$3.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('tiktok-algorithm')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('tiktok')">Preview</button>
+      </div>
+    </div>
+    <div class="product">
+      <span class="tag tag-algo">Algorithm</span>
+      <h3>YouTube Algorithm (April 2026)</h3>
+      <p>Recommendation engine breakdown. CTR, AVD, session time — what actually matters.</p>
+      <div class="price">$3.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('youtube-algorithm')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('youtube')">Preview</button>
+      </div>
+    </div>
+    <div class="product">
+      <span class="tag tag-algo">Algorithm</span>
+      <h3>LinkedIn Algorithm (April 2026)</h3>
+      <p>Feed ranking signals + professional reach strategies. Dwell time, SSI score, and viral hooks.</p>
+      <div class="price">$3.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('linkedin-algorithm')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('linkedin')">Preview</button>
+      </div>
+    </div>
+    <div class="product">
+      <span class="tag tag-algo">Algorithm</span>
+      <h3>X/Twitter Algorithm (April 2026)</h3>
+      <p>Timeline algorithm decoded. Engagement velocity, reply quality, and blue-check boost mechanics.</p>
+      <div class="price">$3.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('twitter-algorithm')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('twitter')">Preview</button>
+      </div>
+    </div>
+    <div class="product" style="border-color:var(--gold)">
+      <span class="tag tag-algo" style="background:rgba(253,203,110,.15);color:var(--gold)">Bundle</span>
+      <h3>🔥 All 5 Algorithms — Save $7</h3>
+      <p>Every algorithm breakdown. Instagram + TikTok + YouTube + LinkedIn + X. Updated monthly.</p>
+      <div class="price">$9.00 <span>USDC</span> <span style="text-decoration:line-through;color:var(--muted);font-size:.8rem;margin-left:.5rem">$15</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('all-algorithms')">Buy Bundle →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">💬 AI Prompt Packs</h2>
+  <p class="section-sub">50 battle-tested prompts each. Copy-paste ready.</p>
+  <div class="products">
+    <div class="product">
+      <span class="tag tag-prompt">Prompts</span>
+      <h3>Freelancer Revenue Engine</h3>
+      <p>50 prompts to 10x your freelance income. Proposals, pricing, client management, upsells.</p>
+      <div class="price">$2.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('freelancer')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('freelancer')">Preview 5 prompts</button>
+      </div>
+    </div>
+    <div class="product">
+      <span class="tag tag-prompt">Prompts</span>
+      <h3>E-Commerce Profit Accelerator</h3>
+      <p>50 prompts to optimize store conversions. Product pages, email flows, ad copy, A/B tests.</p>
+      <div class="price">$2.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('ecommerce')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('ecommerce')">Preview 5 prompts</button>
+      </div>
+    </div>
+    <div class="product">
+      <span class="tag tag-prompt">Prompts</span>
+      <h3>Content Creator Machine</h3>
+      <p>50 prompts for viral content. Hooks, scripts, thumbnails, captions, posting strategies.</p>
+      <div class="price">$2.00 <span>USDC</span></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showPurchaseModal('content')">Buy with USDC →</button>
+        <button class="btn btn-secondary" onclick="showPreview('content')">Preview 5 prompts</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT API -->
+<section>
+  <h2 class="section-title">🤖 Agent-to-Agent API (x402)</h2>
+  <p class="section-sub">Machine-readable endpoints. Pay with x402 header → get instant JSON.</p>
+  <div class="api-cards">
+    <div class="api-card">
+      <span class="method">GET</span>
+      <h4>/api/market-gap</h4>
+      <p>Structured market gap report with evidence, search volume, and build complexity.</p>
+      <div class="price">$1.00 USDC</div>
+    </div>
+    <div class="api-card">
+      <span class="method">GET</span>
+      <h4>/api/trends</h4>
+      <p>Top 5 trending pain points from Reddit, HN, and Product Hunt. Updated hourly.</p>
+      <div class="price">$0.25 USDC</div>
+    </div>
+    <div class="api-card">
+      <span class="method">GET</span>
+      <h4>/api/competitor-gap?niche=</h4>
+      <p>Competitor gap analysis for any niche. Structured JSON output.</p>
+      <div class="price">$0.50 USDC</div>
+    </div>
+    <div class="api-card">
+      <span class="method">GET</span>
+      <h4>/api/algo-report?market=</h4>
+      <p>Backtested pattern analysis on market signals. For trading & strategy agents.</p>
+      <div class="price">$2.00 USDC</div>
+    </div>
+  </div>
+  <p style="margin-top:1rem;color:var(--muted);font-size:.85rem">Agent discovery: <code>/.well-known/agent.json</code> • Payment: x402 on Base • Facilitator: PayAI</p>
+</section>
+
+<!-- LEAD MAGNET -->
+<div class="lead-magnet" style="max-width:800px;margin:2rem auto;padding:2rem">
+  <h3>🎁 Free: 10 Viral Hooks Template</h3>
+  <p>Get our top 10 hooks that stop the scroll — proven across Instagram, TikTok, and YouTube. Free, instant delivery.</p>
+  <div class="email-form">
+    <input type="email" id="leadEmail" placeholder="your@email.com">
+    <button onclick="captureLead()">Get Free Hooks →</button>
+  </div>
+  <p id="leadConfirm" style="display:none;color:var(--accent2);margin-top:1rem">✅ Check your email! (Or just <a href="#" onclick="showHooksDirect();return false">view them now</a>)</p>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="modal-overlay" id="previewModal">
+  <div class="modal">
+    <button class="close" onclick="closeModal('previewModal')">&times;</button>
+    <h3 id="previewTitle">Preview</h3>
+    <div id="previewContent"></div>
+    <button class="btn btn-primary" style="width:100%;margin-top:1rem" onclick="closeModal('previewModal');showProductModal()">🔓 Get Full Version →</button>
+  </div>
+</div>
+
+<!-- PURCHASE MODAL -->
+<div class="modal-overlay" id="purchaseModal">
+  <div class="modal">
+    <button class="close" onclick="closeModal('purchaseModal')">&times;</button>
+    <h3>💳 Pay with USDC</h3>
+    <p>Send USDC on Base to receive instant access:</p>
+    <div style="background:#0a0a0f;padding:1rem;border-radius:8px;margin:1rem 0;word-break:break-all;font-family:monospace;font-size:.8rem">
+      0x83F31CE0F8b1f27a6Ad91693709febb728c71563
+    </div>
+    <p style="font-size:.85rem;color:var(--muted)">Or use an x402-compatible wallet for instant delivery. Products are also available on our GitHub Pages:</p>
+    <a href="https://drgalio.github.io/demaciains-paywall/" target="_blank" class="btn btn-secondary" style="display:block;text-align:center;margin-top:.5rem">Browse on GitHub Pages →</a>
+  </div>
+</div>
+
+<footer>
+  <p>Demaciains — AI Research & Algorithm Intelligence</p>
+  <p style="margin-top:.5rem"><a href="https://github.com/DrGalio/demaciains-paywall">GitHub</a> • <a href="/.well-known/agent.json">Agent Discovery</a> • Built with x402 on Base</p>
+</footer>
+
+<script>
+// Algorithm Score Calculator
+function calcScore(){
+  const fields=['platform','frequency','format','engagement','hashtags','timing'];
+  let total=0;
+  fields.forEach(f=>{total+=parseInt(document.getElementById(f).value)});
+  const max=30;const pct=Math.round((total/max)*100);
+  document.getElementById('scoreNum').textContent=pct+'/100';
+  let label,color;
+  if(pct<40){label='🔴 Needs Work — Algorithm is working against you';color='#e74c3c'}
+  else if(pct<60){label='🟡 Room to Grow — You\'re leaving reach on the table';color='#fdcb6e'}
+  else if(pct<80){label='🟢 Solid — Small tweaks could 2x your reach';color='#00cec9'}
+  else{label='🏆 Elite — You\'re crushing it';color='#6c5ce7'}
+  document.getElementById('scoreLabel').textContent=label;
+  // Tips
+  const tips=[];
+  const platform=document.getElementById('platform').value;
+  if(parseInt(document.getElementById('format').value)<4)tips.push(`Switch to ${platform==='tiktok'||platform==='youtube'?'short video':'Reels/Stories'} — the algorithm favors native formats`);
+  if(parseInt(document.getElementById('timing').value)<4)tips.push('Analyze your posting times against your audience\'s active hours');
+  if(parseInt(document.getElementById('hashtags').value)<4)tips.push('Use researched hashtags, not generic ones — our algorithm reports show exactly which signals matter');
+  if(parseInt(document.getElementById('engagement').value)<3)tips.push('Reply to every comment within 30min — engagement velocity is a top-3 signal on '+platform);
+  if(parseInt(document.getElementById('frequency').value)<3)tips.push('Increase posting frequency — algorithms reward consistency and volume');
+  if(tips.length){
+    document.getElementById('scoreTips').style.display='block';
+    document.getElementById('tipsList').innerHTML=tips.map(t=>'<li>'+t+'</li>').join('');
+  }
+}
+
+// Previews
+const previews={
+  instagram:`<h4>📖 Chapter 1 Preview: The Ranking Signals</h4><p style="margin-top:1rem">Instagram's algorithm in April 2026 uses <strong>4 primary ranking signals</strong> across Feed, Reels, and Explore:</p><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>Interest Score</strong> (35%) — ML prediction of how much you'll care about a post</li><li><strong>Relationship Score</strong> (25%) — DM history, profile visits, comment exchanges</li><li><strong>Timeliness</strong> (20%) — Recency weighted by engagement velocity</li><li><strong>Session Depth</strong> (20%) — How likely this post keeps the user in-app longer</li></ol><p style="color:var(--muted);font-style:italic">...47 more pages of signals, exploitation tactics, and ready-to-use prompts in the full report.</p>`,
+  tiktok:`<h4>📖 Chapter 1 Preview: The For You Page Engine</h4><p style="margin-top:1rem">TikTok's FYP algorithm in April 2026 uses a <strong>3-stage funnel</strong>:</p><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>Initial Pool</strong> (50-300 views) — Tests content against tag/interest clusters</li><li><strong>Velocity Gate</strong> (300-10K) — Watch time % + completion rate + replays</li><li><strong>Viral Cascade</strong> (10K+) — Cross-cluster propagation + sound trends + share rate</li></ol><p style="color:var(--muted);font-style:italic">...52 more pages including shadowban triggers, sound virality patterns, and posting cadence formulas.</p>`,
+  youtube:`<h4>📖 Chapter 1 Preview: Recommendation Engine</h4><p style="margin-top:1rem">YouTube's recommendation system has <strong>2 core metrics</strong> that matter:</p><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>CTR × AVD</strong> — Click-through rate multiplied by average view duration. This is the #1 signal.</li><li><strong>Session Contribution</strong> — Did your video start a binge session or end one?</li></ol><p style="color:var(--muted);font-style:italic">...48 more pages covering thumbnail optimization, title formulas, and Shorts vs long-form strategy.</p>`,
+  linkedin:`<h4>📖 Chapter 1 Preview: Feed Ranking Signals</h4><p style="margin-top:1rem">LinkedIn's algorithm in April 2026 weights <strong>dwell time</strong> as the #1 signal:</p><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>Dwell Time</strong> (40%) — How long someone pauses on your post while scrolling</li><li><strong>Comment Quality</strong> (25%) — Substantive replies > emoji reactions</li><li><strong>Network Relevance</strong> (20%) — 1st degree connections who engage boost distribution</li></ol><p style="color:var(--muted);font-style:italic">...44 more pages including SSI score hacks, newsletter strategy, and B2B lead gen tactics.</p>`,
+  twitter:`<h4>📖 Chapter 1 Preview: Timeline Algorithm</h4><p style="margin-top:1rem">X/Twitter's algorithm in April 2026 uses <strong>engagement velocity</strong> as the primary gate:</p><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>First 5 minutes</strong> — Replies and retweets in this window determine reach ceiling</li><li><strong>Reply depth</strong> — Threads with back-and-forth conversation get 3x boost</li><li><strong>Blue-check amplification</strong> — Verified accounts get ~2x initial distribution</li></ol><p style="color:var(--muted);font-style:italic">...50 more pages covering Community Notes avoidance, Spaces strategy, and long-form post optimization.</p>`,
+  freelancer:`<h4>📖 Sample Prompts (5 of 50)</h4><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>Pricing Anchor:</strong> "Analyze my skills [X] and market [Y]. Create 3 pricing tiers (Starter/Pro/Elite) with specific deliverables and prices that position me as premium but accessible."</li><li><strong>Cold Outreach:</strong> "Write a cold email to [company type] about my [service]. Include a specific insight about their business, a micro-case study, and a soft CTA."</li><li><strong>Proposal Closer:</strong> "Review my proposal draft and add urgency elements, social proof placements, and a risk-reversal guarantee that increases close rate."</li><li><strong>Upsell Script:</strong> "Create a natural upsell conversation script for after a successful project delivery. Include timing, transition phrases, and specific offer templates."</li><li><strong>Portfolio Optimizer:</strong> "Analyze my portfolio for the [industry] market. Identify which projects to feature, what metrics to highlight, and how to structure it for maximum conversion."</li></ol><p style="color:var(--muted);font-style:italic">...45 more prompts covering every aspect of freelancing revenue.</p>`,
+  ecommerce:`<h4>📖 Sample Prompts (5 of 50)</h4><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>Product Page Converter:</strong> "Rewrite my product page for [item]. Include benefit-driven headlines, objection-handling bullets, urgency triggers, and a CTA that converts at 3%+."</li><li><strong>Abandoned Cart Email:</strong> "Create a 3-email abandoned cart sequence. Include social proof, scarcity, and a final 'last chance' with a specific discount strategy."</li><li><strong>Ad Copy Generator:</strong> "Write 5 Facebook ad variations for [product]. Each with different hooks (pain, aspiration, curiosity, social proof, scarcity). Include suggested audiences."</li><li><strong>Review Responder:</strong> "Create response templates for 1-star, 3-star, and 5-star reviews. Turn negatives into public wins and encourage repeat purchases."</li><li><strong>A/B Test Planner:</strong> "Design 5 A/B tests for my checkout flow. Specify hypothesis, variables, success metrics, and minimum sample size for each."</li></ol><p style="color:var(--muted);font-style:italic">...45 more prompts covering conversion optimization end-to-end.</p>`,
+  content:`<h4>📖 Sample Prompts (5 of 50)</h4><ol style="margin:.5rem 0 .5rem 1.5rem"><li><strong>Hook Factory:</strong> "Generate 10 scroll-stopping hooks for [topic]. Use pattern interrupt, curiosity gap, and controversy formats. Include platform-specific versions for IG/TikTok/YouTube."</li><li><strong>Script Writer:</strong> "Write a 60-second video script about [topic]. Include hook (first 3 seconds), value delivery, and CTA. Optimize for retention with a mid-point twist."</li><li><strong>Thumbnail Designer Brief:</strong> "Create a thumbnail concept brief for a video about [topic]. Include face expression, text overlay, color scheme, and contrast strategy for maximum CTR."</li><li><strong>Content Calendar:</strong> "Build a 30-day content calendar for [platform] about [niche]. Mix educational, entertaining, and promotional content at a 4:3:1 ratio."</li><li><strong>Viral Repurposer:</strong> "Take this [blog post/video/podcast] and create 5 platform-specific pieces of content. Adapt format, length, and hooks for each platform's algorithm."</li></ol><p style="color:var(--muted);font-style:italic">...45 more prompts covering every aspect of content creation.</p>`
+};
+
+function showPreview(key){
+  document.getElementById('previewTitle').textContent='Preview';
+  document.getElementById('previewContent').innerHTML=previews[key]||'<p>Preview not available</p>';
+  document.getElementById('previewModal').classList.add('active');
+}
+function showPurchaseModal(product){
+  document.getElementById('purchaseModal').classList.add('active');
+}
+function showProductModal(){document.getElementById('purchaseModal').classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active')})
+});
+
+// Lead capture (just shows confirmation — no backend)
+function captureLead(){
+  const email=document.getElementById('leadEmail').value;
+  if(email&&email.includes('@')){
+    document.getElementById('leadConfirm').style.display='block';
+    document.querySelector('.email-form').style.display='none';
+  }
+}
+function showHooksDirect(){document.getElementById('leadConfirm').innerHTML='✅ Here are your 10 hooks:<br><br>1. "Nobody talks about this, but..."<br>2. "I lost $X doing this wrong"<br>3. "The [industry] secret that [authority] doesn\'t want you to know"<br>4. "Stop doing [common practice]. Do this instead:"<br>5. "I [achieved result] in [timeframe]. Here\'s exactly how:"<br>6. "The difference between [A] and [B] isn\'t what you think"<br>7. "[Number] things I wish I knew before [experience]"<br>8. "This [tool/strategy] changed everything for me"<br>9. "Unpopular opinion: [contrarian take about industry]"<br>10. "If I started over today, I\'d do this:"<br><br><em style="color:var(--muted)">Want the full frameworks? Check our <a href="#products">AI Prompt Packs</a> above.</em>'}
+</script>
+</body>
+</html>

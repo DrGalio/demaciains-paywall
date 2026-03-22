@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLab — AI-Powered Lab Notebook for Researchers</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+            --text: #f1f5f9; --text2: #94a3b8; --accent: #3b82f6;
+            --accent2: #60a5fa; --green: #22c55e; --red: #ef4444;
+            --yellow: #eab308; --border: #475569;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        
+        /* Header */
+        .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent2); display: flex; align-items: center; gap: 8px; }
+        .logo span { font-size: 24px; }
+        .header-actions { display: flex; gap: 8px; }
+        .btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); cursor: pointer; font-size: 14px; transition: all 0.2s; }
+        .btn:hover { background: var(--accent); border-color: var(--accent); }
+        .btn-primary { background: var(--accent); border-color: var(--accent); }
+        .btn-primary:hover { background: var(--accent2); }
+        
+        /* Layout */
+        .app { display: grid; grid-template-columns: 280px 1fr 320px; height: calc(100vh - 57px); }
+        
+        /* Sidebar */
+        .sidebar { background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto; }
+        .sidebar-section { padding: 16px; border-bottom: 1px solid var(--border); }
+        .sidebar-title { font-size: 12px; text-transform: uppercase; color: var(--text2); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .entry-item { padding: 10px 12px; border-radius: 8px; cursor: pointer; margin-bottom: 4px; transition: all 0.15s; border: 1px solid transparent; }
+        .entry-item:hover { background: var(--surface2); }
+        .entry-item.active { background: var(--accent); border-color: var(--accent); }
+        .entry-item h4 { font-size: 14px; margin-bottom: 2px; }
+        .entry-item p { font-size: 12px; color: var(--text2); }
+        .entry-item .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+        .tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: var(--surface2); color: var(--text2); }
+        
+        /* Main Editor */
+        .editor { overflow-y: auto; padding: 24px; }
+        .editor-header { margin-bottom: 24px; }
+        .editor-title { font-size: 28px; font-weight: 700; background: transparent; border: none; color: var(--text); width: 100%; outline: none; }
+        .editor-meta { display: flex; gap: 16px; margin-top: 12px; color: var(--text2); font-size: 13px; }
+        .editor-meta select, .editor-meta input { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 4px 8px; border-radius: 6px; font-size: 13px; }
+        
+        .editor-body { min-height: 400px; }
+        .editor-body textarea { width: 100%; min-height: 400px; background: transparent; border: none; color: var(--text); font-size: 15px; line-height: 1.7; resize: vertical; outline: none; font-family: inherit; }
+        
+        /* Sections */
+        .section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .section-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .section-title span { font-size: 16px; }
+        
+        /* Protocol Section */
+        .protocol-step { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+        .protocol-step:last-child { border-bottom: none; }
+        .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-content input { width: 100%; background: transparent; border: none; color: var(--text); font-size: 14px; outline: none; }
+        
+        /* Variables Table */
+        .var-table { width: 100%; border-collapse: collapse; }
+        .var-table th, .var-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+        .var-table th { color: var(--text2); font-weight: 500; }
+        .var-table input { background: transparent; border: none; color: var(--text); width: 100%; outline: none; font-size: 13px; }
+        
+        /* AI Panel */
+        .ai-panel { background: var(--surface); border-left: 1px solid var(--border); overflow-y: auto; }
+        .ai-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+        .ai-header h3 { font-size: 15px; }
+        .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        .ai-chat { padding: 16px; }
+        .ai-message { margin-bottom: 12px; padding: 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
+        .ai-message.user { background: var(--accent); margin-left: 20px; }
+        .ai-message.bot { background: var(--surface2); margin-right: 20px; }
+        .ai-input-area { padding: 16px; border-top: 1px solid var(--border); }
+        .ai-input { width: 100%; padding: 10px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; outline: none; resize: none; }
+        
+        /* Quick Actions */
+        .quick-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .quick-btn { padding: 6px 10px; border-radius: 6px; background: var(--surface2); border: 1px solid var(--border); color: var(--text2); font-size: 12px; cursor: pointer; transition: all 0.15s; }
+        .quick-btn:hover { background: var(--accent); color: var(--text); border-color: var(--accent); }
+        
+        /* Stats Bar */
+        .stats-bar { display: flex; gap: 24px; padding: 12px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); }
+        .stat { text-align: center; }
+        .stat-value { font-size: 18px; font-weight: 700; color: var(--accent2); }
+        .stat-label { font-size: 11px; color: var(--text2); text-transform: uppercase; }
+        
+        /* New Entry Button */
+        .new-entry-btn { width: 100%; padding: 10px; border-radius: 8px; background: var(--accent); border: none; color: white; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 16px; }
+        .new-entry-btn:hover { background: var(--accent2); }
+        
+        /* Search */
+        .search-box { width: 100%; padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; margin-bottom: 12px; outline: none; }
+        
+        /* Status indicator */
+        .status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+        .status-dot.saved { background: var(--green); }
+        .status-dot.unsaved { background: var(--yellow); }
+        
+        /* Responsive */
+        @media (max-width: 1024px) { .app { grid-template-columns: 1fr; } .sidebar, .ai-panel { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><span>🔬</span> OpenLab Notebook</div>
+        <div style="display:flex;align-items:center;gap:16px;">
+            <div class="status"><div class="status-dot saved"></div> All changes saved locally</div>
+            <div class="header-actions">
+                <button class="btn" onclick="exportData()">📤 Export JSON</button>
+                <button class="btn" onclick="exportMarkdown()">📝 Export Markdown</button>
+                <button class="btn btn-primary" onclick="printNotebook()">🖨️ Print/PDF</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="app">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <button class="new-entry-btn" onclick="createNewEntry()">+ New Experiment</button>
+                <input type="text" class="search-box" placeholder="Search experiments..." oninput="searchEntries(this.value)">
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Recent Experiments</div>
+                <div id="entries-list"></div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Statistics</div>
+                <div class="stats-bar" style="flex-direction:column;gap:12px;background:transparent;padding:0;">
+                    <div class="stat" style="text-align:left;"><div class="stat-value" id="total-entries">0</div><div class="stat-label">Experiments</div></div>
+                    <div class="stat" style="text-align:left;"><div class="stat-value" id="total-hours">0</div><div class="stat-label">Hours Logged</div></div>
+                    <div class="stat" style="text-align:left;"><div class="stat-value" id="total-protocols">0</div><div class="stat-label">Protocols</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Editor -->
+        <div class="editor" id="editor-area">
+            <div class="editor-header">
+                <input type="text" class="editor-title" id="entry-title" placeholder="Experiment Title" oninput="autoSave()">
+                <div class="editor-meta">
+                    <span>📅</span><input type="date" id="entry-date" onchange="autoSave()">
+                    <span>🏷️</span><select id="entry-status" onchange="autoSave()">
+                        <option value="planning">Planning</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="failed">Failed</option>
+                        <option value="on-hold">On Hold</option>
+                    </select>
+                    <span>⏱️</span><input type="number" id="entry-hours" placeholder="Hours" style="width:60px;" oninput="autoSave()">
+                </div>
+            </div>
+            
+            <!-- Hypothesis -->
+            <div class="section">
+                <div class="section-title"><span>💡</span> Hypothesis</div>
+                <textarea id="hypothesis" placeholder="What do you expect to happen? Be specific..." rows="3" oninput="autoSave()"></textarea>
+            </div>
+            
+            <!-- Protocol -->
+            <div class="section">
+                <div class="section-title"><span>📋</span> Protocol Steps</div>
+                <div id="protocol-steps"></div>
+                <button class="btn" style="margin-top:8px;" onclick="addProtocolStep()">+ Add Step</button>
+            </div>
+            
+            <!-- Variables -->
+            <div class="section">
+                <div class="section-title"><span>🔧</span> Variables & Controls</div>
+                <table class="var-table">
+                    <thead><tr><th>Variable</th><th>Type</th><th>Value/Range</th><th>Notes</th></tr></thead>
+                    <tbody id="variables-body"></tbody>
+                </table>
+                <button class="btn" style="margin-top:8px;" onclick="addVariable()">+ Add Variable</button>
+            </div>
+            
+            <!-- Observations -->
+            <div class="section">
+                <div class="section-title"><span>👁️</span> Observations & Raw Data</div>
+                <textarea id="observations" placeholder="Record observations in real-time. Include timestamps, measurements, unexpected phenomena..." rows="6" oninput="autoSave()"></textarea>
+            </div>
+            
+            <!-- Results -->
+            <div class="section">
+                <div class="section-title"><span>📊</span> Results & Analysis</div>
+                <textarea id="results" placeholder="Summarize your findings. Include quantitative data, patterns, and statistical analysis..." rows="5" oninput="autoSave()"></textarea>
+            </div>
+            
+            <!-- Conclusion -->
+            <div class="section">
+                <div class="section-title"><span>🎯</span> Conclusion & Next Steps</div>
+                <textarea id="conclusion" placeholder="Was your hypothesis supported? What would you do differently? What's the next experiment?" rows="4" oninput="autoSave()"></textarea>
+            </div>
+            
+            <!-- References -->
+            <div class="section">
+                <div class="section-title"><span>📚</span> References & Links</div>
+                <textarea id="references" placeholder="DOI links, paper citations, related experiments..." rows="3" oninput="autoSave()"></textarea>
+            </div>
+        </div>
+        
+        <!-- AI Panel -->
+        <div class="ai-panel">
+            <div class="ai-header">
+                <div class="ai-dot"></div>
+                <h3>AI Research Assistant</h3>
+            </div>
+            <div class="stats-bar">
+                <div class="stat"><div class="stat-value" style="font-size:14px;">GPT-4</div><div class="stat-label">Model</div></div>
+                <div class="stat"><div class="stat-value" style="font-size:14px;">0</div><div class="stat-label">Queries</div></div>
+            </div>
+            <div class="ai-chat" id="ai-chat">
+                <div class="ai-message bot">👋 Hi! I'm your AI research assistant. I can help you:<br><br>• Analyze your experimental design<br>• Suggest statistical tests<br>• Review your protocol for errors<br>• Generate literature references<br>• Interpret your results<br><br>What do you need help with?</div>
+            </div>
+            <div class="ai-input-area">
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="aiQuick('review')">🔍 Review Protocol</button>
+                    <button class="quick-btn" onclick="aiQuick('stats')">📊 Suggest Stats</button>
+                    <button class="quick-btn" onclick="aiQuick('lit')">📚 Find Literature</button>
+                    <button class="quick-btn" onclick="aiQuick('error')">⚠️ Error Analysis</button>
+                </div>
+                <textarea class="ai-input" id="ai-input" rows="2" placeholder="Ask about your experiment..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI();}"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let entries = JSON.parse(localStorage.getItem('openlab_entries') || '[]');
+        let currentEntryId = null;
+        let saveTimeout = null;
+        
+        // Initialize
+        document.getElementById('entry-date').valueAsDate = new Date();
+        renderEntriesList();
+        if (entries.length > 0) loadEntry(entries[0].id);
+        updateStats();
+        
+        // Create new entry
+        function createNewEntry() {
+            const entry = {
+                id: Date.now().toString(),
+                title: 'Untitled Experiment',
+                date: new Date().toISOString().split('T')[0],
+                status: 'planning',
+                hours: 0,
+                hypothesis: '',
+                protocol: [''],
+                variables: [{ name: '', type: 'Independent', value: '', notes: '' }],
+                observations: '',
+                results: '',
+                conclusion: '',
+                references: '',
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            entries.unshift(entry);
+            saveEntries();
+            loadEntry(entry.id);
+            renderEntriesList();
+            document.getElementById('entry-title').focus();
+        }
+        
+        // Load entry into editor
+        function loadEntry(id) {
+            currentEntryId = id;
+            const entry = entries.find(e => e.id === id);
+            if (!entry) return;
+            
+            document.getElementById('entry-title').value = entry.title;
+            document.getElementById('entry-date').value = entry.date;
+            document.getElementById('entry-status').value = entry.status;
+            document.getElementById('entry-hours').value = entry.hours || '';
+            document.getElementById('hypothesis').value = entry.hypothesis;
+            document.getElementById('observations').value = entry.observations;
+            document.getElementById('results').value = entry.results;
+            document.getElementById('conclusion').value = entry.conclusion;
+            document.getElementById('references').value = entry.references;
+            
+            // Render protocol steps
+            const stepsDiv = document.getElementById('protocol-steps');
+            stepsDiv.innerHTML = '';
+            (entry.protocol || ['']).forEach((step, i) => {
+                addProtocolStep(step);
+            });
+            
+            // Render variables
+            const varBody = document.getElementById('variables-body');
+            varBody.innerHTML = '';
+            (entry.variables || [{ name: '', type: 'Independent', value: '', notes: '' }]).forEach(v => {
+                addVariable(v.name, v.type, v.value, v.notes);
+            });
+            
+            renderEntriesList();
+        }
+        
+        // Auto-save
+        function autoSave() {
+            if (!currentEntryId) return;
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                const entry = entries.find(e => e.id === currentEntryId);
+                if (!entry) return;
+                
+                entry.title = document.getElementById('entry-title').value || 'Untitled';
+                entry.date = document.getElementById('entry-date').value;
+                entry.status = document.getElementById('entry-status').value;
+                entry.hours = parseFloat(document.getElementById('entry-hours').value) || 0;
+                entry.hypothesis = document.getElementById('hypothesis').value;
+                entry.observations = document.getElementById('observations').value;
+                entry.results = document.getElementById('results').value;
+                entry.conclusion = document.getElementById('conclusion').value;
+                entry.references = document.getElementById('references').value;
+                entry.updatedAt = new Date().toISOString();
+                
+                // Collect protocol steps
+                entry.protocol = Array.from(document.querySelectorAll('.step-content input')).map(i => i.value);
+                
+                // Collect variables
+                entry.variables = Array.from(document.querySelectorAll('#variables-body tr')).map(row => {
+                    const inputs = row.querySelectorAll('input');
+                    const select = row.querySelector('select');
+                    return { name: inputs[0]?.value || '', type: select?.value || 'Independent', value: inputs[1]?.value || '', notes: inputs[2]?.value || '' };
+                });
+                
+                saveEntries();
+                renderEntriesList();
+                updateStats();
+            }, 500);
+        }
+        
+        function saveEntries() {
+            localStorage.setItem('openlab_entries', JSON.stringify(entries));
+        }
+        
+        // Render sidebar list
+        function renderEntriesList() {
+            const list = document.getElementById('entries-list');
+            list.innerHTML = entries.map(e => `
+                <div class="entry-item ${e.id === currentEntryId ? 'active' : ''}" onclick="loadEntry('${e.id}')">
+                    <h4>${e.title}</h4>
+                    <p>${e.date} · ${e.status}</p>
+                    <div class="tags">
+                        <span class="tag">${e.protocol?.filter(p=>p).length || 0} steps</span>
+                        ${e.hours ? `<span class="tag">${e.hours}h</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Add protocol step
+        function addProtocolStep(value = '') {
+            const stepsDiv = document.getElementById('protocol-steps');
+            const num = stepsDiv.children.length + 1;
+            const step = document.createElement('div');
+            step.className = 'protocol-step';
+            step.innerHTML = `
+                <div class="step-num">${num}</div>
+                <div class="step-content"><input type="text" placeholder="Describe this step..." value="${value}" oninput="autoSave()"></div>
+            `;
+            stepsDiv.appendChild(step);
+        }
+        
+        // Add variable row
+        function addVariable(name = '', type = 'Independent', value = '', notes = '') {
+            const tbody = document.getElementById('variables-body');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="text" placeholder="Variable name" value="${name}" oninput="autoSave()"></td>
+                <td><select onchange="autoSave()" style="background:transparent;border:none;color:var(--text);font-size:13px;">
+                    <option ${type==='Independent'?'selected':''}>Independent</option>
+                    <option ${type==='Dependent'?'selected':''}>Dependent</option>
+                    <option ${type==='Control'?'selected':''}>Control</option>
+                    <option ${type==='Confounding'?'selected':''}>Confounding</option>
+                </select></td>
+                <td><input type="text" placeholder="Value or range" value="${value}" oninput="autoSave()"></td>
+                <td><input type="text" placeholder="Notes" value="${notes}" oninput="autoSave()"></td>
+            `;
+            tbody.appendChild(row);
+        }
+        
+        // Search
+        function searchEntries(query) {
+            const q = query.toLowerCase();
+            document.querySelectorAll('.entry-item').forEach((item, i) => {
+                const entry = entries[i];
+                const match = entry.title.toLowerCase().includes(q) || entry.hypothesis.toLowerCase().includes(q) || entry.observations.toLowerCase().includes(q);
+                item.style.display = match ? '' : 'none';
+            });
+        }
+        
+        // Update stats
+        function updateStats() {
+            document.getElementById('total-entries').textContent = entries.length;
+            document.getElementById('total-hours').textContent = entries.reduce((sum, e) => sum + (e.hours || 0), 0);
+            document.getElementById('total-protocols').textContent = entries.reduce((sum, e) => sum + (e.protocol?.filter(p=>p).length || 0), 0);
+        }
+        
+        // Export JSON
+        function exportData() {
+            const blob = new Blob([JSON.stringify(entries, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `openlab-export-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+        
+        // Export Markdown
+        function exportMarkdown() {
+            let md = entries.map(e => `# ${e.title}\n**Date:** ${e.date} | **Status:** ${e.status} | **Hours:** ${e.hours}\n\n## Hypothesis\n${e.hypothesis}\n\n## Protocol\n${(e.protocol||[]).filter(p=>p).map((s,i)=>`${i+1}. ${s}`).join('\n')}\n\n## Observations\n${e.observations}\n\n## Results\n${e.results}\n\n## Conclusion\n${e.conclusion}\n\n## References\n${e.references}\n\n---\n`).join('\n');
+            const blob = new Blob([md], { type: 'text/markdown' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `openlab-notebook-${new Date().toISOString().split('T')[0]}.md`;
+            a.click();
+        }
+        
+        // Print
+        function printNotebook() { window.print(); }
+        
+        // AI functions (placeholder - connect to API)
+        function sendAI() {
+            const input = document.getElementById('ai-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            
+            const chat = document.getElementById('ai-chat');
+            chat.innerHTML += `<div class="ai-message user">${msg}</div>`;
+            input.value = '';
+            
+            // Simulate AI response (replace with real API call)
+            setTimeout(() => {
+                const responses = {
+                    review: "I've reviewed your protocol. Consider adding a negative control group and specifying exact measurement timepoints. Also note that your sample size may need power analysis.",
+                    stats: "Based on your experimental design, I'd recommend: (1) Two-way ANOVA if comparing multiple groups, (2) Paired t-test for before/after measurements, (3) Chi-square for categorical outcomes.",
+                    lit: "Key references for your research area:\n• Smith et al. (2025) - Similar methodology\n• Chen (2024) - Foundational framework\n• Garcia et al. (2026) - Recent meta-analysis",
+                    error: "Potential sources of error in your design: (1) Selection bias in sampling, (2) Measurement instrument calibration, (3) Environmental variables not controlled."
+                };
+                chat.innerHTML += `<div class="ai-message bot">${responses.review || "I'd need to connect to an AI API (OpenAI/Claude) to provide detailed analysis. The notebook structure is ready — just add your API key in settings."}</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
+        }
+        
+        function aiQuick(type) {
+            const prompts = {
+                review: "Review my current experiment protocol for potential issues",
+                stats: "What statistical tests should I use for this experiment?",
+                lit: "Find relevant literature for my current research",
+                error: "Analyze potential sources of error in my experimental design"
+            };
+            document.getElementById('ai-input').value = prompts[type];
+            sendAI();
+        }
+    </script>
+<!-- Demaciains Cross-Promotion Banner -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1e293b,#0f172a);border-top:2px solid #3b82f6;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <span style="color:#94a3b8;font-size:14px;">⚡ Want to earn more? Check our <strong style="color:#f1f5f9;">AI Prompt Packs</strong> & <strong style="color:#f1f5f9;">Algorithm Guides</strong></span>
+  <a href="https://drgalio.github.io/demaciains-paywall/" style="background:#3b82f6;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;">Browse Products →</a>
+  <span onclick="this.parentElement.style.display='none'" style="color:#64748b;cursor:pointer;font-size:18px;margin-left:8px;">✕</span>
+</div>
+<style>body{padding-bottom:60px!important;}</style>
+</body>
+</html>

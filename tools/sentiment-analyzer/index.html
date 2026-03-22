@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewLens — AI-Powered Review Sentiment Analyzer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0a; --surface: #141414; --surface2: #1f1f1f; --text: #fafafa; --text2: #a1a1aa; --accent: #22c55e; --red: #ef4444; --yellow: #eab308; --blue: #3b82f6; --border: #27272a; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+        
+        .header { padding: 20px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; }
+        .logo span { color: var(--accent); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 32px; }
+        
+        .hero { text-align: center; padding: 48px 0; }
+        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; }
+        .hero p { font-size: 18px; color: var(--text2); max-width: 600px; margin: 0 auto; }
+        
+        .input-area { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .input-area h3 { margin-bottom: 12px; }
+        textarea { width: 100%; height: 200px; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; color: var(--text); font-size: 14px; line-height: 1.6; resize: vertical; font-family: inherit; }
+        textarea:focus { outline: none; border-color: var(--accent); }
+        .input-actions { display: flex; gap: 12px; margin-top: 12px; align-items: center; }
+        .btn { padding: 10px 20px; border-radius: 10px; border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+        .or-text { color: var(--text2); font-size: 13px; }
+        
+        .results { display: none; }
+        .results.active { display: block; }
+        
+        .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .metric { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+        .metric-value { font-size: 32px; font-weight: 800; }
+        .metric-label { font-size: 12px; color: var(--text2); text-transform: uppercase; margin-top: 4px; }
+        .positive { color: var(--accent); }
+        .negative { color: var(--red); }
+        .neutral { color: var(--yellow); }
+        
+        .insights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .insight-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .insight-card h3 { margin-bottom: 12px; font-size: 16px; }
+        .insight-list { list-style: none; }
+        .insight-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; display: flex; justify-content: space-between; }
+        .insight-list li:last-child { border-bottom: none; }
+        .count { background: var(--surface2); padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        
+        .review-breakdown { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+        .review-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .review-item:last-child { border-bottom: none; }
+        .review-sentiment { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+        .review-sentiment.pos { background: rgba(34,197,94,0.2); color: var(--accent); }
+        .review-sentiment.neg { background: rgba(239,68,68,0.2); color: var(--red); }
+        .review-sentiment.neu { background: rgba(234,179,8,0.2); color: var(--yellow); }
+        .review-text { margin-top: 6px; font-size: 14px; color: var(--text2); line-height: 1.5; }
+        .review-themes { margin-top: 6px; display: flex; gap: 4px; }
+        .theme-tag { font-size: 11px; padding: 2px 6px; background: var(--surface2); border-radius: 4px; color: var(--text2); }
+        
+        .action-items { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .action-items h3 { margin-bottom: 12px; }
+        .action-item { padding: 10px 12px; background: var(--surface2); border-radius: 8px; margin-bottom: 8px; font-size: 14px; display: flex; align-items: flex-start; gap: 8px; }
+        .priority { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase; }
+        .priority.high { background: rgba(239,68,68,0.2); color: var(--red); }
+        .priority.medium { background: rgba(234,179,8,0.2); color: var(--yellow); }
+        .priority.low { background: rgba(34,197,94,0.2); color: var(--accent); }
+        
+        .export-bar { display: flex; gap: 12px; justify-content: center; padding: 24px 0; }
+        
+        @media (max-width: 768px) { .metrics { grid-template-columns: repeat(2, 1fr); } .insights { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Review<span>Lens</span> 🔍</div>
+        <div style="color:var(--text2);font-size:13px;">AI-Powered Review Analysis</div>
+    </div>
+    
+    <div class="container">
+        <div class="hero">
+            <h1>Understand Your Customers.<br>Stop Guessing.</h1>
+            <p>Paste your product reviews. Get instant sentiment analysis, common complaints, feature requests, and actionable insights.</p>
+        </div>
+        
+        <div class="input-area">
+            <h3>📋 Paste Your Reviews</h3>
+            <textarea id="reviews-input" placeholder="Paste reviews here, one per line or separated by ---&#10;&#10;Example:&#10;Great product! Works exactly as described. Fast shipping.&#10;---&#10;Broke after 2 weeks. Very disappointed.&#10;---&#10;Good value for money but the instructions were confusing."></textarea>
+            <div class="input-actions">
+                <button class="btn btn-primary" onclick="analyzeReviews()">🔬 Analyze Reviews</button>
+                <button class="btn btn-secondary" onclick="loadSample()">Load Sample Data</button>
+                <span class="or-text">or paste from Amazon, Etsy, Shopify export</span>
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="metrics">
+                <div class="metric"><div class="metric-value" id="total-reviews">0</div><div class="metric-label">Total Reviews</div></div>
+                <div class="metric"><div class="metric-value positive" id="positive-pct">0%</div><div class="metric-label">Positive</div></div>
+                <div class="metric"><div class="metric-value negative" id="negative-pct">0%</div><div class="metric-label">Negative</div></div>
+                <div class="metric"><div class="metric-value" id="avg-rating">0</div><div class="metric-label">Avg Sentiment</div></div>
+            </div>
+            
+            <div class="insights">
+                <div class="insight-card">
+                    <h3>👍 Top Praised Features</h3>
+                    <ul class="insight-list" id="praised-features"></ul>
+                </div>
+                <div class="insight-card">
+                    <h3>👎 Top Complaints</h3>
+                    <ul class="insight-list" id="complaints"></ul>
+                </div>
+            </div>
+            
+            <div class="review-breakdown">
+                <h3 style="margin-bottom:16px;">📊 Review Analysis</h3>
+                <div id="review-list"></div>
+            </div>
+            
+            <div class="action-items">
+                <h3>🎯 Action Items (Auto-Generated)</h3>
+                <div id="action-list"></div>
+            </div>
+            
+            <div class="export-bar">
+                <button class="btn btn-secondary" onclick="exportJSON()">📥 Export JSON</button>
+                <button class="btn btn-secondary" onclick="exportReport()">📄 Export Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadSample() {
+            document.getElementById('reviews-input').value = `Absolutely love this product! The quality exceeded my expectations. Fast shipping too.
+---
+Broke after 2 weeks of normal use. Customer service was unhelpful. Very disappointed.
+---
+Good value for the price. Instructions could be clearer but overall satisfied.
+---
+Amazing! Best purchase I've made this year. Already recommended to friends.
+---
+The product is fine but took 3 weeks to arrive. Packaging was damaged.
+---
+Does exactly what it says. Simple, effective, no complaints.
+---
+Terrible quality. Looks nothing like the pictures. Returning immediately.
+---
+Decent product but the sizing runs small. Order one size up.
+---
+Perfect for what I needed. Great customer support when I had questions.
+---
+Stopped working after a month. No response from seller about warranty.`;
+        }
+        
+        function analyzeReviews() {
+            const input = document.getElementById('reviews-input').value;
+            const reviews = input.split(/---|\n{3,}/).map(r => r.trim()).filter(r => r.length > 5);
+            
+            if (reviews.length === 0) { alert('Please paste some reviews to analyze'); return; }
+            
+            const analyzed = reviews.map(review => analyzeReview(review));
+            
+            const positive = analyzed.filter(r => r.sentiment === 'positive').length;
+            const negative = analyzed.filter(r => r.sentiment === 'negative').length;
+            const neutral = analyzed.filter(r => r.sentiment === 'neutral').length;
+            
+            document.getElementById('total-reviews').textContent = analyzed.length;
+            document.getElementById('positive-pct').textContent = Math.round(positive / analyzed.length * 100) + '%';
+            document.getElementById('negative-pct').textContent = Math.round(negative / analyzed.length * 100) + '%';
+            document.getElementById('avg-rating').textContent = (positive / analyzed.length * 5).toFixed(1) + '/5';
+            
+            // Extract themes
+            const praised = extractThemes(analyzed.filter(r => r.sentiment === 'positive'));
+            const complaints = extractThemes(analyzed.filter(r => r.sentiment === 'negative'));
+            
+            renderList('praised-features', praised);
+            renderList('complaints', complaints);
+            
+            // Render reviews
+            document.getElementById('review-list').innerHTML = analyzed.map(r => `
+                <div class="review-item">
+                    <span class="review-sentiment ${r.sentiment === 'positive' ? 'pos' : r.sentiment === 'negative' ? 'neg' : 'neu'}">${r.sentiment}</span>
+                    <div class="review-text">${r.text}</div>
+                    <div class="review-themes">${r.themes.map(t => `<span class="theme-tag">${t}</span>`).join('')}</div>
+                </div>
+            `).join('');
+            
+            // Generate action items
+            const actions = generateActions(analyzed, complaints);
+            document.getElementById('action-list').innerHTML = actions.map(a => `
+                <div class="action-item">
+                    <span class="priority ${a.priority}">${a.priority}</span>
+                    <span>${a.text}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('results').classList.add('active');
+        }
+        
+        function analyzeReview(text) {
+            const lower = text.toLowerCase();
+            const positiveWords = ['love', 'great', 'amazing', 'perfect', 'excellent', 'best', 'satisfied', 'recommend', 'good', 'wonderful', 'fantastic', 'quality'];
+            const negativeWords = ['broke', 'terrible', 'disappointed', 'worst', 'hate', 'awful', 'poor', 'bad', 'waste', 'defective', 'useless', 'returning', 'unhelpful'];
+            
+            let score = 0;
+            positiveWords.forEach(w => { if (lower.includes(w)) score += 1; });
+            negativeWords.forEach(w => { if (lower.includes(w)) score -= 1; });
+            
+            const sentiment = score > 0 ? 'positive' : score < 0 ? 'negative' : 'neutral';
+            
+            const themes = [];
+            if (lower.match(/ship|deliver|arriv|package/)) themes.push('shipping');
+            if (lower.match(/quality|broke|defect|durable/)) themes.push('quality');
+            if (lower.match(/price|value|money|worth|cheap|expensiv/)) themes.push('price');
+            if (lower.match(/customer service|support|response|warranty/)) themes.push('support');
+            if (lower.match(/size|sizing|fit/)) themes.push('sizing');
+            if (lower.match(/instruct|manual|confus|clear/)) themes.push('instructions');
+            if (lower.match(/fast|quick|slow|weeks|days/)) themes.push('speed');
+            if (lower.match(/photo|picture|look|description/)) themes.push('accuracy');
+            
+            return { text, sentiment, score, themes };
+        }
+        
+        function extractThemes(reviews) {
+            const themeCounts = {};
+            reviews.forEach(r => r.themes.forEach(t => { themeCounts[t] = (themeCounts[t] || 0) + 1; }));
+            return Object.entries(themeCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+        }
+        
+        function renderList(id, items) {
+            document.getElementById(id).innerHTML = items.map(([theme, count]) => 
+                `<li><span>${theme}</span><span class="count">${count}</span></li>`
+            ).join('');
+        }
+        
+        function generateActions(analyzed, complaints) {
+            const actions = [];
+            const negPct = analyzed.filter(r => r.sentiment === 'negative').length / analyzed.length;
+            
+            if (negPct > 0.3) actions.push({ priority: 'high', text: `${Math.round(negPct*100)}% negative reviews — investigate quality control immediately` });
+            
+            complaints.slice(0, 3).forEach(([theme, count]) => {
+                const priority = count >= 3 ? 'high' : count >= 2 ? 'medium' : 'low';
+                const actions_map = {
+                    quality: 'Review manufacturing process and materials',
+                    shipping: 'Evaluate shipping partners and packaging',
+                    support: 'Improve customer service response time and training',
+                    sizing: 'Add detailed size guide and measurement instructions',
+                    instructions: 'Rewrite product instructions with clearer visuals',
+                    speed: 'Investigate faster shipping options',
+                    accuracy: 'Update product photos to match actual product'
+                };
+                if (actions_map[theme]) actions.push({ priority, text: actions_map[theme] + ` (${count} complaints)` });
+            });
+            
+            if (actions.length === 0) actions.push({ priority: 'low', text: 'Reviews look great! Focus on maintaining quality and encouraging more reviews.' });
+            
+            return actions;
+        }
+        
+        function exportJSON() {
+            const data = { exported: new Date().toISOString(), reviews: document.getElementById('review-list').innerHTML };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'review-analysis.json'; a.click();
+        }
+        
+        function exportReport() {
+            window.print();
+        }
+    </script>
+<!-- Demaciains Cross-Promotion Banner -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1e293b,#0f172a);border-top:2px solid #3b82f6;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <span style="color:#94a3b8;font-size:14px;">⚡ Want to earn more? Check our <strong style="color:#f1f5f9;">AI Prompt Packs</strong> & <strong style="color:#f1f5f9;">Algorithm Guides</strong></span>
+  <a href="https://drgalio.github.io/demaciains-paywall/" style="background:#3b82f6;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;">Browse Products →</a>
+  <span onclick="this.parentElement.style.display='none'" style="color:#64748b;cursor:pointer;font-size:18px;margin-left:8px;">✕</span>
+</div>
+<style>body{padding-bottom:60px!important;}</style>
+</body>
+</html>
