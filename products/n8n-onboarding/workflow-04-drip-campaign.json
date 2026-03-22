@@ -1,0 +1,59 @@
+{
+  "name": "7-Day Drip Campaign",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "start-drip",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Define 7-day drip sequence\nconst customerName = $input.first().json.name;\nconst customerEmail = $input.first().json.email;\nconst plan = $input.first().json.plan;\n\nconst dripSequence = [\n  { day: 1, subject: '🚀 Welcome! Here\\'s your first win', body: `Hi ${customerName},\\n\\nYour account is ready! Let's start with something quick.\\n\\n✅ First task: Set up your profile (takes 2 min)\\n→ Login: https://app.yourcompany.com/profile\\n\\nThis unlocks personalized recommendations.\\n\\nTomorrow: We'll show you our #1 time-saving feature.`, delayHours: 0 },\n  { day: 2, subject: '⏱️ Save 2 hours this week', body: `Hi ${customerName},\\n\\nDay 2 tip: The #1 feature our power users love is [Feature X].\\n\\n📊 Average time saved: 2 hours/week\\n🎯 How to use it:\\n1. Go to Dashboard\\n2. Click [Feature]\\n3. Enable auto-processing\\n\\nTry it now: https://app.yourcompany.com/dashboard`, delayHours: 24 },\n  { day: 3, subject: '🔗 Connect your first integration', body: `Hi ${customerName},\\n\\nDay 3: Let's connect your tools.\\n\\nPopular integrations for ${plan} users:\\n• Slack — get instant notifications\\n• Google Sheets — auto-export data\\n• Zapier — connect 5000+ apps\\n\\nSet up: https://app.yourcompany.com/integrations`, delayHours: 24 },\n  { day: 4, subject: '📊 See what\\'s possible', body: `Hi ${customerName},\\n\\nCheck out what ${plan} users accomplish:\\n\\n📈 Case study: How [Company] saved 15 hours/week\\n→ Read: blog.yourcompany.com/case-study\\n\\nYour account has the same capabilities. Let us help you unlock them.`, delayHours: 24 },\n  { day: 5, subject: '📞 Free onboarding call — 15 min', body: `Hi ${customerName},\\n\\nYou're halfway through your first week!\\n\\n🎁 Book a free 15-min onboarding call:\\n→ calendly.com/yourcompany/onboarding\\n\\nOur team will:\\n• Answer your questions\\n• Set up advanced features\\n• Create a custom workflow for you\\n\\nSpots fill fast — grab yours now.`, delayHours: 24 },\n  { day: 6, subject: '💡 Quick win: Keyboard shortcuts', body: `Hi ${customerName},\\n\\nPro tip: Keyboard shortcuts save hours.\\n\\n⌨️ Top 5 shortcuts:\\n• Ctrl+N: New item\\n• Ctrl+K: Quick search\\n• Ctrl+S: Save\\n• Ctrl+D: Duplicate\\n• Ctrl+/: Help\\n\\nFull cheat sheet: docs.yourcompany.com/shortcuts`, delayHours: 24 },\n  { day: 7, subject: '🎯 Your first week summary', body: `Hi ${customerName},\\n\\nYou completed your first week! Here's your progress:\\n\\n📊 Onboarding Score: [Auto-calculated]\\n✅ Completed: Steps finished\\n⏳ Next: Advanced features\\n\\n🚀 Ready for more?\\n• Upgrade plan: billing.yourcompany.com\\n• Join community: community.yourcompany.com\\n• Book advanced training: calendly.com/yourcompany/advanced\\n\\nWe're here for you. Just reply anytime.`, delayHours: 24 }\n];\n\nreturn dripSequence.map(email => ({\n  json: { ...email, customerName, customerEmail, plan }\n}));"
+      },
+      "id": "build-sequence",
+      "name": "Build Drip Sequence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "amount": "={{ $json.delayHours }}",
+        "unit": "hours"
+      },
+      "id": "wait-delay",
+      "name": "Wait (Hours)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "onboarding@yourcompany.com",
+        "toEmail": "={{ $json.customerEmail }}",
+        "subject": "={{ $json.subject }}",
+        "text": "={{ $json.body }}"
+      },
+      "id": "send-drip-email",
+      "name": "Send Drip Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [910, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": { "main": [[{ "node": "Build Drip Sequence", "type": "main", "index": 0 }]] },
+    "Build Drip Sequence": { "main": [[{ "node": "Wait (Hours)", "type": "main", "index": 0 }]] },
+    "Wait (Hours)": { "main": [[{ "node": "Send Drip Email", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "onboarding" }, { "name": "email" }, { "name": "drip" }]
+}

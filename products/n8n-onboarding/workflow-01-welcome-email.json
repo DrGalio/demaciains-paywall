@@ -1,0 +1,60 @@
+{
+  "name": "Welcome Email + Credential Delivery",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "new-customer",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Generate welcome packet\nconst customerName = $input.first().json.name;\nconst customerEmail = $input.first().json.email;\nconst plan = $input.first().json.plan || 'starter';\nconst company = $input.first().json.company || '';\n\nconst credentials = {\n  username: customerEmail,\n  tempPassword: Math.random().toString(36).slice(-10),\n  loginUrl: 'https://app.yourcompany.com/login',\n  dashboardUrl: 'https://app.yourcompany.com/dashboard'\n};\n\nconst onboardingSteps = [\n  { day: 1, task: 'Complete profile setup', status: 'pending' },\n  { day: 2, task: 'Watch intro video (5 min)', status: 'pending' },\n  { day: 3, task: 'Connect first integration', status: 'pending' },\n  { day: 5, task: 'Schedule onboarding call', status: 'pending' },\n  { day: 7, task: 'Review first-week report', status: 'pending' }\n];\n\nreturn [{\n  json: {\n    customerName,\n    customerEmail,\n    company,\n    plan,\n    credentials,\n    onboardingSteps,\n    onboardingId: 'ONB-' + Date.now(),\n    createdAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "prepare-welcome",
+      "name": "Prepare Welcome Packet",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "onboarding@yourcompany.com",
+        "toEmail": "={{ $json.customerEmail }}",
+        "subject": "Welcome to {{ $json.plan }}! Your account is ready 🎉",
+        "text": "Hi {{ $json.customerName }},\n\nWelcome aboard! Your account has been created.\n\n🔐 Login Details:\nUsername: {{ $json.credentials.username }}\nTemporary Password: {{ $json.credentials.tempPassword }}\nLogin URL: {{ $json.credentials.loginUrl }}\n\n📋 Your First Week:\nDay 1: Complete profile setup\nDay 2: Watch intro video (5 min)\nDay 3: Connect first integration\nDay 5: Schedule onboarding call\nDay 7: Review first-week report\n\nNeed help? Reply to this email or book a call: calendly.com/yourcompany/onboarding\n\nBest,\nThe Onboarding Team",
+        "html": "<h2>Hi {{ $json.customerName }},</h2><p>Welcome aboard! Your account has been created.</p><h3>🔐 Login Details</h3><ul><li><strong>Username:</strong> {{ $json.credentials.username }}</li><li><strong>Temporary Password:</strong> {{ $json.credentials.tempPassword }}</li><li><strong>Login URL:</strong> <a href='{{ $json.credentials.loginUrl }}'>{{ $json.credentials.loginUrl }}</a></li></ul><h3>📋 Your First Week</h3><ol><li>Day 1: Complete profile setup</li><li>Day 2: Watch intro video (5 min)</li><li>Day 3: Connect first integration</li><li>Day 5: Schedule onboarding call</li><li>Day 7: Review first-week report</li></ol><p>Need help? Reply to this email or <a href='calendly.com/yourcompany/onboarding'>book a call</a>.</p>"
+      },
+      "id": "send-welcome-email",
+      "name": "Send Welcome Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.credentials.loginUrl }}",
+        "options": {}
+      },
+      "id": "respond-success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [910, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": { "main": [[{ "node": "Prepare Welcome Packet", "type": "main", "index": 0 }]] },
+    "Prepare Welcome Packet": { "main": [[{ "node": "Send Welcome Email", "type": "main", "index": 0 }]] },
+    "Send Welcome Email": { "main": [[{ "node": "Respond Success", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "onboarding" }, { "name": "email" }]
+}

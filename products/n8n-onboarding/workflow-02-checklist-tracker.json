@@ -1,0 +1,68 @@
+{
+  "name": "Onboarding Checklist Tracker",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "hours", "hoursInterval": 24 }] }
+      },
+      "id": "daily-trigger",
+      "name": "Daily Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Fetch all active onboarding records\n// In production, replace with your database/API call\nconst mockCustomers = [\n  { id: 'ONB-001', name: 'Alice Chen', email: 'alice@example.com', day: 3, completedSteps: ['profile_setup', 'intro_video'], nextStep: 'connect_integration', plan: 'pro' },\n  { id: 'ONB-002', name: 'Bob Smith', email: 'bob@example.com', day: 5, completedSteps: ['profile_setup', 'intro_video', 'connect_integration'], nextStep: 'schedule_call', plan: 'starter' }\n];\n\nreturn mockCustomers.map(c => ({ json: c }));"
+      },
+      "id": "fetch-customers",
+      "name": "Fetch Active Onboardings",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [{ "value1": "={{ $json.completedSteps.length }}", "operation": "lessThan", "value2": 3 }],
+          "boolean": []
+        }
+      },
+      "id": "check-progress",
+      "name": "Behind Schedule?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "onboarding@yourcompany.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Hey {{ $json.name }} — need a hand getting started?",
+        "text": "Hi {{ $json.name }},\n\nWe noticed you haven't completed all your onboarding steps yet. No worries — we're here to help!\n\nYour next step: {{ $json.nextStep.replace(/_/g, ' ') }}\n\nHere are some quick resources:\n• Step-by-step guide: docs.yourcompany.com/onboarding\n• Video walkthrough: youtube.com/@yourcompany/onboarding\n• Schedule a free call: calendly.com/yourcompany/onboarding\n\nIf you're stuck on anything, just reply to this email.\n\nBest,\nThe Onboarding Team"
+      },
+      "id": "send-nudge",
+      "name": "Send Nudge Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [910, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Log progress for on-track customers\nreturn [{ json: { status: 'on_track', customer: $json.name, steps: $json.completedSteps.length } }];"
+      },
+      "id": "log-ontrack",
+      "name": "Log On-Track",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [910, 400]
+    }
+  ],
+  "connections": {
+    "Daily Check": { "main": [[{ "node": "Fetch Active Onboardings", "type": "main", "index": 0 }]] },
+    "Fetch Active Onboardings": { "main": [[{ "node": "Behind Schedule?", "type": "main", "index": 0 }]] },
+    "Behind Schedule?": { "main": [[{ "node": "Send Nudge Email", "type": "main", "index": 0 }, { "node": "Log On-Track", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "onboarding" }, { "name": "tracking" }]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "AI Knowledge Base Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-kb",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "model", "value": "gpt-4o-mini" },
+            { "name": "messages", "value": "=[{\"role\":\"system\",\"content\":\"Generate a personalized onboarding knowledge base for a new customer. Output JSON with: welcomeMessage, quickStartGuide (array of 5 steps), faq (array of 5 Q&A objects with question/answer), tips (array of 3 tips), resources (array of 3 objects with title/url/description).\"},{\"role\":\"user\",\"content\":\"Customer: {{ $json.customerName }}, Plan: {{ $json.plan }}, Industry: {{ $json.industry }}, Company: {{ $json.company }}\"}]" },
+            { "name": "response_format", "value": "{\"type\":\"json_object\"}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ai-generate",
+      "name": "Generate KB with AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Parse AI response and structure knowledge base\nconst aiResponse = JSON.parse($input.first().json.choices[0].message.content);\nconst customer = $input.first().json;\n\nreturn [{\n  json: {\n    customerId: customer.customerId || 'CUST-' + Date.now(),\n    customerName: customer.customerName,\n    email: customer.email,\n    knowledgeBase: aiResponse,\n    generatedAt: new Date().toISOString(),\n    version: '1.0'\n  }\n}];"
+      },
+      "id": "structure-kb",
+      "name": "Structure Knowledge Base",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "onboarding@yourcompany.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "📚 Your Personalized Getting Started Guide",
+        "text": "Hi {{ $json.customerName }},\n\nWe've created a personalized guide just for you based on your plan and industry.\n\n{{ $json.knowledgeBase.welcomeMessage }}\n\n🚀 Quick Start:\n{{ $json.knowledgeBase.quickStartGuide.join('\\n') }}\n\n❓ FAQ:\n{{ $json.knowledgeBase.faq.map(q => 'Q: ' + q.question + '\\nA: ' + q.answer).join('\\n\\n') }}\n\n💡 Pro Tips:\n{{ $json.knowledgeBase.tips.join('\\n') }}\n\n📚 Resources:\n{{ $json.knowledgeBase.resources.map(r => r.title + ': ' + r.url + '\\n' + r.description).join('\\n\\n') }}"
+      },
+      "id": "send-kb-email",
+      "name": "Send KB Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [910, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": { "main": [[{ "node": "Generate KB with AI", "type": "main", "index": 0 }]] },
+    "Generate KB with AI": { "main": [[{ "node": "Structure Knowledge Base", "type": "main", "index": 0 }]] },
+    "Structure Knowledge Base": { "main": [[{ "node": "Send KB Email", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "onboarding" }, { "name": "ai" }, { "name": "knowledge-base" }]
+}

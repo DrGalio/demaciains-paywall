@@ -1,0 +1,55 @@
+{
+  "name": "Onboarding Health Score Dashboard",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "hours", "hoursInterval": 6 }] }
+      },
+      "id": "scheduled-trigger",
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Calculate onboarding health scores\n// In production, pull from your database\nconst customers = [\n  { id: 'C001', name: 'Alice Chen', email: 'alice@example.com', plan: 'pro', signupDate: '2026-03-15', completedSteps: 5, totalSteps: 5, lastActive: '2026-03-22', supportTickets: 0, loginCount: 12 },\n  { id: 'C002', name: 'Bob Smith', email: 'bob@example.com', plan: 'starter', signupDate: '2026-03-18', completedSteps: 2, totalSteps: 5, lastActive: '2026-03-19', supportTickets: 3, loginCount: 2 },\n  { id: 'C003', name: 'Carol Davis', email: 'carol@example.com', plan: 'enterprise', signupDate: '2026-03-20', completedSteps: 3, totalSteps: 5, lastActive: '2026-03-22', supportTickets: 1, loginCount: 8 }\n];\n\nconst scored = customers.map(c => {\n  let score = 0;\n  // Step completion (40%)\n  score += (c.completedSteps / c.totalSteps) * 40;\n  // Recency (30%) - days since last active\n  const daysSinceActive = Math.floor((Date.now() - new Date(c.lastActive).getTime()) / 86400000);\n  score += Math.max(0, 30 - (daysSinceActive * 10));\n  // Engagement (20%) - login frequency\n  score += Math.min(20, c.loginCount * 2);\n  // Support friction (10%) - fewer tickets = better\n  score += Math.max(0, 10 - (c.supportTickets * 3));\n  \n  const health = score >= 80 ? '🟢 Healthy' : score >= 50 ? '🟡 At Risk' : '🔴 Critical';\n  const action = score < 50 ? 'Send re-engagement email + schedule call' : score < 80 ? 'Send helpful resource' : 'Continue drip sequence';\n  \n  return { ...c, score: Math.round(score), health, action };\n});\n\n// Sort by score ascending (worst first)\nscored.sort((a, b) => a.score - b.score);\n\nconst atRisk = scored.filter(c => c.score < 80);\n\nreturn [{\n  json: {\n    customers: scored,\n    summary: {\n      total: scored.length,\n      healthy: scored.filter(c => c.score >= 80).length,\n      atRisk: atRisk.length,\n      critical: scored.filter(c => c.score < 50).length,\n      avgScore: Math.round(scored.reduce((s, c) => s + c.score, 0) / scored.length)\n    },\n    atRiskCustomers: atRisk,\n    generatedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "calculate-scores",
+      "name": "Calculate Health Scores",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#onboarding-alerts",
+        "text": "📊 *Onboarding Health Report*\n\nTotal customers: {{ $json.summary.total }}\n🟢 Healthy: {{ $json.summary.healthy }}\n🟡 At Risk: {{ $json.summary.atRisk }}\n🔴 Critical: {{ $json.summary.critical }}\n\nAverage score: {{ $json.summary.avgScore }}/100\n\n*Customers needing attention:*\n{{ $json.atRiskCustomers.map(c => '• ' + c.name + ' (' + c.score + '/100) — ' + c.action).join('\\n') }}"
+      },
+      "id": "slack-alert",
+      "name": "Slack Health Report",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [690, 200]
+    },
+    {
+      "parameters": {
+        "fromEmail": "onboarding@yourcompany.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "We noticed you might need a hand — here's a quick win",
+        "text": "Hi {{ $json.name }},\\n\\nWe want to make sure you're getting the most out of your account.\\n\\nYou've completed {{ $json.completedSteps }} of {{ $json.totalSteps }} onboarding steps.\\n\\nHere's a quick win that takes 2 minutes:\\n→ [Specific action based on next step]\\n\\nNeed help? Book a free 15-min call:\\n→ calendly.com/yourcompany/onboarding\\n\\nWe're here for you!\\n\\nThe Onboarding Team"
+      },
+      "id": "reengagement-email",
+      "name": "Re-engagement Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [690, 400]
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": { "main": [[{ "node": "Calculate Health Scores", "type": "main", "index": 0 }]] },
+    "Calculate Health Scores": { "main": [[{ "node": "Slack Health Report", "type": "main", "index": 0 }, { "node": "Re-engagement Email", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "onboarding" }, { "name": "analytics" }, { "name": "health-score" }]
+}
