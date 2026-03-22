@@ -1,8 +1,8 @@
 {
   "name": "Demaciains Research Services",
-  "description": "Market research, gap analysis, trend signals, algorithm reports, and prompt engineering products for AI agents and humans. Payments via x402 protocol on Base network.",
+  "description": "Market research, gap analysis, trend signals, algorithm reports, and startup validation for AI agents and humans. ALL endpoints generate fresh dynamic data on every request. Payments via x402 protocol on Base network.",
   "version": "3.0.0",
-  "engine": "Demaciains Dynamic Data Engine v3",
+  "engine": "Demaciains Dynamic Data Engine v3 \u2014 Client-Side Seeded PRNG",
   "data_refresh": {
     "market-gap": "daily (date-seeded)",
     "trends": "hourly (hour-seeded)",
@@ -35,7 +35,9 @@
       "method": "GET",
       "price": "0.50",
       "currency": "USDC",
-      "params": ["niche"],
+      "params": [
+        "niche"
+      ],
       "description": "Competitor gap analysis for any product niche. Returns structured JSON of gaps competitors are missing."
     },
     {
@@ -43,7 +45,9 @@
       "method": "GET",
       "price": "2.00",
       "currency": "USDC",
-      "params": ["market"],
+      "params": [
+        "market"
+      ],
       "description": "Backtested pattern analysis on market signals or datasets. For trading and strategy agents."
     },
     {
@@ -51,7 +55,9 @@
       "method": "GET",
       "price": "1.50",
       "currency": "USDC",
-      "params": ["idea"],
+      "params": [
+        "idea"
+      ],
       "description": "Multi-dimensional startup idea validation: 8-factor scoring, market sizing, risk matrix, revenue model, competitor landscape, and pivot suggestions."
     },
     {
