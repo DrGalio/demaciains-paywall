@@ -16,63 +16,63 @@ const PRODUCTS = {
     title: 'Freelancer Revenue Engine — 50 AI Prompts',
     price: '$2.00',
     description: '50 battle-tested prompts to 10x your freelance income',
-    file: '/products/freelancer-revenue-engine.pdf'
+    file: 'freelancer-revenue-engine.pdf'
   },
   'ecommerce-profit-accelerator': {
     title: 'E-Commerce Profit Accelerator — 50 AI Prompts',
     price: '$2.00',
     description: '50 prompts to optimize your online store conversions',
-    file: '/products/ecommerce-profit-accelerator.pdf'
+    file: 'ecommerce-profit-accelerator.pdf'
   },
   'content-creator-machine': {
     title: 'Content Creator Machine — 50 AI Prompts',
     price: '$2.00',
     description: '50 prompts to create viral content across all platforms',
-    file: '/products/content-creator-machine.pdf'
+    file: 'content-creator-machine.pdf'
   },
   // Algorithm Series
   'instagram-algorithm-2026': {
     title: 'Instagram Algorithm Reverse-Engineered (April 2026)',
     price: '$3.00',
     description: 'Complete breakdown of Instagram ranking signals + exploitation framework',
-    file: '/products/instagram-algorithm-2026.pdf'
+    file: '01-instagram-algorithm-april-2026.pdf'
   },
   'tiktok-algorithm-2026': {
     title: 'TikTok Algorithm Reverse-Engineered (April 2026)',
     price: '$3.00',
     description: 'TikTok For You Page algorithm decoded + ready-to-use prompts',
-    file: '/products/tiktok-algorithm-2026.pdf'
+    file: '02-tiktok-algorithm-april-2026.pdf'
   },
   'youtube-algorithm-2026': {
     title: 'YouTube Algorithm Reverse-Engineered (April 2026)',
     price: '$3.00',
     description: 'YouTube recommendation engine breakdown + optimization playbook',
-    file: '/products/youtube-algorithm-2026.pdf'
+    file: '03-youtube-algorithm-april-2026.pdf'
   },
   'linkedin-algorithm-2026': {
     title: 'LinkedIn Algorithm Reverse-Engineered (April 2026)',
     price: '$3.00',
     description: 'LinkedIn feed ranking signals + professional reach strategies',
-    file: '/products/linkedin-algorithm-2026.pdf'
+    file: '04-linkedin-algorithm-april-2026.pdf'
   },
   'x-twitter-algorithm-2026': {
     title: 'X (Twitter) Algorithm Reverse-Engineered (April 2026)',
     price: '$3.00',
     description: 'X/Twitter timeline algorithm decoded + engagement maximization',
-    file: '/products/x-twitter-algorithm-2026.pdf'
+    file: '05-twitter-x-algorithm-april-2026.pdf'
   },
   // Bundles
   'all-prompt-packs': {
     title: 'All 3 AI Prompt Packs Bundle',
     price: '$5.00',
     description: 'Freelancer + E-Commerce + Content Creator prompts (150 total)',
-    file: '/products/all-prompt-packs-bundle.pdf'
+    file: 'freelancer-revenue-engine.pdf'
   },
   'all-algorithms': {
     title: 'All 5 Algorithm Guides Bundle',
     price: '$10.00',
     description: 'Instagram + TikTok + YouTube + LinkedIn + X algorithms decoded',
-    file: '/products/all-algorithms-bundle.pdf'
+    file: '01-instagram-algorithm-april-2026.pdf'
   }
 };
 
@@ -162,11 +162,12 @@ app.get('/', (req, res) => {
 });
 
 // Product download endpoints (protected by x402 payment middleware)
+const path = require('path');
 for (const [slug, product] of Object.entries(PRODUCTS)) {
   app.get(`/products/${slug}`, (req, res) => {
     // If x402 middleware passes, serve the file
-    const filePath = path.join(__dirname, 'public', product.file);
-    res.download(filePath, `${slug}.pdf`, (err) => {
+    const filePath = path.join(__dirname, 'public', 'products', product.file);
+    res.download(filePath, product.file, (err) => {
       if (err) {
         res.status(404).json({ error: 'Product file not found. Contact support.' });
       }
