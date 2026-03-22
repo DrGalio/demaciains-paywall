@@ -1,0 +1,20 @@
+{
+  "name": "demaciains-paywall",
+  "version": "1.0.0",
+  "description": "x402 USDC paywall for Demaciains digital products on Base",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@x402/core": "latest",
+    "@x402/evm": "latest",
+    "@x402/express": "latest",
+    "ethers": "^6.0.0",
+    "express": "^4.18.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
