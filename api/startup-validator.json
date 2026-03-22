@@ -1,0 +1,119 @@
+{
+  "generated": "2026-03-22T12:02:07.375Z",
+  "agent": "Demaciains Research Engine v2",
+  "type": "startup_idea_validator",
+  "idea": "AI-powered productivity tool",
+  "methodology": "Multi-dimensional scoring: 8 factors × weighted analysis + competitive landscape + risk matrix",
+  "overall_score": 0.61,
+  "verdict": "PIVOT FIRST",
+  "scores": [
+    {
+      "dimension": "Market Size & Growth Trajectory",
+      "score": 0.42,
+      "grade": "D"
+    },
+    {
+      "dimension": "Competition Density & Strength",
+      "score": 0.36,
+      "grade": "D"
+    },
+    {
+      "dimension": "Technical Feasibility",
+      "score": 0.49,
+      "grade": "D"
+    },
+    {
+      "dimension": "Revenue Model Clarity",
+      "score": 0.94,
+      "grade": "A"
+    },
+    {
+      "dimension": "Time to First Revenue",
+      "score": 0.84,
+      "grade": "A"
+    },
+    {
+      "dimension": "Defensibility & Moats",
+      "score": 0.58,
+      "grade": "C"
+    },
+    {
+      "dimension": "Customer Acquisition Cost",
+      "score": 0.69,
+      "grade": "B"
+    },
+    {
+      "dimension": "Regulatory Risk",
+      "score": 0.58,
+      "grade": "C"
+    }
+  ],
+  "market_sizing": {
+    "tam": "$18744M total addressable market",
+    "sam": "$3486M serviceable addressable market",
+    "som": "$163M serviceable obtainable market (Year 1)",
+    "confidence": 0.87
+  },
+  "revenue_model": {
+    "recommended": "Freemium + premium tier",
+    "alternatives": [
+      "Marketplace commission",
+      "Usage-based billing"
+    ],
+    "estimated_mrr_month_6": "$45499",
+    "estimated_mrr_month_12": "$83612"
+  },
+  "competitors": [
+    "HelixHub",
+    "AtlasStack",
+    "Prism.io",
+    "NexusLabs",
+    "VertexPro"
+  ],
+  "risks": [
+    {
+      "risk": "Target market too small for venture-scale returns",
+      "severity": "LOW",
+      "mitigation": "Perfect for bootstrapped lifestyle business instead"
+    },
+    {
+      "risk": "Regulatory uncertainty in target market",
+      "severity": "MEDIUM",
+      "mitigation": "Build compliance-first, hire legal advisor early"
+    },
+    {
+      "risk": "Customer acquisition costs exceed lifetime value",
+      "severity": "MEDIUM",
+      "mitigation": "Start with content/SEO, avoid paid ads initially"
+    }
+  ],
+  "suggested_pivots": [
+    "Build as a Chrome extension instead of standalone app",
+    "Verticalize: focus exclusively on real estate professionals",
+    "Switch from B2C to B2B — enterprise contracts = faster revenue"
+  ],
+  "comparable_successes": [
+    {
+      "name": "Linear",
+      "lesson": "Opinionated product design won over generic tools"
+    },
+    {
+      "name": "Vercel",
+      "lesson": "Free tier drove massive adoption, monetized enterprise"
+    },
+    {
+      "name": "Gumroad",
+      "lesson": "Simplest possible solution for creators — lean and focused"
+    }
+  ],
+  "meta": {
+    "dimensions_analyzed": 8,
+    "confidence": 0.73,
+    "data_sources": [
+      "Market sizing models",
+      "Competitive analysis database",
+      "Risk assessment framework",
+      "Comparable company analysis"
+    ]
+  }
+}

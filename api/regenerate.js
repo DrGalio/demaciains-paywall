@@ -15,6 +15,7 @@ const endpoints = [
   { file: 'trends.json', gen: () => E.trends() },
   { file: 'competitor-gap.json', gen: () => E.competitorGap('ai agent tools') },
   { file: 'algo-report.json', gen: () => E.algoReport('x402 agent commerce') },
+  { file: 'startup-validator.json', gen: () => E.startupValidator('AI-powered productivity tool') },
 ];
 
 console.log(`[${new Date().toISOString()}] Regenerating API data...`);

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Startup Validator — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px;max-width:900px;margin:0 auto}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.verdict-box{background:#141414;border:2px solid #f59e0b;border-radius:10px;padding:20px;margin-bottom:16px;text-align:center}
+.verdict-box .verdict{font-size:1.4em;font-weight:bold;margin-bottom:6px}
+.verdict-box .score{font-size:2.2em;font-weight:bold;color:#f59e0b}
+.verdict-STRONG{border-color:#22c55e}.verdict-STRONG .verdict,.verdict-STRONG .score{color:#22c55e}
+.verdict-BUILD{border-color:#60a5fa}.verdict-BUILD .verdict,.verdict-BUILD .score{color:#60a5fa}
+.verdict-PIVOT{border-color:#f59e0b}.verdict-PIVOT .verdict,.verdict-PIVOT .score{color:#f59e0b}
+.verdict-RISK{border-color:#f97316}.verdict-RISK .verdict,.verdict-RISK .score{color:#f97316}
+.verdict-KILL{border-color:#ef4444}.verdict-KILL .verdict,.verdict-KILL .score{color:#ef4444}
+.section{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.section h2{color:#60a5fa;font-size:1em;margin-bottom:12px;border-bottom:1px solid #222;padding-bottom:8px}
+.dim{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1a1a1a;font-size:.85em}
+.dim:last-child{border-bottom:none}
+.dim .name{color:#94a3b8;flex:1}.dim .bar{width:120px;height:6px;background:#1e1b4b;border-radius:3px;margin:0 10px;position:relative}
+.dim .bar-fill{height:100%;border-radius:3px;position:absolute;left:0;top:0}
+.grade-A .bar-fill{background:#22c55e}.grade-B .bar-fill{background:#60a5fa}.grade-C .bar-fill{background:#f59e0b}.grade-D .bar-fill{background:#ef4444}
+.grade-A{color:#22c55e}.grade-B{color:#60a5fa}.grade-C{color:#f59e0b}.grade-D{color:#ef4444}
+.dim .val{width:40px;text-align:right;font-weight:bold}
+.market-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.85em;border-bottom:1px solid #1a1a1a}
+.market-row:last-child{border:none}
+.market-row .label{color:#64748b}.market-row .val{color:#e0e0e0}
+.risk-card{background:#0f172a;border-left:3px solid #f59e0b;padding:10px 14px;margin-bottom:8px;border-radius:0 6px 6px 0;font-size:.85em}
+.risk-HIGH{border-color:#ef4444}.risk-MEDIUM{border-color:#f59e0b}.risk-LOW{border-color:#22c55e}
+.risk-card .sev{float:right;padding:1px 8px;border-radius:3px;font-size:.75em;font-weight:bold}
+.sev-HIGH{background:#7f1d1d;color:#fca5a5}.sev-MEDIUM{background:#713f12;color:#fbbf24}.sev-LOW{background:#064e3b;color:#6ee7b7}
+.comp-tag{display:inline-block;background:#1e1b4b;color:#a5b4fc;padding:3px 10px;border-radius:4px;font-size:.8em;margin:3px}
+.pivot-item{background:#0f172a;border-left:3px solid #6366f1;padding:8px 12px;margin-bottom:6px;font-size:.85em;color:#a5b4fc;border-radius:0 6px 6px 0}
+.success-item{background:#0f172a;border-left:3px solid #22c55e;padding:8px 12px;margin-bottom:6px;font-size:.85em;border-radius:0 6px 6px 0}
+.success-item .name{color:#6ee7b7;font-weight:bold}.success-item .lesson{color:#94a3b8;margin-top:3px}
+.rev-row{display:flex;justify-content:space-between;padding:5px 0;font-size:.85em;border-bottom:1px solid #1a1a1a}
+.rev-row:last-child{border:none}
+.rev-row .label{color:#64748b}.rev-row .val{color:#e0e0e0}
+.raw-toggle{cursor:pointer;color:#64748b;font-size:.8em;text-align:center;padding:10px;margin-top:10px}
+.raw-toggle:hover{color:#60a5fa}
+.raw-json{display:none;background:#111;border:1px solid #222;border-radius:6px;padding:14px;font-size:.75em;overflow-x:auto;color:#94a3b8;white-space:pre-wrap;margin-top:10px}
+.footer{text-align:center;color:#64748b;font-size:.75em;margin-top:20px;padding:16px}
+a{color:#60a5fa;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🔬 Startup Idea Validator <span class="live">LIVE</span></h1>
+  <div class="meta">GET /api/startup-validator?idea= • $1.50 USDC • x402 on Base • Auto-refreshes daily</div>
+</div>
+<div id="app">Loading...</div>
+<div class="raw-toggle" onclick="document.getElementById('raw').style.display=document.getElementById('raw').style.display==='none'?'block':'none'">▼ Toggle raw JSON</div>
+<pre class="raw-json" id="raw"></pre>
+<div class="footer">
+  Demaciains Research Engine v3 • <a href="https://drgalio.github.io/demaciains-paywall/">← All Products</a> • <a href="/api/startup-validator.json">JSON endpoint</a> • <a href="/.well-known/agent.json">Agent Card</a>
+</div>
+<script>
+fetch('/api/startup-validator.json').then(r=>r.json()).then(d=>{
+  document.getElementById('raw').textContent=JSON.stringify(d,null,2);
+  const vClass=d.verdict.includes('STRONG')?'STRONG':d.verdict.includes('BUILD')?'BUILD':d.verdict.includes('PIVOT')?'PIVOT':d.verdict.includes('RISK')?'RISK':'KILL';
+  let h=`<div class="verdict-box verdict-${vClass}"><div class="verdict">${d.verdict}</div><div class="score">${(d.overall_score*100).toFixed(0)}%</div><div style="color:#64748b;font-size:.8em;margin-top:6px">Idea: ${d.idea}</div></div>`;
+  h+=`<div class="section"><h2>📊 Dimension Scores</h2>`;
+  d.scores.forEach(s=>{
+    h+=`<div class="dim grade-${s.grade}"><span class="name">${s.dimension}</span><div class="bar"><div class="bar-fill" style="width:${s.score*100}%"></div></div><span class="val grade-${s.grade}">${s.grade}</span></div>`;
+  });
+  h+=`</div>`;
+  h+=`<div class="section"><h2>💰 Market Sizing</h2><div class="market-row"><span class="label">TAM</span><span class="val">${d.market_sizing.tam}</span></div><div class="market-row"><span class="label">SAM</span><span class="val">${d.market_sizing.sam}</span></div><div class="market-row"><span class="label">SOM (Year 1)</span><span class="val">${d.market_sizing.som}</span></div><div class="market-row"><span class="label">Confidence</span><span class="val">${(d.market_sizing.confidence*100).toFixed(0)}%</span></div></div>`;
+  h+=`<div class="section"><h2>🎯 Revenue Model</h2><div class="rev-row"><span class="label">Recommended</span><span class="val">${d.revenue_model.recommended}</span></div><div class="rev-row"><span class="label">Est. MRR Month 6</span><span class="val">${d.revenue_model.estimated_mrr_month_6}</span></div><div class="rev-row"><span class="label">Est. MRR Month 12</span><span class="val">${d.revenue_model.estimated_mrr_month_12}</span></div><div class="rev-row"><span class="label">Alternatives</span><span class="val">${d.revenue_model.alternatives.join(', ')}</span></div></div>`;
+  h+=`<div class="section"><h2>⚠️ Risk Matrix</h2>`;
+  d.risks.forEach(r=>{h+=`<div class="risk-card risk-${r.severity}"><span class="sev sev-${r.severity}">${r.severity}</span><div style="margin-top:4px;font-weight:bold">${r.risk}</div><div style="color:#64748b;font-size:.8em;margin-top:4px">→ ${r.mitigation}</div></div>`;});
+  h+=`</div>`;
+  h+=`<div class="section"><h2>🏢 Competitors</h2><div>${d.competitors.map(c=>`<span class="comp-tag">${c}</span>`).join(' ')}</div></div>`;
+  h+=`<div class="section"><h2>🔄 Suggested Pivots</h2>${d.suggested_pivots.map(p=>`<div class="pivot-item">${p}</div>`).join('')}</div>`;
+  h+=`<div class="section"><h2>✅ Comparable Successes</h2>${d.comparable_successes.map(s=>`<div class="success-item"><div class="name">${s.name}</div><div class="lesson">${s.lesson}</div></div>`).join('')}</div>`;
+  document.getElementById('app').innerHTML=h;
+}).catch(e=>{document.getElementById('app').innerHTML=`<div style="color:#ef4444">Error loading data: ${e.message}</div>`;});
+</script>
+</body>
+</html>

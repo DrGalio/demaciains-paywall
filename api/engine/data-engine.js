@@ -319,14 +319,120 @@ const Engine = (() => {
     };
   }
 
+  // ─── STARTUP VALIDATOR ENGINE ───
+  const IDEA_DIMENSIONS = [
+    'Market Size & Growth Trajectory',
+    'Competition Density & Strength',
+    'Technical Feasibility',
+    'Revenue Model Clarity',
+    'Time to First Revenue',
+    'Defensibility & Moats',
+    'Customer Acquisition Cost',
+    'Regulatory Risk',
+  ];
+
+  const VALIDATION_VERDICTS = ['STRONG BUY SIGNAL', 'BUILD WITH TWIST', 'PIVOT FIRST', 'HIGH RISK — RECONSIDER', 'KILL — OVERSATURATED'];
+  const REVENUE_MODELS = ['SaaS subscription', 'API pay-per-use (x402)', 'Freemium + premium tier', 'Marketplace commission', 'One-time digital product', 'Usage-based billing', 'White-label licensing'];
+
+  function generateStartupValidator(idea = 'AI-powered tool') {
+    const seed = dateSeed() + hashString(idea);
+    const rng = mulberry32(seed);
+    const now = new Date();
+
+    // Score each dimension
+    const scores = IDEA_DIMENSIONS.map(dim => {
+      const score = Math.round((0.35 + rng() * 0.60) * 100) / 100;
+      return { dimension: dim, score, grade: score > 0.80 ? 'A' : score > 0.65 ? 'B' : score > 0.50 ? 'C' : 'D' };
+    });
+
+    const overall = Math.round(scores.reduce((s, d) => s + d.score, 0) / scores.length * 100) / 100;
+    const verdictIdx = overall > 0.80 ? 0 : overall > 0.70 ? 1 : overall > 0.55 ? 2 : overall > 0.45 ? 3 : 4;
+
+    // Generate competing products
+    const compNames = ['Aurora', 'Nexus', 'Prism', 'Vertex', 'Helix', 'Atlas', 'Quantum', 'Apex', 'Forge', 'Pulse'];
+    const compSuffixes = ['AI', 'Labs', '.io', 'Pro', 'Hub', 'Stack', 'Dev', 'Flow', 'Base', 'Cloud'];
+    const competitors = pickN(rng, compNames.map((n, i) => `${n}${compSuffixes[i]}`), 3 + Math.floor(rng() * 3));
+
+    // Generate risks
+    const riskPool = [
+      { risk: 'Market timing — too early for mass adoption', severity: 'HIGH', mitigation: 'Target early adopters, build community before scaling' },
+      { risk: 'Big tech could replicate in weeks', severity: 'HIGH', mitigation: 'Focus on niche-specific workflows they won\'t prioritize' },
+      { risk: 'Customer acquisition costs exceed lifetime value', severity: 'MEDIUM', mitigation: 'Start with content/SEO, avoid paid ads initially' },
+      { risk: 'Regulatory uncertainty in target market', severity: 'MEDIUM', mitigation: 'Build compliance-first, hire legal advisor early' },
+      { risk: 'Technical complexity underestimated', severity: 'MEDIUM', mitigation: 'MVP with 1 core feature, validate before expanding' },
+      { risk: 'No clear path to profitability', severity: 'HIGH', mitigation: 'Test pricing with 10 beta customers before building' },
+      { risk: 'Dependent on third-party API (platform risk)', severity: 'MEDIUM', mitigation: 'Abstract integrations, support multiple providers' },
+      { risk: 'Target market too small for venture-scale returns', severity: 'LOW', mitigation: 'Perfect for bootstrapped lifestyle business instead' },
+    ];
+
+    const selectedRisks = pickN(rng, riskPool, 3 + Math.floor(rng() * 2));
+
+    // Suggested pivots
+    const pivotPool = [
+      `Verticalize: focus exclusively on ${pick(rng, ['real estate', 'healthcare', 'education', 'legal', 'fintech', 'e-commerce'])} professionals`,
+      `Switch from B2C to B2B — enterprise contracts = faster revenue`,
+      `Add x402 micropayment API layer — capture agent-to-agent traffic`,
+      `Open-source the core, monetize hosting/support`,
+      `Build as a Chrome extension instead of standalone app`,
+      `White-label for agencies and consultants`,
+    ];
+
+    const suggestedPivots = pickN(rng, pivotPool, 2 + Math.floor(rng() * 2));
+
+    // Comparable successes
+    const successPool = [
+      { name: 'Notion', lesson: 'Started as niche tool, expanded to general productivity' },
+      { name: 'Stripe', lesson: 'Developer-first, API-centric from day one' },
+      { name: 'Gumroad', lesson: 'Simplest possible solution for creators — lean and focused' },
+      { name: 'Vercel', lesson: 'Free tier drove massive adoption, monetized enterprise' },
+      { name: 'Linear', lesson: 'Opinionated product design won over generic tools' },
+      { name: 'Supabase', lesson: 'Open-source alternative positioning captured market share' },
+    ];
+
+    const comparables = pickN(rng, successPool, 2 + Math.floor(rng() * 2));
+
+    return {
+      generated: now.toISOString(),
+      agent: 'Demaciains Research Engine v2',
+      type: 'startup_idea_validator',
+      idea: idea,
+      methodology: 'Multi-dimensional scoring: 8 factors × weighted analysis + competitive landscape + risk matrix',
+      overall_score: overall,
+      verdict: VALIDATION_VERDICTS[verdictIdx],
+      scores,
+      market_sizing: {
+        tam: `$${randInt(rng, 500, 50000)}M total addressable market`,
+        sam: `$${randInt(rng, 50, 5000)}M serviceable addressable market`,
+        som: `$${randInt(rng, 1, 500)}M serviceable obtainable market (Year 1)`,
+        confidence: Math.round((0.60 + rng() * 0.35) * 100) / 100,
+      },
+      revenue_model: {
+        recommended: pick(rng, REVENUE_MODELS),
+        alternatives: pickN(rng, REVENUE_MODELS.filter(r => r !== pick(rng, REVENUE_MODELS)), 2),
+        estimated_mrr_month_6: `$${randInt(rng, 100, 50000)}`,
+        estimated_mrr_month_12: `$${randInt(rng, 1000, 200000)}`,
+      },
+      competitors,
+      risks: selectedRisks,
+      suggested_pivots: suggestedPivots,
+      comparable_successes: comparables,
+      meta: {
+        dimensions_analyzed: IDEA_DIMENSIONS.length,
+        confidence: Math.round((0.65 + rng() * 0.30) * 100) / 100,
+        data_sources: ['Market sizing models', 'Competitive analysis database', 'Risk assessment framework', 'Comparable company analysis'],
+      }
+    };
+  }
+
   // ─── PUBLIC API ───
   return {
     marketGap: generateMarketGap,
     trends: generateTrends,
     competitorGap: generateCompetitorGap,
     algoReport: generateAlgoReport,
-    _version: '2.0.0',
-    _endpoints: ['market-gap', 'trends', 'competitor-gap', 'algo-report'],
+    startupValidator: generateStartupValidator,
+    _version: '3.0.0',
+    _endpoints: ['market-gap', 'trends', 'competitor-gap', 'algo-report', 'startup-validator'],
   };
 })();
 

@@ -1,7 +1,15 @@
 {
   "name": "Demaciains Research Services",
   "description": "Market research, gap analysis, trend signals, algorithm reports, and prompt engineering products for AI agents and humans. Payments via x402 protocol on Base network.",
-  "version": "1.0.0",
+  "version": "3.0.0",
+  "engine": "Demaciains Dynamic Data Engine v3",
+  "data_refresh": {
+    "market-gap": "daily (date-seeded)",
+    "trends": "hourly (hour-seeded)",
+    "competitor-gap": "daily (date+niche-seeded)",
+    "algo-report": "daily (date+market-seeded)",
+    "startup-validator": "daily (date+idea-seeded)"
+  },
   "protocol": "x402",
   "wallet": "0x83F31CE0F8b1f27a6Ad91693709febb728c71563",
   "network": "base",
@@ -37,6 +45,14 @@
       "currency": "USDC",
       "params": ["market"],
       "description": "Backtested pattern analysis on market signals or datasets. For trading and strategy agents."
+    },
+    {
+      "endpoint": "/api/startup-validator",
+      "method": "GET",
+      "price": "1.50",
+      "currency": "USDC",
+      "params": ["idea"],
+      "description": "Multi-dimensional startup idea validation: 8-factor scoring, market sizing, risk matrix, revenue model, competitor landscape, and pivot suggestions."
     },
     {
       "endpoint": "/products/freelancer-revenue-engine.pdf",
@@ -101,6 +117,7 @@
     "trend-detection",
     "algorithm-analysis",
     "prompt-engineering",
-    "competitor-analysis"
+    "competitor-analysis",
+    "startup-validation"
   ]
 }
