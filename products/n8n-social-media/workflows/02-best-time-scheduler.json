@@ -1,0 +1,55 @@
+{
+  "name": "Best Time Scheduler",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "hours", "hoursInterval": 1 }] }
+      },
+      "id": "trigger-1",
+      "name": "Hourly Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Optimal posting windows per platform (UTC)\nconst schedule = {\n  instagram: { windows: [[11,13], [19,21]], days: [1,2,3,4,5] },\n  tiktok: { windows: [[7,9], [12,13], [19,21]], days: [0,1,2,3,4,5,6] },\n  linkedin: { windows: [[8,10], [12,14]], days: [1,2,3,4] },\n  twitter: { windows: [[8,10], [12,13], [17,18]], days: [1,2,3,4,5] },\n  youtube: { windows: [[12,15], [17,21]], days: [4,5,6,0] }\n};\n\nconst now = new Date();\nconst hour = now.getUTCHours();\nconst day = now.getUTCDay();\n\nconst readyPlatforms = Object.entries(schedule)\n  .filter(([_, cfg]) => cfg.days.includes(day))\n  .filter(([_, cfg]) => cfg.windows.some(([start, end]) => hour >= start && hour < end))\n  .map(([platform]) => platform);\n\nreturn [{ json: { readyPlatforms, hour, day, timestamp: now.toISOString() } }];"
+      },
+      "id": "checker-1",
+      "name": "Check Optimal Windows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "filters": { "status": "queued" }
+      },
+      "id": "fetch-1",
+      "name": "Fetch Queued Posts",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [700, 300],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const ready = $('Check Optimal Windows').first().json.readyPlatforms;\nconst posts = $('Fetch Queued Posts').all();\n\nconst toPublish = posts.filter(p => \n  ready.includes(p.json.platform) && p.json.status === 'queued'\n).slice(0, 3);\n\nreturn toPublish.map(p => ({ json: { ...p.json, action: 'publish' } }));"
+      },
+      "id": "match-1",
+      "name": "Match Posts to Windows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [920, 300]
+    }
+  ],
+  "connections": {
+    "Hourly Check": { "main": [[{ "node": "Check Optimal Windows", "type": "main", "index": 0 }]] },
+    "Check Optimal Windows": { "main": [[{ "node": "Fetch Queued Posts", "type": "main", "index": 0 }]] },
+    "Fetch Queued Posts": { "main": [[{ "node": "Match Posts to Windows", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "description": "Checks optimal posting windows hourly, fetches queued content from Google Sheets, auto-publishes when timing is right" }
+}

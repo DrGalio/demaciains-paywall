@@ -1,0 +1,82 @@
+{
+  "name": "Content Repurposing Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "repurpose",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "trigger-1",
+      "name": "New Content Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "Authorization", "value": "Bearer {{$credentials.httpHeaderAuth.value}}" }]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [{
+            "name": "body",
+            "value": "={{ JSON.stringify({ model: 'gpt-4o-mini', messages: [{ role: 'user', content: 'Repurpose this content for 5 platforms. Return JSON with keys: twitter_thread (array of 3-5 tweets max 280 chars each), linkedin_post (professional tone, 1300 chars max), instagram_caption (casual, 30 hashtags), email_subject (5 options), blog_outline (5 section headers). Content: ' + $json.content })}] }) }}"
+          }]
+        },
+        "options": {}
+      },
+      "id": "ai-1",
+      "name": "AI Repurpose",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst content = JSON.parse(response.choices[0].message.content);\n\nconst outputs = [];\nif (content.twitter_thread) {\n  content.twitter_thread.forEach((tweet, i) => {\n    outputs.push({ json: { platform: 'twitter', content: tweet, order: i + 1, type: 'thread' } });\n  });\n}\nif (content.linkedin_post) {\n  outputs.push({ json: { platform: 'linkedin', content: content.linkedin_post, type: 'post' } });\n}\nif (content.instagram_caption) {\n  outputs.push({ json: { platform: 'instagram', content: content.instagram_caption, type: 'post' } });\n}\nif (content.email_subject) {\n  outputs.push({ json: { platform: 'email', subjects: content.email_subject, type: 'subjects' } });\n}\nif (content.blog_outline) {\n  outputs.push({ json: { platform: 'blog', outline: content.blog_outline, type: 'outline' } });\n}\nreturn outputs;"
+      },
+      "id": "parser-1",
+      "name": "Parse Platform Outputs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "list", "value": "" },
+        "tableId": { "__rl": true, "mode": "list", "value": "" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "platform": "={{ $json.platform }}",
+            "content": "={{ $json.content }}",
+            "type": "={{ $json.type }}",
+            "status": "draft",
+            "created": "={{ $now.toISO() }}"
+          }
+        }
+      },
+      "id": "sheets-1",
+      "name": "Save to Content Calendar",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [960, 300],
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "New Content Webhook": { "main": [[{ "node": "AI Repurpose", "type": "main", "index": 0 }]] },
+    "AI Repurpose": { "main": [[{ "node": "Parse Platform Outputs", "type": "main", "index": 0 }]] },
+    "Parse Platform Outputs": { "main": [[{ "node": "Save to Content Calendar", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "description": "Feed 1 piece of content → AI repurposes into Twitter thread, LinkedIn post, Instagram caption, email subjects, blog outline → saves to Google Sheets content calendar" }
+}

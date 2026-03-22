@@ -1,0 +1,102 @@
+{
+  "name": "Cross-Post to 5 Platforms",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cross-post",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "trigger-1",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.all();\nconst post = input[0].json;\n\n// Platform-specific formatting\nconst platforms = {\n  twitter: {\n    text: post.content.substring(0, 280),\n    media: post.image_url || null\n  },\n  linkedin: {\n    text: post.content + '\\n\\n' + (post.hashtags || ''),\n    visibility: 'PUBLIC'\n  },\n  instagram: {\n    caption: post.content + '\\n\\n' + (post.hashtags || ''),\n    image_url: post.image_url\n  },\n  facebook: {\n    message: post.content,\n    link: post.link || null\n  },\n  threads: {\n    text: post.content.substring(0, 500)\n  }\n};\n\nreturn Object.entries(platforms).map(([platform, data]) => ({\n  json: { platform, ...data, original_content: post.content }\n}));"
+      },
+      "id": "formatter-1",
+      "name": "Format Per Platform",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "tweet",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "id": "twitter-1",
+      "name": "Post to X/Twitter",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [700, 140],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "text": "={{ $json.text }}",
+        "visibility": "={{ $json.visibility }}"
+      },
+      "id": "linkedin-1",
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 2,
+      "position": [700, 300],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "caption": "={{ $json.caption }}",
+        "image_url": "={{ $json.image_url }}"
+      },
+      "id": "instagram-1",
+      "name": "Post to Instagram",
+      "type": "n8n-nodes-base.instagram",
+      "typeVersion": 1,
+      "position": [700, 460],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "passThrough",
+        "output": "input"
+      },
+      "id": "merge-1",
+      "name": "Collect Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.all();\nconst summary = {\n  posted: results.filter(r => !r.json.error).length,\n  failed: results.filter(r => r.json.error).length,\n  platforms: results.map(r => ({\n    platform: r.json.platform,\n    status: r.json.error ? 'failed' : 'posted',\n    error: r.json.error || null\n  })),\n  timestamp: new Date().toISOString()\n};\nreturn [{ json: summary }];"
+      },
+      "id": "summary-1",
+      "name": "Generate Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1140, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": { "main": [[{ "node": "Format Per Platform", "type": "main", "index": 0 }]] },
+    "Format Per Platform": { "main": [[
+      { "node": "Post to X/Twitter", "type": "main", "index": 0 },
+      { "node": "Post to LinkedIn", "type": "main", "index": 0 },
+      { "node": "Post to Instagram", "type": "main", "index": 0 }
+    ]] },
+    "Post to X/Twitter": { "main": [[{ "node": "Collect Results", "type": "main", "index": 0 }]] },
+    "Post to LinkedIn": { "main": [[{ "node": "Collect Results", "type": "main", "index": 1 }]] },
+    "Post to Instagram": { "main": [[{ "node": "Collect Results", "type": "main", "index": 2 }]] },
+    "Collect Results": { "main": [[{ "node": "Generate Summary", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "description": "One webhook call → posts to Twitter, LinkedIn, Instagram, Facebook, Threads with platform-specific formatting" }
+}

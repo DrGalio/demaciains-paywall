@@ -1,0 +1,84 @@
+{
+  "name": "Engagement Auto-Reply Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "minutes", "minutesInterval": 15 }] }
+      },
+      "id": "trigger-1",
+      "name": "Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "mention",
+        "additionalFields": {}
+      },
+      "id": "fetch-mentions",
+      "name": "Fetch New Mentions",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [460, 200],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "comment",
+        "additionalFields": {}
+      },
+      "id": "fetch-comments",
+      "name": "Fetch IG Comments",
+      "type": "n8n-nodes-base.instagram",
+      "typeVersion": 1,
+      "position": [460, 400],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter for engagement-worthy replies\nconst mentions = $('Fetch New Mentions').all();\nconst comments = $('Fetch IG Comments').all();\n\nconst all = [...mentions, ...comments];\n\nconst scored = all.map(item => {\n  const text = (item.json.text || item.json.comment || '').toLowerCase();\n  let score = 0;\n  let category = 'general';\n\n  // Questions get priority\n  if (text.includes('?')) { score += 3; category = 'question'; }\n  // Purchase intent\n  if (text.match(/price|buy|cost|how much|order|available/)) { score += 5; category = 'purchase_intent'; }\n  // Complaint\n  if (text.match(/bad|terrible|worst|hate|broken|broken|refund/)) { score += 4; category = 'complaint'; }\n  // Praise\n  if (text.match(/love|amazing|great|awesome|best|thank/)) { score += 2; category = 'praise'; }\n\n  return { json: { ...item.json, score, category, shouldReply: score >= 3 } };\n});\n\nreturn scored.filter(s => s.json.shouldReply).sort((a, b) => b.json.score - a.json.score).slice(0, 10);"
+      },
+      "id": "prioritize-1",
+      "name": "Prioritize Engagements",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "Authorization", "value": "Bearer {{$credentials.httpHeaderAuth.value}}" }]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [{
+            "name": "body",
+            "value": "={{ JSON.stringify({ model: 'gpt-4o-mini', messages: [{ role: 'system', content: 'You are a friendly brand social media manager. Reply in 1-2 sentences. Be helpful, warm, and on-brand. Never be defensive. For complaints, empathize first then offer to help via DM. For purchase questions, be helpful and include a gentle CTA.' }, { role: 'user', content: 'Category: ' + $json.category + '. Original message: ' + ($json.text || $json.comment) })}] }) }}"
+          }]
+        },
+        "options": {}
+      },
+      "id": "ai-reply-1",
+      "name": "Generate AI Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, 300],
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "Every 15 Minutes": { "main": [[
+      { "node": "Fetch New Mentions", "type": "main", "index": 0 },
+      { "node": "Fetch IG Comments", "type": "main", "index": 0 }
+    ]] },
+    "Fetch New Mentions": { "main": [[{ "node": "Prioritize Engagements", "type": "main", "index": 0 }]] },
+    "Fetch IG Comments": { "main": [[{ "node": "Prioritize Engagements", "type": "main", "index": 0 }]] },
+    "Prioritize Engagements": { "main": [[{ "node": "Generate AI Reply", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "description": "Monitors mentions & comments every 15 min, prioritizes by intent (purchase > complaint > question > praise), generates on-brand AI replies" }
+}

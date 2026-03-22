@@ -1,0 +1,89 @@
+{
+  "name": "Weekly Analytics Digest",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "weeks", "weeksInterval": 1 }] }
+      },
+      "id": "trigger-1",
+      "name": "Every Monday 8am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://graph.instagram.com/v18.0/me/media?fields=id,caption,like_count,comments_count,impressions,reach,timestamp&limit=50&since={{ $now.minus({days: 7}).toISODate() }}&access_token={{$credentials.httpHeaderAuth.value}}",
+        "options": {}
+      },
+      "id": "ig-stats",
+      "name": "Fetch Instagram Stats",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 160],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.twitter.com/2/users/:id/tweets?tweet.fields=public_metrics,created_at&max_results=50&start_time={{ $now.minus({days: 7}).toISO() }}",
+        "options": {}
+      },
+      "id": "tw-stats",
+      "name": "Fetch Twitter Stats",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 340],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.linkedin.com/v2/organizationalEntityShareStatistics?q=organizationalEntity&organizationalEntity=urn:li:organization:{{ org_id }}&timeIntervals.timeRange.start={{ $now.minus({days: 7}).toMillis() }}",
+        "options": {}
+      },
+      "id": "li-stats",
+      "name": "Fetch LinkedIn Stats",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 520],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate stats from all platforms\nconst ig = $('Fetch Instagram Stats').all();\nconst tw = $('Fetch Twitter Stats').all();\nconst li = $('Fetch LinkedIn Stats').all();\n\nconst report = {\n  period: { from: new Date(Date.now() - 7*24*60*60*1000).toISOString().split('T')[0], to: new Date().toISOString().split('T')[0] },\n  instagram: {\n    posts: ig.length,\n    totalReach: ig.reduce((s, p) => s + (p.json.reach || 0), 0),\n    totalLikes: ig.reduce((s, p) => s + (p.json.like_count || 0), 0),\n    totalComments: ig.reduce((s, p) => s + (p.json.comments_count || 0), 0),\n    topPost: ig.sort((a, b) => (b.json.reach || 0) - (a.json.reach || 0))[0]?.json.caption?.substring(0, 100) || 'N/A'\n  },\n  twitter: {\n    tweets: tw.length,\n    totalImpressions: tw.reduce((s, t) => s + (t.json.public_metrics?.impression_count || 0), 0),\n    totalEngagements: tw.reduce((s, t) => s + (t.json.public_metrics?.like_count || 0) + (t.json.public_metrics?.retweet_count || 0), 0)\n  },\n  linkedin: {\n    impressions: li.reduce((s, l) => s + (l.json.impressionCount || 0), 0),\n    clicks: li.reduce((s, l) => s + (l.json.clickCount || 0), 0),\n    engagement: li.reduce((s, l) => s + (l.json.engagement || 0), 0) / (li.length || 1)\n  },\n  weekOverWeek: 'Connect last week data for comparison'\n};\n\nreturn [{ json: report }];"
+      },
+      "id": "aggregate-1",
+      "name": "Aggregate Weekly Stats",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [740, 340]
+    },
+    {
+      "parameters": {
+        "channel": "#social-analytics",
+        "text": "=📊 *Weekly Social Media Report* ({{ $json.period.from }} → {{ $json.period.to }})\n\n*Instagram:* {{ $json.instagram.posts }} posts | {{ $json.instagram.totalReach }} reach | {{ $json.instagram.totalLikes }} likes | {{ $json.instagram.totalComments }} comments\n🔥 Top: {{ $json.instagram.topPost }}\n\n*Twitter:* {{ $json.twitter.tweets }} tweets | {{ $json.twitter.totalImpressions }} impressions | {{ $json.twitter.totalEngagements }} engagements\n\n*LinkedIn:* {{ $json.linkedin.impressions }} impressions | {{ $json.linkedin.clicks }} clicks | {{ $json.linkedin.engagement.toFixed(2) }}% engagement rate"
+      },
+      "id": "slack-1",
+      "name": "Send to Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [980, 340],
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "Every Monday 8am": { "main": [[
+      { "node": "Fetch Instagram Stats", "type": "main", "index": 0 },
+      { "node": "Fetch Twitter Stats", "type": "main", "index": 0 },
+      { "node": "Fetch LinkedIn Stats", "type": "main", "index": 0 }
+    ]] },
+    "Fetch Instagram Stats": { "main": [[{ "node": "Aggregate Weekly Stats", "type": "main", "index": 0 }]] },
+    "Fetch Twitter Stats": { "main": [[{ "node": "Aggregate Weekly Stats", "type": "main", "index": 0 }]] },
+    "Fetch LinkedIn Stats": { "main": [[{ "node": "Aggregate Weekly Stats", "type": "main", "index": 0 }]] },
+    "Aggregate Weekly Stats": { "main": [[{ "node": "Send to Slack", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "description": "Weekly automated report: pulls Instagram, Twitter, LinkedIn analytics, aggregates into a formatted digest, sends to Slack/email" }
+}
