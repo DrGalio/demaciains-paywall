@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demaciains API — Dynamic Data Endpoints</title>
+  <meta name="description" content="x402-paywalled API endpoints for market research, trend analysis, competitor gaps, algorithm reports, and startup validation.">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --accent: #6366f1;
+      --accent-glow: rgba(99,102,241,0.15);
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --code-bg: #1a1a2e;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--text); font-family:'SF Mono','Fira Code','Cascadia Code',monospace; line-height:1.6; }
+    .container { max-width:1100px; margin:0 auto; padding:2rem 1.5rem; }
+    header { text-align:center; padding:3rem 0 2rem; border-bottom:1px solid var(--border); margin-bottom:2rem; }
+    header h1 { font-size:2rem; background:linear-gradient(135deg,#6366f1,#8b5cf6,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.5rem; }
+    header .subtitle { color:var(--muted); font-size:0.9rem; }
+    .badge { display:inline-block; padding:0.15rem 0.5rem; border-radius:4px; font-size:0.75rem; font-weight:600; }
+    .badge-live { background:rgba(16,185,129,0.15); color:var(--green); border:1px solid rgba(16,185,129,0.3); }
+    .badge-price { background:rgba(99,102,241,0.15); color:var(--accent); border:1px solid rgba(99,102,241,0.3); }
+    .badge-dynamic { background:rgba(245,158,11,0.15); color:var(--yellow); border:1px solid rgba(245,158,11,0.3); }
+
+    .endpoints-nav { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0.75rem; margin-bottom:2rem; }
+    .ep-btn { padding:0.75rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center; transition:all 0.2s; color:var(--text); font-family:inherit; font-size:0.85rem; }
+    .ep-btn:hover, .ep-btn.active { border-color:var(--accent); background:var(--accent-glow); box-shadow:0 0 20px rgba(99,102,241,0.1); }
+    .ep-btn .ep-name { font-weight:700; display:block; margin-bottom:0.25rem; }
+    .ep-btn .ep-price { color:var(--muted); font-size:0.75rem; }
+
+    .endpoint-header { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem; padding:1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+    .endpoint-header h2 { font-size:1.3rem; flex:1; }
+    .controls { display:flex; gap:0.5rem; flex-wrap:wrap; }
+    .controls input, .controls select { background:var(--code-bg); border:1px solid var(--border); color:var(--text); padding:0.4rem 0.75rem; border-radius:6px; font-family:inherit; font-size:0.8rem; }
+    .controls input:focus, .controls select:focus { outline:none; border-color:var(--accent); }
+    .btn-regen { background:var(--accent); color:#fff; border:none; padding:0.5rem 1rem; border-radius:6px; cursor:pointer; font-family:inherit; font-size:0.8rem; font-weight:600; transition:all 0.2s; }
+    .btn-regen:hover { filter:brightness(1.15); transform:translateY(-1px); }
+    .btn-copy { background:var(--surface); color:var(--muted); border:1px solid var(--border); padding:0.5rem 1rem; border-radius:6px; cursor:pointer; font-family:inherit; font-size:0.8rem; transition:all 0.2s; }
+    .btn-copy:hover { border-color:var(--accent); color:var(--text); }
+
+    .meta-bar { display:flex; gap:1rem; flex-wrap:wrap; padding:0.75rem 1.25rem; background:rgba(99,102,241,0.05); border:1px solid rgba(99,102,241,0.15); border-radius:8px; margin-bottom:1rem; font-size:0.75rem; color:var(--muted); }
+    .meta-bar span { white-space:nowrap; }
+    .meta-bar .val { color:var(--text); font-weight:600; }
+
+    .json-output { background:var(--code-bg); border:1px solid var(--border); border-radius:10px; padding:1.5rem; overflow-x:auto; max-height:70vh; overflow-y:auto; }
+    .json-output pre { font-size:0.8rem; line-height:1.7; white-space:pre-wrap; word-break:break-word; }
+    .json-key { color:#818cf8; }
+    .json-string { color:#34d399; }
+    .json-number { color:#f59e0b; }
+    .json-bool { color:#f472b6; }
+    .json-null { color:#64748b; }
+
+    .api-info { margin-top:2rem; padding:1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+    .api-info h3 { color:var(--accent); margin-bottom:0.75rem; font-size:1rem; }
+    .api-info code { background:var(--code-bg); padding:0.15rem 0.4rem; border-radius:4px; font-size:0.8rem; }
+    .api-info p { color:var(--muted); font-size:0.85rem; margin-bottom:0.5rem; }
+
+    footer { text-align:center; padding:2rem 0; margin-top:2rem; border-top:1px solid var(--border); color:var(--muted); font-size:0.75rem; }
+    footer a { color:var(--accent); text-decoration:none; }
+
+    @media(max-width:600px) {
+      .endpoints-nav { grid-template-columns:1fr 1fr; }
+      .endpoint-header { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚡ Demaciains API</h1>
+      <p class="subtitle">Dynamic market intelligence — powered by x402 protocol on Base</p>
+      <div style="margin-top:0.75rem; display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
+        <span class="badge badge-live">● LIVE</span>
+        <span class="badge badge-dynamic">⚡ DYNAMIC DATA</span>
+        <span class="badge badge-price">x402 / USDC / Base</span>
+      </div>
+    </header>
+
+    <nav class="endpoints-nav" id="nav"></nav>
+
+    <div id="endpoint-view"></div>
+
+    <div class="api-info">
+      <h3>🔌 How to Consume This API</h3>
+      <p>Each endpoint generates <strong>fresh data on every request</strong> using time-seeded algorithms. No two responses are identical — but the same time window produces reproducible results.</p>
+      <p><strong>Protocol:</strong> <code>x402</code> on Base network — pay-per-call in USDC</p>
+      <p><strong>Wallet:</strong> <code>0x83F31CE0F8b1f27a6Ad91693709febb728c71563</code></p>
+      <p><strong>Agent Card:</strong> <a href="/agent.json" style="color:var(--accent)">/agent.json</a> — full capabilities + pricing</p>
+      <p><strong>Discovery:</strong> <a href="/.well-known/agent.json" style="color:var(--accent)">/.well-known/agent.json</a> — A2A discovery</p>
+      <p style="margin-top:1rem; color:var(--text); font-size:0.8rem;">
+        <strong>Engine:</strong> Demaciains Dynamic Data Engine v3.0 — Seeded PRNG (Mulberry32) + algorithmic market analysis.<br>
+        Data pools: 24 niches · 20 pain points · 50+ competitor profiles · 12 algorithm patterns · 8 validation dimensions.
+      </p>
+    </div>
+
+    <footer>
+      Demaciains Research Services — <a href="https://github.com/DrGalio/demaciains-paywall">GitHub</a> · 
+      Built with x402 protocol · All data generated dynamically
+    </footer>
+  </div>
+
+  <script src="/api/engine/dynamic-engine-v3.js"></script>
+  <script>
+    const ENDPOINTS = [
+      { id: 'market-gap', name: 'Market Gap', price: '$1.00', icon: '📊', desc: 'Underserved market identification' },
+      { id: 'trends', name: 'Trends', price: '$0.25', icon: '📈', desc: 'Trending pain points' },
+      { id: 'competitor-gap', name: 'Competitor Gap', price: '$0.50', icon: '🔍', desc: 'Competitor blind spots' },
+      { id: 'algo-report', name: 'Algo Report', price: '$2.00', icon: '🧬', desc: 'Algorithm patterns' },
+      { id: 'startup-validator', name: 'Startup Validator', price: '$1.50', icon: '🚀', desc: 'Idea validation scoring' },
+    ];
+
+    let currentEndpoint = 'market-gap';
+
+    // Build nav
+    const nav = document.getElementById('nav');
+    ENDPOINTS.forEach(ep => {
+      const btn = document.createElement('button');
+      btn.className = 'ep-btn' + (ep.id === currentEndpoint ? ' active' : '');
+      btn.innerHTML = `<span class="ep-name">${ep.icon} ${ep.name}</span><span class="ep-price">${ep.price} USDC</span>`;
+      btn.onclick = () => selectEndpoint(ep.id);
+      btn.id = 'nav-' + ep.id;
+      nav.appendChild(btn);
+    });
+
+    function selectEndpoint(id) {
+      currentEndpoint = id;
+      document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('nav-' + id).classList.add('active');
+      renderEndpoint();
+    }
+
+    function renderEndpoint() {
+      const view = document.getElementById('endpoint-view');
+      const ep = ENDPOINTS.find(e => e.id === currentEndpoint);
+
+      let data;
+      switch(currentEndpoint) {
+        case 'market-gap': data = DemaciainsEngine.marketGap(); break;
+        case 'trends': data = DemaciainsEngine.trends(); break;
+        case 'competitor-gap': data = DemaciainsEngine.competitorGap(getParam('niche','ai agent tools')); break;
+        case 'algo-report': data = DemaciainsEngine.algoReport(getParam('market','x402 agent commerce')); break;
+        case 'startup-validator': data = DemaciainsEngine.startupValidator(getParam('idea','AI-powered productivity tool')); break;
+      }
+
+      const jsonStr = JSON.stringify(data, null, 2);
+
+      // Dynamic param inputs
+      let paramHTML = '';
+      if (currentEndpoint === 'competitor-gap') {
+        paramHTML = `<input type="text" id="param-niche" placeholder="niche (e.g. ai coding)" value="${getParam('niche','ai agent tools')}" style="width:200px">`;
+      } else if (currentEndpoint === 'algo-report') {
+        paramHTML = `<input type="text" id="param-market" placeholder="market (e.g. x402 agent commerce)" value="${getParam('market','x402 agent commerce')}" style="width:220px">`;
+      } else if (currentEndpoint === 'startup-validator') {
+        paramHTML = `<input type="text" id="param-idea" placeholder="idea (e.g. AI-powered fitness app)" value="${getParam('idea','AI-powered productivity tool')}" style="width:260px">`;
+      }
+
+      view.innerHTML = `
+        <div class="endpoint-header">
+          <h2>${ep.icon} /api/${ep.id}</h2>
+          <div class="controls">
+            ${paramHTML}
+            <button class="btn-regen" onclick="regenerate()">⟳ Regenerate</button>
+            <button class="btn-copy" onclick="copyJSON()">📋 Copy JSON</button>
+          </div>
+        </div>
+        <div class="meta-bar">
+          <span>Generated: <span class="val">${data.generated}</span></span>
+          <span>Engine: <span class="val">v${DemaciainsEngine.version}</span></span>
+          <span>Seed: <span class="val">${data.seed_used || 'time-based'}</span></span>
+          <span>Price: <span class="val">${ep.price} USDC</span></span>
+          <span>Protocol: <span class="val">x402 / Base</span></span>
+        </div>
+        <div class="json-output">
+          <pre id="json-pre">${syntaxHighlight(jsonStr)}</pre>
+        </div>
+      `;
+
+      // Store raw JSON for copy
+      window._rawJSON = jsonStr;
+      window._currentData = data;
+    }
+
+    function regenerate() {
+      renderEndpoint();
+    }
+
+    function copyJSON() {
+      navigator.clipboard.writeText(window._rawJSON).then(() => {
+        const btn = document.querySelector('.btn-copy');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => btn.textContent = '📋 Copy JSON', 1500);
+      });
+    }
+
+    function getParam(name, fallback) {
+      const el = document.getElementById('param-' + name);
+      return el ? el.value : fallback;
+    }
+
+    function syntaxHighlight(json) {
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        let cls = 'json-number';
+        if (/^"/.test(match)) {
+          cls = /:$/.test(match) ? 'json-key' : 'json-string';
+        } else if (/true|false/.test(match)) {
+          cls = 'json-bool';
+        } else if (/null/.test(match)) {
+          cls = 'json-null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+      });
+    }
+
+    // Handle URL hash for direct endpoint access
+    const hash = window.location.hash.slice(1);
+    if (hash && ENDPOINTS.find(e => e.id === hash)) {
+      currentEndpoint = hash;
+    }
+    renderEndpoint();
+
+    // Update hash on navigation
+    const origSelect = selectEndpoint;
+    selectEndpoint = function(id) {
+      window.location.hash = id;
+      origSelect(id);
+    };
+  </script>
+</body>
+</html>

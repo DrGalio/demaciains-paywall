@@ -1,100 +1,101 @@
 {
-  "generated": "2026-03-22T09:04:25.487Z",
-  "agent": "Demaciains Research Engine v2",
+  "generated": "2026-03-22T15:19:14.696Z",
+  "agent": "Demaciains Research Engine v3",
   "type": "trend_signals",
   "methodology": "Hourly-seeded signal aggregation: pain_point.base_strength ± noise, sorted by signal_strength",
   "refresh_rate": "Every hour (hour-seed changes)",
+  "seed_used": 1334435243,
   "trends": [
     {
-      "rank": 5,
-      "pain_point": "AI agents can't pay for services autonomously",
-      "source": "HN",
-      "signal_strength": 0.93,
+      "rank": 1,
+      "pain_point": "RAG pipelines hallucinate when retrieval fails silently",
+      "source": "r/LlamaIndex",
+      "signal_strength": 0.86,
       "velocity": "stable",
       "related_keywords": [
-        "autonomously",
-        "agents",
-        "can't"
+        "RAG",
+        "hallucinate",
+        "retrieval"
       ],
-      "mention_velocity": "+186% this week",
-      "first_detected": "2026-02-21"
-    },
-    {
-      "rank": 6,
-      "pain_point": "Agent-to-agent commerce lacks standardized protocols",
-      "source": "x402 GitHub",
-      "signal_strength": 0.92,
-      "velocity": "stable",
-      "related_keywords": [
-        "agent-to-agent",
-        "protocols",
-        "commerce"
-      ],
-      "mention_velocity": "+227% this week",
-      "first_detected": "2026-02-20"
+      "mention_velocity": "+224% this week",
+      "first_detected": "2026-02-14"
     },
     {
       "rank": 2,
+      "pain_point": "API rate limits kill real-time AI agent loops",
+      "source": "r/developers",
+      "signal_strength": 0.83,
+      "velocity": "stable",
+      "related_keywords": [
+        "rate limits",
+        "real-time",
+        "agent loops"
+      ],
+      "mention_velocity": "+229% this week",
+      "first_detected": "2026-03-04"
+    },
+    {
+      "rank": 3,
+      "pain_point": "Content creators face algorithm fatigue from constant platform changes",
+      "source": "r/InstagramMarketing",
+      "signal_strength": 0.83,
+      "velocity": "rising",
+      "related_keywords": [
+        "creators",
+        "fatigue",
+        "platform"
+      ],
+      "mention_velocity": "+266% this week",
+      "first_detected": "2026-02-17"
+    },
+    {
+      "rank": 4,
+      "pain_point": "AI coding assistants generate insecure code patterns",
+      "source": "HN",
+      "signal_strength": 0.82,
+      "velocity": "accelerating",
+      "related_keywords": [
+        "coding",
+        "insecure",
+        "patterns"
+      ],
+      "mention_velocity": "+199% this week",
+      "first_detected": "2026-02-28"
+    },
+    {
+      "rank": 5,
       "pain_point": "Freelancers can't price AI-augmented services correctly",
       "source": "Product Hunt",
-      "signal_strength": 0.86,
+      "signal_strength": 0.81,
       "velocity": "emerging",
       "related_keywords": [
         "freelancers",
         "correctly",
-        "can't"
+        "pricing"
       ],
-      "mention_velocity": "+142% this week",
-      "first_detected": "2026-03-21"
+      "mention_velocity": "+196% this week",
+      "first_detected": "2026-02-11"
     },
     {
-      "rank": 4,
-      "pain_point": "Content creators face algorithm fatigue from constant platform changes",
-      "source": "r/InstagramMarketing",
-      "signal_strength": 0.84,
+      "rank": 6,
+      "pain_point": "AI model costs unpredictable — billing spikes surprise teams",
+      "source": "r/MachineLearning",
+      "signal_strength": 0.7,
       "velocity": "rising",
       "related_keywords": [
-        "changes",
-        "platform",
-        "creators"
+        "costs",
+        "unpredictable",
+        "billing"
       ],
-      "mention_velocity": "+159% this week",
-      "first_detected": "2026-02-27"
-    },
-    {
-      "rank": 1,
-      "pain_point": "Small teams can't afford enterprise AI tooling",
-      "source": "r/SaaS",
-      "signal_strength": 0.83,
-      "velocity": "accelerating",
-      "related_keywords": [
-        "can't",
-        "teams",
-        "afford"
-      ],
-      "mention_velocity": "+188% this week",
-      "first_detected": "2026-03-11"
-    },
-    {
-      "rank": 3,
-      "pain_point": "AI chatbot builders produce identical low-quality experiences",
-      "source": "r/SaaS",
-      "signal_strength": 0.74,
-      "velocity": "accelerating",
-      "related_keywords": [
-        "builders",
-        "identical",
-        "experiences"
-      ],
-      "mention_velocity": "+168% this week",
-      "first_detected": "2026-03-12"
+      "mention_velocity": "+124% this week",
+      "first_detected": "2026-03-17"
     }
   ],
   "meta": {
-    "total_signals_monitored": 15,
+    "total_signals_monitored": 20,
     "refresh_interval": "60 minutes",
     "data_sources": [
-      "Pain point database (15 signals)",
+      "Pain point database (20 signals)",
       "Signal strength modeling",
       "Velocity tracking"
     ]

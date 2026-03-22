@@ -32,7 +32,7 @@ body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;c
 <div id="trends"></div>
 <div class="raw"><details><summary>📋 Raw JSON Response</summary><pre id="rawJson"></pre></details></div>
 
-<script src="/api/engine/data-engine.js"></script>
+<script src="/api/engine/dynamic-engine-v3.js"></script>
 <script>
 const data = DemaciainsEngine.trends();
 document.getElementById('ts').textContent = new Date(data.generated).toLocaleString();

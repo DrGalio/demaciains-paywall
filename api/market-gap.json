@@ -1,7 +1,7 @@
 {
-  "report_id": "mg-2026-03-22-630",
-  "generated": "2026-03-22T09:04:25.456Z",
-  "agent": "Demaciains Research Engine v2",
+  "report_id": "mg-20260322-z4s5lg",
+  "generated": "2026-03-22T15:19:14.695Z",
+  "agent": "Demaciains Research Engine v3",
   "type": "market_gap_report",
   "methodology": "Seeded algorithmic analysis: growth_rate × 0.4 + (1 - competition_density) × 0.3 + signal_noise × 0.3",
   "data_sources": [
@@ -9,77 +9,78 @@
     "Growth rate modeling",
     "Competition density scoring"
   ],
+  "seed_used": 591718310,
   "gaps": [
     {
       "rank": 1,
       "niche": "x402 Agent Payment Rails",
-      "gap_score": 0.91,
-      "search_volume_monthly": 3319,
-      "growth_rate": "+80% month-over-month",
+      "gap_score": 0.78,
+      "search_volume_monthly": 2858,
+      "growth_rate": "+79% month-over-month",
       "competition_density": "LOW",
       "build_complexity": "MEDIUM",
-      "revenue_potential": "$50,000+/month",
+      "revenue_potential": "$15,000-$50,000/month",
       "time_to_market": "2-6 weeks",
-      "evidence": "Reddit/HN mentions up 399% YoY, but existing solutions are outdated",
-      "action": "Create freemium x402 agent payment rails service — ship MVP in 2-4 weeks"
-    },
-    {
-      "rank": 4,
-      "niche": "Agent Memory & Context Systems",
-      "gap_score": 0.61,
-      "search_volume_monthly": 7687,
-      "growth_rate": "+62% month-over-month",
-      "competition_density": "LOW",
-      "build_complexity": "HIGH",
-      "revenue_potential": "$5,000-$15,000/month",
-      "time_to_market": "1-3 months",
-      "evidence": "Market growing 62% MoM but supply hasn't caught up — 66% demand unmet",
-      "action": "Create x402-gated agent memory & context systems service — ship MVP in 2-4 weeks"
+      "evidence": "GitHub stars up 287% YoY, but supply hasn't caught up",
+      "action": "Create SaaS platform solving the x402 agent payment rails problem — ship MVP in 2-4 weeks"
     },
     {
       "rank": 2,
-      "niche": "AI Agent Orchestration Frameworks",
-      "gap_score": 0.51,
-      "search_volume_monthly": 27721,
-      "growth_rate": "+23% month-over-month",
-      "competition_density": "MEDIUM",
-      "build_complexity": "MEDIUM",
-      "revenue_potential": "$5,000-$15,000/month",
-      "time_to_market": "2-6 weeks",
-      "evidence": "17,100+ monthly searches with only 12 serious competitors",
-      "action": "Launch CLI tool solving the core ai agent orchestration frameworks problem"
+      "niche": "Agent Memory & Context Systems",
+      "gap_score": 0.76,
+      "search_volume_monthly": 11110,
+      "growth_rate": "+71% month-over-month",
+      "competition_density": "LOW",
+      "build_complexity": "HIGH",
+      "revenue_potential": "$50,000+/month",
+      "time_to_market": "2-4 weeks",
+      "evidence": "GitHub stars up 213% YoY, but existing solutions are outdated",
+      "action": "Create CLI tool solving the agent memory & context systems problem — ship MVP in 2-6 weeks"
     },
     {
       "rank": 3,
-      "niche": "Prompt Engineering Platforms",
-      "gap_score": 0.51,
-      "search_volume_monthly": 42566,
-      "growth_rate": "+11% month-over-month",
+      "niche": "Multi-Agent Communication Protocols",
+      "gap_score": 0.6,
+      "search_volume_monthly": 12379,
+      "growth_rate": "+72% month-over-month",
       "competition_density": "LOW",
-      "build_complexity": "LOW",
-      "revenue_potential": "$5,000-$15,000/month",
-      "time_to_market": "1-2 weeks",
-      "evidence": "26,520+ monthly searches with only 3 serious competitors",
-      "action": "Build API-first prompt engineering platforms tool targeting small teams"
+      "build_complexity": "HIGH",
+      "revenue_potential": "$2,000-$5,000/month",
+      "time_to_market": "1-3 months",
+      "evidence": "Market demand up 380% YoY, but no dominant player exists",
+      "action": "Create CLI tool solving the multi-agent communication protocols problem — ship MVP in 2-4 weeks"
+    },
+    {
+      "rank": 4,
+      "niche": "Autonomous Customer Support Agents",
+      "gap_score": 0.55,
+      "search_volume_monthly": 37916,
+      "growth_rate": "+30% month-over-month",
+      "competition_density": "MEDIUM",
+      "build_complexity": "MEDIUM",
+      "revenue_potential": "$2,000-$5,000/month",
+      "time_to_market": "2-4 weeks",
+      "evidence": "Market demand up 431% YoY, but supply hasn't caught up",
+      "action": "Create marketplace solving the autonomous customer support agents problem — ship MVP in 2-6 weeks"
     },
     {
       "rank": 5,
-      "niche": "AI Finance & Bookkeeping",
-      "gap_score": 0.32,
-      "search_volume_monthly": 31822,
-      "growth_rate": "+22% month-over-month",
-      "competition_density": "HIGH",
-      "build_complexity": "LOW",
+      "niche": "Automated Code Review APIs",
+      "gap_score": 0.54,
+      "search_volume_monthly": 19493,
+      "growth_rate": "+24% month-over-month",
+      "competition_density": "MEDIUM",
+      "build_complexity": "MEDIUM",
       "revenue_potential": "$500-$2,000/month",
-      "time_to_market": "1-2 weeks",
-      "evidence": "Reddit/HN mentions up 309% YoY, but existing solutions are outdated",
-      "action": "Launch Chrome extension solving the core ai finance & bookkeeping problem"
+      "time_to_market": "2-6 weeks",
+      "evidence": "Search volume up 347% YoY, but competitors are ignoring this segment",
+      "action": "Create browser extension solving the automated code review apis problem — ship MVP in 2-6 weeks"
     }
   ],
   "meta": {
     "total_niches_analyzed": 24,
     "selection_method": "top by gap_score",
-    "confidence": 0.91,
-    "next_scan": "2026-03-22T10:04:25.456Z"
+    "confidence": 0.85,
+    "next_scan": "2026-03-22T16:19:14.695Z"
   }
 }

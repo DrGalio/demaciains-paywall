@@ -1,119 +1,88 @@
 {
-  "generated": "2026-03-22T12:02:07.375Z",
-  "agent": "Demaciains Research Engine v2",
+  "report_id": "sv-20260322-5mmc5n",
+  "generated": "2026-03-22T15:19:14.697Z",
+  "agent": "Demaciains Research Engine v3",
   "type": "startup_idea_validator",
   "idea": "AI-powered productivity tool",
   "methodology": "Multi-dimensional scoring: 8 factors × weighted analysis + competitive landscape + risk matrix",
-  "overall_score": 0.61,
-  "verdict": "PIVOT FIRST",
+  "seed_used": -1722691911,
+  "overall_score": 0.69,
+  "verdict": "GO WITH CAUTION",
   "scores": [
     {
       "dimension": "Market Size & Growth Trajectory",
-      "score": 0.42,
-      "grade": "D"
+      "score": 0.38,
+      "grade": "F"
     },
     {
       "dimension": "Competition Density & Strength",
-      "score": 0.36,
-      "grade": "D"
+      "score": 0.56,
+      "grade": "C"
     },
     {
       "dimension": "Technical Feasibility",
-      "score": 0.49,
-      "grade": "D"
+      "score": 0.69,
+      "grade": "C"
     },
     {
       "dimension": "Revenue Model Clarity",
-      "score": 0.94,
-      "grade": "A"
+      "score": 0.81,
+      "grade": "B"
     },
     {
       "dimension": "Time to First Revenue",
-      "score": 0.84,
-      "grade": "A"
+      "score": 0.8,
+      "grade": "B"
     },
     {
       "dimension": "Defensibility & Moats",
-      "score": 0.58,
+      "score": 0.59,
       "grade": "C"
     },
     {
       "dimension": "Customer Acquisition Cost",
-      "score": 0.69,
-      "grade": "B"
+      "score": 0.88,
+      "grade": "A"
     },
     {
       "dimension": "Regulatory Risk",
-      "score": 0.58,
-      "grade": "C"
+      "score": 0.8,
+      "grade": "B"
     }
   ],
-  "market_sizing": {
-    "tam": "$18744M total addressable market",
-    "sam": "$3486M serviceable addressable market",
-    "som": "$163M serviceable obtainable market (Year 1)",
-    "confidence": 0.87
-  },
-  "revenue_model": {
-    "recommended": "Freemium + premium tier",
-    "alternatives": [
-      "Marketplace commission",
-      "Usage-based billing"
-    ],
-    "estimated_mrr_month_6": "$45499",
-    "estimated_mrr_month_12": "$83612"
-  },
-  "competitors": [
-    "HelixHub",
-    "AtlasStack",
-    "Prism.io",
-    "NexusLabs",
-    "VertexPro"
+  "revenue_model": "Usage-based billing",
+  "recommended_pricing": "$61/mo or $0.85 per use via x402",
+  "estimated_tam": "$407M globally",
+  "time_to_mvp": "5 weeks",
+  "suggested_channels": [
+    "Agent-to-agent referrals",
+    "API directory submissions",
+    "Integration marketplace listings",
+    "Developer community (HN, Reddit)"
   ],
   "risks": [
-    {
-      "risk": "Target market too small for venture-scale returns",
-      "severity": "LOW",
-      "mitigation": "Perfect for bootstrapped lifestyle business instead"
-    },
-    {
-      "risk": "Regulatory uncertainty in target market",
-      "severity": "MEDIUM",
-      "mitigation": "Build compliance-first, hire legal advisor early"
-    },
-    {
-      "risk": "Customer acquisition costs exceed lifetime value",
-      "severity": "MEDIUM",
-      "mitigation": "Start with content/SEO, avoid paid ads initially"
-    }
+    "Technical complexity — core problem may be harder than estimated",
+    "Scaling costs — unit economics may not hold at scale"
   ],
-  "suggested_pivots": [
-    "Build as a Chrome extension instead of standalone app",
-    "Verticalize: focus exclusively on real estate professionals",
-    "Switch from B2C to B2B — enterprise contracts = faster revenue"
+  "pivot_suggestions": [
+    "Narrow focus to one specific use case — generalist tools lose to specialists",
+    "Target underserved vertical (healthcare, legal, compliance) — less competition",
+    "Switch from B2C to B2B — enterprise contracts provide revenue stability"
   ],
-  "comparable_successes": [
-    {
-      "name": "Linear",
-      "lesson": "Opinionated product design won over generic tools"
-    },
-    {
-      "name": "Vercel",
-      "lesson": "Free tier drove massive adoption, monetized enterprise"
-    },
-    {
-      "name": "Gumroad",
-      "lesson": "Simplest possible solution for creators — lean and focused"
-    }
-  ],
+  "competitive_landscape": {
+    "direct_competitors": 15,
+    "indirect_competitors": 28,
+    "market_leader_share": "22%",
+    "fragmentation_index": 0.31
+  },
   "meta": {
-    "dimensions_analyzed": 8,
-    "confidence": 0.73,
+    "confidence": 0.81,
     "data_sources": [
       "Market sizing models",
-      "Competitive analysis database",
-      "Risk assessment framework",
-      "Comparable company analysis"
-    ]
+      "Competitor database",
+      "Revenue model benchmarks",
+      "Startup outcome data"
+    ],
+    "methodology_note": "Scores are relative to market conditions as of generation date"
   }
 }
