@@ -1,0 +1,106 @@
+{
+  "name": "Demaciains Research Services",
+  "description": "Market research, gap analysis, trend signals, algorithm reports, and prompt engineering products for AI agents and humans. Payments via x402 protocol on Base network.",
+  "version": "1.0.0",
+  "protocol": "x402",
+  "wallet": "0x83F31CE0F8b1f27a6Ad91693709febb728c71563",
+  "network": "base",
+  "facilitator": "https://facilitator.payai.network",
+  "contact": "galio@sharebot.net",
+  "services": [
+    {
+      "endpoint": "/api/market-gap",
+      "method": "GET",
+      "price": "1.00",
+      "currency": "USDC",
+      "description": "Structured market gap report identifying underserved digital markets with evidence, search volume estimates, and build complexity ratings."
+    },
+    {
+      "endpoint": "/api/trends",
+      "method": "GET",
+      "price": "0.25",
+      "currency": "USDC",
+      "description": "Top 5 trending pain points from Reddit, Hacker News, and Product Hunt. Updated hourly. Structured JSON output."
+    },
+    {
+      "endpoint": "/api/competitor-gap",
+      "method": "GET",
+      "price": "0.50",
+      "currency": "USDC",
+      "params": ["niche"],
+      "description": "Competitor gap analysis for any product niche. Returns structured JSON of gaps competitors are missing."
+    },
+    {
+      "endpoint": "/api/algo-report",
+      "method": "GET",
+      "price": "2.00",
+      "currency": "USDC",
+      "params": ["market"],
+      "description": "Backtested pattern analysis on market signals or datasets. For trading and strategy agents."
+    },
+    {
+      "endpoint": "/products/freelancer-revenue-engine.pdf",
+      "method": "GET",
+      "price": "2.00",
+      "currency": "USDC",
+      "description": "50 battle-tested AI prompts to 10x freelance income."
+    },
+    {
+      "endpoint": "/products/ecommerce-profit-accelerator.pdf",
+      "method": "GET",
+      "price": "2.00",
+      "currency": "USDC",
+      "description": "50 AI prompts to optimize e-commerce store conversions."
+    },
+    {
+      "endpoint": "/products/content-creator-machine.pdf",
+      "method": "GET",
+      "price": "2.00",
+      "currency": "USDC",
+      "description": "50 AI prompts to create viral content across all platforms."
+    },
+    {
+      "endpoint": "/products/01-instagram-algorithm-april-2026.pdf",
+      "method": "GET",
+      "price": "3.00",
+      "currency": "USDC",
+      "description": "Instagram algorithm reverse-engineered: ranking signals + exploitation framework (April 2026)."
+    },
+    {
+      "endpoint": "/products/02-tiktok-algorithm-april-2026.pdf",
+      "method": "GET",
+      "price": "3.00",
+      "currency": "USDC",
+      "description": "TikTok For You Page algorithm decoded + ready-to-use optimization prompts (April 2026)."
+    },
+    {
+      "endpoint": "/products/03-youtube-algorithm-april-2026.pdf",
+      "method": "GET",
+      "price": "3.00",
+      "currency": "USDC",
+      "description": "YouTube recommendation engine breakdown + optimization playbook (April 2026)."
+    },
+    {
+      "endpoint": "/products/04-linkedin-algorithm-april-2026.pdf",
+      "method": "GET",
+      "price": "3.00",
+      "currency": "USDC",
+      "description": "LinkedIn feed ranking signals + professional reach strategies (April 2026)."
+    },
+    {
+      "endpoint": "/products/05-twitter-x-algorithm-april-2026.pdf",
+      "method": "GET",
+      "price": "3.00",
+      "currency": "USDC",
+      "description": "X/Twitter timeline algorithm decoded + engagement maximization (April 2026)."
+    }
+  ],
+  "capabilities": [
+    "market-research",
+    "gap-analysis",
+    "trend-detection",
+    "algorithm-analysis",
+    "prompt-engineering",
+    "competitor-analysis"
+  ]
+}
