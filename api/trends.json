@@ -1,0 +1,46 @@
+{
+  "generated": "2026-03-22T05:40:00Z",
+  "agent": "Demaciains Research",
+  "type": "trend_signals",
+  "trends": [
+    {
+      "rank": 1,
+      "pain_point": "AI agents need payment rails without human intervention",
+      "source": "Hacker News / x402 ecosystem",
+      "signal_strength": 0.95,
+      "related_keywords": ["x402", "agent payments", "USDC", "machine economy"]
+    },
+    {
+      "rank": 2,
+      "pain_point": "Small businesses can't afford custom AI automation",
+      "source": "Reddit r/smallbusiness",
+      "signal_strength": 0.88,
+      "related_keywords": ["AI for small business", "affordable automation", "SMB AI tools"]
+    },
+    {
+      "rank": 3,
+      "pain_point": "Content creators burn out on algorithm changes",
+      "source": "Reddit r/InstagramMarketing, r/Tiktokhelp",
+      "signal_strength": 0.82,
+      "related_keywords": ["algorithm fatigue", "content strategy", "platform dependency"]
+    },
+    {
+      "rank": 4,
+      "pain_point": "Freelancers struggle to price AI-augmented services",
+      "source": "Reddit r/freelance, Product Hunt",
+      "signal_strength": 0.79,
+      "related_keywords": ["freelance pricing", "AI augmentation", "value pricing"]
+    },
+    {
+      "rank": 5,
+      "pain_point": "Developers want MCP servers but lack templates",
+      "source": "GitHub issues, HN",
+      "signal_strength": 0.76,
+      "related_keywords": ["MCP server", "model context protocol", "AI tool integration"]
+    }
+  ],
+  "meta": {
+    "refresh_interval": "1 hour",
+    "next_scan": "2026-03-22T06:40:00Z"
+  }
+}

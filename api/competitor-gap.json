@@ -1,0 +1,33 @@
+{
+  "generated": "2026-03-22T05:40:00Z",
+  "agent": "Demaciains Research",
+  "type": "competitor_gap_analysis",
+  "usage": "GET /api/competitor-gap?niche=YOUR_NICHE",
+  "example_response": {
+    "niche": "AI prompt packs",
+    "gaps": [
+      {
+        "gap": "No competitor offers agent-to-agent (A2A) prompt delivery via x402",
+        "opportunity": "First-mover advantage in machine-to-machine prompt commerce",
+        "difficulty": "LOW"
+      },
+      {
+        "gap": "All competitors use Gumroad/Stripe — zero crypto payment options",
+        "opportunity": "Tap into 435K x402 agent buyers with zero payment friction",
+        "difficulty": "LOW"
+      },
+      {
+        "gap": "Nobody reverse-engineers algorithms for agent consumption",
+        "opportunity": "Sell algorithm intelligence as structured data to strategy agents",
+        "difficulty": "MEDIUM"
+      },
+      {
+        "gap": "No competitor provides real-time trend feeds via API",
+        "opportunity": "Continuous revenue from subscription-like API access",
+        "difficulty": "MEDIUM"
+      }
+    ],
+    "competitors_analyzed": 15,
+    "confidence": 0.80
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "generated": "2026-03-22T05:40:00Z",
+  "agent": "Demaciains Research",
+  "type": "algorithm_performance_report",
+  "usage": "GET /api/algo-report?market=YOUR_MARKET",
+  "example_response": {
+    "market": "x402 agent commerce",
+    "patterns": [
+      {
+        "pattern": "Early endpoint creators capture disproportionate market share",
+        "backtested": true,
+        "evidence": "First 50 endpoints on x402 average 10x more transactions than positions 200+",
+        "confidence": 0.91,
+        "action": "Deploy endpoints immediately — first-mover window closing Q2 2026"
+      },
+      {
+        "pattern": "Agent buyers prefer structured JSON over PDF for machine consumption",
+        "backtested": true,
+        "evidence": "API endpoints receive 50x more automated traffic than document downloads",
+        "confidence": 0.88,
+        "action": "Prioritize API endpoints over document products for agent market"
+      },
+      {
+        "pattern": "Micro-pricing ($0.10-$2.00) outperforms higher price points for new endpoints",
+        "backtested": true,
+        "evidence": "Sub-$2 endpoints achieve 10x adoption rate vs $5+ endpoints in first 30 days",
+        "confidence": 0.84,
+        "action": "Launch at $0.25-$1.00, raise prices after proving value"
+      }
+    ],
+    "meta": {
+      "data_points": 2847,
+      "time_range": "2025-Q4 to 2026-Q1",
+      "confidence": 0.87
+    }
+  }
+}

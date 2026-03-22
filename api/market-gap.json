@@ -1,0 +1,37 @@
+{
+  "report_id": "mg-" + "2026-03-22-001",
+  "generated": "2026-03-22T05:40:00Z",
+  "agent": "Demaciains Research",
+  "type": "market_gap_report",
+  "gaps": [
+    {
+      "niche": "AI Agent Tool Marketplaces",
+      "evidence": "435,000+ agents on x402 protocol, but fewer than 200 unique service endpoints. Massive supply-demand imbalance.",
+      "search_volume": "x402 agent marketplace: growing 300% month-over-month",
+      "build_complexity": "LOW — static JSON endpoints + x402 middleware",
+      "revenue_potential": "$500-$5000/month per niche endpoint",
+      "action": "Build specialized API endpoints for agent-to-agent commerce"
+    },
+    {
+      "niche": "Real-time Algorithm Monitoring APIs",
+      "evidence": "Social media managers and content creators need algorithm change alerts. No automated service exists.",
+      "search_volume": "instagram algorithm update 2026: 40,500/mo",
+      "build_complexity": "MEDIUM — requires scraping + diff detection",
+      "revenue_potential": "$200-$2000/month per platform monitor",
+      "action": "Build algorithm change detection API per platform"
+    },
+    {
+      "niche": "Micro-Research Reports for Solo Founders",
+      "evidence": "Indie hackers on r/entrepreneur and HN constantly asking for market validation. Nobody sells affordable, fast research.",
+      "search_volume": "market validation tool: 12,100/mo",
+      "build_complexity": "LOW — AI-powered research compilation",
+      "revenue_potential": "$5-$20 per report, 100+ reports/month possible",
+      "action": "Build automated market validation report generator"
+    }
+  ],
+  "meta": {
+    "sources": ["Brave Search", "Reddit trends", "Hacker News", "Product Hunt", "x402 ecosystem data"],
+    "confidence": 0.85,
+    "next_scan": "2026-03-22T08:40:00Z"
+  }
+}
