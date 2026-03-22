@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dental Practice AI Agent Config Pack — Demaciains</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #00b4d8;
+    --accent-hover: #0096c7;
+    --surface: #16213e;
+    --surface-light: #0f3460;
+    --text: #eee;
+    --text-muted: #a8b2d1;
+    --white: #fff;
+    --success: #00c853;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--primary);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+  header { text-align: center; padding: 4rem 0 3rem; }
+  header h1 {
+    font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--accent), #48cae4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+  header .tagline { font-size: 1.3rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+  .badge {
+    display: inline-block; padding: 0.4rem 1rem; border-radius: 20px;
+    background: rgba(0,180,216,0.15); color: var(--accent); font-size: 0.85rem;
+    font-weight: 600; margin-bottom: 1.5rem; border: 1px solid rgba(0,180,216,0.3);
+  }
+  .price-block {
+    text-align: center; padding: 2rem; margin: 2rem 0;
+    background: var(--surface); border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .price { font-size: 3rem; font-weight: 800; color: var(--accent); }
+  .price-note { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+  .cta {
+    display: inline-block; padding: 1rem 2.5rem; margin-top: 1.5rem;
+    background: linear-gradient(135deg, var(--accent), #0096c7);
+    color: var(--white); font-weight: 700; font-size: 1.1rem;
+    border: none; border-radius: var(--radius); cursor: pointer;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,180,216,0.3); }
+  section { margin: 3rem 0; }
+  h2 {
+    font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem; border-bottom: 2px solid rgba(0,180,216,0.2);
+  }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+  .feature-card {
+    background: var(--surface); padding: 1.5rem; border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .feature-card h3 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
+  .includes-list { list-style: none; }
+  .includes-list li {
+    padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .includes-list li::before { content: '✅'; font-size: 1.2rem; }
+  .pain-point {
+    background: rgba(233,69,96,0.1); border-left: 3px solid #e94560;
+    padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .pain-point strong { color: #e94560; }
+  .roi-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .roi-table th, .roi-table td {
+    padding: 0.75rem 1rem; text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .roi-table th { color: var(--accent); font-weight: 600; }
+  .roi-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .testimonial {
+    background: var(--surface); padding: 1.5rem; border-radius: var(--radius);
+    border-left: 3px solid var(--accent); margin: 1rem 0; font-style: italic;
+    color: var(--text-muted);
+  }
+  .testimonial strong { color: var(--text); font-style: normal; display: block; margin-bottom: 0.5rem; }
+  .cta-center { text-align: center; margin: 3rem 0; }
+  footer {
+    text-align: center; padding: 3rem 0; color: var(--text-muted);
+    border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  @media (max-width: 600px) {
+    header h1 { font-size: 2rem; }
+    .price { font-size: 2.2rem; }
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="badge">🏥 AI Agent Config Pack</div>
+  <h1>Dental Practice AI Assistant</h1>
+  <p class="tagline">A complete, ready-to-paste AI configuration that turns ChatGPT, Claude, or Gemini into your dental office's virtual front desk — handling scheduling, treatment questions, insurance queries, emergencies, and patient education 24/7.</p>
+</header>
+
+<div class="price-block">
+  <div class="price">$29</div>
+  <div class="price-note">One-time purchase · Instant download · Works forever</div>
+  <a href="https://drgalio.gumroad.com/l/dental-agent-config" class="cta">Get Instant Access →</a>
+</div>
+
+<section>
+  <h2>The Problem</h2>
+  <div class="pain-point">
+    <strong>Every missed call is a missed patient.</strong> Dental offices lose 30-40% of after-hours inquiries because there's no one to answer. Staff spend 15-20 hours per week answering the same questions: "Do you take my insurance?", "How much is a crown?", "What do I do about this toothache?"
+  </div>
+  <div class="pain-point">
+    <strong>Patients Google their symptoms at 2 AM</strong> and end up on WebMD getting terrified. They want answers from YOUR practice — but you're not available.
+  </div>
+</section>
+
+<section>
+  <h2>The Solution</h2>
+  <p>Our Dental Practice AI Config Pack gives you a professionally crafted AI assistant that knows your practice inside and out. Paste it into any major AI platform and your virtual front desk is live in 15 minutes.</p>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>🦷 Treatment Q&A</h3>
+      <p>Answers patient questions about procedures, recovery, costs, and timelines — accurately and in plain language.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🚨 Emergency Triage</h3>
+      <p>Guides patients through dental emergencies — toothaches, knocked-out teeth, broken crowns — with clear first-aid instructions.</p>
+    </div>
+    <div class="feature-card">
+      <h3>💳 Insurance Help</h3>
+      <p>Explains coverage basics, helps patients understand their benefits, and guides them on financial options.</p>
+    </div>
+    <div class="feature-card">
+      <h3>📅 Scheduling Support</h3>
+      <p>Answers questions about appointment availability, what to bring, and how to prepare for visits.</p>
+    </div>
+    <div class="feature-card">
+      <h3>😰 Dental Anxiety</h3>
+      <p>Reassures nervous patients, explains comfort options, and makes the first visit feel manageable.</p>
+    </div>
+    <div class="feature-card">
+      <h3>👨‍👩‍👧‍👦 Family Care</h3>
+      <p>Guides parents through kids' dental milestones, first visits, and pediatric care questions.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What's Included</h2>
+  <ul class="includes-list">
+    <li><strong>System Prompt</strong> — 3,000+ word AI personality and behavior configuration</li>
+    <li><strong>Knowledge Base Template</strong> — Customizable practice info (services, pricing, insurance, providers)</li>
+    <li><strong>10 Conversation Starters</strong> — Pre-built prompts for highest-value patient interactions</li>
+    <li><strong>Setup Guide</strong> — Step-by-step instructions for ChatGPT, Claude, and Gemini</li>
+    <li><strong>ROI Calculator</strong> — Show your team the value before you deploy</li>
+    <li><strong>Customization Checklist</strong> — Don't miss a placeholder with your practice info</li>
+  </ul>
+</section>
+
+<section>
+  <h2>ROI — What It's Worth</h2>
+  <table class="roi-table">
+    <tr><th>Metric</th><th>Before</th><th>After</th></tr>
+    <tr><td>After-hours patient inquiries answered</td><td>0%</td><td>100%</td></tr>
+    <tr><td>Staff time on routine Q&A</td><td>15-20 hrs/week</td><td>2-3 hrs/week</td></tr>
+    <tr><td>Patient response time</td><td>4-24 hours</td><td>Instant</td></tr>
+    <tr><td>New patient conversion rate</td><td>~30%</td><td>~45-55%</td></tr>
+    <tr><td><strong>Estimated monthly value</strong></td><td>—</td><td><strong>$2,000-5,000</strong></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Works With</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>ChatGPT Custom GPT</h3>
+      <p>Create a branded GPT your whole team can access. Best for practices already using ChatGPT.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Claude Projects</h3>
+      <p>Set up a Claude Project with your practice data. Best for privacy-conscious practices.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Gemini Gems</h3>
+      <p>Create a Gem for your Google Workspace team. Best for practices using Google tools.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-center">
+  <a href="https://drgalio.gumroad.com/l/dental-agent-config" class="cta">Get the Dental Practice AI Pack — $29 →</a>
+  <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">Instant download · One-time payment · Works forever</p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://drgalio.github.io/demaciains-paywall/">Demaciains</a> · AI-powered digital products</p>
+  <p style="margin-top: 0.5rem;">Questions? Need a custom AI agent for your practice? <a href="mailto:galio@sharebot.net">Contact us</a></p>
+</footer>
+
+</div>
+</body>
+</html>
