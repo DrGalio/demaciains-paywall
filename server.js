@@ -10,8 +10,9 @@ const PORT = process.env.PORT || 3000;
 // Treasury wallet address (Base network) — receives USDC directly
 const TREASURY_ADDRESS = '0x83F31CE0F8b1f27a6Ad91693709febb728c71563';
 
-// ChaosChain facilitator — gasless, no API key, non-custodial
-const FACILITATOR_URL = process.env.FACILITATOR_URL || 'https://facilitator.chaoscha.in';
+// PayAI facilitator — gasless, production-ready, Base mainnet
+// First 1,000 settlements free, then $0.001/tx
+const FACILITATOR_URL = process.env.FACILITATOR_URL || 'https://facilitator.payai.network';
 
 // Product catalog
 const PRODUCTS = {
