@@ -1,106 +1,27 @@
 {
   "name": "Demaciains Research Services",
-  "description": "Market research, gap analysis, trend signals, algorithm reports, and prompt engineering products for AI agents and humans. Payments via x402 protocol on Base network.",
-  "version": "1.0.0",
+  "description": "Market research, gap analysis, trend signals, algorithm reports, startup validation, and prompt engineering products for AI agents and humans.",
+  "version": "2.1.0",
   "protocol": "x402",
   "wallet": "0x83F31CE0F8b1f27a6Ad91693709febb728c71563",
-  "network": "base",
+  "network": "eip155:8453",
   "facilitator": "https://facilitator.payai.network",
   "contact": "galio@sharebot.net",
   "services": [
-    {
-      "endpoint": "/api/market-gap",
-      "method": "GET",
-      "price": "1.00",
-      "currency": "USDC",
-      "description": "Structured market gap report identifying underserved digital markets with evidence, search volume estimates, and build complexity ratings."
-    },
-    {
-      "endpoint": "/api/trends",
-      "method": "GET",
-      "price": "0.25",
-      "currency": "USDC",
-      "description": "Top 5 trending pain points from Reddit, Hacker News, and Product Hunt. Updated hourly. Structured JSON output."
-    },
-    {
-      "endpoint": "/api/competitor-gap",
-      "method": "GET",
-      "price": "0.50",
-      "currency": "USDC",
-      "params": ["niche"],
-      "description": "Competitor gap analysis for any product niche. Returns structured JSON of gaps competitors are missing."
-    },
-    {
-      "endpoint": "/api/algo-report",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "params": ["market"],
-      "description": "Backtested pattern analysis on market signals or datasets. For trading and strategy agents."
-    },
-    {
-      "endpoint": "/products/freelancer-revenue-engine.pdf",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "description": "50 battle-tested AI prompts to 10x freelance income."
-    },
-    {
-      "endpoint": "/products/ecommerce-profit-accelerator.pdf",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "description": "50 AI prompts to optimize e-commerce store conversions."
-    },
-    {
-      "endpoint": "/products/content-creator-machine.pdf",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "description": "50 AI prompts to create viral content across all platforms."
-    },
-    {
-      "endpoint": "/products/01-instagram-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "Instagram algorithm reverse-engineered: ranking signals + exploitation framework (April 2026)."
-    },
-    {
-      "endpoint": "/products/02-tiktok-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "TikTok For You Page algorithm decoded + ready-to-use optimization prompts (April 2026)."
-    },
-    {
-      "endpoint": "/products/03-youtube-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "YouTube recommendation engine breakdown + optimization playbook (April 2026)."
-    },
-    {
-      "endpoint": "/products/04-linkedin-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "LinkedIn feed ranking signals + professional reach strategies (April 2026)."
-    },
-    {
-      "endpoint": "/products/05-twitter-x-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "X/Twitter timeline algorithm decoded + engagement maximization (April 2026)."
-    }
-  ],
-  "capabilities": [
-    "market-research",
-    "gap-analysis",
-    "trend-detection",
-    "algorithm-analysis",
-    "prompt-engineering",
-    "competitor-analysis"
+    {"endpoint": "/api/market-gap", "method": "GET", "price": "$1.00", "currency": "USDC", "description": "Market gap analysis report with evidence and build complexity"},
+    {"endpoint": "/api/trends", "method": "GET", "price": "$0.25", "currency": "USDC", "description": "Top 5 trending pain points from Reddit, HN, Product Hunt"},
+    {"endpoint": "/api/competitor-gap", "method": "GET", "price": "$0.50", "currency": "USDC", "description": "Competitor gap analysis for any niche"},
+    {"endpoint": "/api/algo-report", "method": "GET", "price": "$2.00", "currency": "USDC", "description": "Backtested algorithm performance analysis"},
+    {"endpoint": "/api/startup-validator", "method": "GET", "price": "$1.50", "currency": "USDC", "description": "7-dimension startup idea validation with scoring"},
+    {"endpoint": "/products/freelancer-revenue-engine", "method": "GET", "price": "$2.00", "currency": "USDC", "description": "50 AI prompts for freelancers (PDF)"},
+    {"endpoint": "/products/ecommerce-profit-accelerator", "method": "GET", "price": "$2.00", "currency": "USDC", "description": "50 AI prompts for e-commerce (PDF)"},
+    {"endpoint": "/products/content-creator-machine", "method": "GET", "price": "$2.00", "currency": "USDC", "description": "50 AI prompts for content creators (PDF)"},
+    {"endpoint": "/products/instagram-algorithm-2026", "method": "GET", "price": "$3.00", "currency": "USDC", "description": "Instagram algorithm reverse-engineered (PDF)"},
+    {"endpoint": "/products/tiktok-algorithm-2026", "method": "GET", "price": "$3.00", "currency": "USDC", "description": "TikTok algorithm reverse-engineered (PDF)"},
+    {"endpoint": "/products/youtube-algorithm-2026", "method": "GET", "price": "$3.00", "currency": "USDC", "description": "YouTube algorithm reverse-engineered (PDF)"},
+    {"endpoint": "/products/linkedin-algorithm-2026", "method": "GET", "price": "$3.00", "currency": "USDC", "description": "LinkedIn algorithm reverse-engineered (PDF)"},
+    {"endpoint": "/products/x-twitter-algorithm-2026", "method": "GET", "price": "$3.00", "currency": "USDC", "description": "X/Twitter algorithm reverse-engineered (PDF)"},
+    {"endpoint": "/products/all-prompt-packs", "method": "GET", "price": "$5.00", "currency": "USDC", "description": "All 3 prompt packs bundle (150 prompts)"},
+    {"endpoint": "/products/all-algorithms", "method": "GET", "price": "$10.00", "currency": "USDC", "description": "All 5 algorithm guides bundle"}
   ]
 }

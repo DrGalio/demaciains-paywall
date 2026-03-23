@@ -58,6 +58,10 @@ app.use(paymentMiddleware({
     accepts: [{ scheme: 'exact', price: '$2.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
     description: 'Algorithm performance report'
   },
+  'GET /api/startup-validator': {
+    accepts: [{ scheme: 'exact', price: '$1.50', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'Startup idea validation report with 7-dimension scoring'
+  },
   // PDF product downloads — ALL protected
   'GET /products/freelancer-revenue-engine': {
     accepts: [{ scheme: 'exact', price: '$2.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
@@ -142,6 +146,7 @@ app.get('/api/market-gap', (req, res) => res.sendFile(path.join(__dirname, 'publ
 app.get('/api/trends', (req, res) => res.sendFile(path.join(__dirname, 'public', 'api', 'trends.json')));
 app.get('/api/competitor-gap', (req, res) => res.sendFile(path.join(__dirname, 'public', 'api', 'competitor-gap.json')));
 app.get('/api/algo-report', (req, res) => res.sendFile(path.join(__dirname, 'public', 'api', 'algo-report.json')));
+app.get('/api/startup-validator', (req, res) => res.sendFile(path.join(__dirname, 'public', 'api', 'startup-validator.json')));
 
 // Agent discovery
 app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));

@@ -1,0 +1,40 @@
+{
+  "generated": "2026-03-23T02:25:00Z",
+  "agent": "Demaciains Research",
+  "type": "startup_idea_validator",
+  "usage": "GET /api/startup-validator?idea=YOUR_IDEA",
+  "validation_dimensions": [
+    "market_size",
+    "competition_density",
+    "monetization_clarity",
+    "build_complexity",
+    "time_to_revenue",
+    "distribution_channels",
+    "defensibility"
+  ],
+  "example_response": {
+    "idea": "AI-powered email reply generator for Gmail",
+    "overall_score": 72,
+    "verdict": "VIABLE — strong demand, crowded but differentiable",
+    "scores": {
+      "market_size": { "score": 85, "note": "1.8B Gmail users, email productivity is top-3 pain point" },
+      "competition_density": { "score": 35, "note": "Heavy: Superhuman, Compose AI, Magical, Gmail native AI. Differentiate on tone-matching or niche verticals." },
+      "monetization_clarity": { "score": 90, "note": "Clear SaaS ($5-15/mo) or one-time purchase model. Users already paying for email tools." },
+      "build_complexity": { "score": 75, "note": "Chrome extension + Gmail API + LLM. 2-4 week MVP. Medium complexity." },
+      "time_to_revenue": { "score": 60, "note": "30-60 days to first sale if distribution is right. Reddit + Chrome Web Store organic." },
+      "distribution_channels": { "score": 80, "note": "Chrome Web Store (huge organic), Product Hunt, Reddit r/productivity, Twitter/X" },
+      "defensibility": { "score": 45, "note": "Low moat — AI email tools commoditizing fast. Protect with niche specialization or workflow integration." }
+    },
+    "recommendations": [
+      "Niche down: target real estate agents, recruiters, or sales teams specifically",
+      "Build Chrome extension first (fastest distribution)",
+      "Price at $9/mo or $49 one-time for premium tier",
+      "Free tier: 10 replies/day to drive organic installs"
+    ],
+    "similar_products": [
+      { "name": "Compose AI", "revenue": "Est. $2M+ ARR", "model": "Freemium SaaS" },
+      { "name": "Magical", "revenue": "Est. $5M+ ARR", "model": "Freemium SaaS" },
+      { "name": "Superhuman AI", "revenue": "Part of $82M ARR", "model": "Bundled premium" }
+    ]
+  }
+}
