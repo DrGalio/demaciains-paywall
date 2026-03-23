@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "name": "Demaciains AI Tools",
-  "description": "17 pay-per-use API tools for AI agents — premium analysis at $2.44, standard intelligence at $1.39. Powered by x402 protocol on Base network.",
+  "description": "17 pay-per-use API tools for AI agents \u2014 premium analysis at $2.44, standard intelligence at $1.39. Powered by x402 protocol on Base network.",
   "version": "4.0.0",
   "url": "https://xpay-server.vercel.app",
   "documentation": "https://drgalio.github.io/demaciains-paywall/",
@@ -16,8 +16,10 @@
       "path": "/api/ai-detector",
       "method": "GET",
       "price": "$2.44",
-      "description": "AI content detection — analyzes text for AI-generated patterns using burstiness, vocabulary diversity, and sentence structure analysis",
-      "params": { "text": "string (min 50 chars)" },
+      "description": "AI content detection \u2014 analyzes text for AI-generated patterns using burstiness, vocabulary diversity, and sentence structure analysis",
+      "params": {
+        "text": "string (min 50 chars)"
+      },
       "category": "premium"
     },
     {
@@ -26,7 +28,9 @@
       "method": "GET",
       "price": "$2.44",
       "description": "Email verification with real DNS/MX record checks, deliverability scoring, disposable/free/corporate detection",
-      "params": { "email": "string" },
+      "params": {
+        "email": "string"
+      },
       "category": "premium"
     },
     {
@@ -34,8 +38,10 @@
       "path": "/api/company-enrich",
       "method": "GET",
       "price": "$2.44",
-      "description": "Company enrichment via web research — firmographics, competitors, industry, size estimation",
-      "params": { "company": "string" },
+      "description": "Company enrichment via web research \u2014 firmographics, competitors, industry, size estimation",
+      "params": {
+        "company": "string"
+      },
       "category": "premium"
     },
     {
@@ -43,8 +49,10 @@
       "path": "/api/web-intel",
       "method": "GET",
       "price": "$2.44",
-      "description": "Web intelligence — page analysis, title/description extraction, SEO signals, indexation check",
-      "params": { "url": "string" },
+      "description": "Web intelligence \u2014 page analysis, title/description extraction, SEO signals, indexation check",
+      "params": {
+        "url": "string"
+      },
       "category": "premium"
     },
     {
@@ -52,8 +60,10 @@
       "path": "/api/plagiarism",
       "method": "GET",
       "price": "$2.44",
-      "description": "Plagiarism detection via text fingerprinting — originality scoring, n-gram analysis, similarity detection",
-      "params": { "text": "string (min 100 chars)" },
+      "description": "Plagiarism detection via text fingerprinting \u2014 originality scoring, n-gram analysis, similarity detection",
+      "params": {
+        "text": "string (min 100 chars)"
+      },
       "category": "premium"
     },
     {
@@ -61,8 +71,10 @@
       "path": "/api/seo-audit",
       "method": "GET",
       "price": "$2.44",
-      "description": "SEO audit — technical + on-page analysis: title, meta, H1, images, links, with severity-ranked issues",
-      "params": { "url": "string" },
+      "description": "SEO audit \u2014 technical + on-page analysis: title, meta, H1, images, links, with severity-ranked issues",
+      "params": {
+        "url": "string"
+      },
       "category": "premium"
     },
     {
@@ -70,8 +82,10 @@
       "path": "/api/lead-score",
       "method": "GET",
       "price": "$2.44",
-      "description": "B2B lead scoring — ICP fit analysis based on email quality, job title seniority, company match, industry",
-      "params": { "lead": "JSON string: {email,company,title,industry}" },
+      "description": "B2B lead scoring \u2014 ICP fit analysis based on email quality, job title seniority, company match, industry",
+      "params": {
+        "lead": "JSON string: {email,company,title,industry}"
+      },
       "category": "premium"
     },
     {
@@ -79,8 +93,10 @@
       "path": "/api/market-gap",
       "method": "GET",
       "price": "$1.39",
-      "description": "Market gap analysis — find underserved niches with revenue estimates and validation signals",
-      "params": { "niche": "string (optional)" },
+      "description": "Market gap analysis \u2014 find underserved niches with revenue estimates and validation signals",
+      "params": {
+        "niche": "string (optional)"
+      },
       "category": "standard"
     },
     {
@@ -88,8 +104,10 @@
       "path": "/api/trends",
       "method": "GET",
       "price": "$1.39",
-      "description": "Market trends — growth signals for hot sectors including AI, SaaS, creator economy",
-      "params": { "seed": "number (optional)" },
+      "description": "Market trends \u2014 growth signals for hot sectors including AI, SaaS, creator economy",
+      "params": {
+        "seed": "number (optional)"
+      },
       "category": "standard"
     },
     {
@@ -97,8 +115,10 @@
       "path": "/api/competitor-gap",
       "method": "GET",
       "price": "$1.39",
-      "description": "Competitor gap analysis — weaknesses to exploit with pricing comparison",
-      "params": { "industry": "string (optional)" },
+      "description": "Competitor gap analysis \u2014 weaknesses to exploit with pricing comparison",
+      "params": {
+        "industry": "string (optional)"
+      },
       "category": "standard"
     },
     {
@@ -106,8 +126,10 @@
       "path": "/api/algo-report",
       "method": "GET",
       "price": "$1.39",
-      "description": "Social platform algorithm report — ranking signals and optimization hacks for IG/TikTok/YT/LinkedIn/X",
-      "params": { "platform": "string: instagram|tiktok|youtube|linkedin|twitter" },
+      "description": "Social platform algorithm report \u2014 ranking signals and optimization hacks for IG/TikTok/YT/LinkedIn/X",
+      "params": {
+        "platform": "string: instagram|tiktok|youtube|linkedin|twitter"
+      },
       "category": "standard"
     },
     {
@@ -115,8 +137,10 @@
       "path": "/api/startup-validator",
       "method": "GET",
       "price": "$1.39",
-      "description": "Startup idea validator — multi-dimension scoring with BUILD/PROMISING/HIGH RISK verdict",
-      "params": { "idea": "string (optional)" },
+      "description": "Startup idea validator \u2014 multi-dimension scoring with BUILD/PROMISING/HIGH RISK verdict",
+      "params": {
+        "idea": "string (optional)"
+      },
       "category": "standard"
     },
     {
@@ -124,8 +148,10 @@
       "path": "/api/domain-intel",
       "method": "GET",
       "price": "$1.39",
-      "description": "Domain intelligence — brandability score, SEO potential, TLD authority, value estimate",
-      "params": { "domain": "string" },
+      "description": "Domain intelligence \u2014 brandability score, SEO potential, TLD authority, value estimate",
+      "params": {
+        "domain": "string"
+      },
       "category": "standard"
     },
     {
@@ -133,8 +159,10 @@
       "path": "/api/prompt-optimize",
       "method": "GET",
       "$price": "$1.39",
-      "description": "Prompt optimizer — scores your prompt, identifies issues, returns optimized version with best practices",
-      "params": { "prompt": "string" },
+      "description": "Prompt optimizer \u2014 scores your prompt, identifies issues, returns optimized version with best practices",
+      "params": {
+        "prompt": "string"
+      },
       "category": "standard"
     },
     {
@@ -142,8 +170,10 @@
       "path": "/api/content-score",
       "method": "GET",
       "price": "$1.39",
-      "description": "Content scoring — readability, SEO metrics, word/sentence analysis",
-      "params": { "text": "string" },
+      "description": "Content scoring \u2014 readability, SEO metrics, word/sentence analysis",
+      "params": {
+        "text": "string"
+      },
       "category": "standard"
     },
     {
@@ -151,8 +181,10 @@
       "path": "/api/price-benchmark",
       "method": "GET",
       "price": "$1.39",
-      "description": "SaaS price benchmark — tier pricing analysis by category with MRR estimates",
-      "params": { "category": "string (optional)" },
+      "description": "SaaS price benchmark \u2014 tier pricing analysis by category with MRR estimates",
+      "params": {
+        "category": "string (optional)"
+      },
       "category": "standard"
     },
     {
@@ -160,9 +192,34 @@
       "path": "/api/name-generator",
       "method": "GET",
       "price": "$1.39",
-      "description": "Business/product name generator — brandable names with domain availability hints",
-      "params": { "keywords": "string (comma-separated)" },
+      "description": "Business/product name generator \u2014 brandable names with domain availability hints",
+      "params": {
+        "keywords": "string (comma-separated)"
+      },
       "category": "standard"
+    },
+    {
+      "name": "social-audit",
+      "path": "/api/social-audit",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "Social media audit \u2014 profile analysis, engagement metrics, brandability scoring via web search",
+      "params": {
+        "handle": "string (without @)",
+        "platform": "string: twitter|instagram|linkedin|tiktok"
+      },
+      "category": "premium"
+    },
+    {
+      "name": "tech-stack",
+      "path": "/api/tech-stack",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "Tech stack detector \u2014 identify CMS, frameworks, analytics, payments, hosting from live page analysis",
+      "params": {
+        "url": "string"
+      },
+      "category": "premium"
     }
   ]
 }
