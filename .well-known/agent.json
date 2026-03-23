@@ -1,129 +1,168 @@
 {
-  "name": "Demaciains Research Services",
-  "description": "Market research, gap analysis, trend signals, algorithm reports, and startup validation for AI agents and humans. ALL endpoints generate fresh dynamic data on every request. Payments via x402 protocol on Base network.",
-  "version": "3.0.0",
-  "engine": "Demaciains Dynamic Data Engine v3 \u2014 Client-Side Seeded PRNG",
-  "data_refresh": {
-    "market-gap": "daily (date-seeded)",
-    "trends": "hourly (hour-seeded)",
-    "competitor-gap": "daily (date+niche-seeded)",
-    "algo-report": "daily (date+market-seeded)",
-    "startup-validator": "daily (date+idea-seeded)"
-  },
-  "protocol": "x402",
+  "schemaVersion": "1.0.0",
+  "name": "Demaciains AI Tools",
+  "description": "17 pay-per-use API tools for AI agents — premium analysis at $2.44, standard intelligence at $1.39. Powered by x402 protocol on Base network.",
+  "version": "4.0.0",
+  "url": "https://xpay-server.vercel.app",
+  "documentation": "https://drgalio.github.io/demaciains-paywall/",
   "wallet": "0x83F31CE0F8b1f27a6Ad91693709febb728c71563",
   "network": "base",
-  "facilitator": "https://facilitator.payai.network",
+  "protocol": "x402",
+  "facilitator": "https://facilitator.xpay.sh",
   "contact": "galio@sharebot.net",
-  "services": [
-    {
-      "endpoint": "/api/market-gap",
-      "method": "GET",
-      "price": "1.00",
-      "currency": "USDC",
-      "description": "Structured market gap report identifying underserved digital markets with evidence, search volume estimates, and build complexity ratings."
-    },
-    {
-      "endpoint": "/api/trends",
-      "method": "GET",
-      "price": "0.25",
-      "currency": "USDC",
-      "description": "Top 5 trending pain points from Reddit, Hacker News, and Product Hunt. Updated hourly. Structured JSON output."
-    },
-    {
-      "endpoint": "/api/competitor-gap",
-      "method": "GET",
-      "price": "0.50",
-      "currency": "USDC",
-      "params": [
-        "niche"
-      ],
-      "description": "Competitor gap analysis for any product niche. Returns structured JSON of gaps competitors are missing."
-    },
-    {
-      "endpoint": "/api/algo-report",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "params": [
-        "market"
-      ],
-      "description": "Backtested pattern analysis on market signals or datasets. For trading and strategy agents."
-    },
-    {
-      "endpoint": "/api/startup-validator",
-      "method": "GET",
-      "price": "1.50",
-      "currency": "USDC",
-      "params": [
-        "idea"
-      ],
-      "description": "Multi-dimensional startup idea validation: 8-factor scoring, market sizing, risk matrix, revenue model, competitor landscape, and pivot suggestions."
-    },
-    {
-      "endpoint": "/products/freelancer-revenue-engine.pdf",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "description": "50 battle-tested AI prompts to 10x freelance income."
-    },
-    {
-      "endpoint": "/products/ecommerce-profit-accelerator.pdf",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "description": "50 AI prompts to optimize e-commerce store conversions."
-    },
-    {
-      "endpoint": "/products/content-creator-machine.pdf",
-      "method": "GET",
-      "price": "2.00",
-      "currency": "USDC",
-      "description": "50 AI prompts to create viral content across all platforms."
-    },
-    {
-      "endpoint": "/products/01-instagram-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "Instagram algorithm reverse-engineered: ranking signals + exploitation framework (April 2026)."
-    },
-    {
-      "endpoint": "/products/02-tiktok-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "TikTok For You Page algorithm decoded + ready-to-use optimization prompts (April 2026)."
-    },
-    {
-      "endpoint": "/products/03-youtube-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "YouTube recommendation engine breakdown + optimization playbook (April 2026)."
-    },
-    {
-      "endpoint": "/products/04-linkedin-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "LinkedIn feed ranking signals + professional reach strategies (April 2026)."
-    },
-    {
-      "endpoint": "/products/05-twitter-x-algorithm-april-2026.pdf",
-      "method": "GET",
-      "price": "3.00",
-      "currency": "USDC",
-      "description": "X/Twitter timeline algorithm decoded + engagement maximization (April 2026)."
-    }
-  ],
   "capabilities": [
-    "market-research",
-    "gap-analysis",
-    "trend-detection",
-    "algorithm-analysis",
-    "prompt-engineering",
-    "competitor-analysis",
-    "startup-validation"
+    {
+      "name": "ai-detector",
+      "path": "/api/ai-detector",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "AI content detection — analyzes text for AI-generated patterns using burstiness, vocabulary diversity, and sentence structure analysis",
+      "params": { "text": "string (min 50 chars)" },
+      "category": "premium"
+    },
+    {
+      "name": "email-verify",
+      "path": "/api/email-verify",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "Email verification with real DNS/MX record checks, deliverability scoring, disposable/free/corporate detection",
+      "params": { "email": "string" },
+      "category": "premium"
+    },
+    {
+      "name": "company-enrich",
+      "path": "/api/company-enrich",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "Company enrichment via web research — firmographics, competitors, industry, size estimation",
+      "params": { "company": "string" },
+      "category": "premium"
+    },
+    {
+      "name": "web-intel",
+      "path": "/api/web-intel",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "Web intelligence — page analysis, title/description extraction, SEO signals, indexation check",
+      "params": { "url": "string" },
+      "category": "premium"
+    },
+    {
+      "name": "plagiarism",
+      "path": "/api/plagiarism",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "Plagiarism detection via text fingerprinting — originality scoring, n-gram analysis, similarity detection",
+      "params": { "text": "string (min 100 chars)" },
+      "category": "premium"
+    },
+    {
+      "name": "seo-audit",
+      "path": "/api/seo-audit",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "SEO audit — technical + on-page analysis: title, meta, H1, images, links, with severity-ranked issues",
+      "params": { "url": "string" },
+      "category": "premium"
+    },
+    {
+      "name": "lead-score",
+      "path": "/api/lead-score",
+      "method": "GET",
+      "price": "$2.44",
+      "description": "B2B lead scoring — ICP fit analysis based on email quality, job title seniority, company match, industry",
+      "params": { "lead": "JSON string: {email,company,title,industry}" },
+      "category": "premium"
+    },
+    {
+      "name": "market-gap",
+      "path": "/api/market-gap",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Market gap analysis — find underserved niches with revenue estimates and validation signals",
+      "params": { "niche": "string (optional)" },
+      "category": "standard"
+    },
+    {
+      "name": "trends",
+      "path": "/api/trends",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Market trends — growth signals for hot sectors including AI, SaaS, creator economy",
+      "params": { "seed": "number (optional)" },
+      "category": "standard"
+    },
+    {
+      "name": "competitor-gap",
+      "path": "/api/competitor-gap",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Competitor gap analysis — weaknesses to exploit with pricing comparison",
+      "params": { "industry": "string (optional)" },
+      "category": "standard"
+    },
+    {
+      "name": "algo-report",
+      "path": "/api/algo-report",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Social platform algorithm report — ranking signals and optimization hacks for IG/TikTok/YT/LinkedIn/X",
+      "params": { "platform": "string: instagram|tiktok|youtube|linkedin|twitter" },
+      "category": "standard"
+    },
+    {
+      "name": "startup-validator",
+      "path": "/api/startup-validator",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Startup idea validator — multi-dimension scoring with BUILD/PROMISING/HIGH RISK verdict",
+      "params": { "idea": "string (optional)" },
+      "category": "standard"
+    },
+    {
+      "name": "domain-intel",
+      "path": "/api/domain-intel",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Domain intelligence — brandability score, SEO potential, TLD authority, value estimate",
+      "params": { "domain": "string" },
+      "category": "standard"
+    },
+    {
+      "name": "prompt-optimize",
+      "path": "/api/prompt-optimize",
+      "method": "GET",
+      "$price": "$1.39",
+      "description": "Prompt optimizer — scores your prompt, identifies issues, returns optimized version with best practices",
+      "params": { "prompt": "string" },
+      "category": "standard"
+    },
+    {
+      "name": "content-score",
+      "path": "/api/content-score",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Content scoring — readability, SEO metrics, word/sentence analysis",
+      "params": { "text": "string" },
+      "category": "standard"
+    },
+    {
+      "name": "price-benchmark",
+      "path": "/api/price-benchmark",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "SaaS price benchmark — tier pricing analysis by category with MRR estimates",
+      "params": { "category": "string (optional)" },
+      "category": "standard"
+    },
+    {
+      "name": "name-generator",
+      "path": "/api/name-generator",
+      "method": "GET",
+      "price": "$1.39",
+      "description": "Business/product name generator — brandable names with domain availability hints",
+      "params": { "keywords": "string (comma-separated)" },
+      "category": "standard"
+    }
   ]
 }
