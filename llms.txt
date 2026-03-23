@@ -1,0 +1,48 @@
+# Demaciains AI Tools
+> 19 pay-per-use API tools for AI agents. Premium $2.44, Standard $1.39 per call. USDC on Base via x402 protocol.
+
+## API
+Base URL: https://xpay-server.vercel.app
+
+## Endpoints
+
+### Premium ($2.44 USDC)
+- GET /api/ai-detector?text=... — AI content detection. Analyze text for AI-generated patterns.
+- GET /api/email-verify?email=... — Email verification with DNS/MX checks.
+- GET /api/company-enrich?company=... — Company research via web search.
+- GET /api/web-intel?url=... — Web page analysis, SEO signals.
+- GET /api/plagiarism?text=... — Plagiarism detection via fingerprinting.
+- GET /api/seo-audit?url=... — Full SEO audit with issues.
+- GET /api/lead-score?lead=... — B2B lead scoring (JSON: {email,company,title,industry}).
+- GET /api/social-audit?handle=...&platform=... — Social media profile audit.
+- GET /api/tech-stack?url=... — Detect CMS, frameworks, analytics from URL.
+
+### Standard ($1.39 USDC)
+- GET /api/market-gap?niche=... — Market gap analysis.
+- GET /api/trends?seed=... — Market trends and growth signals.
+- GET /api/competitor-gap?industry=... — Competitor weakness analysis.
+- GET /api/algo-report?platform=... — Social platform algorithm signals.
+- GET /api/startup-validator?idea=... — Startup idea scoring.
+- GET /api/domain-intel?domain=... — Domain brandability and value.
+- GET /api/prompt-optimize?prompt=... — Prompt optimization and scoring.
+- GET /api/content-score?text=... — Content readability and SEO.
+- GET /api/price-benchmark?category=... — SaaS pricing benchmark.
+- GET /api/name-generator?keywords=... — Business name generator.
+
+### Free
+- GET / — Server info
+- GET /health — Health check
+- GET /agent.json — Agent discovery card
+
+## Payment
+Protocol: x402 v2 (https://x402.org)
+Facilitator: https://facilitator.xpay.sh (free, no auth)
+Network: Base (eip155:8453)
+Asset: USDC (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913)
+Wallet: 0x83F31CE0F8b1f27a6Ad91693709febb728c71563
+
+## Links
+- API: https://xpay-server.vercel.app
+- GitHub: https://github.com/DrGalio/demaciains-paywall
+- Agent Card: https://drgalio.github.io/demaciains-paywall/.well-known/agent.json
+- MCP Server: https://github.com/DrGalio/demaciains-paywall/tree/gh-pages-new/mcp

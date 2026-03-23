@@ -1,11 +1,13 @@
 {
   "name": "demaciains-mcp",
-  "version": "1.0.0",
-  "description": "MCP server for Demaciains AI Tools — 19 pay-per-use tools via x402 protocol",
+  "version": "1.1.0",
+  "description": "MCP server for 19 pay-per-use AI tools via x402 protocol. AI detection, email verify, company enrich, SEO audit, tech stack, plagiarism, lead scoring.",
   "main": "index.js",
   "bin": {
     "demaciains-mcp": "./index.js"
   },
+  "keywords": ["mcp", "model-context-protocol", "ai-tools", "x402", "pay-per-use", "usdc", "base", "ai-agent", "email-verification", "seo-audit", "ai-detection", "company-enrichment", "plagiarism", "lead-scoring", "market-research", "tech-stack"],
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
   }
