@@ -1,7 +1,7 @@
 {
   "name": "demaciains-mcp",
   "version": "1.0.0",
-  "description": "MCP server for Demaciains AI Tools — 17 pay-per-use tools via x402 protocol",
+  "description": "MCP server for Demaciains AI Tools — 19 pay-per-use tools via x402 protocol",
   "main": "index.js",
   "bin": {
     "demaciains-mcp": "./index.js"
