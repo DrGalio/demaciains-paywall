@@ -97,7 +97,7 @@
       <p><strong>Discovery:</strong> <a href="/.well-known/agent.json" style="color:var(--accent)">/.well-known/agent.json</a> — A2A discovery</p>
       <p style="margin-top:1rem; color:var(--text); font-size:0.8rem;">
         <strong>Engine:</strong> Demaciains Dynamic Data Engine v3.0 — Seeded PRNG (Mulberry32) + algorithmic market analysis.<br>
-        Data pools: 24 niches · 20 pain points · 50+ competitor profiles · 12 algorithm patterns · 8 validation dimensions.
+        Data pools: 24 niches · 20 pain points · 50+ competitor profiles · 12 algorithm patterns · 8 validation dimensions · 7 pricing models.
       </p>
     </div>
 
@@ -115,6 +115,7 @@
       { id: 'competitor-gap', name: 'Competitor Gap', price: '$0.50', icon: '🔍', desc: 'Competitor blind spots' },
       { id: 'algo-report', name: 'Algo Report', price: '$2.00', icon: '🧬', desc: 'Algorithm patterns' },
       { id: 'startup-validator', name: 'Startup Validator', price: '$1.50', icon: '🚀', desc: 'Idea validation scoring' },
+      { id: 'pricing-strategy', name: 'Pricing Strategy', price: '$0.75', icon: '💰', desc: 'Pricing optimization' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -148,6 +149,7 @@
         case 'competitor-gap': data = DemaciainsEngine.competitorGap(getParam('niche','ai agent tools')); break;
         case 'algo-report': data = DemaciainsEngine.algoReport(getParam('market','x402 agent commerce')); break;
         case 'startup-validator': data = DemaciainsEngine.startupValidator(getParam('idea','AI-powered productivity tool')); break;
+        case 'pricing-strategy': data = DemaciainsEngine.pricingStrategy(getParam('product','digital template pack')); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);
@@ -160,6 +162,8 @@
         paramHTML = `<input type="text" id="param-market" placeholder="market (e.g. x402 agent commerce)" value="${getParam('market','x402 agent commerce')}" style="width:220px">`;
       } else if (currentEndpoint === 'startup-validator') {
         paramHTML = `<input type="text" id="param-idea" placeholder="idea (e.g. AI-powered fitness app)" value="${getParam('idea','AI-powered productivity tool')}" style="width:260px">`;
+      } else if (currentEndpoint === 'pricing-strategy') {
+        paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. online course)" value="${getParam('product','digital template pack')}" style="width:220px">`;
       }
 
       view.innerHTML = `
