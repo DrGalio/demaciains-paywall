@@ -39,43 +39,65 @@ const PRODUCTS = {
   'all-algorithms': { title: 'All 5 Algorithm Guides Bundle', price: '$10.00', description: 'Instagram + TikTok + YouTube + LinkedIn + X algorithms decoded', file: '01-instagram-algorithm-april-2026.pdf' }
 };
 
-// x402 payment middleware — protects API endpoints
+// x402 payment middleware — protects ALL paid endpoints
 app.use(paymentMiddleware({
+  // API endpoints
   'GET /api/market-gap': {
-    accepts: [{
-      scheme: 'exact',
-      price: '$1.00',
-      network: 'eip155:8453',
-      payTo: TREASURY_ADDRESS
-    }],
+    accepts: [{ scheme: 'exact', price: '$1.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
     description: 'Market gap analysis report'
   },
   'GET /api/trends': {
-    accepts: [{
-      scheme: 'exact',
-      price: '$0.25',
-      network: 'eip155:8453',
-      payTo: TREASURY_ADDRESS
-    }],
+    accepts: [{ scheme: 'exact', price: '$0.25', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
     description: 'Live trend signals'
   },
   'GET /api/competitor-gap': {
-    accepts: [{
-      scheme: 'exact',
-      price: '$0.50',
-      network: 'eip155:8453',
-      payTo: TREASURY_ADDRESS
-    }],
+    accepts: [{ scheme: 'exact', price: '$0.50', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
     description: 'Competitor gap analysis'
   },
   'GET /api/algo-report': {
-    accepts: [{
-      scheme: 'exact',
-      price: '$2.00',
-      network: 'eip155:8453',
-      payTo: TREASURY_ADDRESS
-    }],
+    accepts: [{ scheme: 'exact', price: '$2.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
     description: 'Algorithm performance report'
+  },
+  // PDF product downloads — ALL protected
+  'GET /products/freelancer-revenue-engine': {
+    accepts: [{ scheme: 'exact', price: '$2.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'Freelancer Revenue Engine — 50 AI Prompts PDF'
+  },
+  'GET /products/ecommerce-profit-accelerator': {
+    accepts: [{ scheme: 'exact', price: '$2.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'E-Commerce Profit Accelerator — 50 AI Prompts PDF'
+  },
+  'GET /products/content-creator-machine': {
+    accepts: [{ scheme: 'exact', price: '$2.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'Content Creator Machine — 50 AI Prompts PDF'
+  },
+  'GET /products/instagram-algorithm-2026': {
+    accepts: [{ scheme: 'exact', price: '$3.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'Instagram Algorithm Reverse-Engineered (April 2026)'
+  },
+  'GET /products/tiktok-algorithm-2026': {
+    accepts: [{ scheme: 'exact', price: '$3.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'TikTok Algorithm Reverse-Engineered (April 2026)'
+  },
+  'GET /products/youtube-algorithm-2026': {
+    accepts: [{ scheme: 'exact', price: '$3.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'YouTube Algorithm Reverse-Engineered (April 2026)'
+  },
+  'GET /products/linkedin-algorithm-2026': {
+    accepts: [{ scheme: 'exact', price: '$3.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'LinkedIn Algorithm Reverse-Engineered (April 2026)'
+  },
+  'GET /products/x-twitter-algorithm-2026': {
+    accepts: [{ scheme: 'exact', price: '$3.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'X (Twitter) Algorithm Reverse-Engineered (April 2026)'
+  },
+  'GET /products/all-prompt-packs': {
+    accepts: [{ scheme: 'exact', price: '$5.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'All 3 AI Prompt Packs Bundle'
+  },
+  'GET /products/all-algorithms': {
+    accepts: [{ scheme: 'exact', price: '$10.00', network: 'eip155:8453', payTo: TREASURY_ADDRESS }],
+    description: 'All 5 Algorithm Guides Bundle'
   }
 }, resourceServer));
 
