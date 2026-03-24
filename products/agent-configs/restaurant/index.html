@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant AI Agent Config Pack — Demaciains</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #e94560;
+    --accent-hover: #d63851;
+    --surface: #16213e;
+    --surface-light: #0f3460;
+    --text: #eee;
+    --text-muted: #a8b2d1;
+    --white: #fff;
+    --success: #00c853;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--primary);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--surface) 50%, var(--surface-light) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(233,69,96,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(15,52,96,0.15) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .hero * { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(233,69,96,0.15);
+    color: var(--accent);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(233,69,96,0.3);
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+  .hero-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .price-tag { font-size: 2.8rem; font-weight: 800; color: var(--white); }
+  .price-orig { font-size: 1.2rem; color: var(--text-muted); text-decoration: line-through; }
+  .price-save {
+    background: rgba(0,200,83,0.15);
+    color: var(--success);
+    padding: 4px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    padding: 16px 40px;
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(233,69,96,0.3);
+  }
+  .cta-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(233,69,96,0.4);
+  }
+  .cta-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; }
+  .trust-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.03);
+  }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-muted); }
+  .t-icon { font-size: 1.2rem; }
+  section { padding: 60px 0; }
+  .section-label {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+  section .lead { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; max-width: 640px; }
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .pain-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .pain-card .icon { font-size: 1.6rem; margin-bottom: 12px; }
+  .pain-card h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--white); }
+  .pain-card p { font-size: 0.92rem; color: var(--text-muted); }
+  .includes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .include-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: border-color 0.2s;
+  }
+  .include-card:hover { border-color: rgba(233,69,96,0.3); }
+  .include-card .icon { font-size: 1.6rem; margin-bottom: 12px; }
+  .include-card h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--white); }
+  .include-card p { font-size: 0.92rem; color: var(--text-muted); }
+  .include-card .tag {
+    display: inline-block;
+    background: rgba(233,69,96,0.12);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .preview-box {
+    background: #0d1117;
+    border-radius: var(--radius);
+    padding: 28px;
+    overflow-x: auto;
+    border: 1px solid rgba(255,255,255,0.08);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #c9d1d9;
+  }
+  .preview-box .prompt-header { color: var(--accent); font-weight: 700; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
+  .step {
+    text-align: center;
+    padding: 24px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .step-num {
+    width: 40px; height: 40px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin: 0 auto 12px;
+    color: var(--white);
+  }
+  .step h3 { font-size: 1rem; margin-bottom: 8px; color: var(--white); }
+  .step p { font-size: 0.85rem; color: var(--text-muted); }
+  .platforms { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
+  .platform-badge {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .roi-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+  }
+  .roi-table th, .roi-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .roi-table th {
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .roi-table td { font-size: 0.92rem; }
+  .roi-table tr:last-child td { font-weight: 700; color: var(--success); border-bottom: none; }
+  .roi-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .faq-item {
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 18px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--white);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-item summary::after { content: '+'; font-size: 1.4rem; color: var(--accent); }
+  .faq-item[open] summary::after { content: '\2212'; }
+  .faq-body { padding: 0 24px 18px; color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; }
+  .cta-section {
+    text-align: center;
+    padding: 80px 24px;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--primary) 100%);
+  }
+  .cta-section h2 { font-size: 2rem; margin-bottom: 16px; color: var(--white); }
+  .cta-section p { color: var(--text-muted); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🍽️ AI Agent Config Pack #5</div>
+  <h1>Your Restaurant's <span>AI Assistant</span>,<br>Ready in 10 Minutes</h1>
+  <p class="hero-sub">A professionally written system prompt, 15 knowledge-base Q&amp;As, conversation starters, and setup guide — everything you need to launch a hospitality-focused AI assistant for your restaurant.</p>
+  <div class="hero-price">
+    <span class="price-tag">$29</span>
+    <span class="price-orig">$79</span>
+    <span class="price-save">Save 63%</span>
+  </div>
+  <a href="https://drgalio.github.io/demaciains-paywall/" class="cta-btn">Get the Restaurant Pack — $29</a>
+  <p class="cta-sub">Instant download · One-time payment · Lifetime access</p>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item"><span class="t-icon">⚡</span> Setup in 10 minutes</div>
+  <div class="trust-item"><span class="t-icon">🔄</span> Works on 3 platforms</div>
+  <div class="trust-item"><span class="t-icon">📝</span> 1,900+ word system prompt</div>
+  <div class="trust-item"><span class="t-icon">🧠</span> 15 knowledge Q&amp;As</div>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2>Your front-of-house team is drowning in repetitive questions</h2>
+    <p class="lead">Every phone call asking about hours, every guest worried about allergies, every private event inquiry — your staff handles it all while trying to run a restaurant.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="icon">📞</div>
+        <h3>Phone rings off the hook</h3>
+        <p>Reservation calls, menu questions, hours inquiries — your hosts spend more time on the phone than greeting guests at the door.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">😰</div>
+        <h3>Allergy anxiety</h3>
+        <p>Guests with dietary restrictions feel nervous. Your staff does their best, but inconsistent answers erode trust.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">🌙</div>
+        <h3>Lost after-hours bookings</h3>
+        <p>When the phone goes to voicemail after close, potential guests call the next restaurant on their list instead.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">🥂</div>
+        <h3>Private events slip through</h3>
+        <p>Event inquiries get lost in email threads. No systematic way to capture, follow up, and close private dining bookings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section style="background: rgba(255,255,255,0.02);">
+  <div class="container">
+    <div class="section-label">What You Get</div>
+    <h2>Everything you need to launch your AI assistant today</h2>
+    <p class="lead">Five files. Zero guesswork. Professional-grade configuration that sounds like your best host on their best night.</p>
+    <div class="includes-grid">
+      <div class="include-card">
+        <div class="icon">🎯</div>
+        <h3>System Prompt (1,900+ words)</h3>
+        <p>A comprehensive AI personality that covers guest communication, reservation handling, dietary accommodations, private events, takeout orders, wine pairings, allergy protocols, and more.</p>
+        <span class="tag">system-prompt.md</span>
+      </div>
+      <div class="include-card">
+        <div class="icon">🧠</div>
+        <h3>Knowledge Base (15 Q&amp;As)</h3>
+        <p>Substantive, guest-facing answers covering cuisine, dietary needs, reservations, private dining, takeout, beverages, catering, gift cards, food safety, and feedback.</p>
+        <span class="tag">knowledge-base.md</span>
+      </div>
+      <div class="include-card">
+        <div class="icon">💬</div>
+        <h3>Conversation Starters (10 prompts)</h3>
+        <p>Ready-to-use guest-facing prompts covering new guest welcome, reservation booking, dietary restrictions, private dining, wine pairings, celebrations, and more.</p>
+        <span class="tag">conversation-starters.md</span>
+      </div>
+      <div class="include-card">
+        <div class="icon">📖</div>
+        <h3>Setup Guide</h3>
+        <p>Step-by-step instructions for installing in ChatGPT Custom GPT, Claude Projects, and Gemini Gems. Written for non-technical users. Setup takes under 10 minutes.</p>
+        <span class="tag">setup-guide.md</span>
+      </div>
+      <div class="include-card">
+        <div class="icon">🎨</div>
+        <h3>Fully Customizable</h3>
+        <p>Every file is markdown — easy to edit. Add your restaurant name, menu items, hours, staff names, and brand voice. Includes an allergen matrix template.</p>
+        <span class="tag">All .md files</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREVIEW SNIPPET -->
+<section>
+  <div class="container">
+    <div class="section-label">Preview</div>
+    <h2>See what's inside the system prompt</h2>
+    <p class="lead">Here's an excerpt — the real file is 1,900+ words covering every aspect of restaurant hospitality.</p>
+    <div class="preview-box">
+      <pre><span class="prompt-header">## Core Identity &amp; Tone</span>
+
+You represent the restaurant's brand with warmth,
+professionalism, and genuine care. Think of yourself
+as the ideal front-of-house team member: attentive
+without being intrusive, knowledgeable without being
+rigid, and always willing to go the extra mile to
+make every guest feel welcome.
+
+<span class="prompt-header">### Dietary Accommodations &amp; Allergies</span>
+
+This is one of the most critical areas of your
+expertise. Dietary restrictions and food allergies
+are not inconveniences — they are essential
+health and safety matters that deserve the
+utmost attention and care...
+
+<span class="prompt-header">### Private Events &amp; Celebrations</span>
+
+You help guests plan memorable private dining
+experiences. You ask about the occasion, guest
+count, preferred date and time, dietary needs,
+budget range, and any special requests...</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ROI TABLE -->
+<section style="background: rgba(255,255,255,0.02);">
+  <div class="container">
+    <div class="section-label">Return on Investment</div>
+    <h2>The pack pays for itself in one shift</h2>
+    <p class="lead">Here's what a typical restaurant saves — conservatively.</p>
+    <div style="overflow-x:auto;">
+      <table class="roi-table">
+        <thead>
+          <tr><th>Metric</th><th>Without AI</th><th>With AI</th><th>Monthly Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Phone calls answered</td><td>100/mo by staff</td><td>70 handled by AI</td><td>30 staff hours saved</td></tr>
+          <tr><td>Average staff cost per hour</td><td colspan="2">$15/hour</td><td>—</td></tr>
+          <tr><td>Staff time saved</td><td>—</td><td>30 hours/mo</td><td><strong>$450/mo</strong></td></tr>
+          <tr><td>Missed after-hours calls</td><td>20/mo lost</td><td>0 lost</td><td><strong>$600/mo</strong></td></tr>
+          <tr><td>Private event inquiries</td><td>3/mo</td><td>8/mo (+5)</td><td><strong>$2,500/mo</strong></td></tr>
+          <tr><td>Total estimated monthly value</td><td>—</td><td>—</td><td><strong>$3,550/mo</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <h2>From download to deployed in 10 minutes</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Download</h3>
+        <p>Get instant access to all 5 files after purchase.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Customize</h3>
+        <p>Add your restaurant name, menu items, and hours.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Paste &amp; Launch</h3>
+        <p>Follow the setup guide to install in your platform of choice.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Delight Guests</h3>
+        <p>Your AI assistant handles inquiries like your best host.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section style="background: rgba(255,255,255,0.02);">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Compatibility</div>
+    <h2>Works on the platforms you already use</h2>
+    <p class="lead" style="margin: 0 auto 16px;">No new tools to learn. No subscriptions to manage.</p>
+    <div class="platforms">
+      <div class="platform-badge">💬 ChatGPT Custom GPT</div>
+      <div class="platform-badge">🔮 Claude Projects</div>
+      <div class="platform-badge">💎 Gemini Gems</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="section-label">FAQ</div>
+    <h2>Common questions</h2>
+    <details class="faq-item">
+      <summary>Do I need any technical skills?</summary>
+      <div class="faq-body">No. The setup guide is written for non-technical users. If you can copy and paste text, you can set this up. The guide walks you through every click.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Can I customize the content?</summary>
+      <div class="faq-body">Absolutely. All files are plain markdown — edit them in any text editor. Add your restaurant name, specific menu items, hours, staff contacts, and brand-specific language.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Will it handle severe food allergies safely?</summary>
+      <div class="faq-body">The system prompt includes detailed allergy protocols covering communication best practices, cross-contamination awareness, and when to escalate to a manager. The AI always recommends guests with severe allergies speak directly with your kitchen manager.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Is this a subscription?</summary>
+      <div class="faq-body">No. It's a one-time purchase of $29. You get all 5 files and lifetime access to download them. You will need a paid account on your chosen AI platform (ChatGPT Plus, Claude Pro, or Gemini Advanced), but that's separate.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Which platform should I use?</summary>
+      <div class="faq-body">ChatGPT Custom GPT is best if you want a shareable assistant your whole team can access. Claude Projects is great for deep, document-aware conversations. Gemini Gems works well if you're already in the Google ecosystem. The setup guide covers all three.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Can my whole staff use it?</summary>
+      <div class="faq-body">Yes. Once you set up the Custom GPT, Claude Project, or Gemini Gem, you can share access with your team. One purchase covers your entire restaurant staff.</div>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="buy">
+  <h2>Stop answering the same questions. Start delighting guests.</h2>
+  <p>Get a professional AI restaurant assistant configured in 10 minutes — for less than the cost of one staff meal.</p>
+  <a href="https://drgalio.github.io/demaciains-paywall/" class="cta-btn">Get the Restaurant Pack — $29</a>
+  <p class="cta-sub" style="margin-top: 16px;">Instant download · One-time payment · Lifetime access</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Demaciains · <a href="https://drgalio.github.io/demaciains-paywall/">drgalio.github.io/demaciains-paywall</a></p>
+</footer>
+
+</body>
+</html>
