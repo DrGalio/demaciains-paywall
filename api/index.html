@@ -117,6 +117,7 @@
       { id: 'startup-validator', name: 'Startup Validator', price: '$1.50', icon: '🚀', desc: 'Idea validation scoring' },
       { id: 'pricing-strategy', name: 'Pricing Strategy', price: '$0.75', icon: '💰', desc: 'Pricing optimization' },
       { id: 'revenue-forecast', name: 'Revenue Forecast', price: '$1.25', icon: '📈', desc: 'Revenue projection engine' },
+      { id: 'go-to-market', name: 'Go-to-Market', price: '$1.50', icon: '🚀', desc: 'Launch strategy + channels' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -152,6 +153,7 @@
         case 'startup-validator': data = DemaciainsEngine.startupValidator(getParam('idea','AI-powered productivity tool')); break;
         case 'pricing-strategy': data = DemaciainsEngine.pricingStrategy(getParam('product','digital template pack')); break;
         case 'revenue-forecast': data = DemaciainsEngine.revenueForecast(getParam('product','AI prompt pack'), { price: 29, traffic: 2000 }); break;
+        case 'go-to-market': data = DemaciainsEngine.goToMarket(getParam('product','AI productivity tool'), { niche: 'creators', price: 29 }); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);
