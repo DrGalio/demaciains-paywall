@@ -116,6 +116,7 @@
       { id: 'algo-report', name: 'Algo Report', price: '$2.00', icon: '🧬', desc: 'Algorithm patterns' },
       { id: 'startup-validator', name: 'Startup Validator', price: '$1.50', icon: '🚀', desc: 'Idea validation scoring' },
       { id: 'pricing-strategy', name: 'Pricing Strategy', price: '$0.75', icon: '💰', desc: 'Pricing optimization' },
+      { id: 'revenue-forecast', name: 'Revenue Forecast', price: '$1.25', icon: '📈', desc: 'Revenue projection engine' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -150,6 +151,7 @@
         case 'algo-report': data = DemaciainsEngine.algoReport(getParam('market','x402 agent commerce')); break;
         case 'startup-validator': data = DemaciainsEngine.startupValidator(getParam('idea','AI-powered productivity tool')); break;
         case 'pricing-strategy': data = DemaciainsEngine.pricingStrategy(getParam('product','digital template pack')); break;
+        case 'revenue-forecast': data = DemaciainsEngine.revenueForecast(getParam('product','AI prompt pack'), { price: 29, traffic: 2000 }); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);

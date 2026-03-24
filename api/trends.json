@@ -1,94 +1,94 @@
 {
-  "generated": "2026-03-22T15:19:14.696Z",
+  "generated": "2026-03-24T06:05:37.653Z",
   "agent": "Demaciains Research Engine v3",
   "type": "trend_signals",
   "methodology": "Hourly-seeded signal aggregation: pain_point.base_strength ± noise, sorted by signal_strength",
   "refresh_rate": "Every hour (hour-seed changes)",
-  "seed_used": 1334435243,
+  "seed_used": 1705616209,
   "trends": [
     {
       "rank": 1,
-      "pain_point": "RAG pipelines hallucinate when retrieval fails silently",
-      "source": "r/LlamaIndex",
-      "signal_strength": 0.86,
-      "velocity": "stable",
-      "related_keywords": [
-        "RAG",
-        "hallucinate",
-        "retrieval"
-      ],
-      "mention_velocity": "+224% this week",
-      "first_detected": "2026-02-14"
-    },
-    {
-      "rank": 2,
-      "pain_point": "API rate limits kill real-time AI agent loops",
-      "source": "r/developers",
-      "signal_strength": 0.83,
-      "velocity": "stable",
-      "related_keywords": [
-        "rate limits",
-        "real-time",
-        "agent loops"
-      ],
-      "mention_velocity": "+229% this week",
-      "first_detected": "2026-03-04"
-    },
-    {
-      "rank": 3,
       "pain_point": "Content creators face algorithm fatigue from constant platform changes",
       "source": "r/InstagramMarketing",
-      "signal_strength": 0.83,
-      "velocity": "rising",
+      "signal_strength": 0.89,
+      "velocity": "emerging",
       "related_keywords": [
         "creators",
         "fatigue",
         "platform"
       ],
-      "mention_velocity": "+266% this week",
-      "first_detected": "2026-02-17"
+      "mention_velocity": "+213% this week",
+      "first_detected": "2026-03-14"
     },
     {
-      "rank": 4,
-      "pain_point": "AI coding assistants generate insecure code patterns",
+      "rank": 2,
+      "pain_point": "AI tool fragmentation — too many APIs, no unified layer",
       "source": "HN",
-      "signal_strength": 0.82,
-      "velocity": "accelerating",
+      "signal_strength": 0.87,
+      "velocity": "stable",
       "related_keywords": [
-        "coding",
-        "insecure",
-        "patterns"
+        "fragmentation",
+        "APIs",
+        "unified"
       ],
-      "mention_velocity": "+199% this week",
-      "first_detected": "2026-02-28"
+      "mention_velocity": "+255% this week",
+      "first_detected": "2026-02-20"
     },
     {
-      "rank": 5,
-      "pain_point": "Freelancers can't price AI-augmented services correctly",
-      "source": "Product Hunt",
-      "signal_strength": 0.81,
-      "velocity": "emerging",
-      "related_keywords": [
-        "freelancers",
-        "correctly",
-        "pricing"
-      ],
-      "mention_velocity": "+196% this week",
-      "first_detected": "2026-02-11"
-    },
-    {
-      "rank": 6,
+      "rank": 3,
       "pain_point": "AI model costs unpredictable — billing spikes surprise teams",
       "source": "r/MachineLearning",
-      "signal_strength": 0.7,
+      "signal_strength": 0.79,
       "velocity": "rising",
       "related_keywords": [
         "costs",
         "unpredictable",
         "billing"
       ],
-      "mention_velocity": "+124% this week",
-      "first_detected": "2026-03-17"
+      "mention_velocity": "+201% this week",
+      "first_detected": "2026-03-22"
+    },
+    {
+      "rank": 4,
+      "pain_point": "AI chatbot builders produce identical low-quality experiences",
+      "source": "r/SaaS",
+      "signal_strength": 0.78,
+      "velocity": "declining",
+      "related_keywords": [
+        "chatbot",
+        "identical",
+        "low-quality"
+      ],
+      "mention_velocity": "+261% this week",
+      "first_detected": "2026-02-09"
+    },
+    {
+      "rank": 5,
+      "pain_point": "Non-technical founders can't evaluate AI vendor claims",
+      "source": "Product Hunt",
+      "signal_strength": 0.74,
+      "velocity": "emerging",
+      "related_keywords": [
+        "non-technical",
+        "evaluate",
+        "vendor"
+      ],
+      "mention_velocity": "+93% this week",
+      "first_detected": "2026-02-07"
+    },
+    {
+      "rank": 6,
+      "pain_point": "Enterprise AI adoption stuck at proof-of-concept stage",
+      "source": "McKinsey Report",
+      "signal_strength": 0.72,
+      "velocity": "emerging",
+      "related_keywords": [
+        "enterprise",
+        "POC",
+        "adoption"
+      ],
+      "mention_velocity": "+133% this week",
+      "first_detected": "2026-02-24"
     }
   ],
   "meta": {

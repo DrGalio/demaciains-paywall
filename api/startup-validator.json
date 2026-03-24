@@ -1,82 +1,81 @@
 {
-  "report_id": "sv-20260322-5mmc5n",
-  "generated": "2026-03-22T15:19:14.697Z",
+  "report_id": "sv-20260324-ydm3jx",
+  "generated": "2026-03-24T06:05:37.655Z",
   "agent": "Demaciains Research Engine v3",
   "type": "startup_idea_validator",
   "idea": "AI-powered productivity tool",
   "methodology": "Multi-dimensional scoring: 8 factors × weighted analysis + competitive landscape + risk matrix",
-  "seed_used": -1722691911,
-  "overall_score": 0.69,
+  "seed_used": -1722691909,
+  "overall_score": 0.64,
   "verdict": "GO WITH CAUTION",
   "scores": [
     {
       "dimension": "Market Size & Growth Trajectory",
-      "score": 0.38,
+      "score": 0.36,
       "grade": "F"
     },
     {
       "dimension": "Competition Density & Strength",
-      "score": 0.56,
-      "grade": "C"
+      "score": 0.4,
+      "grade": "D"
     },
     {
       "dimension": "Technical Feasibility",
-      "score": 0.69,
-      "grade": "C"
+      "score": 0.8,
+      "grade": "B"
     },
     {
       "dimension": "Revenue Model Clarity",
-      "score": 0.81,
+      "score": 0.83,
       "grade": "B"
     },
     {
       "dimension": "Time to First Revenue",
-      "score": 0.8,
+      "score": 0.71,
       "grade": "B"
     },
     {
       "dimension": "Defensibility & Moats",
-      "score": 0.59,
-      "grade": "C"
+      "score": 0.76,
+      "grade": "B"
     },
     {
       "dimension": "Customer Acquisition Cost",
-      "score": 0.88,
-      "grade": "A"
+      "score": 0.63,
+      "grade": "C"
     },
     {
       "dimension": "Regulatory Risk",
-      "score": 0.8,
-      "grade": "B"
+      "score": 0.6,
+      "grade": "C"
     }
   ],
-  "revenue_model": "Usage-based billing",
-  "recommended_pricing": "$61/mo or $0.85 per use via x402",
-  "estimated_tam": "$407M globally",
-  "time_to_mvp": "5 weeks",
+  "revenue_model": "Marketplace commission (15-30%)",
+  "recommended_pricing": "$47/mo or $0.02 per use via x402",
+  "estimated_tam": "$306M globally",
+  "time_to_mvp": "6 weeks",
   "suggested_channels": [
-    "Agent-to-agent referrals",
-    "API directory submissions",
     "Integration marketplace listings",
-    "Developer community (HN, Reddit)"
+    "Developer community (HN, Reddit)",
+    "Twitter/X thought leadership"
   ],
   "risks": [
-    "Technical complexity — core problem may be harder than estimated",
-    "Scaling costs — unit economics may not hold at scale"
+    "Market timing — too early or too late for mainstream adoption",
+    "Talent scarcity — specialized skills needed but hard to recruit"
   ],
   "pivot_suggestions": [
+    "Build API-first, UI second — agents need endpoints, not dashboards",
     "Narrow focus to one specific use case — generalist tools lose to specialists",
-    "Target underserved vertical (healthcare, legal, compliance) — less competition",
-    "Switch from B2C to B2B — enterprise contracts provide revenue stability"
+    "Add x402 micropayment layer — unlock agent-to-agent buyer segment"
   ],
   "competitive_landscape": {
-    "direct_competitors": 15,
-    "indirect_competitors": 28,
-    "market_leader_share": "22%",
-    "fragmentation_index": 0.31
+    "direct_competitors": 7,
+    "indirect_competitors": 13,
+    "market_leader_share": "53%",
+    "fragmentation_index": 0.17
   },
   "meta": {
-    "confidence": 0.81,
+    "confidence": 0.72,
     "data_sources": [
       "Market sizing models",
       "Competitor database",

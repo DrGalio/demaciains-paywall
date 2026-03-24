@@ -1,62 +1,60 @@
 {
-  "generated": "2026-03-22T15:19:14.696Z",
+  "generated": "2026-03-24T06:05:37.654Z",
   "agent": "Demaciains Research Engine v3",
   "type": "competitor_gap_analysis",
   "niche": "ai agent tools",
   "methodology": "Competitor feature matrix analysis + gap identification by payment, access, speed, integration, pricing dimensions",
-  "seed_used": -2049404420,
+  "seed_used": -2049404418,
   "competitors_analyzed": [
-    "Peppertype",
-    "Sudowrite",
-    "Jasper AI",
-    "Copy.ai",
-    "Writesonic"
+    "Anyword",
+    "Writesonic",
+    "Copy.ai"
   ],
   "gaps": [
     {
-      "gap_type": "speed",
-      "gap_description": "Competitors average 7-5 second response times for core features",
-      "opportunity": "Build sub-second API responses for real-time use cases",
-      "difficulty": "MEDIUM",
+      "gap_type": "api_quality",
+      "gap_description": "Anyword's API has 47 documented endpoints but 12 are deprecated or broken",
+      "opportunity": "Ship a clean, well-tested API with zero deprecated endpoints",
+      "difficulty": "LOW",
+      "estimated_capture": "17% of addressable market",
+      "time_to_exploit": "3 weeks"
+    },
+    {
+      "gap_type": "self_serve",
+      "gap_description": "Anyword and Writesonic require sales calls or demo bookings for enterprise features",
+      "opportunity": "Offer fully self-serve access to all features",
+      "difficulty": "LOW",
       "estimated_capture": "34% of addressable market",
       "time_to_exploit": "3 weeks"
     },
     {
-      "gap_type": "payment",
-      "gap_description": "No competitor supports x402/USDC micropayments for API access",
-      "opportunity": "First-mover in crypto-native payments for this niche",
+      "gap_type": "onboarding",
+      "gap_description": "Anyword takes 47 minutes average to first API call",
+      "opportunity": "Reduce time-to-first-call to under 2 minutes",
       "difficulty": "LOW",
-      "estimated_capture": "23% of addressable market",
-      "time_to_exploit": "3 weeks"
+      "estimated_capture": "40% of addressable market",
+      "time_to_exploit": "4 weeks"
     },
     {
-      "gap_type": "api_quality",
-      "gap_description": "Peppertype's API has 47 documented endpoints but 12 are deprecated or broken",
-      "opportunity": "Ship a clean, well-tested API with zero deprecated endpoints",
+      "gap_type": "mobile",
+      "gap_description": "Zero Anyword and Writesonic have mobile-first or responsive API docs",
+      "opportunity": "Mobile-first developer experience as differentiator",
       "difficulty": "LOW",
-      "estimated_capture": "22% of addressable market",
+      "estimated_capture": "15% of addressable market",
       "time_to_exploit": "4 weeks"
     },
     {
       "gap_type": "documentation",
-      "gap_description": "Peppertype and Jasper AI have poor SDK documentation — 2.1/5 average developer rating",
+      "gap_description": "Anyword and Copy.ai have poor SDK documentation — 2.1/5 average developer rating",
       "opportunity": "Create best-in-class docs with interactive examples",
       "difficulty": "MEDIUM",
-      "estimated_capture": "22% of addressable market",
-      "time_to_exploit": "1 weeks"
-    },
-    {
-      "gap_type": "mobile",
-      "gap_description": "Zero Peppertype and Sudowrite have mobile-first or responsive API docs",
-      "opportunity": "Mobile-first developer experience as differentiator",
-      "difficulty": "LOW",
-      "estimated_capture": "21% of addressable market",
-      "time_to_exploit": "2 weeks"
+      "estimated_capture": "27% of addressable market",
+      "time_to_exploit": "4 weeks"
     }
   ],
   "meta": {
-    "total_competitors_scanned": 5,
-    "gap_confidence": 0.87,
+    "total_competitors_scanned": 3,
+    "gap_confidence": 0.79,
     "data_sources": [
       "Competitor feature database",
       "Market positioning analysis",

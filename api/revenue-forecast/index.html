@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Revenue Forecast — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.card{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.card h3{color:#10b981;font-size:.95em;margin-bottom:10px}
+.card .score{float:right;background:#064e3b;color:#6ee7b7;padding:2px 10px;border-radius:4px;font-size:.8em}
+.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:.85em}
+.row:last-child{border-bottom:none}.label{color:#64748b}.val{color:#e0e0e0;text-align:right;max-width:60%}
+.projection{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:14px;margin-bottom:8px}
+.projection h4{color:#a78bfa;font-size:.85em;margin-bottom:8px}
+.bar-container{background:#1e293b;border-radius:4px;height:20px;margin:4px 0;overflow:hidden}
+.bar{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:.7em;color:#fff;font-weight:bold}
+.bar-conservative{background:linear-gradient(90deg,#1e40af,#3b82f6)}
+.bar-moderate{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.bar-optimistic{background:linear-gradient(90deg,#059669,#34d399)}
+.bar-best{background:linear-gradient(90deg,#d97706,#fbbf24)}
+.lever{background:#111;border-left:3px solid #10b981;padding:8px 12px;margin:8px 0;font-size:.8em;color:#6ee7b7}
+.raw{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-top:20px}
+.raw summary{color:#6366f1;cursor:pointer;font-size:.85em}
+.raw pre{color:#22c55e;font-size:.75em;overflow-x:auto;margin-top:10px;white-space:pre-wrap}
+.filter{margin-bottom:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,input{background:#1e293b;color:#e0e0e0;border:1px solid #334155;border-radius:4px;padding:4px 8px;font-size:.8em;font-family:inherit}
+button{background:#10b981;color:#000;border:none;border-radius:4px;padding:6px 14px;cursor:pointer;font-size:.8em;font-family:inherit;font-weight:bold}
+button:hover{background:#059669}
+.verdict{font-size:1.1em;font-weight:bold;padding:8px 16px;border-radius:6px;display:inline-block;margin:8px 0}
+.verdict-go{background:#064e3b;color:#6ee7b7}
+.verdict-caution{background:#78350f;color:#fbbf24}
+.verdict-pivot{background:#7f1d1d;color:#fca5a5}
+.section-title{color:#64748b;font-size:.8em;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>📈 Revenue Forecast Engine <span class="live">LIVE</span></h1>
+<div class="meta">GET /api/revenue-forecast • $1.25 USDC • x402 on Base • Generated: <span id="ts">—</span></div>
+</div>
+<div class="filter">
+<label style="color:#64748b;font-size:.8em">Product:</label>
+<input id="productInput" placeholder="e.g. SaaS API, prompt pack, online course..." style="width:220px">
+<label style="color:#64748b;font-size:.8em">Price:</label>
+<input id="priceInput" type="number" placeholder="29" style="width:80px">
+<label style="color:#64748b;font-size:.8em">Traffic:</label>
+<input id="trafficInput" type="number" placeholder="2000" style="width:100px">
+<button onclick="regenerate()">Generate Forecast</button>
+</div>
+<div id="forecast"></div>
+<div class="raw"><details><summary>📋 Raw JSON Response</summary><pre id="rawJson"></pre></details></div>
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function render() {
+  const product = document.getElementById('productInput').value || 'AI prompt pack';
+  const price = parseInt(document.getElementById('priceInput').value) || 29;
+  const traffic = parseInt(document.getElementById('trafficInput').value) || 2000;
+  const data = DemaciainsEngine.revenueForecast(product, { price, traffic });
+  document.getElementById('ts').textContent = new Date(data.generated).toLocaleString();
+
+  const maxRevenue = Math.max(...data.scenarios.map(s => s.monthly_revenue));
+  
+  let html = `<div class="card">
+    <h3>📊 12-Month Revenue Forecast</h3>
+    <div class="row"><span class="label">Product</span><span class="val">${data.product}</span></div>
+    <div class="row"><span class="label">Unit Price</span><span class="val">${data.unit_price}</span></div>
+    <div class="row"><span class="label">Monthly Traffic</span><span class="val">${data.monthly_traffic.toLocaleString()} visitors</span></div>
+    <div class="row"><span class="label">Market Segment</span><span class="val">${data.market_segment}</span></div>
+  </div>`;
+
+  html += `<div class="section-title">SCENARIO PROJECTIONS</div>`;
+  data.scenarios.forEach(s => {
+    const pct = (s.monthly_revenue / maxRevenue * 100);
+    const barClass = s.scenario === 'Conservative' ? 'bar-conservative' : s.scenario === 'Moderate' ? 'bar-moderate' : s.scenario === 'Optimistic' ? 'bar-optimistic' : 'bar-best';
+    html += `<div class="projection">
+      <h4>${s.scenario} — ${s.label}</h4>
+      <div class="row"><span class="label">Conversion Rate</span><span class="val">${s.conversion_rate}</span></div>
+      <div class="row"><span class="label">Monthly Sales</span><span class="val">${s.monthly_sales} units</span></div>
+      <div class="row"><span class="label">Monthly Revenue</span><span class="val">${s.monthly_revenue_display}</span></div>
+      <div class="row"><span class="label">Year 1 Total</span><span class="val">${s.year1_total_display}</span></div>
+      <div class="row"><span class="label">Break-even</span><span class="val">${s.break_even}</span></div>
+      <div class="bar-container"><div class="bar ${barClass}" style="width:${pct}%">${s.monthly_revenue_display}</div></div>
+      <div style="color:#64748b;font-size:.75em;margin-top:4px">${s.assumption}</div>
+    </div>`;
+  });
+
+  html += `<div class="section-title">GROWTH LEVERS</div>`;
+  data.growth_levers.forEach(l => {
+    html += `<div class="lever">⚡ <strong>${l.lever}</strong>: ${l.impact}<br><span style="color:#64748b;font-size:.9em">→ ${l.action}</span></div>`;
+  });
+
+  html += `<div class="section-title">COMPETITIVE BENCHMARKS</div><div class="card">`;
+  data.benchmarks.forEach(b => {
+    html += `<div class="row"><span class="label">${b.metric}</span><span class="val">${b.value}</span></div>`;
+  });
+  html += `</div>`;
+
+  html += `<div class="section-title">RISK FACTORS</div><div class="card">`;
+  data.risks.forEach(r => {
+    html += `<div style="padding:6px 0;border-bottom:1px solid #1a1a1a;font-size:.85em">
+      <span style="color:${r.severity==='HIGH'?'#ef4444':r.severity==='MEDIUM'?'#f59e0b':'#22c55e'}">● ${r.severity}</span>
+      <strong> ${r.risk}</strong><br><span style="color:#64748b;font-size:.9em">Mitigation: ${r.mitigation}</span></div>`;
+  });
+  html += `</div>`;
+
+  html += `<div class="section-title">MONTH-BY-MONTH TRAJECTORY</div><div class="card" style="overflow-x:auto">`;
+  html += `<table style="width:100%;font-size:.75em;border-collapse:collapse">
+    <tr style="color:#64748b;border-bottom:1px solid #333"><th style="text-align:left;padding:4px">Month</th><th style="text-align:right;padding:4px">Traffic</th><th style="text-align:right;padding:4px">Conv%</th><th style="text-align:right;padding:4px">Sales</th><th style="text-align:right;padding:4px">Revenue</th><th style="text-align:right;padding:4px">Cumulative</th></tr>`;
+  let cumul = 0;
+  data.monthly_trajectory.forEach(m => {
+    cumul += m.revenue;
+    html += `<tr style="border-bottom:1px solid #1a1a1a"><td style="padding:4px">M${m.month}</td><td style="text-align:right;padding:4px">${m.traffic.toLocaleString()}</td><td style="text-align:right;padding:4px">${m.conversion}%</td><td style="text-align:right;padding:4px">${m.sales}</td><td style="text-align:right;padding:4px;color:#10b981">$${m.revenue.toLocaleString()}</td><td style="text-align:right;padding:4px;color:#a78bfa">$${cumul.toLocaleString()}</td></tr>`;
+  });
+  html += `</table></div>`;
+
+  document.getElementById('forecast').innerHTML = html;
+  document.getElementById('rawJson').textContent = JSON.stringify(data, null, 2);
+}
+function regenerate() { render(); }
+render();
+</script>
+</body>
+</html>
