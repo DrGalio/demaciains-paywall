@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Subject Line Analyzer — Free Tool | Demaciains</title>
+<meta name="description" content="Test and score your email subject lines. Get instant feedback on length, spam words, emotional appeal, and open rate predictions. Free tool.">
+<meta name="keywords" content="email subject line tester, subject line analyzer, email marketing tool, open rate predictor">
+<link rel="canonical" href="https://drgalio.github.io/demaciains-paywall/tools/email-subject-analyzer/">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+h1{font-size:2.5rem;background:linear-gradient(135deg,#f97316,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.subtitle{color:#888;font-size:1.1rem;margin-bottom:30px}
+.input-area{display:flex;gap:12px;margin-bottom:30px}
+input{flex:1;padding:16px 20px;border-radius:12px;border:1px solid #333;background:#151520;color:#fff;font-size:1.1rem}
+input:focus{outline:none;border-color:#f97316}
+button{padding:16px 28px;border-radius:12px;border:none;background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.score-ring{width:160px;height:160px;margin:0 auto 30px;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:8}
+.score-ring .bg{stroke:#222}
+.score-ring .fg{stroke-linecap:round;transition:stroke-dashoffset .8s ease}
+.score-number{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;font-weight:700}
+.score-label{position:absolute;top:70%;left:50%;transform:translate(-50%,0);font-size:.85rem;color:#888}
+.metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:30px}
+.metric{background:#151520;border:1px solid #222;border-radius:12px;padding:20px}
+.metric-label{font-size:.8rem;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.metric-value{font-size:1.5rem;font-weight:700}
+.metric-tip{font-size:.8rem;color:#aaa;margin-top:6px;line-height:1.4}
+.good{color:#4ade80}
+.warn{color:#fbbf24}
+.bad{color:#ef4444}
+.tips{background:#151520;border:1px solid #222;border-radius:12px;padding:24px;margin-top:20px}
+.tips h3{color:#f97316;margin-bottom:15px}
+.tips ul{list-style:none;padding:0}
+.tips li{padding:8px 0;border-bottom:1px solid #1a1a1a;color:#ccc}
+.tips li:last-child{border:none}
+.tips li::before{content:'→ ';color:#f97316}
+.cta-banner{margin-top:50px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:16px;padding:30px;text-align:center}
+.cta-banner h3{color:#f97316;margin-bottom:10px}
+.cta-banner p{color:#aaa;margin-bottom:20px}
+.cta-btn{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📧 Email Subject Line Analyzer</h1>
+<p class="subtitle">Score your subject lines on length, spam risk, emotional appeal & more.</p>
+
+<div class="input-area">
+<input type="text" id="subject" placeholder="Enter your email subject line..." maxlength="200">
+<button onclick="analyze()">Analyze</button>
+</div>
+
+<div id="results"></div>
+
+<div class="cta-banner">
+<h3>Automate your email marketing with AI</h3>
+<p>Get our Freelancer Revenue Engine — 50 AI prompts for outreach, follow-ups, and conversions. $19.</p>
+<a href="https://drgalio.github.io/demaciains-paywall/" class="cta-btn">Get Prompt Packs →</a>
+</div>
+</div>
+
+<script>
+const spamWords=['free','urgent','act now','limited time','click here','buy now','order now','subscribe','winner','congratulations','deal','discount','offer','save','cheap','bargain','prize','cash','earn','money','guarantee','no obligation','risk free','100% free','double your','increase your','make money','work from home'];
+const powerWords=['you','new','exclusive','secret','proven','instant','discover','unlock','essential','breakthrough','ultimate','imagine','transform','master','powerful'];
+const urgencyWords=['now','today','immediately','fast','quick','hurry','soon','deadline','expires','last chance','final','limited'];
+
+function analyze(){
+const text=document.getElementById('subject').value.trim();
+if(!text)return;
+
+const len=text.length;
+const wordCount=text.split(/\s+/).length;
+const hasEmoji=/[\u{1F300}-\u{1F9FF}]/u.test(text);
+const hasNumber=/\d/.test(text);
+const hasQuestion=/\?/.test(text);
+const isAllCaps=text===text.toUpperCase()&&len>3;
+
+const spamFound=spamWords.filter(w=>text.toLowerCase().includes(w));
+const powerFound=powerWords.filter(w=>text.toLowerCase().includes(w));
+const urgencyFound=urgencyWords.filter(w=>text.toLowerCase().includes(w));
+
+// Score calculation
+let score=50;
+// Length: 30-60 chars is optimal
+if(len>=30&&len<=60)score+=15;
+else if(len>=20&&len<=70)score+=8;
+else if(len<15)score-=15;
+// Words: 6-10 is optimal
+if(wordCount>=6&&wordCount<=10)score+=10;
+else if(wordCount>=4&&wordCount<=12)score+=5;
+// Spam penalty
+score-=spamFound.length*8;
+// Power words bonus
+score+=Math.min(powerFound.length*5,15);
+// Urgency bonus
+score+=Math.min(urgencyFound.length*3,9);
+// Emoji bonus
+if(hasEmoji)score+=5;
+// Question bonus
+if(hasQuestion)score+=5;
+// Number bonus
+if(hasNumber)score+=3;
+// All caps penalty
+if(isAllCaps)score-=20;
+
+score=Math.max(0,Math.min(100,score));
+
+const lenVerdict=len<20?'Too short — may get cut off on mobile':len>70?'Too long — will get truncated':'Optimal length';
+const lenClass=len<20?'bad':len>70?'warn':'good';
+
+const spamVerdict=spamFound.length===0?'Clean — no spam triggers':`${spamFound.length} spam word${spamFound.length>1?'s':''} found`;
+const spamClass=spamFound.length===0?'good':spamFound.length<=1?'warn':'bad';
+
+const color=score>=70?'#4ade80':score>=40?'#fbbf24':'#ef4444';
+
+document.getElementById('results').innerHTML=`
+<div class="score-ring">
+<svg width="160" height="160"><circle class="bg" cx="80" cy="80" r="70"/><circle class="fg" cx="80" cy="80" r="70" stroke="${color}" stroke-dasharray="440" stroke-dashoffset="${440-(440*score/100)}"/></svg>
+<div class="score-number" style="color:${color}">${score}</div>
+<div class="score-label">${score>=70?'Great!':score>=40?'Good':'Needs Work'}</div>
+</div>
+
+<div class="metrics">
+<div class="metric"><div class="metric-label">Length</div><div class="metric-value ${lenClass}">${len} chars</div><div class="metric-tip">${lenVerdict}</div></div>
+<div class="metric"><div class="metric-label">Words</div><div class="metric-value ${wordCount>=4&&wordCount<=12?'good':'warn'}">${wordCount}</div><div class="metric-tip">${wordCount<4?'Too few words':'Optimal'}</div></div>
+<div class="metric"><div class="metric-label">Spam Risk</div><div class="metric-value ${spamClass}">${spamFound.length===0?'None':spamFound.length}</div><div class="metric-tip">${spamVerdict}</div></div>
+<div class="metric"><div class="metric-label">Power Words</div><div class="metric-value ${powerFound.length>0?'good':'warn'}">${powerFound.length}</div><div class="metric-tip">${powerFound.length>0?powerFound.join(', '):'Add emotional words'}</div></div>
+<div class="metric"><div class="metric-label">Has Number</div><div class="metric-value ${hasNumber?'good':'warn'}">${hasNumber?'Yes':'No'}</div><div class="metric-tip">${hasNumber?'Numbers boost open rates':'Consider adding a number'}</div></div>
+<div class="metric"><div class="metric-label">Has Question</div><div class="metric-value ${hasQuestion?'good':'warn'}">${hasQuestion?'Yes':'No'}</div><div class="metric-tip">${hasQuestion?'Questions drive curiosity':'Questions boost engagement'}</div></div>
+</div>
+
+${spamFound.length>0?`<div class="tips"><h3>⚠️ Spam Words Found</h3><ul>${spamFound.map(w=>`<li>"${w}" — triggers spam filters</li>`).join('')}</ul></div>`:''}
+
+<div class="tips"><h3>💡 Tips to Improve</h3><ul>
+${len<20?'<li>Expand to 30-60 characters for optimal display</li>':''}
+${len>70?'<li>Shorten to under 60 chars to avoid truncation</li>':''}
+${spamFound.length>0?'<li>Remove spam trigger words to avoid filters</li>':''}
+${powerFound.length===0?'<li>Add power words: discover, exclusive, proven, secret</li>':''}
+${!hasNumber?'<li>Include a number (e.g., "5 Tips" or "3x faster")</li>':''}
+${!hasQuestion?'<li>Try a question format to boost curiosity</li>':''}
+${!hasEmoji?'<li>Add a relevant emoji to stand out in the inbox</li>':''}
+${score>=70?'<li>Looking good! A/B test with slight variations</li>':''}
+</ul></div>`;
+}
+
+document.getElementById('subject').addEventListener('keydown',e=>{if(e.key==='Enter')analyze()});
+</script>
+</body>
+</html>

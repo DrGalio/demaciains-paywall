@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI ROI Calculator — Free Tool | Demaciains</title>
+<meta name="description" content="Calculate the ROI of implementing AI tools in your business. See time saved, cost reduction, and revenue impact. Free calculator.">
+<meta name="keywords" content="AI ROI calculator, artificial intelligence ROI, AI cost savings, automation ROI tool">
+<link rel="canonical" href="https://drgalio.github.io/demaciains-paywall/tools/ai-roi-calculator/">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+h1{font-size:2.5rem;background:linear-gradient(135deg,#10b981,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.subtitle{color:#888;font-size:1.1rem;margin-bottom:30px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:30px}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.field label{display:block;font-size:.85rem;color:#888;margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #333;background:#151520;color:#fff;font-size:1rem}
+.field input:focus,.field select:focus{outline:none;border-color:#10b981}
+.calc-btn{width:100%;padding:16px;border-radius:12px;border:none;background:linear-gradient(135deg,#10b981,#3b82f6);color:#fff;font-size:1.1rem;font-weight:600;cursor:pointer;margin-bottom:30px}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px}
+@media(max-width:600px){.results-grid{grid-template-columns:1fr}}
+.result-card{background:#151520;border:1px solid #222;border-radius:12px;padding:24px;text-align:center}
+.result-label{font-size:.8rem;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.result-value{font-size:2.2rem;font-weight:800;margin:8px 0}
+.result-sub{font-size:.85rem;color:#aaa}
+.highlight{color:#10b981}
+.breakdown{background:#151520;border:1px solid #222;border-radius:12px;padding:24px;margin-top:20px}
+.breakdown h3{color:#10b981;margin-bottom:15px}
+.breakdown-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #1a1a1a}
+.breakdown-row:last-child{border:none}
+.cta-banner{margin-top:50px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:16px;padding:30px;text-align:center}
+.cta-banner h3{color:#10b981;margin-bottom:10px}
+.cta-banner p{color:#aaa;margin-bottom:20px}
+.cta-btn{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#10b981,#3b82f6);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>💰 AI ROI Calculator</h1>
+<p class="subtitle">Calculate how much time and money AI tools can save your business.</p>
+
+<div class="form-grid">
+<div class="field"><label>Team Size</label><input type="number" id="team" value="5" min="1"></div>
+<div class="field"><label>Avg Hourly Rate ($)</label><input type="number" id="rate" value="50" min="1"></div>
+<div class="field"><label>Hours/Week on Repetitive Tasks</label><input type="number" id="hours" value="10" min="1"></div>
+<div class="field"><label>AI Tool Monthly Cost ($)</label><input type="number" id="cost" value="100" min="0"></div>
+<div class="field"><label>Expected Automation %</label><select id="auto"><option value="0.3">30% — Conservative</option><option value="0.5" selected>50% — Moderate</option><option value="0.7">70% — Aggressive</option></select></div>
+<div class="field"><label>Revenue Impact</label><select id="rev"><option value="0">None</option><option value="0.05">5% — Slight increase</option><option value="0.1" selected>10% — Moderate</option><option value="0.2">20% — Significant</option></select></div>
+</div>
+
+<button class="calc-btn" onclick="calculate()">Calculate ROI →</button>
+<div id="results"></div>
+
+<div class="cta-banner">
+<h3>Ready to implement AI in your business?</h3>
+<p>Get our AI Prompt Packs — 50 ready-to-use prompts for automation, marketing, and growth. $19.</p>
+<a href="https://drgalio.github.io/demaciains-paywall/" class="cta-btn">Get Prompt Packs →</a>
+</div>
+</div>
+
+<script>
+function calculate(){
+const team=+document.getElementById('team').value;
+const rate=+document.getElementById('rate').value;
+const hours=+document.getElementById('hours').value;
+const cost=+document.getElementById('cost').value;
+const auto=+document.getElementById('auto').value;
+const rev=+document.getElementById('rev').value;
+
+const weeklySavedHours=team*hours*auto;
+const monthlySavedHours=weeklySavedHours*4;
+const monthlySavedDollars=monthlySavedHours*rate;
+const annualSavedDollars=monthlySavedDollars*12;
+const annualToolCost=cost*12;
+const annualROI=annualSavedDollars-annualToolCost;
+const roiPercent=Math.round((annualROI/annualToolCost)*100);
+const paybackDays=Math.ceil(annualToolCost/(monthlySavedDollars||1));
+
+document.getElementById('results').innerHTML=`
+<div class="results-grid">
+<div class="result-card">
+<div class="result-label">Monthly Hours Saved</div>
+<div class="result-value highlight">${Math.round(monthlySavedHours)}</div>
+<div class="result-sub">${Math.round(weeklySavedHours)} hrs/week across ${team} people</div>
+</div>
+<div class="result-card">
+<div class="result-label">Annual Cost Savings</div>
+<div class="result-value highlight">$${annualSavedDollars.toLocaleString()}</div>
+<div class="result-sub">$${monthlySavedDollars.toLocaleString()}/month</div>
+</div>
+<div class="result-card">
+<div class="result-label">ROI</div>
+<div class="result-value" style="color:${roiPercent>0?'#4ade80':'#ef4444'}">${roiPercent>0?'+':''}${roiPercent}%</div>
+<div class="result-sub">Payback in ${paybackDays} day${paybackDays>1?'s':''}</div>
+</div>
+</div>
+
+<div class="breakdown">
+<h3>📊 Full Breakdown</h3>
+<div class="breakdown-row"><span>Team size</span><span>${team} people</span></div>
+<div class="breakdown-row"><span>Hours saved per person/week</span><span>${(hours*auto).toFixed(1)} hrs</span></div>
+<div class="breakdown-row"><span>Total hours saved/month</span><span>${monthlySavedHours.toFixed(0)} hrs</span></div>
+<div class="breakdown-row"><span>Value of saved time/month</span><span>$${monthlySavedDollars.toLocaleString()}</span></div>
+<div class="breakdown-row"><span>AI tool cost/month</span><span>$${cost}</span></div>
+<div class="breakdown-row"><span>Net monthly benefit</span><span style="color:#4ade80">$${(monthlySavedDollars-cost).toLocaleString()}</span></div>
+<div class="breakdown-row"><span>Annual net benefit</span><span style="color:#4ade80;font-weight:700">$${annualROI.toLocaleString()}</span></div>
+</div>`;
+}
+calculate();
+</script>
+</body>
+</html>

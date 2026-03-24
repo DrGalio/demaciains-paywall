@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Bio Generator — Free Tool | Demaciains</title>
+<meta name="description" content="Generate perfect social media bios for Instagram, Twitter, LinkedIn, TikTok. Free bio generator with character count and platform-specific formatting.">
+<meta name="keywords" content="bio generator, social media bio, Instagram bio ideas, Twitter bio, LinkedIn headline generator">
+<link rel="canonical" href="https://drgalio.github.io/demaciains-paywall/tools/bio-generator/">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+h1{font-size:2.5rem;background:linear-gradient(135deg,#ec4899,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.subtitle{color:#888;font-size:1.1rem;margin-bottom:30px}
+.form-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+input,select{padding:12px 16px;border-radius:10px;border:1px solid #333;background:#151520;color:#fff;font-size:1rem;flex:1;min-width:180px}
+input:focus,select:focus{outline:none;border-color:#ec4899}
+button{padding:14px 32px;border-radius:12px;border:none;background:linear-gradient(135deg,#ec4899,#f97316);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.platform-tabs{display:flex;gap:8px;margin:20px 0;flex-wrap:wrap}
+.tab{padding:10px 20px;border-radius:10px;border:1px solid #333;background:#151520;color:#888;cursor:pointer;font-size:.9rem;transition:all .2s}
+.tab.active{border-color:#ec4899;color:#ec4899;background:#1a1520}
+.bio-card{background:#151520;border:1px solid #222;border-radius:12px;padding:20px;margin-bottom:12px;position:relative}
+.bio-text{font-size:1.1rem;line-height:1.6;white-space:pre-wrap}
+.bio-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid #1a1a1a}
+.char-count{font-size:.8rem;color:#888}
+.char-ok{color:#4ade80}
+.char-warn{color:#fbbf24}
+.char-over{color:#ef4444}
+.copy-btn{background:none;border:1px solid #444;color:#aaa;padding:6px 14px;border-radius:8px;cursor:pointer}
+.copy-btn:hover{border-color:#ec4899;color:#ec4899}
+.cta-banner{margin-top:50px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:16px;padding:30px;text-align:center}
+.cta-banner h3{color:#ec4899;margin-bottom:10px}
+.cta-banner p{color:#aaa;margin-bottom:20px}
+.cta-btn{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#ec4899,#f97316);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>✨ Social Media Bio Generator</h1>
+<p class="subtitle">Perfect bios for every platform. Enter your details, get 10 variations.</p>
+<div class="form-row">
+<input type="text" id="name" placeholder="Your name">
+<input type="text" id="role" placeholder="What you do (e.g. designer, marketer)">
+<input type="text" id="vibe" placeholder="Vibe (e.g. funny, professional, bold)">
+</div>
+<div class="form-row">
+<button onclick="generate()">Generate Bios</button>
+</div>
+<div class="platform-tabs">
+<div class="tab active" onclick="showPlatform(this,'instagram')">Instagram</div>
+<div class="tab" onclick="showPlatform(this,'twitter')">Twitter/X</div>
+<div class="tab" onclick="showPlatform(this,'linkedin')">LinkedIn</div>
+<div class="tab" onclick="showPlatform(this,'tiktok')">TikTok</div>
+</div>
+<div id="results"></div>
+<div class="cta-banner">
+<h3>Want content that converts?</h3>
+<p>Get our Content Creator Machine — 50 AI prompts for viral posts, bios, and engagement. $19.</p>
+<a href="https://drgalio.github.io/demaciains-paywall/" class="cta-btn">Get Prompt Packs →</a>
+</div>
+</div>
+
+<script>
+let allBios={};
+const limits={instagram:150,twitter:160,linkedin:220,tiktok:80};
+const templates={
+instagram:[
+(n,r,v)=>`${r} | Making things happen ✨\n${v} vibes only 🚀\n📩 DM for collabs`,
+(n,r,v)=>`${r}\n🎯 Helping you ${r.toLowerCase().replace(/^(a|an) /,'')}\n👇 Free resources below`,
+(n,r,v)=>`${n} — ${r}\n${v} • creative • unstoppable\n🔗 link in bio`,
+(n,r,v)=>`✨ ${r}\n📍 Creating ${v} content daily\n💬 Let's connect`,
+(n,r,v)=>`${r} by day, ${v} by night 🌙\nBuilding something cool 🔥\nTap the link 👇`,
+],
+twitter:[
+(n,r,v)=>`${r}. ${v} takes only. Building in public. 🚀`,
+(n,r,v)=>`${n} | ${r} | Sharing what I learn about ${r.toLowerCase()}`,
+(n,r,v)=>`${r}. I tweet about ${v} stuff. Probably overthinking it.`,
+(n,r,v)=>`Making ${r.toLowerCase()} ${v}. DMs open.`,
+(n,r,v)=>`${n} — ${r}. ${v} thoughts, real results.`,
+],
+linkedin:[
+(n,r,v)=>`${r} | Helping businesses grow through ${v} strategies | Open to opportunities`,
+(n,r,v)=>`${n} — ${r}\nPassionate about ${v} solutions that drive results.\nLet's connect and build something great.`,
+(n,r,v)=>`${r} with ${v} mindset. I help teams ship faster and smarter.`,
+(n,r,v)=>`Experienced ${r.toLowerCase()} focused on ${v} outcomes. Speaker. Builder. Connector.`,
+(n,r,v)=>`${r} | Turning ${v} ideas into measurable impact | Always learning`,
+],
+tiktok:[
+(n,r,v)=>`${n} | ${r} | ${v} content 🎬`,
+(n,r,v)=>`${r} 🚀 Follow for ${v} tips`,
+(n,r,v)=>`Just a ${r.toLowerCase()} making ${v} stuff 🎯`,
+(n,r,v)=>`${v} ${r.toLowerCase()} | new vids daily ✨`,
+(n,r,v)=>`${r}. chaos. ${v}. subscribe. 📲`,
+]
+};
+
+let currentPlatform='instagram';
+
+function generate(){
+const name=document.getElementById('name').value.trim()||'Alex';
+const role=document.getElementById('role').value.trim()||'creator';
+const vibe=document.getElementById('vibe').value.trim()||'creative';
+allBios={};
+for(const[plat,tmpls]of Object.entries(templates)){
+allBios[plat]=tmpls.map(fn=>fn(name,role,vibe));
+}
+showPlatform(document.querySelector('.tab.active'),currentPlatform);
+}
+
+function showPlatform(el,platform){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+el.classList.add('active');
+currentPlatform=platform;
+const bios=allBios[platform];
+if(!bios)return;
+const limit=limits[platform];
+document.getElementById('results').innerHTML=bios.map((bio,i)=>{
+const len=bio.length;
+const cc=len<=limit*0.7?'char-ok':len<=limit?'char-warn':'char-over';
+return`<div class="bio-card"><div class="bio-text">${bio}</div><div class="bio-meta"><span class="char-count ${cc}">${len}/${limit} chars</span><button class="copy-btn" onclick="navigator.clipboard.writeText(\`${bio.replace(/`/g,'\\`')}\`);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button></div></div>`;
+}).join('');
+}
+
+generate();
+</script>
+</body>
+</html>
