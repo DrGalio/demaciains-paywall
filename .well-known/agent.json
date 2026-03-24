@@ -1,8 +1,8 @@
 {
   "name": "Demaciains Research Services",
   "description": "Market research, gap analysis, trend signals, algorithm reports, startup validation, and pricing strategy for AI agents and humans. ALL endpoints generate fresh dynamic data on every request. Payments via x402 protocol on Base network.",
-  "version": "3.3.0",
-  "engine": "Demaciains Dynamic Data Engine v3.3 \u2014 Client-Side Seeded PRNG",
+  "version": "3.4.0",
+  "engine": "Demaciains Dynamic Data Engine v3.4 \u2014 Client-Side Seeded PRNG",
   "data_refresh": {
     "market-gap": "daily (date-seeded)",
     "trends": "hourly (hour-seeded)",
@@ -11,7 +11,8 @@
     "startup-validator": "daily (date+idea-seeded)",
     "pricing-strategy": "daily (date+product-seeded)",
     "revenue-forecast": "daily (date+product-seeded)",
-    "go-to-market": "daily (date+product-seeded)"
+    "go-to-market": "daily (date+product-seeded)",
+    "content-strategy": "daily (date+product-seeded)"
   },
   "protocol": "x402",
   "wallet": "0x83F31CE0F8b1f27a6Ad91693709febb728c71563",
@@ -152,6 +153,18 @@
         "price"
       ],
       "description": "Complete go-to-market strategy: positioning framework, channel prioritization, 4-phase launch plan, content calendar, budget allocation, and KPI targets."
+    },
+    {
+      "endpoint": "/api/content-strategy",
+      "method": "GET",
+      "price": "1.50",
+      "currency": "USDC",
+      "params": [
+        "product",
+        "niche",
+        "audience"
+      ],
+      "description": "Complete content strategy: topic clusters, SEO keyword strategy, platform-specific content plans, 4-week content calendar, distribution playbook, and repurposing matrix."
     }
   ],
   "capabilities": [
@@ -168,6 +181,12 @@
       "type": "go_to_market_strategy",
       "description": "Generate complete go-to-market strategies with channel prioritization, messaging frameworks, and phased launch plans",
       "endpoint": "/api/go-to-market",
+      "price": "1.50 USDC"
+    },
+    {
+      "type": "content_strategy",
+      "description": "Generate complete content strategies with topic clusters, SEO keyword planning, platform-specific content calendars, distribution playbooks, and repurposing matrices",
+      "endpoint": "/api/content-strategy",
       "price": "1.50 USDC"
     }
   ]

@@ -118,6 +118,7 @@
       { id: 'pricing-strategy', name: 'Pricing Strategy', price: '$0.75', icon: '💰', desc: 'Pricing optimization' },
       { id: 'revenue-forecast', name: 'Revenue Forecast', price: '$1.25', icon: '📈', desc: 'Revenue projection engine' },
       { id: 'go-to-market', name: 'Go-to-Market', price: '$1.50', icon: '🚀', desc: 'Launch strategy + channels' },
+      { id: 'content-strategy', name: 'Content Strategy', price: '$1.50', icon: '📝', desc: 'Content plans + SEO keywords' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -154,6 +155,7 @@
         case 'pricing-strategy': data = DemaciainsEngine.pricingStrategy(getParam('product','digital template pack')); break;
         case 'revenue-forecast': data = DemaciainsEngine.revenueForecast(getParam('product','AI prompt pack'), { price: 29, traffic: 2000 }); break;
         case 'go-to-market': data = DemaciainsEngine.goToMarket(getParam('product','AI productivity tool'), { niche: 'creators', price: 29 }); break;
+        case 'content-strategy': data = DemaciainsEngine.contentStrategy(getParam('product','AI productivity tool'), { niche: 'AI agents', audience: 'founders' }); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);
@@ -168,7 +170,9 @@
         paramHTML = `<input type="text" id="param-idea" placeholder="idea (e.g. AI-powered fitness app)" value="${getParam('idea','AI-powered productivity tool')}" style="width:260px">`;
       } else if (currentEndpoint === 'pricing-strategy') {
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. online course)" value="${getParam('product','digital template pack')}" style="width:220px">`;
-      }
+      } else if (currentEndpoint === 'content-strategy') {
+        paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI prompt pack)" value="${getParam('product','AI productivity tool')}" style="width:220px">`;
+      } else if (currentEndpoint === 'revenue-forecast') {
 
       view.innerHTML = `
         <div class="endpoint-header">

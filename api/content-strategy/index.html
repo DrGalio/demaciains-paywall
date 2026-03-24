@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Content Strategy Planner — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px;max-width:960px;margin:0 auto}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.card{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.card h3{color:#10b981;font-size:.95em;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:.85em}
+.row:last-child{border-bottom:none}.label{color:#64748b}.val{color:#e0e0e0;text-align:right;max-width:60%}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75em;margin:2px}
+.tag-HIGH{background:#064e3b;color:#6ee7b7}.tag-MEDIUM{background:#713f12;color:#fbbf24}.tag-LOW{background:#1e1b4b;color:#a5b4fc}
+.platform{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:14px;margin-bottom:8px}
+.platform h4{color:#a78bfa;font-size:.85em;margin-bottom:8px}
+.platform .tip{font-size:.78em;color:#94a3b8;padding:4px 0}.platform .tip::before{content:'💡 '}
+.topic{background:#141414;border-radius:4px;padding:6px 10px;margin:3px 0;font-size:.8em;color:#94a3b8}
+.topic::before{content:'📝 ';font-size:.7em}
+.week{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:14px;margin-bottom:8px}
+.week h4{color:#f59e0b;font-size:.85em;margin-bottom:8px}
+.post{background:#141414;border-radius:4px;padding:6px 10px;margin:3px 0;font-size:.78em;color:#94a3b8}
+.post::before{content:'📅 '}
+.keyword{background:#141414;border-radius:4px;padding:6px 10px;margin:3px 0;font-size:.78em}
+.keyword .kw{color:#6ee7b7}.keyword .vol{color:#f59e0b}.keyword .diff{color:#64748b}
+.cta-box{background:linear-gradient(133deg,#1e1b4b,#0f172a);border:1px solid #6366f1;border-radius:8px;padding:16px;margin-top:16px;text-align:center}
+.cta-box h3{color:#a5b4fc;margin-bottom:8px}
+.cta-box .price{font-size:1.8em;color:#22c55e;font-weight:bold}
+.cta-box .sub{color:#64748b;font-size:.8em;margin-top:4px}
+.params{background:#141414;border:1px solid #333;border-radius:8px;padding:14px;margin-bottom:16px}
+.params h3{color:#f59e0b;font-size:.9em;margin-bottom:8px}
+.param-row{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.param-row label{color:#94a3b8;font-size:.8em;min-width:80px}
+.param-row input{background:#0a0a0a;border:1px solid #333;color:#e0e0e0;padding:6px 10px;border-radius:4px;font-family:inherit;font-size:.85em;flex:1;min-width:200px}
+.btn{background:#6366f1;color:white;border:none;padding:8px 20px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:.85em}
+.btn:hover{background:#4f46e5}
+#output{display:none}
+.output-hdr{background:#064e3b;border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.output-hdr .oid{color:#6ee7b7;font-size:.85em}
+.output-hdr .ts{color:#64748b;font-size:.75em}
+.pillar{display:inline-block;background:#1e1b4b;color:#a5b4fc;padding:4px 12px;border-radius:4px;font-size:.8em;margin:3px}
+.distro{background:#141414;border-left:3px solid #6366f1;padding:8px 12px;margin:6px 0;font-size:.8em}
+.distro .ch{color:#60a5fa;font-weight:bold}
+.raw{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-top:20px}
+.raw summary{color:#6366f1;cursor:pointer;font-size:.85em}
+.raw pre{color:#22c55e;font-size:.75em;overflow-x:auto;margin-top:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>📝 Content Strategy Planner <span class="live">LIVE</span></h1>
+<div class="meta">GET /api/content-strategy • $1.50 USDC • x402 on Base • Generated: <span id="ts">—</span></div>
+</div>
+
+<div class="params" id="params">
+<h3>⚙️ Parameters</h3>
+<div class="param-row">
+<label>Product:</label>
+<input id="productInput" placeholder="e.g. AI prompt pack, SaaS tool, online course...">
+</div>
+<div class="param-row">
+<label>Niche:</label>
+<input id="nicheInput" placeholder="e.g. AI productivity, developer tools, e-commerce...">
+</div>
+<div class="param-row">
+<label>Audience:</label>
+<input id="audienceInput" placeholder="e.g. developers, marketers, founders, creators...">
+</div>
+<div class="param-row">
+<button class="btn" onclick="generate()">Generate Content Strategy →</button>
+</div>
+</div>
+
+<div id="output">
+<div class="output-hdr">
+<span class="oid" id="oid">—</span>
+<span class="ts" id="genTs">—</span>
+</div>
+
+<!-- Overview -->
+<div class="card">
+<h3>📊 Strategy Overview</h3>
+<div id="overview"></div>
+</div>
+
+<!-- Content Pillars -->
+<div class="card">
+<h3>🏛️ Content Pillars</h3>
+<div id="pillars"></div>
+</div>
+
+<!-- Topic Clusters -->
+<div class="card">
+<h3>🗂️ Topic Clusters</h3>
+<div id="clusters"></div>
+</div>
+
+<!-- SEO Keywords -->
+<div class="card">
+<h3>🔍 SEO Keyword Strategy</h3>
+<div id="keywords"></div>
+</div>
+
+<!-- Platform Plan -->
+<div class="card">
+<h3>📱 Platform-Specific Plan</h3>
+<div id="platforms"></div>
+</div>
+
+<!-- Content Calendar -->
+<div class="card">
+<h3>📅 4-Week Content Calendar</h3>
+<div id="calendar"></div>
+</div>
+
+<!-- Distribution Playbook -->
+<div class="card">
+<h3>🚀 Distribution Playbook</h3>
+<div id="distribution"></div>
+</div>
+
+<!-- Repurposing -->
+<div class="card">
+<h3>♻️ Content Repurposing Matrix</h3>
+<div id="repurposing"></div>
+</div>
+
+<!-- Quick Wins -->
+<div class="card">
+<h3>⚡ Quick Wins</h3>
+<div id="quickwins"></div>
+</div>
+
+<!-- Raw JSON -->
+<details class="raw">
+<summary>📋 Raw JSON Response</summary>
+<pre id="rawJson"></pre>
+</details>
+</div>
+
+<div class="cta-box">
+<h3>Unlock Full Content Strategy</h3>
+<div class="price">$1.50 USDC</div>
+<div class="sub">x402 protocol on Base network • Fresh data every request</div>
+</div>
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function generate(){
+  const p=document.getElementById('productInput').value||'AI productivity tool';
+  const n=document.getElementById('nicheInput').value||undefined;
+  const a=document.getElementById('audienceInput').value||undefined;
+  const d=DemaciainsEngine.contentStrategy(p,{niche:n,audience:a});
+  document.getElementById('params').style.display='none';
+  document.getElementById('output').style.display='block';
+  document.getElementById('oid').textContent='📝 '+d.report_id;
+  document.getElementById('ts').textContent=d.generated;
+  document.getElementById('genTs').textContent=d.generated;
+
+  // Overview
+  let h='';
+  h+=`<div class="row"><span class="label">Product</span><span class="val">${d.product}</span></div>`;
+  h+=`<div class="row"><span class="label">Niche</span><span class="val">${d.niche}</span></div>`;
+  h+=`<div class="row"><span class="label">Target Audience</span><span class="val">${d.target_audience}</span></div>`;
+  h+=`<div class="row"><span class="label">Confidence</span><span class="val">${(d.meta.confidence*100).toFixed(0)}%</span></div>`;
+  h+=`<div class="row"><span class="label">Campaigns Analyzed</span><span class="val">${d.meta.campaigns_analyzed}</span></div>`;
+  h+=`<div class="row"><span class="label">Refresh Rate</span><span class="val">${d.meta.refresh_rate}</span></div>`;
+  document.getElementById('overview').innerHTML=h;
+
+  // Pillars
+  h='';
+  d.content_pillars.forEach(p=>{
+    h+=`<div style="margin-bottom:12px"><span class="pillar">${p.name}</span> <span style="font-size:.75em;color:#64748b">${p.weight} of content</span>`;
+    h+=`<div style="margin-top:4px;font-size:.78em;color:#94a3b8">Goal: ${p.primary_goal} | Formats: ${p.recommended_formats.join(', ')}</div></div>`;
+  });
+  document.getElementById('pillars').innerHTML=h;
+
+  // Clusters
+  h='';
+  d.topic_clusters.forEach(c=>{
+    h+=`<div style="margin-bottom:12px"><h4 style="color:#60a5fa;font-size:.85em;margin-bottom:6px">${c.pillar}</h4>`;
+    c.topics.forEach(t=>{h+=`<div class="topic">${t}</div>`;});
+    h+=`<div style="font-size:.7em;color:#64748b;margin-top:4px">Est. traffic potential: ${c.estimated_traffic_potential}/mo</div></div>`;
+  });
+  document.getElementById('clusters').innerHTML=h;
+
+  // Keywords
+  h='';
+  d.seo_keyword_strategy.forEach(ks=>{
+    h+=`<div style="margin-bottom:12px"><h4 style="color:#a78bfa;font-size:.85em;margin-bottom:6px;text-transform:capitalize">${ks.intent} Intent</h4>`;
+    ks.keywords.forEach(k=>{
+      const diffColor=k.difficulty<30?'#22c55e':k.difficulty<50?'#f59e0b':'#ef4444';
+      h+=`<div class="keyword"><span class="kw">${k.keyword}</span> — <span class="vol">${k.estimated_volume}/mo</span> — <span class="diff" style="color:${diffColor}">KD: ${k.difficulty}</span> — <span style="color:#64748b">${k.recommended_content_type}</span></div>`;
+    });
+  });
+  document.getElementById('keywords').innerHTML=h;
+
+  // Platforms
+  h='';
+  d.platform_plan.forEach(pl=>{
+    h+=`<div class="platform"><h4>📱 ${pl.platform}</h4>`;
+    h+=`<div class="row"><span class="label">Posting Frequency</span><span class="val">${pl.posting_frequency}</span></div>`;
+    h+=`<div class="row"><span class="label">Best Times</span><span class="val">${pl.best_posting_times.join(', ')}</span></div>`;
+    h+=`<div class="row"><span class="label">Engagement Benchmark</span><span class="val">${pl.engagement_benchmark}</span></div>`;
+    h+=`<div class="tip">${pl.platform_specific_tip}</div>`;
+    h+=`<div style="margin-top:8px"><div style="font-size:.8em;color:#64748b;margin-bottom:4px">Content Mix: ${pl.content_ratio}</div></div>`;
+    h+=`<div style="margin-top:8px"><div style="font-size:.8em;color:#64748b;margin-bottom:4px">Growth Tactic:</div><div style="font-size:.8em;color:#e0e0e0">${pl.growth_tactic}</div></div>`;
+    h+=`<div style="margin-top:8px"><div style="font-size:.8em;color:#64748b;margin-bottom:4px">Weekly Ideas:</div>`;
+    pl.weekly_content_ideas.forEach(wi=>{
+      h+=`<div class="topic">${wi.topic} <span style="color:#64748b">(${wi.format} · ${wi.estimated_engagement} engagement)</span></div>`;
+    });
+    h+=`</div></div>`;
+  });
+  document.getElementById('platforms').innerHTML=h;
+
+  // Calendar
+  h='';
+  d.content_calendar.forEach(w=>{
+    h+=`<div class="week"><h4>Week ${w.week}: ${w.theme} (${w.total_posts} posts · ${w.estimated_hours}h)</h4>`;
+    w.posts.forEach(p=>{
+      h+=`<div class="post"><strong>${p.day}</strong> — ${p.platform} — ${p.content_type}: ${p.topic} <span style="color:#64748b">[${p.theme}] ~${p.estimated_time_min}min</span></div>`;
+    });
+    h+=`</div>`;
+  });
+  document.getElementById('calendar').innerHTML=h;
+
+  // Distribution
+  h='<h4 style="color:#10b981;font-size:.85em;margin-bottom:8px">Owned Channels</h4>';
+  d.distribution_playbook.owned_channels.forEach(c=>{
+    h+=`<div class="distro"><span class="ch">${c.channel}</span> <span class="tag tag-${c.priority}">${c.priority}</span><div style="font-size:.78em;color:#94a3b8;margin-top:4px">${c.tactic}</div></div>`;
+  });
+  h+='<h4 style="color:#f59e0b;font-size:.85em;margin:12px 0 8px">Earned Channels</h4>';
+  d.distribution_playbook.earned_channels.forEach(c=>{
+    h+=`<div class="distro"><span class="ch">${c.channel}</span> <span class="tag tag-${c.priority}">${c.priority}</span><div style="font-size:.78em;color:#94a3b8;margin-top:4px">${c.tactic}</div></div>`;
+  });
+  h+='<h4 style="color:#6366f1;font-size:.85em;margin:12px 0 8px">Paid Channels</h4>';
+  d.distribution_playbook.paid_channels.forEach(c=>{
+    h+=`<div class="distro"><span class="ch">${c.channel}</span> <span class="tag tag-${c.priority}">${c.priority}</span><div style="font-size:.78em;color:#94a3b8;margin-top:4px">${c.tactic}</div></div>`;
+  });
+  document.getElementById('distribution').innerHTML=h;
+
+  // Repurposing
+  h='';
+  d.content_repurposing.forEach(r=>{
+    h+=`<div style="margin-bottom:12px"><div style="font-size:.85em;color:#60a5fa;margin-bottom:4px">${r.source}</div>`;
+    h+=`<div style="font-size:.78em;color:#94a3b8">→ ${r.outputs.join(' → ')}</div>`;
+    h+=`<div style="font-size:.7em;color:#64748b;margin-top:2px">Effort: ${r.effort} | Reach multiplier: ${r.reach_multiplier}</div>`;
+    h+=`<div style="font-size:.78em;color:#6ee7b7;margin-top:4px">${r.recommendation}</div></div>`;
+  });
+  document.getElementById('repurposing').innerHTML=h;
+
+  // Quick Wins
+  h='';
+  d.quick_wins.forEach((w,i)=>{h+=`<div class="topic"><strong>#${i+1}</strong> ${w}</div>`;});
+  document.getElementById('quickwins').innerHTML=h;
+
+  // Raw JSON
+  document.getElementById('rawJson').textContent=JSON.stringify(d,null,2);
+}
+
+// Auto-generate on load if no params shown
+document.getElementById('productInput').addEventListener('keydown',e=>{if(e.key==='Enter')generate();});
+</script>
+</body>
+</html>

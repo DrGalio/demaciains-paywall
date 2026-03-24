@@ -203,6 +203,20 @@
         "parameters": [{ "name": "keywords", "in": "query", "required": true, "schema": { "type": "string" } }],
         "responses": { "402": { "description": "Payment required" }, "200": { "description": "Name suggestions" } }
       }
+    },
+    "/api/content-strategy": {
+      "get": {
+        "summary": "Content Strategy Planner",
+        "description": "Complete content strategy: topic clusters, SEO keyword strategy, platform-specific content plans, 4-week content calendar, distribution playbook & repurposing matrix.",
+        "operationId": "contentStrategy",
+        "x-price": 1.50,
+        "parameters": [
+          { "name": "product", "in": "query", "schema": { "type": "string" } },
+          { "name": "niche", "in": "query", "schema": { "type": "string" } },
+          { "name": "audience", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Content strategy" } }
+      }
     }
   }
 }

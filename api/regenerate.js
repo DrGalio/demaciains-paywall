@@ -2,7 +2,7 @@
 /**
  * Demaciains API Data Regenerator
  * Run: node api/regenerate.js
- * Generates fresh data for all 8 x402 endpoints
+ * Generates fresh data for all 9 x402 endpoints
  */
 const fs = require('fs');
 const path = require('path');
@@ -19,6 +19,7 @@ const endpoints = [
   { file: 'pricing-strategy.json', gen: () => E.pricingStrategy('digital template pack') },
   { file: 'revenue-forecast.json', gen: () => E.revenueForecast('AI prompt pack', { price: 29, traffic: 2000 }) },
   { file: 'go-to-market.json', gen: () => E.goToMarket('AI productivity toolkit', { niche: 'creators', price: 29 }) },
+  { file: 'content-strategy.json', gen: () => E.contentStrategy('AI productivity tool', { niche: 'AI agents', audience: 'founders' }) },
 ];
 
 console.log(`[${new Date().toISOString()}] Regenerating API data...`);
@@ -30,4 +31,4 @@ endpoints.forEach(ep => {
   console.log(`  ✅ ${ep.file} — generated at ${data.generated}`);
 });
 
-console.log('Done. All 8 endpoints regenerated.');
+console.log('Done. All 9 endpoints regenerated.');
