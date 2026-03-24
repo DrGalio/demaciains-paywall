@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup Cost Calculator — Free Tool | Demaciains</title>
+<meta name="description" content="Calculate the true cost of starting your business. Get a detailed breakdown of one-time and recurring costs, funding needs, and break-even timeline. Free.">
+<meta name="keywords" content="startup cost calculator, business startup costs, how much to start a business, startup budget calculator">
+<link rel="canonical" href="https://drgalio.github.io/demaciains-paywall/tools/startup-calculator/">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+h1{font-size:2.5rem;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.subtitle{color:#888;font-size:1.1rem;margin-bottom:30px}
+.section{background:#151520;border:1px solid #222;border-radius:12px;padding:24px;margin-bottom:20px}
+.section h3{color:#f59e0b;margin-bottom:15px;font-size:1.1rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.field label{display:block;font-size:.82rem;color:#888;margin-bottom:5px}
+.field input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #333;background:#0a0a0f;color:#fff;font-size:.95rem}
+.field input:focus{outline:none;border-color:#f59e0b}
+select{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #333;background:#0a0a0f;color:#fff;font-size:.95rem}
+.calc-btn{width:100%;padding:16px;border-radius:12px;border:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:1.1rem;font-weight:600;cursor:pointer;margin:20px 0}
+.total-card{background:linear-gradient(135deg,#1a1520,#151520);border:2px solid #f59e0b;border-radius:16px;padding:30px;text-align:center;margin-bottom:20px}
+.total-label{font-size:.9rem;color:#888;text-transform:uppercase;letter-spacing:1px}
+.total-value{font-size:3.5rem;font-weight:800;color:#f59e0b;margin:10px 0}
+.total-sub{color:#aaa;font-size:.9rem}
+.breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.bd-card{background:#151520;border:1px solid #222;border-radius:10px;padding:16px}
+.bd-label{font-size:.78rem;color:#888;text-transform:uppercase}
+.bd-value{font-size:1.5rem;font-weight:700;margin:4px 0}
+.bd-sub{font-size:.8rem;color:#aaa}
+.timeline{background:#151520;border:1px solid #222;border-radius:12px;padding:24px}
+.timeline h3{color:#f59e0b;margin-bottom:15px}
+.tl-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a1a}
+.tl-row:last-child{border:none}
+.export-btn{display:inline-block;padding:10px 20px;border:1px solid #f59e0b;color:#f59e0b;border-radius:8px;cursor:pointer;background:none;margin-top:15px}
+.export-btn:hover{background:#f59e0b;color:#000}
+.cta-banner{margin-top:50px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:16px;padding:30px;text-align:center}
+.cta-banner h3{color:#f59e0b;margin-bottom:10px}
+.cta-banner p{color:#aaa;margin-bottom:20px}
+.cta-btn{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🚀 Startup Cost Calculator</h1>
+<p class="subtitle">Calculate the true cost of starting your business. Get a detailed breakdown.</p>
+
+<div class="section">
+<h3>📋 Business Basics</h3>
+<div class="grid">
+<div class="field"><label>Business Type</label>
+<select id="bizType"><option value="saas">SaaS / Software</option><option value="ecommerce">E-commerce</option><option value="agency">Agency / Services</option><option value="content">Content / Creator</option><option value="local">Local Business</option><option value="consulting">Consulting</option></select></div>
+<div class="field"><label>Team Size (Year 1)</label><input type="number" id="team" value="1" min="1"></div>
+<div class="field"><label>Expected Monthly Revenue ($)</label><input type="number" id="revenue" value="5000" min="0"></div>
+<div class="field"><label>Months to Profitability</label><input type="number" id="months" value="6" min="1"></div>
+</div>
+</div>
+
+<div class="section">
+<h3>💻 One-Time Costs</h3>
+<div class="grid">
+<div class="field"><label>Domain & Branding ($)</label><input type="number" id="branding" value="500"></div>
+<div class="field"><label>Website / Landing Page ($)</label><input type="number" id="website" value="200"></div>
+<div class="field"><label>Legal & Registration ($)</label><input type="number" id="legal" value="500"></div>
+<div class="field"><label>Equipment & Tools ($)</label><input type="number" id="equipment" value="1000"></div>
+<div class="field"><label>Initial Marketing ($)</label><input type="number" id="marketing1" value="500"></div>
+<div class="field"><label>Other One-Time ($)</label><input type="number" id="other1" value="0"></div>
+</div>
+</div>
+
+<div class="section">
+<h3>🔄 Monthly Recurring Costs</h3>
+<div class="grid">
+<div class="field"><label>Hosting & Infrastructure ($/mo)</label><input type="number" id="hosting" value="50"></div>
+<div class="field"><label>Software & SaaS Tools ($/mo)</label><input type="number" id="software" value="200"></div>
+<div class="field"><label>Marketing & Ads ($/mo)</label><input type="number" id="marketing2" value="500"></div>
+<div class="field"><label>Salaries / Contractors ($/mo)</label><input type="number" id="salaries" value="0"></div>
+<div class="field"><label>Office / Coworking ($/mo)</label><input type="number" id="office" value="0"></div>
+<div class="field"><label>Other Monthly ($/mo)</label><input type="number" id="other2" value="100"></div>
+</div>
+</div>
+
+<button class="calc-btn" onclick="calculate()">Calculate Total Startup Cost →</button>
+<div id="results"></div>
+
+<div class="cta-banner">
+<h3>Want to start a business with zero budget?</h3>
+<p>Our AI Agent Config Packs give you ready-to-use AI assistants for real estate, dental, e-commerce, gyms, and more. $29 each.</p>
+<a href="https://drgalio.github.io/demaciains-paywall/" class="cta-btn">Browse AI Configs →</a>
+</div>
+</div>
+
+<script>
+function $(id){return +document.getElementById(id).value||0}
+function calculate(){
+const oneTime=$('branding')+$('website')+$('legal')+$('equipment')+$('marketing1')+$('other1');
+const monthly=$('hosting')+$('software')+$('marketing2')+$('salaries')+$('office')+$('other2');
+const months=$('months');
+const team=$('team');
+const revenue=$('revenue');
+
+const recurringTotal=monthly*months;
+const totalStartup=oneTime+recurringTotal;
+const monthlyBurn=monthly;
+const runway=Math.floor(totalStartup/(monthlyBurn||1));
+const breakEvenMonth=Math.ceil(totalStartup/((revenue-monthly)||1));
+const fundingNeeded=Math.ceil(totalStartup*1.2/1000)*1000; // 20% buffer, rounded
+
+document.getElementById('results').innerHTML=`
+<div class="total-card">
+<div class="total-label">Total Startup Cost (Year 1)</div>
+<div class="total-value">$${totalStartup.toLocaleString()}</div>
+<div class="total-sub">Including ${months} months of operating costs</div>
+</div>
+
+<div class="breakdown">
+<div class="bd-card"><div class="bd-label">One-Time Costs</div><div class="bd-value">$${oneTime.toLocaleString()}</div><div class="bd-sub">${Math.round(oneTime/totalStartup*100)}% of total</div></div>
+<div class="bd-card"><div class="bd-label">Monthly Burn Rate</div><div class="bd-value">$${monthlyBurn.toLocaleString()}</div><div class="bd-sub">$${(monthlyBurn*12).toLocaleString()}/year</div></div>
+<div class="bd-card"><div class="bd-label">Recurring (${months}mo)</div><div class="bd-value">$${recurringTotal.toLocaleString()}</div><div class="bd-sub">${Math.round(recurringTotal/totalStartup*100)}% of total</div></div>
+<div class="bd-card"><div class="bd-label">Suggested Funding</div><div class="bd-value">$${fundingNeeded.toLocaleString()}</div><div class="bd-sub">20% buffer included</div></div>
+</div>
+
+<div class="timeline">
+<h3>📊 Financial Timeline</h3>
+<div class="tl-row"><span>Month 1 costs</span><span>$${(oneTime+monthly).toLocaleString()}</span></div>
+<div class="tl-row"><span>Monthly burn after setup</span><span>$${monthly.toLocaleString()}</span></div>
+<div class="tl-row"><span>Expected monthly revenue</span><span>$${revenue.toLocaleString()}</span></div>
+<div class="tl-row"><span>Monthly profit/loss</span><span style="color:${revenue-monthly>=0?'#4ade80':'#ef4444'}">$${(revenue-monthly).toLocaleString()}</span></div>
+<div class="tl-row"><span>Break-even point</span><span>${breakEvenMonth>0?breakEvenMonth+' months':'Already profitable'}</span></div>
+<div class="tl-row"><span>Cost per team member</span><span>$${Math.round(totalStartup/team).toLocaleString()}</span></div>
+</div>
+
+<button class="export-btn" onclick="exportReport()">📋 Copy Report</button>`;
+}
+
+function exportReport(){
+const el=document.getElementById('results');
+const text=el.innerText;
+navigator.clipboard.writeText(text);
+}
+
+calculate();
+</script>
+</body>
+</html>
