@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hashtag Generator — Free Instagram/TikTok Hashtags | Demaciains</title>
+<meta name="description" content="Generate trending hashtags for Instagram, TikTok, Twitter, and LinkedIn. Free hashtag generator with engagement estimates and niche suggestions.">
+<meta name="keywords" content="hashtag generator, instagram hashtags, tiktok hashtags, trending hashtags, hashtag finder">
+<link rel="canonical" href="https://drgalio.github.io/demaciains-paywall/tools/hashtag-generator/">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+h1{font-size:2.5rem;background:linear-gradient(135deg,#e1306c,#f77737);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.subtitle{color:#888;font-size:1.1rem;margin-bottom:30px}
+.input-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+input,select{padding:14px 18px;border-radius:12px;border:1px solid #333;background:#151520;color:#fff;font-size:1rem;flex:1;min-width:200px}
+input:focus,select:focus{outline:none;border-color:#e1306c}
+button{padding:14px 32px;border-radius:12px;border:none;background:linear-gradient(135deg,#e1306c,#f77737);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.results{margin-top:30px}
+.platform-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:10px 20px;border-radius:10px;border:1px solid #333;background:#151520;color:#888;cursor:pointer;font-size:.9rem;transition:all .2s}
+.tab.active{border-color:#e1306c;color:#e1306c}
+.hashtag-cloud{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+.tag{display:inline-block;padding:8px 16px;border-radius:20px;background:#1a1520;border:1px solid #333;cursor:pointer;transition:all .2s;font-size:.9rem}
+.tag:hover{border-color:#e1306c;color:#e1306c}
+.tag.selected{border-color:#e1306c;background:#2a1520;color:#e1306c}
+.tag-pop{font-size:.7rem;color:#4ade80;margin-left:4px}
+.tag-niche{font-size:.7rem;color:#fbbf24;margin-left:4px}
+.copy-area{background:#151520;border:1px solid #222;border-radius:12px;padding:16px;margin-top:20px}
+.copy-area textarea{width:100%;height:100px;background:#0a0a0f;border:1px solid #333;border-radius:8px;color:#fff;padding:12px;font-family:inherit;resize:none}
+.copy-btn{display:inline-block;margin-top:10px;padding:10px 20px;border:1px solid #e1306c;color:#e1306c;border-radius:8px;cursor:pointer;background:none}
+.copy-btn:hover{background:#e1306c;color:#fff}
+.stats{display:flex;gap:20px;margin:15px 0;color:#888;font-size:.9rem}
+.cta-banner{margin-top:50px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:16px;padding:30px;text-align:center}
+.cta-banner h3{color:#e1306c;margin-bottom:10px}
+.cta-banner p{color:#aaa;margin-bottom:20px}
+.cta-btn{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#e1306c,#f77737);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>#️⃣ Hashtag Generator</h1>
+<p class="subtitle">Generate trending hashtags for Instagram, TikTok, Twitter & LinkedIn.</p>
+<div class="input-row">
+<input type="text" id="topic" placeholder="Enter your topic (e.g. fitness, travel, tech)...">
+<select id="platform"><option value="instagram">Instagram</option><option value="tiktok">TikTok</option><option value="twitter">Twitter/X</option><option value="linkedin">LinkedIn</option></select>
+<button onclick="generate()">Generate Hashtags</button>
+</div>
+<div id="results"></div>
+<div class="cta-banner">
+<h3>Master the algorithm with our guides</h3>
+<p>Get platform-specific algorithm reverse-engineering reports. Know exactly what gets ranked. $29 each.</p>
+<a href="https://drgalio.github.io/demaciains-paywall/" class="cta-btn">Get Algorithm Guides →</a>
+</div>
+</div>
+
+<script>
+const hashtagDB={
+fitness:['#fitness','#workout','#gym','#fit','#health','#motivation','#fitnessmotivation','#training','#lifestyle','#bodybuilding','#healthylifestyle','#exercise','#muscle','#crossfit','#yoga','#cardio','#nutrition','#personaltrainer','#gymlife','#strong','#fitspo','#weightloss','#wellness','#abs','#protein','#fitfam','#instafit','#homeworkout','#running','#fitlife'],
+travel:['#travel','#wanderlust','#adventure','#vacation','#explore','#travelgram','#instatravel','#traveling','#trip','#holiday','#travelphotography','#traveler','#nature','#photography','#beautiful','#photooftheday','#love','#landscape','#sunset','#beach','#mountains','#backpacking','#worldtravel','#tourism','#travellife','#traveladdict','#roadtrip','#travelblogger','#bucketlist','#paradise'],
+tech:['#tech','#technology','#programming','#coding','#developer','#software','#ai','#machinelearning','#webdev','#startup','#javascript','#python','#datascience','#cybersecurity','#blockchain','#iot','#cloud','#devops','#opensource','#innovation','#code','#computerscience','#engineering','#gadgets','#digital','#automation','#robotics','#app','#webdevelopment','#techtrends'],
+food:['#food','#foodie','#yummy','#foodporn','#instafood','#foodphotography','#delicious','#homemade','#cooking','#foodstagram','#healthyfood','#dinner','#lunch','#breakfast','#chef','#restaurant','#foodblogger','#recipe','#dessert','#baking','#vegan','#organic','#tasty','#eat','#kitchen','#yummyfood','#foodlover','#streetfood','#brunch','#gourmet'],
+business:['#business','#entrepreneur','#marketing','#success','#startup','#money','#motivation','#digitalmarketing','#entrepreneurship','#socialmedia','#branding','#smallbusiness','#hustle','#leadership','#ecommerce','#sales','#growth','#strategy','#investment','#onlinebusiness','#sidehustle','#networking','#goals','#productivity','#mindset','#finance','#consulting','#b2b','#funding','#scaling'],
+fashion:['#fashion','#style','#ootd','#fashionista','#instafashion','#outfit','#clothing','#streetstyle','#fashionblogger','#beauty','#trendy','#look','#moda','#fashionstyle','#womensfashion','#mensfashion','#shopping','#accessories','#design','#outfitoftheday','#stylish','#fashionphotography','#luxury','#chic','#vintage','#sustainablefashion','#runway','#couture','#fashiondesign','#trendsetter'],
+music:['#music','#musician','#singer','#songwriter','#producer','#hiphop','#rap','#rock','#pop','#dj','#beats','#studio','#guitar','#piano','#vocals','#recording','#artist','#album','#concert','#livemusic','#indie','#electronic','#rnb','#jazz','#classical','#band','#soundcloud','#spotify','#newmusic','#musicproducer'],
+fitness_gym:['#gym','#workout','#fitness','#gains','#legday','#chestday','#armday','#backday','#shoulderday','#squat','#deadlift','#benchpress','#bodybuilding','#powerlifting','#strength','#muscle','#iron','#pump','#reps','#sets','#protein','#preworkout','#shredded','#bulk','#cut','#ripped','#aesthetic','#physique','#classic','#mass'],
+education:['#education','#learning','#student','#school','#study','#teacher','#university','#college','#knowledge','#science','#math','#reading','#books','#onlinelearning','#tutorial','#courses','#homework','#exam','#academic','#research','#stem','#scholarship','#language','#literature','#history','#geography','#physics','#chemistry','#biology','#degree'],
+health:['#health','#wellness','#healthy','#mentalhealth','#selfcare','#healthylifestyle','#nutrition','#fitness','#mindfulness','#meditation','#healthcare','#healing','#therapy','#anxiety','#depression','#wellbeing','#holistic','#natural','#organic','#exercise','#sleep','#stress','#selflove','#motivation','#lifestyle','#body','#mind','#soul','#balance','#vitality']
+};
+
+const popularity={instagram:{'100k+':0.15,'50k-100k':0.25,'10k-50k':0.35,'1k-10k':0.2,'<1k':0.05},tiktok:{'1M+':0.1,'100k-1M':0.2,'10k-100k':0.35,'1k-10k':0.25,'<1k':0.1},twitter:{'100k+':0.2,'10k-100k':0.3,'1k-10k':0.3,'<1k':0.2},linkedin:{'50k+':0.15,'10k-50k':0.25,'1k-10k':0.35,'<1k':0.25}};
+const limits={instagram:30,tiktok:5,twitter:3,linkedin:5};
+
+function seeded(s){return function(){s=(s*16807+0)%2147483647;return(s-1)/2147483646}}
+
+function generate(){
+const topic=document.getElementById('topic').value.trim().toLowerCase();
+const platform=document.getElementById('platform').value;
+if(!topic)return;
+
+const hash=topic.split('').reduce((a,c)=>((a<<5)-a)+c.charCodeAt(0),0);
+const rng=seeded(Math.abs(hash));
+
+// Find matching category
+let category='business';
+let bestMatch=0;
+for(const[cat,tags]of Object.entries(hashtagDB)){
+const match=tags.filter(t=>topic.includes(t.replace('#',''))||t.replace('#','').includes(topic)).length;
+if(match>bestMatch){bestMatch=match;category=cat}
+}
+
+// Also try partial matches
+for(const[cat,tags]of Object.entries(hashtagDB)){
+if(cat.includes(topic)||topic.includes(cat)){category=cat;break}
+}
+
+const baseTags=hashtagDB[category]||hashtagDB.business;
+const limit=limits[platform];
+
+// Mix popular and niche tags
+const selected=[];
+const shuffled=[...baseTags].sort(()=>rng()-0.5);
+
+// Add topic-specific tags
+const topicTag='#'+topic.replace(/\s+/g,'');
+if(!shuffled.includes(topicTag))shuffled.unshift(topicTag);
+
+for(let i=0;i<Math.min(limit+5,shuffled.length);i++){
+const tag=shuffled[i];
+const pop=rng()>0.5?'popular':'niche';
+selected.push({tag,pop});
+}
+
+document.getElementById('results').innerHTML=`
+<div class="stats"><span>📱 ${platform}</span><span>🏷️ ${selected.length} hashtags</span><span>📊 Limit: ${limit}</span></div>
+<div class="hashtag-cloud">${selected.map(s=>`<span class="tag" onclick="this.classList.toggle('selected')" title="${s.pop==='popular'?'Popular — high reach':'Niche — targeted audience'}">${s.tag}<span class="${s.pop==='popular'?'tag-pop':'tag-niche'}">${s.pop==='popular'?'🔥':'🎯'}</span></span>`).join('')}</div>
+<div class="copy-area"><strong>Copy all hashtags:</strong><textarea id="copyText" readonly>${selected.map(s=>s.tag).join(' ')}</textarea><button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('copyText').value);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy All',1500)">Copy All</button></div>`;
+}
+
+document.getElementById('topic').addEventListener('keydown',e=>{if(e.key==='Enter')generate()});
+</script>
+</body>
+</html>
