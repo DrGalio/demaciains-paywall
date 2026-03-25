@@ -1,53 +1,53 @@
 {
-  "report_id": "cs-20260324-upsuh3",
-  "generated": "2026-03-24T15:21:25.258Z",
+  "report_id": "cs-20260325-fuqzzp",
+  "generated": "2026-03-25T09:08:13.163Z",
   "agent": "Demaciains Research Engine v3",
   "type": "content_strategy",
   "product": "AI productivity tool",
   "niche": "AI agents",
   "target_audience": "founders",
   "methodology": "Topic clustering + SEO keyword strategy + platform-specific planning + content calendar + distribution playbook + repurposing matrix",
-  "seed_used": 1544938404,
+  "seed_used": 1544938405,
   "content_pillars": [
     {
-      "name": "Product-Led Content",
-      "weight": "15%",
+      "name": "Educational / How-To",
+      "weight": "30%",
       "recommended_formats": [
-        "Integration showcase",
-        "Feature demo video",
-        "API documentation blog"
+        "LinkedIn carousel",
+        "Blog tutorial",
+        "YouTube walkthrough"
       ],
-      "primary_goal": "product adoption"
-    },
-    {
-      "name": "Community / Engagement",
-      "weight": "15%",
-      "recommended_formats": [
-        "Reddit AMA",
-        "Twitter poll",
-        "Community spotlight"
-      ],
-      "primary_goal": "retention"
+      "primary_goal": "trust-building"
     },
     {
       "name": "Thought Leadership",
       "weight": "20%",
       "recommended_formats": [
-        "LinkedIn article",
+        "Blog opinion piece",
         "Twitter hot take",
-        "Podcast appearance"
+        "LinkedIn article"
       ],
       "primary_goal": "authority"
     },
     {
-      "name": "Educational / How-To",
-      "weight": "30%",
+      "name": "Community / Engagement",
+      "weight": "15%",
       "recommended_formats": [
-        "Twitter thread",
-        "LinkedIn carousel",
-        "Blog tutorial"
+        "Twitter poll",
+        "Community spotlight",
+        "Reddit AMA"
       ],
-      "primary_goal": "trust-building"
+      "primary_goal": "retention"
+    },
+    {
+      "name": "Product-Led Content",
+      "weight": "15%",
+      "recommended_formats": [
+        "Use case walkthrough",
+        "Feature demo video",
+        "Integration showcase"
+      ],
+      "primary_goal": "product adoption"
     }
   ],
   "topic_clusters": [
@@ -60,7 +60,7 @@
         "Common mistakes beginners make",
         "FAQ for new users"
       ],
-      "estimated_traffic_potential": 441
+      "estimated_traffic_potential": 3405
     },
     {
       "pillar": "Advanced Techniques",
@@ -71,40 +71,40 @@
         "Automation recipes",
         "Performance optimization tips"
       ],
-      "estimated_traffic_potential": 4435
+      "estimated_traffic_potential": 787
     },
     {
       "pillar": "Industry Insights",
       "topics": [
         "State of AI agents in 2026",
-        "Why agent commerce matters for your business",
-        "Jasper vs [Product]: honest comparison",
-        "The future of no-code automation",
+        "Why micro-SaaS matters for your business",
+        "Copy.ai vs [Product]: honest comparison",
+        "The future of multi-agent systems",
         "Lessons from 1000+ users"
       ],
-      "estimated_traffic_potential": 4058
+      "estimated_traffic_potential": 1000
     },
     {
       "pillar": "Use Case Spotlights",
       "topics": [
-        "How SaaS uses AI productivity tool",
+        "How consulting uses AI productivity tool",
         "[Role]-specific workflows",
         "Before & after transformations",
         "ROI calculator walkthrough",
-        "Integration with Zapier deep dive"
+        "Integration with Stripe deep dive"
       ],
-      "estimated_traffic_potential": 4977
+      "estimated_traffic_potential": 1735
     },
     {
       "pillar": "Behind the Scenes",
       "topics": [
-        "Building in public: month 5 update",
+        "Building in public: month 2 update",
         "How we solved payments",
         "Our tech stack explained",
         "Revenue and metrics transparency",
         "What we learned from partnership attempt"
       ],
-      "estimated_traffic_potential": 3580
+      "estimated_traffic_potential": 2471
     }
   ],
   "seo_keyword_strategy": [
@@ -113,38 +113,38 @@
       "keywords": [
         {
           "keyword": "how to use AI productivity tool",
-          "estimated_volume": 3399,
-          "difficulty": 38,
+          "estimated_volume": 8389,
+          "difficulty": 26,
           "opportunity_score": 0.41,
-          "recommended_content_type": "Blog post"
+          "recommended_content_type": "Tutorial"
         },
         {
           "keyword": "what is AI productivity tool",
-          "estimated_volume": 10670,
-          "difficulty": 24,
-          "opportunity_score": 0.68,
-          "recommended_content_type": "Comparison page"
-        },
-        {
-          "keyword": "AI productivity tool guide",
-          "estimated_volume": 3938,
-          "difficulty": 25,
-          "opportunity_score": 0.61,
+          "estimated_volume": 4563,
+          "difficulty": 20,
+          "opportunity_score": 0.59,
           "recommended_content_type": "Landing page"
         },
         {
-          "keyword": "AI productivity tool tutorial",
-          "estimated_volume": 10969,
-          "difficulty": 43,
-          "opportunity_score": 0.41,
-          "recommended_content_type": "Blog post"
+          "keyword": "AI productivity tool guide",
+          "estimated_volume": 8003,
+          "difficulty": 21,
+          "opportunity_score": 0.53,
+          "recommended_content_type": "Tutorial"
         },
         {
-          "keyword": "AI productivity tool vs competitor",
-          "estimated_volume": 2057,
-          "difficulty": 36,
-          "opportunity_score": 0.4,
-          "recommended_content_type": "YouTube video"
+          "keyword": "AI productivity tool tutorial",
+          "estimated_volume": 5110,
+          "difficulty": 33,
+          "opportunity_score": 0.59,
+          "recommended_content_type": "Landing page"
+        },
+        {
+          "keyword": "AI productivity tool vs manual process",
+          "estimated_volume": 3571,
+          "difficulty": 33,
+          "opportunity_score": 0.43,
+          "recommended_content_type": "Tutorial"
         }
       ]
     },
@@ -153,38 +153,38 @@
       "keywords": [
         {
           "keyword": "best AI agents tools",
-          "estimated_volume": 4980,
-          "difficulty": 61,
-          "opportunity_score": 0.77,
-          "recommended_content_type": "Landing page"
+          "estimated_volume": 5306,
+          "difficulty": 43,
+          "opportunity_score": 0.71,
+          "recommended_content_type": "YouTube video"
         },
         {
           "keyword": "AI agents software comparison",
-          "estimated_volume": 5135,
-          "difficulty": 63,
-          "opportunity_score": 0.56,
-          "recommended_content_type": "Blog post"
+          "estimated_volume": 5488,
+          "difficulty": 60,
+          "opportunity_score": 0.73,
+          "recommended_content_type": "YouTube video"
         },
         {
           "keyword": "AI productivity tool review",
-          "estimated_volume": 4021,
-          "difficulty": 60,
+          "estimated_volume": 2997,
+          "difficulty": 55,
           "opportunity_score": 0.58,
-          "recommended_content_type": "Tutorial"
+          "recommended_content_type": "Comparison page"
         },
         {
           "keyword": "AI productivity tool pricing",
-          "estimated_volume": 6654,
-          "difficulty": 65,
-          "opportunity_score": 0.65,
+          "estimated_volume": 983,
+          "difficulty": 35,
+          "opportunity_score": 0.75,
           "recommended_content_type": "YouTube video"
         },
         {
           "keyword": "AI productivity tool alternative",
-          "estimated_volume": 3737,
-          "difficulty": 58,
-          "opportunity_score": 0.66,
-          "recommended_content_type": "Landing page"
+          "estimated_volume": 1434,
+          "difficulty": 42,
+          "opportunity_score": 0.65,
+          "recommended_content_type": "Comparison page"
         }
       ]
     },
@@ -193,38 +193,38 @@
       "keywords": [
         {
           "keyword": "buy AI productivity tool",
-          "estimated_volume": 2163,
-          "difficulty": 50,
-          "opportunity_score": 0.86,
+          "estimated_volume": 2104,
+          "difficulty": 54,
+          "opportunity_score": 0.64,
           "recommended_content_type": "Tutorial"
         },
         {
           "keyword": "AI productivity tool discount code",
-          "estimated_volume": 4609,
+          "estimated_volume": 1904,
           "difficulty": 42,
-          "opportunity_score": 0.62,
-          "recommended_content_type": "Comparison page"
+          "opportunity_score": 0.48,
+          "recommended_content_type": "Tutorial"
         },
         {
           "keyword": "AI productivity tool free trial",
-          "estimated_volume": 3682,
-          "difficulty": 41,
-          "opportunity_score": 0.48,
-          "recommended_content_type": "Blog post"
+          "estimated_volume": 691,
+          "difficulty": 51,
+          "opportunity_score": 0.54,
+          "recommended_content_type": "Comparison page"
         },
         {
           "keyword": "AI productivity tool vs [competitor]",
-          "estimated_volume": 2773,
-          "difficulty": 41,
-          "opportunity_score": 0.89,
+          "estimated_volume": 4068,
+          "difficulty": 47,
+          "opportunity_score": 0.46,
           "recommended_content_type": "YouTube video"
         },
         {
           "keyword": "is AI productivity tool worth it",
-          "estimated_volume": 2658,
-          "difficulty": 64,
-          "opportunity_score": 0.86,
-          "recommended_content_type": "Comparison page"
+          "estimated_volume": 1539,
+          "difficulty": 51,
+          "opportunity_score": 0.65,
+          "recommended_content_type": "Blog post"
         }
       ]
     },
@@ -233,37 +233,37 @@
       "keywords": [
         {
           "keyword": "AI productivity tool login",
-          "estimated_volume": 1956,
-          "difficulty": 20,
-          "opportunity_score": 0.73,
-          "recommended_content_type": "Comparison page"
+          "estimated_volume": 570,
+          "difficulty": 28,
+          "opportunity_score": 0.43,
+          "recommended_content_type": "Tutorial"
         },
         {
           "keyword": "AI productivity tool documentation",
-          "estimated_volume": 2802,
-          "difficulty": 11,
-          "opportunity_score": 0.59,
-          "recommended_content_type": "Comparison page"
-        },
-        {
-          "keyword": "AI productivity tool API",
-          "estimated_volume": 1218,
-          "difficulty": 17,
-          "opportunity_score": 0.9,
+          "estimated_volume": 2705,
+          "difficulty": 30,
+          "opportunity_score": 0.48,
           "recommended_content_type": "Blog post"
         },
         {
+          "keyword": "AI productivity tool API",
+          "estimated_volume": 1407,
+          "difficulty": 17,
+          "opportunity_score": 0.48,
+          "recommended_content_type": "YouTube video"
+        },
+        {
           "keyword": "AI productivity tool pricing page",
-          "estimated_volume": 578,
-          "difficulty": 18,
-          "opportunity_score": 0.44,
-          "recommended_content_type": "Landing page"
+          "estimated_volume": 2967,
+          "difficulty": 25,
+          "opportunity_score": 0.76,
+          "recommended_content_type": "YouTube video"
         },
         {
           "keyword": "AI productivity tool changelog",
-          "estimated_volume": 1844,
-          "difficulty": 19,
-          "opportunity_score": 0.58,
+          "estimated_volume": 2360,
+          "difficulty": 18,
+          "opportunity_score": 0.73,
           "recommended_content_type": "Blog post"
         }
       ]
@@ -271,31 +271,31 @@
   ],
   "platform_plan": [
     {
-      "platform": "Twitter/X",
+      "platform": "LinkedIn",
       "best_posting_times": [
-        "8-9 AM",
-        "12-1 PM",
+        "7-8 AM",
+        "12 PM",
         "5-6 PM"
       ],
-      "content_ratio": "40% threads, 30% hot takes, 20% engagement, 10% promo",
-      "growth_tactic": "Quote-tweet industry leaders with contrarian insights",
-      "engagement_benchmark": "2.5-4%",
-      "posting_frequency": "3-5x daily",
-      "platform_specific_tip": "Thread length: 7-12 tweets",
+      "content_ratio": "30% stories, 25% frameworks, 20% carousels, 15% polls, 10% articles",
+      "growth_tactic": "Comment meaningfully on 10 posts daily before posting",
+      "engagement_benchmark": "3-6%",
+      "posting_frequency": "1-2x daily",
+      "platform_specific_tip": "Optimal post length: 1,200-1,800 characters",
       "weekly_content_ideas": [
         {
-          "topic": "The future of no-code automation",
-          "format": "hot takes",
+          "topic": "Common mistakes beginners make",
+          "format": "carousels",
+          "estimated_engagement": "Medium"
+        },
+        {
+          "topic": "Why micro-SaaS matters for your business",
+          "format": "stories",
           "estimated_engagement": "Low"
         },
         {
-          "topic": "Before & after transformations",
-          "format": "promo",
-          "estimated_engagement": "High"
-        },
-        {
-          "topic": "First win tutorial",
-          "format": "promo",
+          "topic": "The future of multi-agent systems",
+          "format": "articles",
           "estimated_engagement": "High"
         }
       ]
@@ -313,19 +313,19 @@
       "platform_specific_tip": "Target word count: 1,500-3,000 for SEO",
       "weekly_content_ideas": [
         {
-          "topic": "Lessons from 1000+ users",
+          "topic": "Our tech stack explained",
           "format": "case studies",
           "estimated_engagement": "High"
         },
         {
-          "topic": "How SaaS uses AI productivity tool",
-          "format": "listicles",
+          "topic": "Hidden features you missed",
+          "format": "comparisons",
           "estimated_engagement": "High"
         },
         {
-          "topic": "[Role]-specific workflows",
-          "format": "listicles",
-          "estimated_engagement": "Medium"
+          "topic": "5-minute setup guide",
+          "format": "tutorials",
+          "estimated_engagement": "Low"
         }
       ]
     },
@@ -343,48 +343,49 @@
       "platform_specific_tip": "Contribute 10x before promoting 1x",
       "weekly_content_ideas": [
         {
-          "topic": "The future of no-code automation",
-          "format": "value comments",
-          "estimated_engagement": "Medium"
-        },
-        {
-          "topic": "5-minute setup guide",
-          "format": "value comments",
-          "estimated_engagement": "Low"
-        },
-        {
-          "topic": "What is AI productivity tool?",
-          "format": "value comments",
+          "topic": "Integration with Stripe deep dive",
+          "format": "case studies",
           "estimated_engagement": "High"
+        },
+        {
+          "topic": "Before & after transformations",
+          "format": "helpful posts",
+          "estimated_engagement": "High"
+        },
+        {
+          "topic": "Automation recipes",
+          "format": "case studies",
+          "estimated_engagement": "Medium"
         }
       ]
     },
     {
-      "platform": "YouTube",
+      "platform": "Twitter/X",
       "best_posting_times": [
-        "2-4 PM",
-        "Saturday mornings"
+        "8-9 AM",
+        "12-1 PM",
+        "5-6 PM"
       ],
-      "content_ratio": "35% tutorials, 25% reviews, 20% comparisons, 15% vlogs, 5% shorts",
-      "growth_tactic": "Hook in first 8 seconds — retention > 50% = algorithmic boost",
-      "engagement_benchmark": "4-7% CTR on thumbnails",
-      "posting_frequency": "1-2 long/week + 3-5 shorts/week",
-      "platform_specific_tip": "Optimal video length: 8-15 min for long-form",
+      "content_ratio": "40% threads, 30% hot takes, 20% engagement, 10% promo",
+      "growth_tactic": "Quote-tweet industry leaders with contrarian insights",
+      "engagement_benchmark": "2.5-4%",
+      "posting_frequency": "3-5x daily",
+      "platform_specific_tip": "Thread length: 7-12 tweets",
       "weekly_content_ideas": [
         {
-          "topic": "First win tutorial",
-          "format": "reviews",
+          "topic": "The future of multi-agent systems",
+          "format": "engagement",
+          "estimated_engagement": "High"
+        },
+        {
+          "topic": "Copy.ai vs [Product]: honest comparison",
+          "format": "threads",
           "estimated_engagement": "Medium"
         },
         {
-          "topic": "Why agent commerce matters for your business",
-          "format": "shorts",
-          "estimated_engagement": "Low"
-        },
-        {
-          "topic": "ROI calculator walkthrough",
-          "format": "vlogs",
-          "estimated_engagement": "Medium"
+          "topic": "How consulting uses AI productivity tool",
+          "format": "threads",
+          "estimated_engagement": "High"
         }
       ]
     }
@@ -392,177 +393,161 @@
   "content_calendar": [
     {
       "week": 1,
-      "theme": "Industry trends",
-      "total_posts": 6,
+      "theme": "Awareness & Education",
+      "total_posts": 5,
       "estimated_hours": "5.9",
       "posts": [
         {
           "day": "Monday",
-          "platform": "Reddit",
-          "content_type": "Comment",
-          "topic": "What we learned from partnership attempt",
-          "theme": "Problem identification",
-          "estimated_time_min": 24
+          "platform": "Blog/SEO",
+          "content_type": "Story",
+          "topic": "Before & after transformations",
+          "theme": "Awareness & Education",
+          "estimated_time_min": 20
         },
         {
           "day": "Tuesday",
-          "platform": "YouTube",
-          "content_type": "Story",
-          "topic": "Power user workflows",
+          "platform": "LinkedIn",
+          "content_type": "Thread",
+          "topic": "Common mistakes beginners make",
           "theme": "Problem identification",
-          "estimated_time_min": 88
+          "estimated_time_min": 119
         },
         {
           "day": "Wednesday",
-          "platform": "Blog/SEO",
-          "content_type": "Post",
-          "topic": "The future of no-code automation",
-          "theme": "Awareness & Education",
-          "estimated_time_min": 29
+          "platform": "LinkedIn",
+          "content_type": "Poll",
+          "topic": "Power user workflows",
+          "theme": "Problem identification",
+          "estimated_time_min": 46
         },
         {
           "day": "Thursday",
           "platform": "Twitter/X",
           "content_type": "Comment",
-          "topic": "Automation recipes",
+          "topic": "API integration guide",
           "theme": "Industry trends",
-          "estimated_time_min": 117
+          "estimated_time_min": 76
         },
         {
           "day": "Friday",
-          "platform": "YouTube",
-          "content_type": "Poll",
-          "topic": "State of AI agents in 2026",
-          "theme": "Free value drops",
-          "estimated_time_min": 46
-        },
-        {
-          "day": "Saturday",
-          "platform": "Reddit",
-          "content_type": "Article",
-          "topic": "First win tutorial",
+          "platform": "Twitter/X",
+          "content_type": "Story",
+          "topic": "Hidden features you missed",
           "theme": "Problem identification",
-          "estimated_time_min": 52
+          "estimated_time_min": 93
         }
       ]
     },
     {
       "week": 2,
       "theme": "Solution Introduction",
-      "total_posts": 7,
-      "estimated_hours": "6.1",
+      "total_posts": 6,
+      "estimated_hours": "8.6",
       "posts": [
         {
           "day": "Monday",
-          "platform": "Blog/SEO",
-          "content_type": "Article",
-          "topic": "How SaaS uses AI productivity tool",
-          "theme": "Social proof seeding",
-          "estimated_time_min": 75
+          "platform": "LinkedIn",
+          "content_type": "Comment",
+          "topic": "Before & after transformations",
+          "theme": "Product teasers",
+          "estimated_time_min": 99
         },
         {
           "day": "Tuesday",
-          "platform": "Reddit",
+          "platform": "Blog/SEO",
           "content_type": "Thread",
-          "topic": "API integration guide",
-          "theme": "Social proof seeding",
-          "estimated_time_min": 34
+          "topic": "Before & after transformations",
+          "theme": "Solution Introduction",
+          "estimated_time_min": 101
         },
         {
           "day": "Wednesday",
-          "platform": "YouTube",
-          "content_type": "Post",
-          "topic": "5-minute setup guide",
-          "theme": "Social proof seeding",
-          "estimated_time_min": 77
+          "platform": "Twitter/X",
+          "content_type": "Story",
+          "topic": "First win tutorial",
+          "theme": "Product teasers",
+          "estimated_time_min": 74
         },
         {
           "day": "Thursday",
-          "platform": "Blog/SEO",
-          "content_type": "Comment",
-          "topic": "FAQ for new users",
-          "theme": "How-to content",
-          "estimated_time_min": 20
+          "platform": "Reddit",
+          "content_type": "Story",
+          "topic": "Our tech stack explained",
+          "theme": "Product teasers",
+          "estimated_time_min": 62
         },
         {
           "day": "Friday",
-          "platform": "YouTube",
-          "content_type": "Post",
-          "topic": "First win tutorial",
-          "theme": "Product teasers",
-          "estimated_time_min": 38
+          "platform": "Twitter/X",
+          "content_type": "Poll",
+          "topic": "Power user workflows",
+          "theme": "How-to content",
+          "estimated_time_min": 85
         },
         {
           "day": "Saturday",
-          "platform": "Twitter/X",
-          "content_type": "Thread",
-          "topic": "API integration guide",
-          "theme": "Solution Introduction",
-          "estimated_time_min": 27
-        },
-        {
-          "day": "Sunday",
-          "platform": "Reddit",
-          "content_type": "Story",
-          "topic": "[Role]-specific workflows",
+          "platform": "LinkedIn",
+          "content_type": "Post",
+          "topic": "How we solved payments",
           "theme": "How-to content",
-          "estimated_time_min": 95
+          "estimated_time_min": 96
         }
       ]
     },
     {
       "week": 3,
-      "theme": "Comparison content",
+      "theme": "Testimonials",
       "total_posts": 6,
-      "estimated_hours": "5.0",
+      "estimated_hours": "5.9",
       "posts": [
         {
           "day": "Monday",
-          "platform": "Blog/SEO",
-          "content_type": "Poll",
-          "topic": "FAQ for new users",
-          "theme": "Comparison content",
-          "estimated_time_min": 47
+          "platform": "Reddit",
+          "content_type": "Thread",
+          "topic": "Hidden features you missed",
+          "theme": "Testimonials",
+          "estimated_time_min": 27
         },
         {
           "day": "Tuesday",
-          "platform": "Reddit",
-          "content_type": "Poll",
-          "topic": "Integration with Zapier deep dive",
-          "theme": "Comparison content",
-          "estimated_time_min": 56
+          "platform": "Twitter/X",
+          "content_type": "Article",
+          "topic": "Power user workflows",
+          "theme": "Testimonials",
+          "estimated_time_min": 61
         },
         {
           "day": "Wednesday",
-          "platform": "Twitter/X",
-          "content_type": "Poll",
-          "topic": "What is AI productivity tool?",
-          "theme": "Case studies",
-          "estimated_time_min": 69
+          "platform": "Reddit",
+          "content_type": "Comment",
+          "topic": "Performance optimization tips",
+          "theme": "Testimonials",
+          "estimated_time_min": 53
         },
         {
           "day": "Thursday",
-          "platform": "Reddit",
-          "content_type": "Video",
-          "topic": "First win tutorial",
-          "theme": "Testimonials",
-          "estimated_time_min": 17
+          "platform": "LinkedIn",
+          "content_type": "Article",
+          "topic": "Copy.ai vs [Product]: honest comparison",
+          "theme": "Comparison content",
+          "estimated_time_min": 61
         },
         {
           "day": "Friday",
-          "platform": "Reddit",
-          "content_type": "Comment",
-          "topic": "What is AI productivity tool?",
-          "theme": "Case studies",
-          "estimated_time_min": 15
+          "platform": "Twitter/X",
+          "content_type": "Article",
+          "topic": "Building in public: month 2 update",
+          "theme": "Testimonials",
+          "estimated_time_min": 100
         },
         {
           "day": "Saturday",
-          "platform": "Blog/SEO",
-          "content_type": "Story",
-          "topic": "Lessons from 1000+ users",
-          "theme": "Testimonials",
-          "estimated_time_min": 93
+          "platform": "LinkedIn",
+          "content_type": "Article",
+          "topic": "Before & after transformations",
+          "theme": "Comparison content",
+          "estimated_time_min": 51
         }
       ]
     },
@@ -570,55 +555,55 @@
       "week": 4,
       "theme": "Strong CTAs",
       "total_posts": 6,
-      "estimated_hours": "6.9",
+      "estimated_hours": "7.7",
       "posts": [
         {
           "day": "Monday",
-          "platform": "YouTube",
-          "content_type": "Article",
-          "topic": "How SaaS uses AI productivity tool",
-          "theme": "Launch announcements",
-          "estimated_time_min": 29
+          "platform": "Twitter/X",
+          "content_type": "Comment",
+          "topic": "How we solved payments",
+          "theme": "Limited offers",
+          "estimated_time_min": 77
         },
         {
           "day": "Tuesday",
           "platform": "Twitter/X",
-          "content_type": "Thread",
-          "topic": "Jasper vs [Product]: honest comparison",
-          "theme": "Strong CTAs",
-          "estimated_time_min": 19
+          "content_type": "Poll",
+          "topic": "How we solved payments",
+          "theme": "Limited offers",
+          "estimated_time_min": 101
         },
         {
           "day": "Wednesday",
-          "platform": "YouTube",
-          "content_type": "Thread",
-          "topic": "Common mistakes beginners make",
+          "platform": "LinkedIn",
+          "content_type": "Video",
+          "topic": "Integration with Stripe deep dive",
           "theme": "Limited offers",
-          "estimated_time_min": 115
+          "estimated_time_min": 111
         },
         {
           "day": "Thursday",
           "platform": "Reddit",
-          "content_type": "Poll",
-          "topic": "How we solved payments",
-          "theme": "Strong CTAs",
-          "estimated_time_min": 47
+          "content_type": "Thread",
+          "topic": "Power user workflows",
+          "theme": "Conversion & Launch",
+          "estimated_time_min": 36
         },
         {
           "day": "Friday",
-          "platform": "Reddit",
-          "content_type": "Video",
-          "topic": "Power user workflows",
-          "theme": "Strong CTAs",
-          "estimated_time_min": 105
+          "platform": "Blog/SEO",
+          "content_type": "Comment",
+          "topic": "What we learned from partnership attempt",
+          "theme": "Limited offers",
+          "estimated_time_min": 43
         },
         {
           "day": "Saturday",
           "platform": "Blog/SEO",
-          "content_type": "Poll",
-          "topic": "Our tech stack explained",
-          "theme": "Conversion & Launch",
-          "estimated_time_min": 101
+          "content_type": "Article",
+          "topic": "Why micro-SaaS matters for your business",
+          "theme": "Launch announcements",
+          "estimated_time_min": 92
         }
       ]
     }
@@ -693,57 +678,59 @@
       "recommendation": "Create 1 Blog post per week → repurpose into 7 pieces across platforms"
     },
     {
-      "source": "YouTube video (12 min)",
+      "source": "Customer case study",
       "outputs": [
-        "3 short clips (60s each)",
-        "Blog post transcript edit",
-        "5-tweet thread",
-        "LinkedIn post with key takeaways",
+        "Blog post",
+        "LinkedIn post",
+        "Twitter testimonial thread",
         "Newsletter feature",
-        "Twitter/X poll"
+        "YouTube case study video",
+        "Sales deck slide",
+        "Landing page testimonial"
       ],
       "effort": "MEDIUM",
-      "reach_multiplier": "4-6x",
-      "recommendation": "Create 1 YouTube video per week → repurpose into 6 pieces across platforms"
+      "reach_multiplier": "5-8x",
+      "recommendation": "Create 1 Customer case study per week → repurpose into 7 pieces across platforms"
     },
     {
-      "source": "Twitter thread (10 tweets)",
+      "source": "Podcast episode (30 min)",
       "outputs": [
-        "LinkedIn article",
-        "Blog post expansion",
-        "Newsletter section",
-        "Reddit post",
-        "Instagram carousel"
+        "Blog post summary",
+        "10-tweet thread",
+        "LinkedIn post",
+        "3 YouTube shorts",
+        "Newsletter recap",
+        "Quote graphics (5x)"
       ],
-      "effort": "LOW",
-      "reach_multiplier": "2-4x",
-      "recommendation": "Create 1 Twitter thread per week → repurpose into 5 pieces across platforms"
+      "effort": "HIGH",
+      "reach_multiplier": "6-10x",
+      "recommendation": "Create 1 Podcast episode per week → repurpose into 6 pieces across platforms"
     }
   ],
   "content_kpis": {
     "month_1": {
       "blog_posts": 11,
-      "social_posts": 51,
-      "email_subscribers": 150,
-      "organic_traffic": 1423
+      "social_posts": 52,
+      "email_subscribers": 243,
+      "organic_traffic": 1167
     },
     "month_3": {
-      "blog_posts": 33,
-      "social_posts": 176,
-      "email_subscribers": 589,
-      "organic_traffic": 4542
+      "blog_posts": 30,
+      "social_posts": 160,
+      "email_subscribers": 220,
+      "organic_traffic": 1612
     },
     "month_6": {
-      "blog_posts": 83,
-      "social_posts": 339,
-      "email_subscribers": 1515,
-      "organic_traffic": 5761
+      "blog_posts": 89,
+      "social_posts": 301,
+      "email_subscribers": 706,
+      "organic_traffic": 24167
     },
     "month_12": {
-      "blog_posts": 189,
-      "social_posts": 497,
-      "email_subscribers": 3247,
-      "organic_traffic": 54490
+      "blog_posts": 153,
+      "social_posts": 622,
+      "email_subscribers": 6508,
+      "organic_traffic": 21584
     }
   },
   "quick_wins": [
@@ -754,7 +741,7 @@
     "Set up a free Mailchimp/Buttondown newsletter with your best content as lead magnet"
   ],
   "meta": {
-    "confidence": 0.79,
+    "confidence": 0.73,
     "data_sources": [
       "Content marketing benchmarks (1000+ campaigns)",
       "Platform algorithm analysis",
@@ -764,6 +751,6 @@
     ],
     "refresh_rate": "Daily (date-seed changes)",
     "methodology_note": "Strategy generated from 1000+ successful content marketing campaigns across platforms. Adjust based on your analytics and audience feedback.",
-    "campaigns_analyzed": 1301
+    "campaigns_analyzed": 1166
   }
 }

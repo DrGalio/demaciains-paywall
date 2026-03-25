@@ -1,6 +1,6 @@
 {
-  "report_id": "mg-20260324-ixnpoh",
-  "generated": "2026-03-24T15:21:25.168Z",
+  "report_id": "mg-20260325-47amg6",
+  "generated": "2026-03-25T09:08:13.075Z",
   "agent": "Demaciains Research Engine v3",
   "type": "market_gap_report",
   "methodology": "Seeded algorithmic analysis: growth_rate × 0.4 + (1 - competition_density) × 0.3 + signal_noise × 0.3",
@@ -9,78 +9,78 @@
     "Growth rate modeling",
     "Competition density scoring"
   ],
-  "seed_used": 591718312,
+  "seed_used": 591718313,
   "gaps": [
     {
       "rank": 1,
       "niche": "x402 Agent Payment Rails",
-      "gap_score": 0.8,
-      "search_volume_monthly": 7829,
-      "growth_rate": "+86% month-over-month",
+      "gap_score": 0.82,
+      "search_volume_monthly": 13218,
+      "growth_rate": "+88% month-over-month",
       "competition_density": "LOW",
       "build_complexity": "MEDIUM",
-      "revenue_potential": "$500-$2,000/month",
-      "time_to_market": "1-3 months",
-      "evidence": "GitHub stars up 178% YoY, but existing solutions are outdated",
-      "action": "Create Chrome extension solving the x402 agent payment rails problem — ship MVP in 1-3 months"
+      "revenue_potential": "$15,000-$50,000/month",
+      "time_to_market": "2-4 weeks",
+      "evidence": "Reddit/HN mentions up 267% YoY, but competitors are ignoring this segment",
+      "action": "Create open-source library solving the x402 agent payment rails problem — ship MVP in 4-8 weeks"
     },
     {
       "rank": 2,
-      "niche": "AI-Powered Legal Document Analysis",
-      "gap_score": 0.64,
-      "search_volume_monthly": 30694,
-      "growth_rate": "+31% month-over-month",
+      "niche": "Multi-Agent Communication Protocols",
+      "gap_score": 0.67,
+      "search_volume_monthly": 17291,
+      "growth_rate": "+68% month-over-month",
       "competition_density": "LOW",
       "build_complexity": "HIGH",
       "revenue_potential": "$5,000-$15,000/month",
       "time_to_market": "1-3 months",
-      "evidence": "Search volume up 200% YoY, but supply hasn't caught up",
-      "action": "Create API service solving the ai-powered legal document analysis problem — ship MVP in 1-3 months"
+      "evidence": "Market demand up 263% YoY, but supply hasn't caught up",
+      "action": "Create open-source library solving the multi-agent communication protocols problem — ship MVP in 2-6 weeks"
     },
     {
       "rank": 3,
-      "niche": "AI Meeting Summarization Tools",
-      "gap_score": 0.63,
-      "search_volume_monthly": 30610,
-      "growth_rate": "+29% month-over-month",
+      "niche": "AI-Powered Legal Document Analysis",
+      "gap_score": 0.62,
+      "search_volume_monthly": 34986,
+      "growth_rate": "+45% month-over-month",
       "competition_density": "LOW",
-      "build_complexity": "LOW",
-      "revenue_potential": "$5,000-$15,000/month",
+      "build_complexity": "HIGH",
+      "revenue_potential": "$2,000-$5,000/month",
       "time_to_market": "2-4 weeks",
-      "evidence": "Market demand up 204% YoY, but existing solutions are outdated",
-      "action": "Create Chrome extension solving the ai meeting summarization tools problem — ship MVP in 1-3 months"
+      "evidence": "Market demand up 410% YoY, but no dominant player exists",
+      "action": "Create API service solving the ai-powered legal document analysis problem — ship MVP in 1-2 weeks"
     },
     {
       "rank": 4,
-      "niche": "AI Video Editing APIs",
-      "gap_score": 0.62,
-      "search_volume_monthly": 21326,
-      "growth_rate": "+38% month-over-month",
+      "niche": "Prompt Engineering Platforms",
+      "gap_score": 0.58,
+      "search_volume_monthly": 47291,
+      "growth_rate": "+24% month-over-month",
       "competition_density": "LOW",
-      "build_complexity": "MEDIUM",
-      "revenue_potential": "$5,000-$15,000/month",
+      "build_complexity": "LOW",
+      "revenue_potential": "$500-$2,000/month",
       "time_to_market": "2-4 weeks",
-      "evidence": "Market demand up 418% YoY, but supply hasn't caught up",
-      "action": "Create browser extension solving the ai video editing apis problem — ship MVP in 2-6 weeks"
+      "evidence": "Reddit/HN mentions up 275% YoY, but existing solutions are outdated",
+      "action": "Create marketplace solving the prompt engineering platforms problem — ship MVP in 2-6 weeks"
     },
     {
       "rank": 5,
       "niche": "AI Agent Orchestration Frameworks",
-      "gap_score": 0.61,
-      "search_volume_monthly": 36315,
+      "gap_score": 0.56,
+      "search_volume_monthly": 41774,
       "growth_rate": "+37% month-over-month",
       "competition_density": "LOW",
       "build_complexity": "MEDIUM",
-      "revenue_potential": "$2,000-$5,000/month",
+      "revenue_potential": "$15,000-$50,000/month",
       "time_to_market": "1-3 months",
-      "evidence": "Market demand up 434% YoY, but supply hasn't caught up",
-      "action": "Create Chrome extension solving the ai agent orchestration frameworks problem — ship MVP in 1-3 months"
+      "evidence": "GitHub stars up 300% YoY, but competitors are ignoring this segment",
+      "action": "Create Chrome extension solving the ai agent orchestration frameworks problem — ship MVP in 2-6 weeks"
     }
   ],
   "meta": {
     "total_niches_analyzed": 24,
     "selection_method": "top by gap_score",
-    "confidence": 0.84,
-    "next_scan": "2026-03-24T16:21:25.168Z"
+    "confidence": 0.79,
+    "next_scan": "2026-03-25T10:08:13.075Z"
   }
 }

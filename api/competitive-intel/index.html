@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Competitive Intelligence — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px;max-width:960px;margin:0 auto}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.card{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.card h3{color:#10b981;font-size:.95em;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:.85em}
+.row:last-child{border-bottom:none}.label{color:#64748b}.val{color:#e0e0e0;text-align:right;max-width:60%}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75em;margin:2px}
+.tag-Critical{background:#7f1d1d;color:#fca5a5}.tag-High{background:#713f12;color:#fbbf24}
+.tag-Medium{background:#1e3a5f;color:#93c5fd}.tag-Low{background:#064e3b;color:#6ee7b7}
+.tag-Minimal{background:#1a1a2e;color:#a5b4fc}
+.tag-CRITICAL{background:#7f1d1d;color:#fca5a5}.tag-HIGH{background:#713f12;color:#fbbf24}
+.tag-MEDIUM{background:#1e3a5f;color:#93c5fd}
+.params{background:#141414;border:1px solid #333;border-radius:8px;padding:14px;margin-bottom:16px}
+.params h3{color:#f59e0b;font-size:.9em;margin-bottom:8px}
+.param-row{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.param-row label{color:#94a3b8;font-size:.8em;min-width:80px}
+.param-row input{background:#0a0a0a;border:1px solid #333;color:#e0e0e0;padding:6px 10px;border-radius:4px;font-family:inherit;font-size:.85em;flex:1;min-width:200px}
+.btn{background:#6366f1;color:white;border:none;padding:8px 20px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:.85em}
+.btn:hover{background:#4f46e5}
+#output{display:none}
+.output-hdr{background:#064e3b;border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.output-hdr .oid{color:#6ee7b7;font-size:.85em}
+.output-hdr .ts{color:#64748b;font-size:.75em}
+.comp-profile{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:14px;margin-bottom:10px}
+.comp-profile h4{color:#f97316;font-size:.9em;margin-bottom:8px}
+.bar-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.8em}
+.bar-label{color:#94a3b8;min-width:120px;text-align:right}
+.bar-track{flex:1;height:10px;background:#1a1a1a;border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px}
+.bar-val{color:#e0e0e0;min-width:30px;font-size:.75em}
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.swot-box{border-radius:6px;padding:12px}
+.swot-S{background:#064e3b;border:1px solid #22c55e}.swot-S h4{color:#6ee7b7}
+.swot-W{background:#713f12;border:1px solid #fbbf24}.swot-W h4{color:#fbbf24}
+.swot-O{background:#1e1b4b;border:1px solid #818cf8}.swot-O h4{color:#a5b4fc}
+.swot-T{background:#7f1d1d;border:1px solid #ef4444}.swot-T h4{color:#fca5a5}
+.swot-box h4{font-size:.8em;margin-bottom:6px}
+.swot-box li{font-size:.78em;color:#e0e0e0;margin:3px 0;padding-left:4px}
+.diff-card{background:#141414;border-left:3px solid #22c55e;padding:10px 14px;margin:6px 0;border-radius:0 6px 6px 0}
+.diff-card .area{color:#f59e0b;font-weight:bold;font-size:.85em}
+.diff-card .insight{color:#e0e0e0;font-size:.8em;margin-top:3px}
+.diff-card .meta-row{color:#64748b;font-size:.72em;margin-top:4px}
+.qw{background:#141414;border-left:3px solid #22c55e;padding:8px 12px;margin:4px 0;font-size:.8em;color:#6ee7b7}
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.kpi-box{background:#141414;border-radius:6px;padding:10px;text-align:center}
+.kpi-box .kpi-label{font-size:.7em;color:#64748b;margin-bottom:4px}
+.kpi-box .kpi-val{font-size:1em;color:#f59e0b;font-weight:bold}
+.action-phase{background:#0f172a;border-radius:6px;padding:10px;margin:6px 0}
+.action-phase h4{color:#a78bfa;font-size:.82em;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>🔍 Competitive Intelligence Profiler</h1>
+<div class="meta">
+<span class="live">LIVE</span>
+<span style="margin-left:8px">$1.50 USDC · x402 on Base</span>
+<span style="margin-left:8px">v3.5.0</span>
+<span style="margin-left:8px">GET /api/competitive-intel</span>
+</div>
+</div>
+
+<div class="params">
+<h3>⚙️ Generate Competitive Intelligence</h3>
+<div class="param-row">
+<label>Product:</label>
+<input type="text" id="product" placeholder="e.g. AI prompt pack, SaaS tool, template bundle" value="AI productivity toolkit">
+</div>
+<div class="param-row">
+<label>Niche:</label>
+<input type="text" id="niche" placeholder="e.g. freelancers, agencies, developers" value="creators">
+</div>
+<div class="param-row">
+<label>Price ($):</label>
+<input type="text" id="price" placeholder="e.g. 29" value="29">
+</div>
+<div class="param-row">
+<button class="btn" onclick="generate()">Analyze Competitors →</button>
+</div>
+</div>
+
+<div id="output"></div>
+
+<div class="card" style="margin-top:16px">
+<h3>📡 API Usage</h3>
+<div class="row"><span class="label">Endpoint</span><span class="val">GET /api/competitive-intel?product=...&niche=...&price=...</span></div>
+<div class="row"><span class="label">Price</span><span class="val">$1.50 USDC (x402 on Base)</span></div>
+<div class="row"><span class="label">Params</span><span class="val">product (required), niche (optional), price (optional)</span></div>
+<div class="row"><span class="label">Response</span><span class="val">Competitor profiles, battlefield analysis, positioning map, threat assessment, SWOT, strategic recommendations</span></div>
+<div class="row"><span class="label">Refresh</span><span class="val">Daily (date-seeded — same day = same seed)</span></div>
+<div class="row"><span class="label">Engine</span><span class="val">Demaciains Dynamic Engine v3.5.0</span></div>
+</div>
+
+<div class="card">
+<h3>🔗 Related Endpoints</h3>
+<div class="row"><span class="label"><a href="/api/competitor-gap/" style="color:#60a5fa">/api/competitor-gap</a></span><span class="val">$0.50 — Find gaps competitors miss</span></div>
+<div class="row"><span class="label"><a href="/api/market-gap/" style="color:#60a5fa">/api/market-gap</a></span><span class="val">$1.00 — Underserved market analysis</span></div>
+<div class="row"><span class="label"><a href="/api/algo-report/" style="color:#60a5fa">/api/algo-report</a></span><span class="val">$2.00 — Pattern analysis & backtesting</span></div>
+<div class="row"><span class="label"><a href="/api/startup-validator/" style="color:#60a5fa">/api/startup-validator</a></span><span class="val">$1.50 — Validate your idea</span></div>
+<div class="row"><span class="label"><a href="/api/pricing-strategy/" style="color:#60a5fa">/api/pricing-strategy</a></span><span class="val">$0.75 — Optimize pricing</span></div>
+<div class="row"><span class="label"><a href="/api/go-to-market/" style="color:#60a5fa">/api/go-to-market</a></span><span class="val">$1.50 — GTM strategy</span></div>
+</div>
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function generate(){
+  const p=document.getElementById('product').value||'AI productivity tool';
+  const n=document.getElementById('niche').value||'creators';
+  const pr=parseInt(document.getElementById('price').value)||29;
+  const d=DemaciainsEngine.competitiveIntel(p,{niche:n,price:pr});
+  render(d);
+}
+
+function render(d){
+  const o=document.getElementById('output');
+  o.style.display='block';
+  let h='';
+
+  // Header
+  h+=`<div class="output-hdr"><span class="oid">🔍 ${d.report_id}</span><span class="ts">${d.generated}</span></div>`;
+
+  // Landscape Overview
+  h+=`<div class="card"><h3>🗺️ Competitive Landscape</h3>`;
+  h+=`<div class="row"><span class="label">Competitors Tracked</span><span class="val">${d.competitive_landscape.total_competitors_tracked}</span></div>`;
+  h+=`<div class="row"><span class="label">Market Leader</span><span class="val">${d.competitive_landscape.market_leader} (${d.competitive_landscape.market_leader_share})</span></div>`;
+  h+=`<div class="row"><span class="label">Other Combined Share</span><span class="val">${d.competitive_landscape.market_fragmentation}%</span></div>`;
+  h+=`<div class="row"><span class="label">Consolidation Risk</span><span class="val">${d.competitive_landscape.consolidation_risk}</span></div>`;
+  h+=`</div>`;
+
+  // Competitor Profiles
+  h+=`<div class="card"><h3>👥 Competitor Profiles (${d.competitor_profiles.length})</h3>`;
+  d.competitor_profiles.forEach(c=>{
+    h+=`<div class="comp-profile">`;
+    h+=`<h4>#${c.rank} ${c.name} <span class="tag tag-${c.threat_level}">${c.threat_level}</span> <span style="color:#64748b;font-size:.75em;font-weight:normal">${c.type}</span></h4>`;
+    h+=`<div class="row"><span class="label">Market Share</span><span class="val">${c.estimated_market_share}</span></div>`;
+    h+=`<div class="row"><span class="label">Est. MRR</span><span class="val">${c.estimated_mrr}</span></div>`;
+    h+=`<div class="row"><span class="label">Pricing</span><span class="val">${c.typical_pricing}</span></div>`;
+    h+=`<div class="row"><span class="label">Vulnerability</span><span class="val">${(c.vulnerability_score*100).toFixed(0)}%</span></div>`;
+    h+=`<div style="margin-top:6px"><span style="color:#22c55e;font-size:.78em">Strengths:</span> `;
+    c.strengths.forEach(s=>{h+=`<span style="font-size:.72em;color:#94a3b8;margin-right:6px">✓ ${s}</span>`;});
+    h+=`</div>`;
+    h+=`<div style="margin-top:4px"><span style="color:#ef4444;font-size:.78em">Weaknesses:</span> `;
+    c.weaknesses.forEach(w=>{h+=`<span style="font-size:.72em;color:#94a3b8;margin-right:6px">✗ ${w}</span>`;});
+    h+=`</div>`;
+    h+=`<div style="margin-top:4px"><span style="color:#f59e0b;font-size:.78em">Moats:</span> `;
+    c.moats.forEach(m=>{h+=`<span style="font-size:.72em;color:#94a3b8;margin-right:6px">🏰 ${m}</span>`;});
+    h+=`</div>`;
+    h+=`<div style="margin-top:4px"><span style="color:#a78bfa;font-size:.78em">Recent Moves:</span> `;
+    c.recent_moves.forEach(m=>{h+=`<span style="font-size:.72em;color:#94a3b8;margin-right:6px">→ ${m}</span>`;});
+    h+=`</div>`;
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+
+  // Battlefield Analysis
+  h+=`<div class="card"><h3>⚔️ Battlefield Analysis</h3>`;
+  h+=`<div style="font-size:.75em;color:#64748b;margin-bottom:8px">Score out of 10 across key dimensions</div>`;
+  const colors = ['#f97316','#6366f1','#22c55e','#ef4444','#eab308'];
+  d.battlefield_analysis.forEach(b=>{
+    h+=`<div style="margin-bottom:10px"><div style="color:#a78bfa;font-size:.82em;font-weight:bold;margin-bottom:4px">${b.dimension}</div>`;
+    Object.entries(b.scores).forEach(([name,score],i)=>{
+      h+=`<div class="bar-row">`;
+      h+=`<span class="bar-label">${name.length>18?name.slice(0,16)+'…':name}</span>`;
+      h+=`<div class="bar-track"><div class="bar-fill" style="width:${score*10}%;background:${colors[i%5]}"></div></div>`;
+      h+=`<span class="bar-val">${score}/10</span>`;
+      h+=`</div>`;
+    });
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+
+  // Positioning Map
+  h+=`<div class="card"><h3>📍 Positioning Map</h3>`;
+  h+=`<div class="row"><span class="label">X-Axis</span><span class="val">${d.positioning_map.axes.x}</span></div>`;
+  h+=`<div class="row"><span class="label">Y-Axis</span><span class="val">${d.positioning_map.axes.y}</span></div>`;
+  d.positioning_map.positions.forEach(p=>{
+    h+=`<div class="row"><span class="label">${p.name}</span><span class="val">(${p.x}, ${p.y}) — ${p.type}</span></div>`;
+  });
+  h+=`<div style="background:#1e1b4b;border:1px solid #6366f1;border-radius:6px;padding:10px;margin-top:8px">`;
+  h+=`<div style="color:#a5b4fc;font-size:.85em;font-weight:bold">Your Position: (${d.positioning_map.your_position.x}, ${d.positioning_map.your_position.y})</div>`;
+  h+=`<div style="color:#e0e0e0;font-size:.8em;margin-top:4px">💡 ${d.positioning_map.your_position.recommendation}</div>`;
+  h+=`</div>`;
+  h+=`</div>`;
+
+  // Threat Assessment
+  h+=`<div class="card"><h3>🚨 Threat Assessment</h3>`;
+  h+=`<div class="row"><span class="label">Timeline</span><span class="val">${d.threat_assessment.threat_timeline}</span></div>`;
+  if(d.threat_assessment.immediate_threats.length){
+    h+=`<div style="margin-top:10px"><div style="color:#ef4444;font-size:.85em;font-weight:bold;margin-bottom:6px">Immediate Threats</div>`;
+    d.threat_assessment.immediate_threats.forEach(t=>{
+      h+=`<div style="background:#0f172a;border-left:3px solid #ef4444;padding:8px 12px;margin:4px 0;border-radius:0 6px 6px 0">`;
+      h+=`<div style="font-size:.85em"><span class="tag tag-${t.threat}">${t.threat}</span> <strong>${t.competitor}</strong></div>`;
+      h+=`<div style="font-size:.78em;color:#94a3b8;margin-top:4px">Reason: ${t.reason}</div>`;
+      h+=`<div style="font-size:.78em;color:#6ee7b7;margin-top:2px">Response: ${t.recommended_response}</div>`;
+      h+=`</div>`;
+    });
+    h+=`</div>`;
+  }
+  if(d.threat_assessment.emerging_threats.length){
+    h+=`<div style="margin-top:10px"><div style="color:#fbbf24;font-size:.85em;font-weight:bold;margin-bottom:6px">Emerging Threats</div>`;
+    d.threat_assessment.emerging_threats.forEach(t=>{
+      h+=`<div style="font-size:.8em;color:#94a3b8;padding:2px 0">⚠️ ${t}</div>`;
+    });
+    h+=`</div>`;
+  }
+  h+=`</div>`;
+
+  // Differentiation Opportunities
+  h+=`<div class="card"><h3>🎯 Differentiation Opportunities</h3>`;
+  d.differentiation_opportunities.forEach(df=>{
+    h+=`<div class="diff-card">`;
+    h+=`<div class="area">${df.area}</div>`;
+    h+=`<div class="insight">${df.insight}</div>`;
+    h+=`<div class="meta-row">Effort: ${df.effort} · Impact: ${df.impact}</div>`;
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+
+  // SWOT Analysis
+  h+=`<div class="card"><h3>📊 SWOT Analysis</h3>`;
+  h+=`<div class="swot-grid">`;
+  h+=`<div class="swot-box swot-S"><h4>💪 Strengths</h4><ul>${d.swot_analysis.strengths.map(s=>`<li>${s}</li>`).join('')}</ul></div>`;
+  h+=`<div class="swot-box swot-W"><h4>⚠️ Weaknesses</h4><ul>${d.swot_analysis.weaknesses.map(w=>`<li>${w}</li>`).join('')}</ul></div>`;
+  h+=`<div class="swot-box swot-O"><h4>🚀 Opportunities</h4><ul>${d.swot_analysis.opportunities.map(o=>`<li>${o}</li>`).join('')}</ul></div>`;
+  h+=`<div class="swot-box swot-T"><h4>🔥 Threats</h4><ul>${d.swot_analysis.threats.map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
+  h+=`</div></div>`;
+
+  // Strategic Recommendations
+  h+=`<div class="card"><h3>🧭 Strategic Recommendations</h3>`;
+  const s=d.strategic_recommendations;
+  h+=`<div style="background:#0f172a;border:1px solid #6366f1;border-radius:6px;padding:12px;margin-bottom:10px">`;
+  h+=`<div style="color:#a5b4fc;font-size:.9em;font-weight:bold">${s.recommended_strategy.name}</div>`;
+  h+=`<div style="color:#e0e0e0;font-size:.82em;margin-top:4px">${s.recommended_strategy.desc}</div>`;
+  h+=`<div style="color:#64748b;font-size:.75em;margin-top:4px">Risk: ${s.recommended_strategy.risk} · Effort: ${s.recommended_strategy.effort} · Timeline: ${s.recommended_strategy.timeline}</div>`;
+  h+=`</div>`;
+  h+=`<div style="color:#94a3b8;font-size:.8em;margin-bottom:8px">${s.rationale}</div>`;
+  s.action_plan.forEach(a=>{
+    h+=`<div class="action-phase"><h4>${a.phase} <span class="tag tag-${a.priority}" style="float:right">${a.priority}</span></h4>`;
+    h+=`<div style="font-size:.8em;color:#e0e0e0">→ ${a.action}</div></div>`;
+  });
+  h+=`<div style="margin-top:10px"><div style="color:#22c55e;font-size:.82em;font-weight:bold;margin-bottom:4px">KPIs to Track</div>`;
+  s.kpis_to_track.forEach(k=>{h+=`<div style="font-size:.78em;color:#94a3b8;padding:2px 0">📊 ${k}</div>`;});
+  h+=`</div></div>`;
+
+  // Intelligence Sources
+  h+=`<div class="card"><h3>📡 Intelligence Sources</h3>`;
+  d.intelligence_sources.forEach(src=>{
+    h+=`<div class="row"><span class="label">${src.source}</span><span class="val">${src.data_type} (${src.update_frequency})</span></div>`;
+    h+=`<div style="font-size:.72em;color:#64748b;padding:0 0 4px 0">Free tool: ${src.free_tool}</div>`;
+  });
+  h+=`</div>`;
+
+  // Quick Wins
+  h+=`<div class="card"><h3>⚡ Quick Wins (Do Today)</h3>`;
+  d.quick_wins.forEach(q=>{h+=`<div class="qw">${q}</div>`;});
+  h+=`</div>`;
+
+  // Meta
+  h+=`<div class="card" style="font-size:.8em"><h3>ℹ️ Report Metadata</h3>`;
+  h+=`<div class="row"><span class="label">Confidence</span><span class="val">${(d.meta.confidence*100).toFixed(0)}%</span></div>`;
+  h+=`<div class="row"><span class="label">Markets Analyzed</span><span class="val">${d.meta.markets_analyzed.toLocaleString()}</span></div>`;
+  h+=`<div class="row"><span class="label">Competitors Profiled</span><span class="val">${d.meta.competitors_profiled.toLocaleString()}</span></div>`;
+  h+=`<div class="row"><span class="label">Seed</span><span class="val">${d.seed_used}</span></div>`;
+  h+=`<div class="row"><span class="label">Engine</span><span class="val">${d.agent}</span></div>`;
+  h+=`<div style="margin-top:8px;color:#64748b;font-size:.9em">${d.meta.methodology_note}</div>`;
+  h+=`</div>`;
+
+  // JSON preview
+  h+=`<details style="margin-top:12px"><summary style="color:#60a5fa;cursor:pointer;font-size:.85em">📄 View Raw JSON</summary>`;
+  h+=`<pre style="background:#141414;border:1px solid #222;border-radius:6px;padding:12px;font-size:.75em;color:#94a3b8;overflow-x:auto;max-height:400px;margin-top:8px">${JSON.stringify(d,null,2)}</pre>`;
+  h+=`</details>`;
+
+  o.innerHTML=h;
+}
+
+// Auto-generate on load
+generate();
+</script>
+</body>
+</html>

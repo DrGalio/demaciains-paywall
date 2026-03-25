@@ -1,6 +1,6 @@
 {
-  "report_id": "rf-20260324-qdvhow",
-  "generated": "2026-03-24T15:21:25.253Z",
+  "report_id": "rf-20260325-ap3lum",
+  "generated": "2026-03-25T09:08:13.159Z",
   "agent": "Demaciains Research Engine v3",
   "type": "revenue_forecast",
   "product": "AI prompt pack",
@@ -8,7 +8,7 @@
   "monthly_traffic": 2000,
   "market_segment": "AI Prompt Packs",
   "methodology": "Segment-matched conversion modeling + seasonal adjustment + growth trajectory + risk-weighted scenarios",
-  "seed_used": -470182381,
+  "seed_used": -470182380,
   "scenarios": [
     {
       "scenario": "Conservative",
@@ -63,103 +63,98 @@
     {
       "month": 1,
       "traffic": 2033,
-      "conversion": 3.8,
-      "sales": 76,
-      "revenue": 2204
-    },
-    {
-      "month": 2,
-      "traffic": 2116,
       "conversion": 3.6,
-      "sales": 76,
-      "revenue": 2204
-    },
-    {
-      "month": 3,
-      "traffic": 2097,
-      "conversion": 3.3,
-      "sales": 68,
-      "revenue": 1972
-    },
-    {
-      "month": 4,
-      "traffic": 2114,
-      "conversion": 3.6,
-      "sales": 77,
-      "revenue": 2233
-    },
-    {
-      "month": 5,
-      "traffic": 2070,
-      "conversion": 3.5,
       "sales": 73,
       "revenue": 2117
     },
     {
-      "month": 6,
-      "traffic": 2045,
+      "month": 2,
+      "traffic": 2123,
       "conversion": 3.4,
-      "sales": 69,
-      "revenue": 2001
+      "sales": 73,
+      "revenue": 2117
+    },
+    {
+      "month": 3,
+      "traffic": 2165,
+      "conversion": 3.6,
+      "sales": 78,
+      "revenue": 2262
+    },
+    {
+      "month": 4,
+      "traffic": 2185,
+      "conversion": 3.3,
+      "sales": 72,
+      "revenue": 2088
+    },
+    {
+      "month": 5,
+      "traffic": 2162,
+      "conversion": 3.7,
+      "sales": 79,
+      "revenue": 2291
+    },
+    {
+      "month": 6,
+      "traffic": 2230,
+      "conversion": 3.7,
+      "sales": 82,
+      "revenue": 2378
     },
     {
       "month": 7,
-      "traffic": 2740,
-      "conversion": 3.7,
-      "sales": 102,
-      "revenue": 2958
+      "traffic": 2988,
+      "conversion": 3.4,
+      "sales": 100,
+      "revenue": 2900
     },
     {
       "month": 8,
-      "traffic": 3302,
-      "conversion": 3.5,
+      "traffic": 3420,
+      "conversion": 3.4,
       "sales": 117,
       "revenue": 3393
     },
     {
       "month": 9,
-      "traffic": 4025,
-      "conversion": 3.4,
-      "sales": 137,
-      "revenue": 3973
+      "traffic": 4048,
+      "conversion": 3.3,
+      "sales": 133,
+      "revenue": 3857
     },
     {
       "month": 10,
-      "traffic": 4470,
-      "conversion": 3.6,
-      "sales": 160,
-      "revenue": 4640
+      "traffic": 4533,
+      "conversion": 3.7,
+      "sales": 168,
+      "revenue": 4872
     },
     {
       "month": 11,
-      "traffic": 4076,
+      "traffic": 4104,
       "conversion": 3.7,
       "sales": 152,
       "revenue": 4408
     },
     {
       "month": 12,
-      "traffic": 4187,
-      "conversion": 3.5,
-      "sales": 148,
-      "revenue": 4292
+      "traffic": 4290,
+      "conversion": 3.4,
+      "sales": 147,
+      "revenue": 4263
     }
   ],
   "growth_levers": [
     {
-      "lever": "Cross-Platform Distribution",
-      "impact": "+25-50% reach from multi-channel presence",
-      "action": "List on Gumroad + own site + Product Hunt + GitHub. Different pricing per channel."
+      "lever": "Product Hunt Launch",
+      "impact": "+500-2000 visitors in launch week, 2-4% conversion",
+      "action": "Schedule launch for Tuesday-Thursday. Prepare 50+ hunter network. Ship on Monday."
     },
     {
-      "lever": "x402 Agent Discovery",
-      "impact": "+100-500 automated API calls/month from agents",
-      "action": "Deploy agent.json at /.well-known/. Register on x402scan. Agents auto-discover."
-    },
-    {
-      "lever": "Bundle Upsell",
-      "impact": "+35-60% average order value",
-      "action": "Create 3-product bundle at 2.5x single price. Show savings prominently."
+      "lever": "Retargeting Non-Buyers",
+      "impact": "+8-15% recovered abandoned checkouts",
+      "action": "Email sequence for cart abandoners: reminder (1h) → benefit (24h) → discount (72h)."
     },
     {
       "lever": "SEO Content Flywheel",
@@ -167,16 +162,17 @@
       "action": "Publish 2 blog posts/week targeting long-tail keywords. Each post links to product."
     },
     {
-      "lever": "Social Proof Amplification",
-      "impact": "+15-30% conversion from testimonials/reviews",
-      "action": "Request reviews at day 7 post-purchase. Display count + quotes on sales page."
+      "lever": "Cross-Platform Distribution",
+      "impact": "+25-50% reach from multi-channel presence",
+      "action": "List on Gumroad + own site + Product Hunt + GitHub. Different pricing per channel."
+    },
+    {
+      "lever": "Free Tier / Freemium",
+      "impact": "+200-500% top-of-funnel volume",
+      "action": "Release 20% of product free. Paid version has full set + updates + support."
     }
   ],
   "benchmarks": [
-    {
-      "metric": "Avg digital product conversion",
-      "value": "2.5-3.5%"
-    },
     {
       "metric": "Email list → buyer conversion",
       "value": "5-15%"
@@ -186,27 +182,19 @@
       "value": "10-25% in first 6 months"
     },
     {
-      "metric": "Refund rate (industry avg)",
-      "value": "3-8%"
+      "metric": "Avg customer acquisition cost",
+      "value": "$3-12 (organic), $15-40 (paid)"
     },
     {
-      "metric": "Avg time to first 10 sales",
-      "value": "2-8 weeks"
+      "metric": "Top quartile conversion",
+      "value": "5.5-7.8%"
+    },
+    {
+      "metric": "Repeat purchase rate",
+      "value": "15-30% for digital products"
     }
   ],
   "risks": [
-    {
-      "risk": "Market saturation",
-      "severity": "MEDIUM",
-      "likelihood": "35%",
-      "mitigation": "Differentiate on quality, niche focus, or unique methodology. Avoid competing on price alone."
-    },
-    {
-      "risk": "Technical issues (hosting/delivery)",
-      "severity": "LOW",
-      "likelihood": "20%",
-      "mitigation": "Use reliable platforms (Gumroad, GitHub). Test purchase flow monthly. Monitor uptime."
-    },
     {
       "risk": "Copycat competition within 90 days",
       "severity": "HIGH",
@@ -214,27 +202,33 @@
       "mitigation": "Build brand + community moat. Ship updates faster than copycats can replicate."
     },
     {
-      "risk": "Platform dependency (Gumroad/hosting)",
+      "risk": "Market saturation",
       "severity": "MEDIUM",
-      "likelihood": "25%",
-      "mitigation": "Distribute across 2-3 platforms. Maintain email list independent of any platform."
+      "likelihood": "35%",
+      "mitigation": "Differentiate on quality, niche focus, or unique methodology. Avoid competing on price alone."
     },
     {
-      "risk": "Refund abuse",
-      "severity": "LOW",
-      "likelihood": "15%",
-      "mitigation": "Track refund rates. Require reason for refund. 30-day window is industry standard."
+      "risk": "Traffic acquisition difficulty",
+      "severity": "HIGH",
+      "likelihood": "45%",
+      "mitigation": "Start SEO early (3-6 month runway). Build community presence before product launch."
+    },
+    {
+      "risk": "Seasonal demand drops",
+      "severity": "MEDIUM",
+      "likelihood": "40%",
+      "mitigation": "Plan content/product launches for high-season months. Build evergreen + seasonal products."
     }
   ],
   "pricing_analysis": {
     "current_price": "$29",
     "optimal_range": "$22 - $41",
     "charm_price": "$29",
-    "x402_per_call": "$0.62",
+    "x402_per_call": "$0.4",
     "annual_equivalent": "$261/yr (25% annual discount)"
   },
   "meta": {
-    "confidence": 0.68,
+    "confidence": 0.77,
     "data_sources": [
       "Market segment benchmarks",
       "Conversion rate databases",
@@ -244,6 +238,6 @@
     ],
     "refresh_rate": "Daily (date-seed changes)",
     "methodology_note": "Projections use segment-specific conversion benchmarks adjusted for traffic volume, seasonality, and growth trajectory. A/B test pricing to validate assumptions.",
-    "comparable_products_analyzed": 101
+    "comparable_products_analyzed": 115
   }
 }

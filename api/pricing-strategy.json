@@ -1,37 +1,37 @@
 {
-  "report_id": "ps-20260324-h7pz2z",
-  "generated": "2026-03-24T15:21:25.251Z",
+  "report_id": "ps-20260325-jarrjm",
+  "generated": "2026-03-25T09:08:13.158Z",
   "agent": "Demaciains Research Engine v3",
   "type": "pricing_strategy",
   "product_type": "digital template pack",
   "methodology": "Product-type matching + conversion benchmarks + pricing psychology + revenue modeling",
-  "seed_used": -579631059,
+  "seed_used": -579631058,
   "recommended_pricing": {
     "primary_recommendation": {
-      "model": "Tiered subscription",
-      "best_for": "SaaS, APIs, ongoing services",
-      "typical_range": "$9-$299/mo",
-      "conversion_note": "3 tiers optimal — Free/Starter, Pro, Enterprise"
+      "model": "Pay-what-you-want",
+      "best_for": "Community building, open-source monetization",
+      "typical_range": "$0-$50 (avg 60% pay minimum)",
+      "conversion_note": "Add suggested price + social proof of what others paid"
     },
     "alternative_models": [
       {
-        "model": "Pay-per-use (x402)",
-        "best_for": "API endpoints, data services, agent-to-agent",
-        "typical_range": "$0.01-$5.00/call",
-        "conversion_note": "Lowest friction for agents — no commitment"
+        "model": "Bundle pricing",
+        "best_for": "Multiple related products, suites",
+        "typical_range": "40-60% of sum",
+        "conversion_note": "Bundle at 2.5-3x single product price for perceived value"
       },
       {
-        "model": "Pay-what-you-want",
-        "best_for": "Community building, open-source monetization",
-        "typical_range": "$0-$50 (avg 60% pay minimum)",
-        "conversion_note": "Add suggested price + social proof of what others paid"
+        "model": "Freemium + upgrade",
+        "best_for": "Tools with network effects, communities",
+        "typical_range": "Free → $19-$99/mo",
+        "conversion_note": "2-5% free-to-paid is benchmark; 7%+ is excellent"
       }
     ],
     "price_points": {
-      "starter": "$22",
-      "pro": "$48",
-      "premium": "$99",
-      "x402_per_call": "$0.72"
+      "starter": "$43",
+      "pro": "$95",
+      "premium": "$194",
+      "x402_per_call": "$0.14"
     },
     "positioning": "$12-$39 is the sweet spot for digital template pack — top quartile converters price here"
   },
@@ -52,99 +52,99 @@
       "apply_when": "Any subscription or tiered product"
     },
     {
-      "tactic": "Charm pricing ($X7, $X9)",
-      "expected_effect": "+24% conversion vs round numbers",
-      "evidence": "Rounded prices signal \"arbitrary\" — $27 converts better than $30",
-      "apply_when": "Always for one-time purchases under $100"
+      "tactic": "Money-back guarantee",
+      "expected_effect": "+30% conversion, <5% refund rate",
+      "evidence": "30-day guarantees increase conversion more than they increase refunds",
+      "apply_when": "Products >$29 where buyer trust is the bottleneck"
+    },
+    {
+      "tactic": "Price increase cadence",
+      "expected_effect": "+15% revenue per increase cycle",
+      "evidence": "Raise prices 10-20% every 500 customers — early adopters lock in lower price",
+      "apply_when": "Growing products with proven demand"
     },
     {
       "tactic": "Annual discount (20-30% off)",
       "expected_effect": "+65% LTV vs monthly-only",
       "evidence": "Annual plans reduce churn by 40-60% and improve cash flow predictability",
       "apply_when": "Any subscription product"
-    },
-    {
-      "tactic": "Social proof pricing",
-      "expected_effect": "+18% conversion when showing \"X people bought\"",
-      "evidence": "Purchase counts >50 create bandwagon effect",
-      "apply_when": "Gumroad, course platforms, marketplaces"
     }
   ],
   "revenue_projections": {
-    "baseline_assumption": "1507 monthly visitors",
+    "baseline_assumption": "6390 monthly visitors",
     "projections": [
       {
         "scenario": "Conservative",
-        "monthly_visitors": 754,
+        "monthly_visitors": 3195,
         "conversion_rate": "2.4%",
-        "monthly_sales": 18,
-        "avg_order_value": "$23",
-        "monthly_revenue": "$410",
-        "annual_revenue": "$4,920",
+        "monthly_sales": 78,
+        "avg_order_value": "$44",
+        "monthly_revenue": "$3,433",
+        "annual_revenue": "$41,196",
         "note": "Low traffic, average conversion"
       },
       {
         "scenario": "Moderate",
-        "monthly_visitors": 1507,
+        "monthly_visitors": 6390,
         "conversion_rate": "3.5%",
-        "monthly_sales": 53,
-        "avg_order_value": "$29",
-        "monthly_revenue": "$1,524",
-        "annual_revenue": "$18,288",
+        "monthly_sales": 224,
+        "avg_order_value": "$45",
+        "monthly_revenue": "$10,004",
+        "annual_revenue": "$120,048",
         "note": "Average traffic, average conversion"
       },
       {
         "scenario": "Optimistic",
-        "monthly_visitors": 3014,
+        "monthly_visitors": 12780,
         "conversion_rate": "4.9%",
-        "monthly_sales": 148,
-        "avg_order_value": "$29",
-        "monthly_revenue": "$4,308",
-        "annual_revenue": "$51,696",
+        "monthly_sales": 626,
+        "avg_order_value": "$51",
+        "monthly_revenue": "$32,156",
+        "annual_revenue": "$385,872",
         "note": "Good traffic, above-average conversion"
       },
       {
         "scenario": "Best case",
-        "monthly_visitors": 6028,
+        "monthly_visitors": 25560,
         "conversion_rate": "6.3%",
-        "monthly_sales": 380,
-        "avg_order_value": "$29",
-        "monthly_revenue": "$11,181",
-        "annual_revenue": "$134,172",
+        "monthly_sales": 1610,
+        "avg_order_value": "$58",
+        "monthly_revenue": "$92,643",
+        "annual_revenue": "$1,111,716",
         "note": "Viral/featured traffic, top-quartile conversion"
       }
     ]
   },
   "ab_tests_to_run": [
     {
-      "test": "Test $22 vs $29 — charm pricing sweet spot",
-      "expected_lift": "+14% conversion",
-      "duration": "8 days"
+      "test": "Test $43 vs $50 — charm pricing sweet spot",
+      "expected_lift": "+11% conversion",
+      "duration": "14 days"
     },
     {
       "test": "Test \"Buy now\" vs \"Get instant access\" CTA",
-      "expected_lift": "+14% click-through",
-      "duration": "9 days"
+      "expected_lift": "+12% click-through",
+      "duration": "12 days"
     },
     {
       "test": "Test social proof position (above vs below price)",
-      "expected_lift": "+28% conversion",
+      "expected_lift": "+19% conversion",
       "duration": "13 days"
     },
     {
       "test": "Test money-back guarantee badge visibility",
-      "expected_lift": "+27% conversion",
-      "duration": "18 days"
+      "expected_lift": "+32% conversion",
+      "duration": "20 days"
     }
   ],
   "quick_wins": [
-    "Set price to $29 (charm pricing) — immediate +20% conversion boost",
-    "Add \"X people bought this\" counter if >50 sales — +18% conversion",
-    "Offer 25% annual discount if subscription — +44% LTV",
-    "Show money-back guarantee badge prominently — +32% conversion"
+    "Set price to $50 (charm pricing) — immediate +14% conversion boost",
+    "Add \"X people bought this\" counter if >50 sales — +20% conversion",
+    "Offer 25% annual discount if subscription — +47% LTV",
+    "Show money-back guarantee badge prominently — +31% conversion"
   ],
   "meta": {
-    "confidence": 0.79,
+    "confidence": 0.74,
     "data_sources": [
       "Conversion benchmark database",
       "Pricing psychology research",

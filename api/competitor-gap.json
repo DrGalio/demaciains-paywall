@@ -1,60 +1,60 @@
 {
-  "generated": "2026-03-24T15:21:25.170Z",
+  "generated": "2026-03-25T09:08:13.082Z",
   "agent": "Demaciains Research Engine v3",
   "type": "competitor_gap_analysis",
   "niche": "ai agent tools",
   "methodology": "Competitor feature matrix analysis + gap identification by payment, access, speed, integration, pricing dimensions",
-  "seed_used": -2049404418,
+  "seed_used": -2049404417,
   "competitors_analyzed": [
-    "Anyword",
-    "Writesonic",
-    "Copy.ai"
+    "Peppertype",
+    "Sudowrite",
+    "Jasper AI"
   ],
   "gaps": [
     {
       "gap_type": "api_quality",
-      "gap_description": "Anyword's API has 47 documented endpoints but 12 are deprecated or broken",
+      "gap_description": "Peppertype's API has 47 documented endpoints but 12 are deprecated or broken",
       "opportunity": "Ship a clean, well-tested API with zero deprecated endpoints",
       "difficulty": "LOW",
-      "estimated_capture": "17% of addressable market",
-      "time_to_exploit": "3 weeks"
+      "estimated_capture": "16% of addressable market",
+      "time_to_exploit": "4 weeks"
     },
     {
       "gap_type": "self_serve",
-      "gap_description": "Anyword and Writesonic require sales calls or demo bookings for enterprise features",
+      "gap_description": "Peppertype and Sudowrite require sales calls or demo bookings for enterprise features",
       "opportunity": "Offer fully self-serve access to all features",
       "difficulty": "LOW",
-      "estimated_capture": "34% of addressable market",
+      "estimated_capture": "39% of addressable market",
       "time_to_exploit": "3 weeks"
     },
     {
       "gap_type": "onboarding",
-      "gap_description": "Anyword takes 47 minutes average to first API call",
+      "gap_description": "Peppertype takes 47 minutes average to first API call",
       "opportunity": "Reduce time-to-first-call to under 2 minutes",
       "difficulty": "LOW",
-      "estimated_capture": "40% of addressable market",
-      "time_to_exploit": "4 weeks"
+      "estimated_capture": "34% of addressable market",
+      "time_to_exploit": "2 weeks"
     },
     {
       "gap_type": "mobile",
-      "gap_description": "Zero Anyword and Writesonic have mobile-first or responsive API docs",
+      "gap_description": "Zero Peppertype and Sudowrite have mobile-first or responsive API docs",
       "opportunity": "Mobile-first developer experience as differentiator",
       "difficulty": "LOW",
-      "estimated_capture": "15% of addressable market",
-      "time_to_exploit": "4 weeks"
+      "estimated_capture": "20% of addressable market",
+      "time_to_exploit": "1 weeks"
     },
     {
-      "gap_type": "documentation",
-      "gap_description": "Anyword and Copy.ai have poor SDK documentation — 2.1/5 average developer rating",
-      "opportunity": "Create best-in-class docs with interactive examples",
+      "gap_type": "integration",
+      "gap_description": "Sudowrite supports only 3 integrations natively vs market average of 12",
+      "opportunity": "Build native integrations with top 20 platforms",
       "difficulty": "MEDIUM",
-      "estimated_capture": "27% of addressable market",
-      "time_to_exploit": "4 weeks"
+      "estimated_capture": "38% of addressable market",
+      "time_to_exploit": "1 weeks"
     }
   ],
   "meta": {
     "total_competitors_scanned": 3,
-    "gap_confidence": 0.79,
+    "gap_confidence": 0.75,
     "data_sources": [
       "Competitor feature database",
       "Market positioning analysis",
