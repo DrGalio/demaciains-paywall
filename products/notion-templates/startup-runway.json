@@ -1,0 +1,96 @@
+{
+  "version": "1.0.0",
+  "type": "notion-template",
+  "name": "Startup Runway & Burn Rate Calculator",
+  "icon": "🚀",
+  "description": "Track your startup finances, calculate runway, and model growth scenarios",
+  "pages": [
+    {
+      "title": "💰 Runway Dashboard",
+      "type": "callout",
+      "content": "Current runway: 8.5 months at current burn rate. Next milestone: Break-even by Q3 2026."
+    },
+    {
+      "title": "📊 Monthly P&L",
+      "type": "table",
+      "columns": ["Month", "Revenue", "Fixed Costs", "Variable Costs", "Net Burn", "Cash Remaining"],
+      "rows": [
+        ["Jan 2026", "$4,200", "$8,500", "$1,800", "-$6,100", "$73,900"],
+        ["Feb 2026", "$5,800", "$8,500", "$2,100", "-$4,800", "$69,100"],
+        ["Mar 2026", "$7,500", "$8,500", "$2,400", "-$3,400", "$65,700"],
+        ["Apr 2026", "$9,200", "$8,500", "$2,700", "-$2,000", "$63,700"],
+        ["May 2026", "$11,000", "$8,500", "$3,000", "-$500", "$63,200"],
+        ["Jun 2026", "$13,500", "$8,500", "$3,300", "$1,700", "$64,900"]
+      ]
+    },
+    {
+      "title": "💸 Expense Breakdown",
+      "type": "table",
+      "columns": ["Category", "Monthly Cost", "Annual Cost", "% of Burn", "Can Cut?"],
+      "rows": [
+        ["Salaries", "$5,000", "$60,000", "58.8%", "No"],
+        ["Office/Co-working", "$800", "$9,600", "9.4%", "Yes → Remote"],
+        ["Software & Tools", "$650", "$7,800", "7.6%", "Yes → Audit"],
+        ["Marketing", "$1,200", "$14,400", "14.1%", "Yes → Reduce"],
+        ["Legal & Accounting", "$400", "$4,800", "4.7%", "No"],
+        ["Miscellaneous", "$450", "$5,400", "5.3%", "Yes"]
+      ]
+    },
+    {
+      "title": "📈 Revenue Projections",
+      "type": "table",
+      "columns": ["Scenario", "MRR Growth", "Break-even Month", "12-Month Revenue"],
+      "rows": [
+        ["Conservative (10%/mo)", "10%", "Month 9", "$128,000"],
+        ["Base Case (20%/mo)", "20%", "Month 6", "$185,000"],
+        ["Optimistic (35%/mo)", "35%", "Month 4", "$310,000"],
+        ["Pessimistic (5%/mo)", "5%", "Month 14", "$92,000"]
+      ]
+    },
+    {
+      "title": "🎯 Milestones",
+      "type": "table",
+      "columns": ["Milestone", "Target Date", "Status", "Revenue Needed", "Notes"],
+      "rows": [
+        ["First 10 paying customers", "Feb 2026", "✅ Done", "$2,000 MRR", "Hit on Feb 15"],
+        ["$5K MRR", "Apr 2026", "🟡 In Progress", "$5,000 MRR", "At $4.2K now"],
+        ["Break-even", "Jun 2026", "🔴 Not Started", "$8,500 MRR", "Need 103% growth"],
+        ["$15K MRR", "Sep 2026", "🔴 Not Started", "$15,000 MRR", "Scale phase"],
+        ["First hire", "Jul 2026", "🔴 Not Started", "$12,000 MRR", "Customer success"]
+      ]
+    },
+    {
+      "title": "🏦 Funding Tracker",
+      "type": "table",
+      "columns": ["Source", "Amount", "Date", "Terms", "Status"],
+      "rows": [
+        ["Personal Savings", "$50,000", "Jan 2026", "Founder capital", "✅ Deployed"],
+        ["Friends & Family", "$25,000", "Feb 2026", "Convertible note @ $1M cap", "✅ Deployed"],
+        ["Angel Round", "$100,000", "Target Jul 2026", "SAFE @ $1.5M cap", "🔴 Seeking"],
+        ["Revenue", "$27,500", "Cumulative", "Organic growth", "🟡 Growing"]
+      ]
+    },
+    {
+      "title": "🔥 Scenario: What If?",
+      "type": "toggle",
+      "items": [
+        {
+          "title": "What if revenue grows 20% month-over-month?",
+          "content": "Break-even in Month 6 (Jun 2026). No additional funding needed. Can hire by Month 8."
+        },
+        {
+          "title": "What if we cut marketing spend by 50%?",
+          "content": "Burn drops to $7,900/mo. Runway extends from 8.5 to 9.6 months. But growth likely slows to 10-12%/mo."
+        },
+        {
+          "title": "What if we raise $100K angel round?",
+          "content": "Runway extends to 20+ months. Can hire 2 people. Break-even pushed to Month 8 but with more resources."
+        },
+        {
+          "title": "What if churn hits 10%?",
+          "content": "Net MRR growth drops to 10% even with 20% new sales. Break-even pushed to Month 11. Need to fix retention before scaling."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customer Retention & Churn Prevention — Demaciains x402 API</title>
+<meta name="description" content="AI-powered customer retention strategy: churn risk analysis, re-engagement campaigns, loyalty programs, referral mechanics, and health score frameworks. $1.50 USDC via x402.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e0e0e8;--dim:#888;--accent:#60a5fa;--green:#34d399;--yellow:#fbbf24;--orange:#fb923c;--purple:#a78bfa;--pink:#f472b6;--red:#f87171;--cyan:#22d3ee}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;padding:20px}
+.container{max-width:960px;margin:0 auto}
+header{text-align:center;padding:40px 0 30px;border-bottom:1px solid var(--border)}
+header h1{font-size:2.2em;margin-bottom:8px;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--dim);font-size:1.1em}
+.badge{display:inline-block;background:var(--green);color:#000;padding:2px 10px;border-radius:12px;font-size:.75em;font-weight:700;margin-left:8px;vertical-align:middle}
+.price-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.price-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:.85em}
+.price-chip strong{color:var(--green)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0}
+.card h3{color:var(--accent);margin-bottom:14px;font-size:1.15em}
+.param-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.param-row label{min-width:140px;color:var(--dim);font-size:.9em}
+.param-row input,.param-row select{background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;flex:1;min-width:180px;font-size:.95em}
+.param-row input:focus{outline:none;border-color:var(--accent)}
+.btn{background:linear-gradient(135deg,var(--green),var(--cyan));color:#000;border:none;padding:12px 28px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e}
+.row:last-child{border-bottom:none}
+.label{color:var(--dim);font-size:.9em}
+.val{font-weight:600;text-align:right}
+.score{display:inline-block;padding:3px 10px;border-radius:6px;font-weight:700;font-size:.85em}
+.score-high{background:rgba(52,211,153,.15);color:var(--green)}
+.score-mid{background:rgba(251,191,36,.15);color:var(--yellow)}
+.score-low{background:rgba(248,113,113,.15);color:var(--red)}
+.tab-bar{display:flex;gap:4px;margin:20px 0 0;flex-wrap:wrap}
+.tab{padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px 8px 0 0;cursor:pointer;font-size:.85em;color:var(--dim);transition:all .2s}
+.tab.active{background:#1a1a2e;color:var(--accent);border-bottom-color:#1a1a2e}
+.tab-content{display:none}
+.tab-content.active{display:block}
+#json-output{background:#0d0d14;border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.8em;max-height:500px;overflow:auto;white-space:pre-wrap;word-break:break-all;color:var(--green);margin-top:12px}
+.risk-card{background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0;border-left:3px solid var(--red)}
+.risk-card.medium{border-left-color:var(--orange)}
+.risk-card.low{border-left-color:var(--yellow)}
+.strategy-card{background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0}
+.strategy-card .title{font-weight:700;font-size:1.05em;margin-bottom:6px}
+.strategy-card .meta{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+.strategy-card .meta span{font-size:.8em;color:var(--dim)}
+.campaign-card{background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0;border-left:3px solid var(--purple)}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#000;font-weight:700;font-size:.8em;margin-right:10px;flex-shrink:0}
+.health-metric{display:grid;grid-template-columns:1fr auto auto;gap:12px;padding:10px 0;border-bottom:1px solid #1a1a2e;align-items:center}
+.health-metric:last-child{border-bottom:none}
+footer{text-align:center;padding:40px 0 20px;color:var(--dim);font-size:.85em}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){header h1{font-size:1.6em}.param-row{flex-direction:column}.param-row label{min-width:auto}.health-metric{grid-template-columns:1fr}.tab-bar{gap:2px}.tab{padding:6px 10px;font-size:.75em}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🔄 Customer Retention & Churn Prevention <span class="badge">$1.50</span></h1>
+<p>Churn risk analysis, re-engagement campaigns, loyalty programs, referral mechanics & health score frameworks</p>
+<div class="price-bar">
+<span class="price-chip">Price: <strong>$1.50 USDC</strong></span>
+<span class="price-chip">Network: <strong>Base</strong></span>
+<span class="price-chip">x402: <strong>v2</strong></span>
+</div>
+</header>
+
+<div class="card">
+<h3>📋 Parameters</h3>
+<div class="param-row">
+<label>Product / Niche</label>
+<input type="text" id="product" placeholder="e.g. SaaS tool, digital templates, online course" value="digital product">
+</div>
+<div class="param-row">
+<label>Business Model</label>
+<select id="model">
+<option value="one-time">One-Time Purchase</option>
+<option value="subscription">Subscription / SaaS</option>
+<option value="freemium">Freemium</option>
+<option value="marketplace">Marketplace</option>
+</select>
+</div>
+<div class="param-row">
+<label>Avg Customer LTV</label>
+<input type="text" id="ltv" placeholder="e.g. $49, $199" value="$49">
+</div>
+<div style="margin-top:16px">
+<button class="btn" id="generate-btn" onclick="generate()">Generate Retention Strategy →</button>
+</div>
+</div>
+
+<div class="tab-bar">
+<div class="tab active" onclick="showTab('overview')">Overview</div>
+<div class="tab" onclick="showTab('churn')">Churn Risk</div>
+<div class="tab" onclick="showTab('strategies')">Strategies</div>
+<div class="tab" onclick="showTab('campaigns')">Re-Engage</div>
+<div class="tab" onclick="showTab('loyalty')">Loyalty</div>
+<div class="tab" onclick="showTab('referral')">Referral</div>
+<div class="tab" onclick="showTab('health')">Health Score</div>
+<div class="tab" onclick="showTab('metrics')">Metrics</div>
+<div class="tab" onclick="showTab('wins')">Quick Wins</div>
+<div class="tab" onclick="showTab('json')">JSON</div>
+</div>
+
+<div id="tab-overview" class="tab-content active">
+<div class="card" id="overview-card">
+<p style="color:var(--dim);text-align:center;padding:40px">Click "Generate Retention Strategy" to see results</p>
+</div>
+</div>
+<div id="tab-churn" class="tab-content"><div class="card" id="churn-card"></div></div>
+<div id="tab-strategies" class="tab-content"><div class="card" id="strategies-card"></div></div>
+<div id="tab-campaigns" class="tab-content"><div class="card" id="campaigns-card"></div></div>
+<div id="tab-loyalty" class="tab-content"><div class="card" id="loyalty-card"></div></div>
+<div id="tab-referral" class="tab-content"><div class="card" id="referral-card"></div></div>
+<div id="tab-health" class="tab-content"><div class="card" id="health-card"></div></div>
+<div id="tab-metrics" class="tab-content"><div class="card" id="metrics-card"></div></div>
+<div id="tab-wins" class="tab-content"><div class="card" id="wins-card"></div></div>
+<div id="tab-json" class="tab-content"><div id="json-output"></div></div>
+
+<footer>
+<p>Powered by <a href="/">Demaciains</a> Dynamic Engine v3.9.0 · x402 Protocol · Base Network</p>
+<p style="margin-top:8px"><a href="/api/">← API Explorer</a></p>
+</footer>
+</div>
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function generate(){
+  const product=document.getElementById('product').value.trim()||'digital product';
+  const model=document.getElementById('model').value;
+  const ltv=document.getElementById('ltv').value.trim()||'$49';
+  const btn=document.getElementById('generate-btn');
+  btn.disabled=true;btn.textContent='Generating...';
+  try{
+    const d=DemaciainsEngine.retentionStrategy({product,model,ltv});
+    renderOverview(d);
+    renderChurn(d);
+    renderStrategies(d);
+    renderCampaigns(d);
+    renderLoyalty(d);
+    renderReferral(d);
+    renderHealth(d);
+    renderMetrics(d);
+    renderWins(d);
+    document.getElementById('json-output').textContent=JSON.stringify(d,null,2);
+    btn.textContent='✓ Generated!';setTimeout(()=>{btn.textContent='Generate Retention Strategy →';btn.disabled=false},2000);
+  }catch(e){
+    btn.textContent='Error — retry';btn.disabled=false;console.error(e);
+  }
+}
+
+function renderOverview(d){
+  const el=document.getElementById('overview-card');
+  el.innerHTML=`
+    <h3>📊 Retention Health Score</h3>
+    <div style="text-align:center;margin:20px 0">
+      <div style="font-size:3em;font-weight:800;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">${d.meta.retentionScore}/100</div>
+      <div style="color:var(--dim);margin-top:4px">Projected Churn Rate: <strong style="color:var(--orange)">${d.meta.projectedChurnRate}</strong></div>
+      <div style="color:var(--dim)">Revenue at Risk: <strong style="color:var(--red)">${d.meta.revenueAtRisk}</strong></div>
+      <div style="color:var(--dim)">Recoverable Revenue: <strong style="color:var(--green)">${d.meta.recoverableRevenue}</strong></div>
+    </div>
+    <h3 style="margin-top:24px">🎯 Strategy Summary</h3>
+    <div style="background:#1a1a2e;border-radius:8px;padding:16px;margin-top:10px">
+      <div style="color:var(--orange);font-size:.85em;margin-bottom:6px">SITUATION</div>
+      <div style="margin-bottom:12px">${d.meta.situation}</div>
+      <div style="color:var(--orange);font-size:.85em;margin-bottom:6px">PRIORITY ACTION</div>
+      <div style="font-weight:600;color:var(--green)">${d.meta.priorityAction}</div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="row"><span class="label">Churn Risks Identified</span><span class="val" style="color:var(--red)">${d.churnRisks.length}</span></div>
+      <div class="row"><span class="label">Retention Strategies</span><span class="val" style="color:var(--green)">${d.retentionStrategies.length}</span></div>
+      <div class="row"><span class="label">Re-Engagement Campaigns</span><span class="val" style="color:var(--purple)">${d.reEngagementCampaigns.length}</span></div>
+      <div class="row"><span class="label">Loyalty Tiers</span><span class="val" style="color:var(--yellow)">${d.loyaltyProgram.tiers.length}</span></div>
+      <div class="row"><span class="label">Referral Mechanics</span><span class="val" style="color:var(--cyan)">${d.referralMechanics.length}</span></div>
+      <div class="row"><span class="label">Quick Wins</span><span class="val" style="color:var(--green)">${d.quickWins.length}</span></div>
+    </div>
+    <div style="margin-top:16px;color:var(--dim);font-size:.85em">Product: <strong>${d.product}</strong> · Model: <strong>${d.model}</strong> · LTV: <strong>${d.ltv}</strong> · Generated: ${d.generatedAt}</div>
+  `;
+}
+
+function renderChurn(d){
+  const el=document.getElementById('churn-card');
+  el.innerHTML=`<h3>⚠️ Churn Risk Assessment (${d.churnRisks.length} factors)</h3>
+    ${d.churnRisks.map(r=>{
+      const cls=r.severity==='HIGH'?'':r.severity==='MEDIUM'?'medium':'low';
+      const col=r.severity==='HIGH'?'var(--red)':r.severity==='MEDIUM'?'var(--orange)':'var(--yellow)';
+      return `<div class="risk-card ${cls}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong style="color:${col}">${r.factor}</strong>
+          <span class="score ${r.severity==='HIGH'?'score-low':r.severity==='MEDIUM'?'score-mid':'score-high'}">${r.severity}</span>
+        </div>
+        <div style="font-size:.95em;margin-bottom:8px">${r.description}</div>
+        <div style="color:var(--dim);font-size:.85em"><strong style="color:var(--green)">Mitigation:</strong> ${r.mitigation}</div>
+        <div style="margin-top:6px;color:var(--dim);font-size:.8em">Early Warning Signal: <em>${r.earlyWarningSignal}</em></div>
+      </div>`;
+    }).join('')}`;
+}
+
+function renderStrategies(d){
+  const el=document.getElementById('strategies-card');
+  el.innerHTML=`<h3>🛡️ Retention Strategies (${d.retentionStrategies.length})</h3>
+    ${d.retentionStrategies.map((s,i)=>{
+      const imp=parseFloat(s.impact);
+      const cls=imp>=8?'score-high':imp>=6?'score-mid':'score-low';
+      return `<div class="strategy-card">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span class="step-num">${i+1}</span>
+          <div style="flex:1">
+            <div class="title">${s.strategy}</div>
+            <div style="font-size:.95em;margin-bottom:8px">${s.description}</div>
+            <div class="meta">
+              <span>Impact: <strong class="${cls}">${s.impact}/10</strong></span>
+              <span>Effort: <strong>${s.effort}</strong></span>
+              <span>Timeline: <strong>${s.timeline}</strong></span>
+              <span>Cost: <strong>${s.cost}</strong></span>
+            </div>
+            <div style="margin-top:8px;color:var(--dim);font-size:.85em"><strong style="color:var(--green)">KPI:</strong> ${s.kpi}</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}`;
+}
+
+function renderCampaigns(d){
+  const el=document.getElementById('campaigns-card');
+  el.innerHTML=`<h3>📬 Re-Engagement Campaigns (${d.reEngagementCampaigns.length})</h3>
+    ${d.reEngagementCampaigns.map(c=>`<div class="campaign-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <strong style="color:var(--purple)">${c.campaign}</strong>
+        <span style="font-size:.8em;color:var(--dim)">${c.trigger}</span>
+      </div>
+      <div style="font-size:.95em;margin-bottom:10px">${c.description}</div>
+      <div style="background:#0d0d14;border-radius:6px;padding:12px;margin-bottom:8px">
+        <div style="color:var(--dim);font-size:.8em;margin-bottom:6px">SEQUENCE</div>
+        ${c.sequence.map((s,i)=>`<div style="display:flex;gap:8px;padding:4px 0;${i<c.sequence.length-1?'border-bottom:1px solid #1e1e2e':''}">
+          <span style="color:var(--purple);font-size:.85em;min-width:60px">${s.timing}</span>
+          <span style="font-size:.9em">${s.message}</span>
+        </div>`).join('')}
+      </div>
+      <div style="color:var(--dim);font-size:.85em">Expected Recovery: <strong style="color:var(--green)">${c.expectedRecovery}</strong></div>
+    </div>`).join('')}`;
+}
+
+function renderLoyalty(d){
+  const el=document.getElementById('loyalty-card');
+  const lp=d.loyaltyProgram;
+  el.innerHTML=`<h3>🏆 Loyalty Program: ${lp.name}</h3>
+    <div style="font-size:.95em;margin-bottom:16px">${lp.description}</div>
+    <h3 style="margin-top:20px">Tiers</h3>
+    ${lp.tiers.map(t=>`<div style="background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0;border-left:3px solid ${t.color}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <strong style="color:${t.color}">${t.icon} ${t.name}</strong>
+        <span style="font-size:.85em;color:var(--dim)">${t.requirement}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        ${t.benefits.map(b=>`<div style="font-size:.9em">✅ ${b}</div>`).join('')}
+      </div>
+      <div style="margin-top:8px;color:var(--dim);font-size:.8em">Perk Value: <strong style="color:var(--green)">${t.perkValue}</strong></div>
+    </div>`).join('')}
+    <h3 style="margin-top:20px">🎯 Milestones</h3>
+    ${lp.milestones.map(m=>`<div class="row"><span class="label">${m.milestone}</span><span class="val" style="color:var(--yellow)">${m.reward}</span></div>`).join('')}`;
+}
+
+function renderReferral(d){
+  const el=document.getElementById('referral-card');
+  el.innerHTML=`<h3>🔗 Referral Mechanics (${d.referralMechanics.length})</h3>
+    ${d.referralMechanics.map(r=>`<div style="background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0;border-left:3px solid var(--cyan)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <strong style="color:var(--cyan)">${r.mechanic}</strong>
+        <span class="score ${parseFloat(r.viralPotential)>=7?'score-high':parseFloat(r.viralPotential)>=5?'score-mid':'score-low'}">Viral: ${r.viralPotential}/10</span>
+      </div>
+      <div style="font-size:.95em;margin-bottom:8px">${r.description}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div><span style="color:var(--dim);font-size:.8em">REFERRER GETS</span><br><strong style="color:var(--green)">${r.referrerReward}</strong></div>
+        <div><span style="color:var(--dim);font-size:.8em">FRIEND GETS</span><br><strong style="color:var(--cyan)">${r.friendReward}</strong></div>
+      </div>
+      <div style="color:var(--dim);font-size:.85em">Implementation: ${r.implementation}</div>
+    </div>`).join('')}`;
+}
+
+function renderHealth(d){
+  const el=document.getElementById('health-card');
+  const h=d.healthScoreFramework;
+  el.innerHTML=`<h3>💗 Customer Health Score Framework</h3>
+    <div style="font-size:.95em;margin-bottom:16px">${h.description}</div>
+    <h3 style="margin-top:16px">📊 Metrics</h3>
+    ${h.metrics.map(m=>`<div class="health-metric">
+      <div><strong>${m.metric}</strong><br><span style="color:var(--dim);font-size:.85em">${m.description}</span></div>
+      <div style="text-align:center"><div style="color:var(--accent);font-weight:700">${m.weight}%</div><div style="color:var(--dim);font-size:.75em">weight</div></div>
+      <div style="text-align:center"><div style="color:var(--green);font-weight:700">${m.threshold}</div><div style="color:var(--dim);font-size:.75em">target</div></div>
+    </div>`).join('')}
+    <h3 style="margin-top:20px">🚦 Alert Thresholds</h3>
+    ${h.alerts.map(a=>{
+      const col=a.level==='CRITICAL'?'var(--red)':a.level==='WARNING'?'var(--orange)':'var(--yellow)';
+      return `<div style="background:#1a1a2e;border-radius:8px;padding:12px;margin:8px 0;border-left:3px solid ${col}">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong style="color:${col}">${a.level}</strong>
+          <span style="font-size:.85em;color:var(--dim)">Score: ${a.scoreRange}</span>
+        </div>
+        <div style="font-size:.9em;margin-top:4px">${a.action}</div>
+      </div>`;
+    }).join('')}`;
+}
+
+function renderMetrics(d){
+  const el=document.getElementById('metrics-card');
+  const m=d.retentionMetrics;
+  el.innerHTML=`<h3>📈 Retention Metrics & Benchmarks</h3>
+    <div style="font-size:.95em;margin-bottom:16px">${m.description}</div>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.9em">
+      <thead><tr style="border-bottom:2px solid var(--border)">
+        <th style="text-align:left;padding:10px;color:var(--dim)">Metric</th>
+        <th style="text-align:center;padding:10px;color:var(--dim)">Industry Avg</th>
+        <th style="text-align:center;padding:10px;color:var(--dim)">Good</th>
+        <th style="text-align:center;padding:10px;color:var(--dim)">Excellent</th>
+        <th style="text-align:center;padding:10px;color:var(--dim)">Your Target</th>
+      </tr></thead>
+      <tbody>
+      ${m.benchmarks.map(b=>`<tr style="border-bottom:1px solid #1a1a2e">
+        <td style="padding:10px;font-weight:600">${b.metric}</td>
+        <td style="text-align:center;padding:10px;color:var(--dim)">${b.industryAvg}</td>
+        <td style="text-align:center;padding:10px;color:var(--yellow)">${b.good}</td>
+        <td style="text-align:center;padding:10px;color:var(--green)">${b.excellent}</td>
+        <td style="text-align:center;padding:10px;font-weight:700;color:var(--accent)">${b.target}</td>
+      </tr>`).join('')}
+      </tbody>
+    </table>
+    </div>
+    <h3 style="margin-top:24px">📊 Tracking Cadence</h3>
+    ${m.trackingCadence.map(t=>`<div class="row"><span class="label">${t.frequency}</span><span class="val" style="color:var(--accent)">${t.action}</span></div>`).join('')}`;
+}
+
+function renderWins(d){
+  const el=document.getElementById('wins-card');
+  el.innerHTML=`<h3>⚡ Quick Wins — Implement Today (${d.quickWins.length})</h3>
+    <div style="color:var(--dim);font-size:.9em;margin-bottom:16px">High-impact, low-effort actions to start improving retention immediately.</div>
+    ${d.quickWins.map((w,i)=>`<div style="background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0;display:flex;gap:12px;align-items:flex-start">
+      <span class="step-num">${i+1}</span>
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:1.05em;margin-bottom:4px">${w.action}</div>
+        <div style="font-size:.95em;margin-bottom:8px">${w.description}</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <span style="font-size:.8em;color:var(--dim)">Impact: <strong style="color:var(--green)">${w.impact}</strong></span>
+          <span style="font-size:.8em;color:var(--dim)">Time: <strong>${w.timeRequired}</strong></span>
+          <span style="font-size:.8em;color:var(--dim)">Tools: <strong>${w.tools}</strong></span>
+        </div>
+      </div>
+    </div>`).join('')}`;
+}
+
+window.addEventListener('DOMContentLoaded',()=>{generate();});
+</script>
+</body>
+</html>

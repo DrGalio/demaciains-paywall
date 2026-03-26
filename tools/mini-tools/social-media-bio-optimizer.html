@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Bio Optimizer — Demaciains</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e4e4e7;font-family:system-ui,-apple-system,sans-serif;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem 6rem}
+h1{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+.subtitle{color:#a1a1aa;margin-bottom:2rem;font-size:1.05rem}
+.platform-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{background:#18181b;border:1px solid #27272a;border-radius:8px;padding:.6rem 1.2rem;cursor:pointer;color:#a1a1aa;font-weight:600;transition:all .2s}
+.tab.active,.tab:hover{background:#6366f1;color:#fff;border-color:#6366f1}
+textarea{width:100%;min-height:120px;background:#18181b;border:1px solid #27272a;border-radius:12px;padding:1.25rem;color:#e4e4e7;font-size:1rem;line-height:1.6;resize:vertical;font-family:inherit}
+textarea:focus{outline:none;border-color:#6366f1}
+.char-bar{margin-top:.5rem;display:flex;justify-content:space-between;font-size:.85rem;color:#71717a}
+.char-fill{height:4px;background:#27272a;border-radius:2px;margin-top:.25rem;overflow:hidden}
+.char-fill-inner{height:100%;background:#6366f1;transition:width .3s;border-radius:2px}
+.btn{background:#6366f1;color:#fff;border:none;padding:.85rem 2rem;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1rem;transition:all .2s}
+.btn:hover{background:#4f46e5}
+.results{margin-top:2rem;display:none}
+.score-ring{width:160px;height:160px;margin:0 auto 2rem;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring .value{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.5rem;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:2rem}
+.card{background:#18181b;border:1px solid #27272a;border-radius:12px;padding:1.25rem}
+.card h3{font-size:.95rem;margin-bottom:.75rem;color:#a1a1aa}
+.card .metric{font-size:1.5rem;font-weight:700;margin-bottom:.25rem}
+.green{color:#22c55e}.yellow{color:#eab308}.red{color:#ef4444}.blue{color:#6366f1}
+.tips-list{background:#18181b;border:1px solid #27272a;border-radius:12px;padding:1.25rem}
+.tips-list h3{margin-bottom:1rem}
+.tip{padding:.6rem 0;border-bottom:1px solid #27272a;display:flex;gap:.75rem}
+.tip:last-child{border:none}
+.keyword-cloud{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.keyword{background:#27272a;padding:.3rem .75rem;border-radius:20px;font-size:.8rem}
+.keyword.high{background:#1a3a1a;color:#22c55e}
+.keyword.med{background:#3a3a1a;color:#eab308}
+.keyword.low{background:#3a1a1a;color:#ef4444}
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#18181b;border-top:1px solid #27272a;padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:#71717a;z-index:100}
+.sticky-bar a{color:#6366f1;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📱 Social Media Bio Optimizer</h1>
+<p class="subtitle">Optimize your bio for maximum impact across platforms.</p>
+<div class="platform-tabs">
+<div class="tab active" onclick="setPlatform('instagram',this)">📸 Instagram</div>
+<div class="tab" onclick="setPlatform('tiktok',this)">🎵 TikTok</div>
+<div class="tab" onclick="setPlatform('linkedin',this)">💼 LinkedIn</div>
+<div class="tab" onclick="setPlatform('twitter',this)">🐦 X/Twitter</div>
+</div>
+<textarea id="bio" placeholder="Paste your bio here..." oninput="updateCharCount()">🚀 Building the future of AI automation | Helping 10K+ founders scale with smart tech | DM for collabs 📩</textarea>
+<div class="char-bar"><span id="charCount">0</span><span id="charLimit">/ 150</span></div>
+<div class="char-fill"><div class="char-fill-inner" id="charBar" style="width:0%"></div></div>
+<button class="btn" onclick="analyze()">🔍 Optimize Bio</button>
+<div class="results" id="results">
+<div class="score-ring"><svg width="160" height="160"><circle cx="80" cy="80" r="70" stroke="#27272a" stroke-width="8" fill="none"/><circle cx="80" cy="80" r="70" stroke="#6366f1" stroke-width="8" fill="none" stroke-dasharray="440" id="scoreRing" stroke-dashoffset="440" stroke-linecap="round"/></svg><div class="value" id="totalScore">0</div></div>
+<div class="grid">
+<div class="card"><h3>📏 Length</h3><div class="metric" id="lengthScore">—</div><div id="lengthTip" style="color:#a1a1aa;font-size:.85rem"></div></div>
+<div class="card"><h3>🔑 Keywords</h3><div class="metric" id="keywordScore">—</div><div class="keyword-cloud" id="keywords"></div></div>
+<div class="card"><h3>📢 Call to Action</h3><div class="metric" id="ctaScore">—</div><div id="ctaTip" style="color:#a1a1aa;font-size:.85rem"></div></div>
+<div class="card"><h3>😊 Emoji Balance</h3><div class="metric" id="emojiScore">—</div><div id="emojiTip" style="color:#a1a1aa;font-size:.85rem"></div></div>
+</div>
+<div class="tips-list"><h3>💡 Optimization Tips</h3><div id="tipsList"></div></div>
+</div>
+</div>
+<div class="sticky-bar"><span>Built by <strong>Demaciains</strong></span><a href="https://drgalio.github.io/demaciains-paywall/">Algorithm Cheat Sheets →</a></div>
+<script>
+let platform='instagram';
+const limits={instagram:150,tiktok:80,linkedin:2200,twitter:160};
+const ctaWords=['dm','message','click','link','follow','subscribe','join','visit','book','get','try','start','download','shop','sign up','apply','comment','share','save'];
+function setPlatform(p,el){platform=p;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('charLimit').textContent='/ '+limits[p];updateCharCount()}
+function updateCharCount(){const bio=document.getElementById('bio').value;document.getElementById('charCount').textContent=bio.length;const pct=Math.min(100,(bio.length/limits[platform])*100);document.getElementById('charBar').style.width=pct+'%';document.getElementById('charBar').style.background=pct>90?'#ef4444':pct>70?'#eab308':'#6366f1'}
+function analyze(){
+const bio=document.getElementById('bio').value.trim();
+if(!bio)return;
+const len=bio.length;const lim=limits[platform];
+const lenPct=(len/lim)*100;
+const lenScore=lenPct>=70&&lenPct<=95?100:lenPct>=50&&lenPct<=100?70:lenPct<50?40:50;
+const emojis=bio.match(/[\u{1F300}-\u{1F9FF}]/gu)||[];
+const emojiCount=emojis.length;
+const wordCount=bio.split(/\s+/).length;
+const emojiRatio=emojiCount/wordCount;
+const emojiScore=emojiRatio>=0.05&&emojiRatio<=0.25?100:emojiRatio<0.05?60:70;
+const lowerBio=bio.toLowerCase();
+const foundCtas=ctaWords.filter(w=>lowerBio.includes(w));
+const ctaScore=foundCtas.length>=1?100:40;
+const wordFreq={};
+bio.toLowerCase().replace(/[^\w\s]/g,'').split(/\s+/).forEach(w=>{if(w.length>3)wordFreq[w]=(wordFreq[w]||0)+1});
+const topKeywords=Object.entries(wordFreq).sort((a,b)=>b[1]-a[1]).slice(0,8);
+const kwScore=topKeywords.length>=3?100:topKeywords.length>=1?70:40;
+const total=Math.round(lenScore*0.25+emojiScore*0.2+ctaScore*0.3+kwScore*0.25);
+document.getElementById('totalScore').textContent=total;
+document.getElementById('scoreRing').style.strokeDashoffset=440-(440*total/100);
+document.getElementById('scoreRing').style.stroke=total>=80?'#22c55e':total>=50?'#eab308':'#ef4444';
+document.getElementById('lengthScore').textContent=lenScore>=80?'✅ '+len+' chars':lenScore>=50?'⚠️ '+len+' chars':'❌ '+len+' chars';
+document.getElementById('lengthScore').className='metric '+(lenScore>=80?'green':lenScore>=50?'yellow':'red');
+document.getElementById('lengthTip').textContent=len<lim*0.5?'You have room — add more value propositions.':len>lim*0.95?'Almost at limit — trim fluff.':'Good length! Sweet spot for '+platform+'.';
+document.getElementById('keywordScore').textContent=kwScore>=80?'✅ Strong':'⚠️ Weak';
+document.getElementById('keywordScore').className='metric '+(kwScore>=80?'green':'yellow');
+document.getElementById('keywords').innerHTML=topKeywords.map(([w,c])=>`<span class="keyword ${c>1?'high':'low'}">${w} (${c})</span>`).join('')||'<span style="color:#71717a">No repeated keywords</span>';
+document.getElementById('ctaScore').textContent=ctaScore>=80?'✅ Found':'❌ Missing';
+document.getElementById('ctaScore').className='metric '+(ctaScore>=80?'green':'red');
+document.getElementById('ctaTip').textContent=foundCtas.length?'CTAs: '+foundCtas.join(', '):'Add a CTA: "DM me", "Link in bio", "Follow for more"';
+document.getElementById('emojiScore').textContent=emojiScore>=80?'✅ '+emojiCount+' emojis':emojiScore>=60?'⚠️ '+emojiCount+' emojis':'❌ '+emojiCount+' emojis';
+document.getElementById('emojiScore').className='metric '+(emojiScore>=80?'green':emojiScore>=60?'yellow':'red');
+document.getElementById('emojiTip').textContent=emojiCount===0?'Add 1-3 emojis for visual appeal.':emojiRatio>0.25?'Too many emojis — reduce for professionalism.':'Good emoji balance!';
+const tips=[];
+if(lenScore<80)tips.push('📏 '+(len<lim*0.5?'Your bio is short. Add what you do, who you help, and a CTA.':'Your bio is too long. Cut filler words — every character counts.'));
+if(ctaScore<80)tips.push('📢 Add a clear call-to-action: "DM for collabs", "Link in bio", "Follow for daily tips"');
+if(emojiScore<80)tips.push('😊 '+(emojiCount===0?'Add 1-3 relevant emojis — they increase engagement by 25%.':'Reduce emojis — aim for 1 per 3-5 words.'));
+if(kwScore<80)tips.push('🔑 Repeat key terms: your niche, expertise, or brand words should appear 2-3 times.');
+if(platform==='linkedin'&&len<100)tips.push('💼 LinkedIn allows 2200 chars — use the space! Add achievements, metrics, and what you\'re looking for.');
+if(platform==='tiktok'&&len>60)tips.push('🎵 TikTok bios are short. Lead with personality, not credentials.');
+if(total>=80)tips.push('🏆 Great bio! Minor tweaks could push you to 90+.');
+document.getElementById('tipsList').innerHTML=tips.map(t=>`<div class="tip"><span>${t}</span></div>`).join('')||'<div class="tip"><span>✅ Your bio looks great!</span></div>';
+document.getElementById('results').style.display='block';
+document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+updateCharCount();
+</script>
+</body>
+</html>

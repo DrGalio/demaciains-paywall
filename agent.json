@@ -1,8 +1,8 @@
 {
   "name": "Demaciains Research Services",
   "description": "Market research, gap analysis, trend signals, algorithm reports, startup validation, and pricing strategy for AI agents and humans. ALL endpoints generate fresh dynamic data on every request. Payments via x402 protocol on Base network.",
-  "version": "3.7.0",
-  "engine": "Demaciains Dynamic Data Engine v3.7 — Client-Side Seeded PRNG",
+  "version": "3.9.0",
+  "engine": "Demaciains Dynamic Data Engine v3.9 — Client-Side Seeded PRNG",
   "data_refresh": {
     "market-gap": "daily (date-seeded)",
     "trends": "hourly (hour-seeded)",
@@ -14,7 +14,8 @@
     "go-to-market": "daily (date+product-seeded)",
     "content-strategy": "daily (date+product-seeded)",
     "competitive-intel": "daily (date+product-seeded)",
-    "audience-profiler": "daily (date+product-seeded)"
+    "audience-profiler": "daily (date+product-seeded)",
+    "retention-strategy": "daily (date+product+model-seeded)"
   },
   "protocol": "x402",
   "wallet": "0x83F31CE0F8b1f27a6Ad91693709febb728c71563",
@@ -201,6 +202,18 @@
         "product"
       ],
       "description": "Target audience profiling: 3-5 buyer personas with demographics, psychographics, pain points, objections, messaging frameworks, market sizing (TAM/SAM/SOM), channel priority matrix, and segmentation strategy."
+    },
+    {
+      "endpoint": "/api/retention-strategy",
+      "method": "GET",
+      "price": "1.50",
+      "currency": "USDC",
+      "params": [
+        "product",
+        "model",
+        "ltv"
+      ],
+      "description": "Customer retention & churn prevention strategy: churn risk assessment, retention strategies with effort/impact scoring, re-engagement email campaigns, loyalty program design, referral mechanics, customer health score framework, retention benchmarks, and quick wins."
     }
   ],
   "capabilities": [
@@ -225,6 +238,7 @@
       "endpoint": "/api/content-strategy",
       "price": "1.50 USDC"
     },
-    "audience-profiling"
+    "audience-profiling",
+    "retention-strategy"
   ]
 }

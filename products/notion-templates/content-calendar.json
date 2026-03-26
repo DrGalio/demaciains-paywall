@@ -1,0 +1,217 @@
+{
+  "version": "1.0.0",
+  "type": "notion-template",
+  "name": "90-Day Content Calendar & Planner",
+  "icon": "📅",
+  "description": "Plan, batch, and track content across Instagram, TikTok, YouTube, LinkedIn, and X with analytics tracking and hashtag banks.",
+  "pages": [
+    {
+      "title": "Content Calendar — Q2 2026",
+      "icon": "📅",
+      "children": [
+        {
+          "type": "callout",
+          "icon": { "type": "emoji", "emoji": "🚀" },
+          "color": "purple_background",
+          "rich_text": [
+            { "type": "text", "text": { "content": "Your 90-day content command center. Plan ahead, batch create, and track what works. Apr 1 — Jun 30, 2026" } }
+          ]
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "📋 Content Queue" } }]
+        },
+        {
+          "type": "table",
+          "table_width": 6,
+          "has_column_header": true,
+          "has_row_header": false,
+          "children": [
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Title / Topic" } }], [{ "type": "text", "text": { "content": "Platform" } }], [{ "type": "text", "text": { "content": "Type" } }], [{ "type": "text", "text": { "content": "Status" } }], [{ "type": "text", "text": { "content": "Publish Date" } }], [{ "type": "text", "text": { "content": "Engagement Target" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "5 Design Trends for 2026" } }], [{ "type": "text", "text": { "content": "Instagram" } }], [{ "type": "text", "text": { "content": "Carousel" } }], [{ "type": "text", "text": { "content": "🟢 Published" } }], [{ "type": "text", "text": { "content": "2026-04-02" } }], [{ "type": "text", "text": { "content": "500 likes" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Freelancer Pricing Deep Dive" } }], [{ "type": "text", "text": { "content": "YouTube" } }], [{ "type": "text", "text": { "content": "Long-form Video" } }], [{ "type": "text", "text": { "content": "🟡 Filming" } }], [{ "type": "text", "text": { "content": "2026-04-10" } }], [{ "type": "text", "text": { "content": "2,000 views" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "How I Built My Agency in 90 Days" } }], [{ "type": "text", "text": { "content": "LinkedIn" } }], [{ "type": "text", "text": { "content": "Text Post" } }], [{ "type": "text", "text": { "content": "🔵 Draft" } }], [{ "type": "text", "text": { "content": "2026-04-07" } }], [{ "type": "text", "text": { "content": "200 reactions" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Quick CSS Grid Trick" } }], [{ "type": "text", "text": { "content": "TikTok" } }], [{ "type": "text", "text": { "content": "Short Video" } }], [{ "type": "text", "text": { "content": "⚪ Idea" } }], [{ "type": "text", "text": { "content": "2026-04-15" } }], [{ "type": "text", "text": { "content": "10K views" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Hot take: AI won't replace designers" } }], [{ "type": "text", "text": { "content": "X (Twitter)" } }], [{ "type": "text", "text": { "content": "Thread" } }], [{ "type": "text", "text": { "content": "🟢 Published" } }], [{ "type": "text", "text": { "content": "2026-04-01" } }], [{ "type": "text", "text": { "content": "50 retweets" } }]] }
+          ]
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "📱 Platform Breakdown" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "📸 Instagram" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Frequency: 4x/week (2 carousels, 1 reel, 1 story series)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Best posting times: Tue/Thu 11am, Sat 9am" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Focus: Design tips, portfolio showcases, behind-the-scenes" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "🎵 TikTok" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Frequency: 3x/week (short tutorials, trends, hot takes)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Best posting times: Mon/Wed/Fri 7pm" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "🎬 YouTube" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Frequency: 1x/week long-form + 2 Shorts" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Best posting times: Wed 2pm (long-form), daily Shorts" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "💼 LinkedIn" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Frequency: 3x/week (text posts + 1 article/month)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Focus: Thought leadership, case studies, industry insights" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "𝕏 X (Twitter)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Frequency: Daily (threads 2x/week)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Focus: Quick insights, engagement, community building" } }]
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "⚡ Batch Workflow Tracker" } }]
+        },
+        {
+          "type": "callout",
+          "icon": { "type": "emoji", "emoji": "🎯" },
+          "color": "yellow_background",
+          "rich_text": [
+            { "type": "text", "text": { "content": "Batch day = Sunday. Plan → Create → Schedule → Review. Never scramble for content again." } }
+          ]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "This Week's Batch (Apr 6–12)" } }]
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Research & outline 7 content pieces" } }],
+          "checked": true
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Write 3 LinkedIn posts" } }],
+          "checked": true
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Film 1 YouTube video + 2 Shorts" } }],
+          "checked": false
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Design 2 Instagram carousels" } }],
+          "checked": false
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Schedule all posts in Buffer/Later" } }],
+          "checked": false
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Write 7 X/Twitter posts + 1 thread" } }],
+          "checked": false
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "#️⃣ Hashtag Bank" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "Design & Creative" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "#DesignTips #UIDesign #UXDesign #GraphicDesign #WebDesign #DesignInspiration #CreativeProcess #DesignThinking" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "Freelancing & Business" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "#FreelancerLife #Solopreneur #RemoteWork #ClientWork #FreelanceTips #DigitalNomad #WorkFromAnywhere #SideHustle" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "Tech & Tools" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "#Figma #Notion #Webflow #React #TailwindCSS #DevTools #NoCode #TechTwitter" } }]
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "📈 Analytics Tracker" } }]
+        },
+        {
+          "type": "table",
+          "table_width": 7,
+          "has_column_header": true,
+          "has_row_header": false,
+          "children": [
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Platform" } }], [{ "type": "text", "text": { "content": "Followers (Start)" } }], [{ "type": "text", "text": { "content": "Followers (Now)" } }], [{ "type": "text", "text": { "content": "Growth" } }], [{ "type": "text", "text": { "content": "Avg Engagement" } }], [{ "type": "text", "text": { "content": "Top Content" } }], [{ "type": "text", "text": { "content": "Notes" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Instagram" } }], [{ "type": "text", "text": { "content": "4,200" } }], [{ "type": "text", "text": { "content": "4,850" } }], [{ "type": "text", "text": { "content": "+15.5%" } }], [{ "type": "text", "text": { "content": "4.2%" } }], [{ "type": "text", "text": { "content": "Design Trends Carousel" } }], [{ "type": "text", "text": { "content": "Carousels outperform reels 2:1" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "TikTok" } }], [{ "type": "text", "text": { "content": "1,800" } }], [{ "type": "text", "text": { "content": "3,200" } }], [{ "type": "text", "text": { "content": "+77.8%" } }], [{ "type": "text", "text": { "content": "8.1%" } }], [{ "type": "text", "text": { "content": "CSS Grid Trick" } }], [{ "type": "text", "text": { "content": "Tutorial format crushing it" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "YouTube" } }], [{ "type": "text", "text": { "content": "890" } }], [{ "type": "text", "text": { "content": "1,150" } }], [{ "type": "text", "text": { "content": "+29.2%" } }], [{ "type": "text", "text": { "content": "6.8%" } }], [{ "type": "text", "text": { "content": "Freelancer Pricing" } }], [{ "type": "text", "text": { "content": "Long-form > Shorts for subs" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "LinkedIn" } }], [{ "type": "text", "text": { "content": "2,100" } }], [{ "type": "text", "text": { "content": "2,650" } }], [{ "type": "text", "text": { "content": "+26.2%" } }], [{ "type": "text", "text": { "content": "3.5%" } }], [{ "type": "text", "text": { "content": "Agency Story Post" } }], [{ "type": "text", "text": { "content": "Personal stories win here" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "X (Twitter)" } }], [{ "type": "text", "text": { "content": "5,400" } }], [{ "type": "text", "text": { "content": "6,100" } }], [{ "type": "text", "text": { "content": "+13.0%" } }], [{ "type": "text", "text": { "content": "2.9%" } }], [{ "type": "text", "text": { "content": "AI Hot Take Thread" } }], [{ "type": "text", "text": { "content": "Controversial = engagement" } }]] }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -122,6 +122,8 @@
       { id: 'competitive-intel', name: 'Competitive Intel', price: '$1.50', icon: '🔎', desc: 'Competitor profiles & strategy' },
       { id: 'content-distribution', name: 'Content Distribution', price: '$1.50', icon: '📡', desc: 'Multi-platform distribution plans' },
       { id: 'audience-profiler', name: 'Audience Profiler', price: '$1.50', icon: '🎯', desc: 'Buyer personas & market sizing' },
+      { id: 'sales-copy', name: 'Sales Copy Generator', price: '$1.50', icon: '✍️', desc: 'Headlines, CTAs & conversion copy' },
+      { id: 'retention-strategy', name: 'Retention Strategy', price: '$1.50', icon: '🔄', desc: 'Churn prevention & loyalty' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -162,6 +164,8 @@
         case 'competitive-intel': data = DemaciainsEngine.competitiveIntel(getParam('product','AI productivity toolkit'), { niche: 'creators', price: 29 }); break;
         case 'content-distribution': data = DemaciainsEngine.contentDistribution(getParam('product','AI productivity toolkit'), { niche: 'creators' }); break;
         case 'audience-profiler': data = DemaciainsEngine.audienceProfiler(getParam('product','AI productivity toolkit')); break;
+        case 'sales-copy': data = DemaciainsEngine.salesCopy(getParam('product','digital template pack')); break;
+        case 'retention-strategy': data = DemaciainsEngine.retentionStrategy({ product: getParam('product','digital product'), model: 'one-time', ltv: '$49' }); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);
@@ -184,6 +188,10 @@
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI prompt pack)" value="${getParam('product','AI productivity toolkit')}" style="width:220px">`;
       } else if (currentEndpoint === 'audience-profiler') {
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI prompt pack)" value="${getParam('product','AI productivity toolkit')}" style="width:220px">`;
+      } else if (currentEndpoint === 'sales-copy') {
+        paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. digital template pack)" value="${getParam('product','digital template pack')}" style="width:220px">`;
+      } else if (currentEndpoint === 'retention-strategy') {
+        paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. SaaS tool)" value="${getParam('product','digital product')}" style="width:220px">`;
       } else if (currentEndpoint === 'revenue-forecast') {
 
       view.innerHTML = `

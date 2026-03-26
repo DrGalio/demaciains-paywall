@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Generator — Free Online Tool</title>
+<meta name="description" content="Free professional invoice generator. Create invoices with live preview, PDF download, tax calculations, and multi-currency support.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--card:#141414;--border:#222;--text:#fff;--muted:#888;--accent:#6366f1;--accent-hover:#818cf8;--danger:#ef4444;--success:#22c55e}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:60px}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+h1{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+.subtitle{color:var(--muted);margin-bottom:2rem;font-size:1rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:.35rem;margin-top:1rem}
+label:first-child{margin-top:0}
+input,select{width:100%;padding:.65rem .8rem;background:#1a1a1a;border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.95rem;transition:border .2s}
+input:focus,select:focus{outline:none;border-color:var(--accent)}
+select{cursor:pointer}
+.item-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:.5rem;align-items:end;margin-bottom:.5rem}
+@media(max-width:600px){.item-row{grid-template-columns:1fr 1fr;}}
+.item-row input{font-size:.85rem;padding:.5rem .6rem}
+button{padding:.65rem 1.2rem;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-accent{background:var(--accent);color:#fff}.btn-accent:hover{background:var(--accent-hover)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted)}.btn-outline:hover{border-color:var(--accent);color:var(--text)}
+.btn-danger{background:transparent;color:var(--danger);border:1px solid #331111}.btn-danger:hover{background:#200}
+.btn-sm{padding:.4rem .7rem;font-size:.8rem}
+.btn-row{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.preview{margin-top:2rem}
+.invoice-paper{background:#fff;color:#111;border-radius:8px;padding:2rem;min-height:500px}
+.inv-header{display:flex;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.inv-title{font-size:1.8rem;font-weight:800;color:#6366f1}
+.inv-num{font-size:.85rem;color:#666}
+.inv-section{margin-bottom:1.5rem}
+.inv-section h3{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#999;margin-bottom:.3rem}
+.inv-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.inv-table th{background:#f3f3f3;text-align:left;padding:.6rem .8rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#666}
+.inv-table td{padding:.6rem .8rem;border-bottom:1px solid #eee;font-size:.9rem}
+.inv-table .num{text-align:right}
+.inv-totals{text-align:right;margin-top:1rem}
+.inv-totals div{padding:.3rem 0;font-size:.9rem}
+.inv-totals .total{font-size:1.2rem;font-weight:700;color:#6366f1}
+.inv-notes{margin-top:2rem;padding-top:1rem;border-top:1px solid #eee;font-size:.85rem;color:#666}
+.print-actions{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.cta-bar{margin-top:3rem;text-align:center;padding:2rem;background:linear-gradient(135deg,#6366f120,#6366f108);border:1px solid #6366f133;border-radius:12px}
+.cta-bar p{margin-bottom:1rem;color:var(--muted)}
+.cta-bar a{color:var(--accent);font-weight:600;text-decoration:none}.cta-bar a:hover{text-decoration:underline;color:var(--accent-hover)}
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid var(--border);padding:.6rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted);z-index:100}
+.sticky-bar a{color:var(--accent);text-decoration:none;font-weight:600}.sticky-bar a:hover{text-decoration:underline}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .4s ease}
+@media print{body{padding:0;background:#fff}.sticky-bar,.btn-row,.print-actions,.cta-bar{display:none!important}.container{max-width:100%;padding:0}}
+</style>
+</head>
+<body>
+<div class="container fade-up">
+  <h1>🧾 Invoice Generator</h1>
+  <p class="subtitle">Create professional invoices instantly — free, no sign-up.</p>
+  <div class="grid">
+    <div class="card">
+      <label>Your Company Name</label>
+      <input type="text" id="company" placeholder="Acme Inc." oninput="updatePreview()">
+      <label>Client Name</label>
+      <input type="text" id="client" placeholder="John Doe" oninput="updatePreview()">
+      <label>Currency</label>
+      <select id="currency" onchange="updatePreview()">
+        <option value="USD">$ USD</option><option value="EUR">€ EUR</option><option value="GBP">£ GBP</option><option value="CAD">$ CAD</option><option value="AUD">$ AUD</option>
+      </select>
+      <label>Tax Rate (%)</label>
+      <input type="number" id="taxRate" value="10" min="0" max="100" step="0.5" oninput="updatePreview()">
+      <label style="margin-top:1.5rem;font-weight:600;color:var(--text)">Line Items</label>
+      <div id="items"></div>
+      <div class="btn-row">
+        <button class="btn-accent btn-sm" onclick="addItem()">+ Add Item</button>
+      </div>
+    </div>
+    <div class="card preview">
+      <div class="invoice-paper" id="invoicePaper"></div>
+      <div class="print-actions">
+        <button class="btn-accent" onclick="window.print()">⬇ Download PDF</button>
+        <button class="btn-outline" onclick="resetForm()">Reset</button>
+      </div>
+    </div>
+  </div>
+  <div class="cta-bar">
+    <p>Need a full freelancer business system?</p>
+    <a href="#" target="_blank">Check our Notion templates →</a>
+  </div>
+</div>
+<div class="sticky-bar">
+  <span>Built by Demaciains</span>
+  <a href="index.html">More AI Tools →</a>
+</div>
+<script>
+const symbols={USD:'$',EUR:'€',GBP:'£',CAD:'$',AUD:'$'};
+let items=[{desc:'Website Design',qty:1,rate:1500},{desc:'Hosting (monthly)',qty:12,rate:25}];
+function addItem(){items.push({desc:'',qty:1,rate:0});renderItems();updatePreview()}
+function removeItem(i){if(items.length>1){items.splice(i,1);renderItems();updatePreview()}}
+function renderItems(){
+  const c=document.getElementById('items');
+  c.innerHTML=items.map((it,i)=>`
+    <div class="item-row">
+      <input placeholder="Description" value="${it.desc}" oninput="items[${i}].desc=this.value;updatePreview()">
+      <input type="number" placeholder="Qty" min="0" value="${it.qty}" oninput="items[${i}].qty=+this.value;updatePreview()">
+      <input type="number" placeholder="Rate" min="0" step="0.01" value="${it.rate}" oninput="items[${i}].rate=+this.value;updatePreview()">
+      <button class="btn-danger btn-sm" onclick="removeItem(${i})">✕</button>
+    </div>`).join('');
+}
+function fmt(n){return n.toFixed(2)}
+function updatePreview(){
+  const cur=document.getElementById('currency').value;
+  const sym=symbols[cur];
+  const tax=parseFloat(document.getElementById('taxRate').value)||0;
+  const subtotal=items.reduce((s,it)=>s+it.qty*it.rate,0);
+  const taxAmt=subtotal*(tax/100);
+  const total=subtotal+taxAmt;
+  const invNum='INV-'+String(Math.floor(Date.now()/1000)).slice(-6);
+  const today=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('invoicePaper').innerHTML=`
+    <div class="inv-header">
+      <div><div class="inv-title">INVOICE</div><div class="inv-num">${invNum}</div></div>
+      <div style="text-align:right"><div style="font-size:.85rem;color:#666">${today}</div></div>
+    </div>
+    <div style="display:flex;gap:2rem;flex-wrap:wrap">
+      <div class="inv-section"><h3>From</h3><p>${document.getElementById('company').value||'Your Company'}</p></div>
+      <div class="inv-section"><h3>Bill To</h3><p>${document.getElementById('client').value||'Client Name'}</p></div>
+    </div>
+    <table class="inv-table">
+      <thead><tr><th>Description</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead>
+      <tbody>${items.filter(it=>it.desc).map(it=>`<tr><td>${it.desc}</td><td class="num">${it.qty}</td><td class="num">${sym}${fmt(it.rate)}</td><td class="num">${sym}${fmt(it.qty*it.rate)}</td></tr>`).join('')}</tbody>
+    </table>
+    <div class="inv-totals">
+      <div>Subtotal: ${sym}${fmt(subtotal)}</div>
+      <div>Tax (${tax}%): ${sym}${fmt(taxAmt)}</div>
+      <div class="total">Total: ${sym}${fmt(total)}</div>
+    </div>
+    <div class="inv-notes"><strong>Thank you for your business!</strong></div>`;
+}
+function resetForm(){document.getElementById('company').value='';document.getElementById('client').value='';document.getElementById('taxRate').value='10';items=[{desc:'',qty:1,rate:0}];renderItems();updatePreview()}
+renderItems();updatePreview();
+</script>
+</body>
+</html>

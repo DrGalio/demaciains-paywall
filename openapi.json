@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Demaciains AI Tools",
-    "version": "4.1.0",
+    "version": "4.2.0",
     "description": "19 pay-per-use API tools for AI agents. Premium $2.44, Standard $1.39. USDC on Base via x402 protocol.",
     "contact": {
       "email": "galio@sharebot.net"
@@ -588,6 +588,56 @@
         "responses": {
           "200": {
             "description": "Audience profile report"
+          },
+          "402": {
+            "description": "Payment required ($1.50 USDC on Base)"
+          }
+        },
+        "x402": {
+          "price": "1.50",
+          "currency": "USDC",
+          "network": "base"
+        }
+      }
+    },
+    "/api/retention-strategy": {
+      "get": {
+        "operationId": "retentionStrategy",
+        "summary": "Customer retention & churn prevention strategy",
+        "description": "Generates comprehensive retention strategy: churn risk assessment, retention strategies with effort/impact scoring, re-engagement email campaigns, loyalty program design, referral mechanics, customer health score framework, retention benchmarks, and quick wins.",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Product or service to generate retention strategy for"
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["one-time", "subscription", "freemium", "marketplace"]
+            },
+            "description": "Business model type"
+          },
+          {
+            "name": "ltv",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Average customer lifetime value (e.g. '$49')"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retention strategy report"
           },
           "402": {
             "description": "Payment required ($1.50 USDC on Base)"

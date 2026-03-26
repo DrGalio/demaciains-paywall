@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contract Readability Checker — Demaciains</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e4e4e7;font-family:system-ui,-apple-system,sans-serif;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem 6rem}
+h1{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+.subtitle{color:#a1a1aa;margin-bottom:2rem;font-size:1.05rem}
+textarea{width:100%;min-height:250px;background:#18181b;border:1px solid #27272a;border-radius:12px;padding:1.25rem;color:#e4e4e7;font-size:.95rem;line-height:1.7;resize:vertical;font-family:inherit}
+textarea:focus{outline:none;border-color:#6366f1}
+.btn{background:#6366f1;color:#fff;border:none;padding:.85rem 2rem;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1rem;transition:all .2s}
+.btn:hover{background:#4f46e5;transform:translateY(-1px)}
+.results{margin-top:2rem;display:none}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.score-card{background:#18181b;border:1px solid #27272a;border-radius:12px;padding:1.25rem;text-align:center}
+.score-card .value{font-size:2.2rem;font-weight:700;margin:.25rem 0}
+.score-card .label{color:#a1a1aa;font-size:.85rem}
+.green{color:#22c55e}.yellow{color:#eab308}.red{color:#ef4444}.blue{color:#6366f1}
+.jargon-list{background:#18181b;border:1px solid #27272a;border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+.jargon-list h3{margin-bottom:1rem;font-size:1.1rem}
+.jargon-item{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #27272a}
+.jargon-item:last-child{border:none}
+.tips{background:#18181b;border:1px solid #27272a;border-radius:12px;padding:1.25rem}
+.tips h3{margin-bottom:1rem}
+.tip{padding:.6rem 0;border-bottom:1px solid #27272a;display:flex;gap:.75rem;align-items:flex-start}
+.tip:last-child{border:none}
+.tip-icon{font-size:1.2rem;flex-shrink:0}
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#18181b;border-top:1px solid #27272a;padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:#71717a;z-index:100}
+.sticky-bar a{color:#6366f1;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📄 Contract Readability Checker</h1>
+<p class="subtitle">Paste any contract text to analyze readability, detect legal jargon, and identify risk areas.</p>
+<textarea id="input" placeholder="Paste your contract text here...">The party of the first part (hereinafter referred to as "Provider") shall notwithstanding any prior agreements, provide the aforementioned services to the party of the second part (hereinafter referred to as "Client") subject to the terms and conditions set forth herein. The Provider reserves the right to terminate this agreement forthwith in the event that the Client fails to remit payment within the stipulated timeframe. All intellectual property created pursuant to this agreement shall be deemed the exclusive property of the Client upon receipt of full payment.</textarea>
+<button class="btn" onclick="analyze()">🔍 Analyze Contract</button>
+<div class="results" id="results">
+<div class="score-grid">
+<div class="score-card"><div class="label">Readability Score</div><div class="value" id="flesch">—</div><div class="label" id="fleschGrade">—</div></div>
+<div class="score-card"><div class="label">Avg Words/Sentence</div><div class="value" id="avgWords">—</div><div class="label">target: 15-20</div></div>
+<div class="score-card"><div class="label">Passive Voice</div><div class="value" id="passive">—</div><div class="label">target: under 20%</div></div>
+<div class="score-card"><div class="label">Risk Score</div><div class="value" id="risk">—</div><div class="label" id="riskGrade">—</div></div>
+</div>
+<div class="jargon-list"><h3>⚠️ Legal Jargon Detected</h3><div id="jargonItems"></div></div>
+<div class="tips"><h3>💡 Recommendations</h3><div id="tipItems"></div></div>
+</div>
+</div>
+<div class="sticky-bar"><span>Built by <strong>Demaciains</strong></span><a href="https://drgalio.github.io/demaciains-paywall/">More AI Tools →</a></div>
+<script>
+const jargonList={hereinafter:"Use 'from now on' or just name the party",notwithstanding:"Use 'despite' or 'even if'",aforementioned:"Use 'the' or repeat the noun",pursuant:"Use 'under' or 'according to'",forthwith:"Use 'immediately'",deemed:"Use 'considered' or 'treated as'",stipulated:"Use 'agreed' or 'specified",remuneration:"Use 'payment' or 'compensation'",indemnify:"Use 'protect from loss'",liability:"Consider simplifying to 'responsibility'",covenant:"Use 'promise' or 'agreement'",waiver:"Use 'giving up the right to'",null:"and void: Use 'cancelled' or 'no longer valid'",whereby:"Use 'by which' or rephrase",inter:"alia: Use 'among other things'",vis-à-vis:"Use 'regarding' or 'in relation to'"};
+function analyze(){
+const text=document.getElementById('input').value.trim();
+if(!text)return;
+const sentences=text.split(/[.!?]+/).filter(s=>s.trim().length>5);
+const words=text.split(/\s+/).filter(w=>w.length>0);
+const syllables=words.reduce((a,w)=>a+countSyllables(w),0);
+const avgWordsPerSent=words.length/Math.max(sentences.length,1);
+const avgSyllPerWord=syllables/Math.max(words.length,1);
+const fleschScore=Math.max(0,Math.min(100,206.835-1.015*avgWordsPerSent-84.6*avgSyllPerWord)).toFixed(0);
+const passivePatterns=/\b(is|are|was|were|been|being|be)\s+(being\s+)?\w+ed\b/gi;
+const passiveMatches=text.match(passivePatterns)||[];
+const passivePct=((passiveMatches.length/Math.max(sentences.length,1))*100).toFixed(0);
+const foundJargon=[];
+Object.keys(jargonList).forEach(term=>{
+if(text.toLowerCase().includes(term.toLowerCase()))foundJargon.push({term,suggestion:jargonList[term]});
+});
+const riskScore=Math.min(100,Math.round(foundJargon.length*12+parseInt(passivePct)*0.5+(avgWordsPerSent>25?(avgWordsPerSent-25)*3:0)));
+document.getElementById('flesch').textContent=fleschScore;
+document.getElementById('flesch').className='value '+(fleschScore>=60?'green':fleschScore>=30?'yellow':'red');
+document.getElementById('fleschGrade').textContent=fleschScore>=60?'Easy to read':fleschScore>=30?'Difficult':'Very hard';
+document.getElementById('avgWords').textContent=avgWordsPerSent.toFixed(1);
+document.getElementById('avgWords').className='value '+(avgWordsPerSent<=20?'green':avgWordsPerSent<=30?'yellow':'red');
+document.getElementById('passive').textContent=passivePct+'%';
+document.getElementById('passive').className='value '+(passivePct<=20?'green':passivePct<=40?'yellow':'red');
+document.getElementById('risk').textContent=riskScore+'/100';
+document.getElementById('risk').className='value '+(riskScore<=30?'green':riskScore<=60?'yellow':'red');
+document.getElementById('riskGrade').textContent=riskScore<=30?'Low risk':riskScore<=60?'Medium risk':'High risk';
+const jargonHtml=foundJargon.length?foundJargon.map(j=>`<div class="jargon-item"><span class="red">"${j.term}"</span><span style="color:#a1a1aa">→ ${j.suggestion}</span></div>`).join(''):'<div class="jargon-item"><span class="green">✅ No common jargon detected</span></div>';
+document.getElementById('jargonItems').innerHTML=jargonHtml;
+const tips=[];
+if(avgWordsPerSent>25)tips.push({icon:'✂️',text:`Average sentence length is ${avgWordsPerSent.toFixed(0)} words. Break long sentences into shorter ones (target: 15-20 words).`});
+if(passivePct>30)tips.push({icon:'🔄',text:`${passivePct}% passive voice detected. Rewrite in active voice for clarity (e.g., "The client pays" vs "Payment shall be remitted").`});
+if(foundJargon.length>3)tips.push({icon:'📝',text:`${foundJargon.length} legal jargon terms found. Replace with plain English equivalents where possible.`});
+if(fleschScore<30)tips.push({icon:'📖',text:'This contract scores very low on readability. Consider adding a plain-English summary at the top.'});
+if(fleschScore>=60)tips.push({icon:'✅',text:'Good readability! This contract is accessible to most readers.'});
+if(tips.length===0)tips.push({icon:'👍',text:'This text looks reasonably clear. No major issues detected.'});
+document.getElementById('tipItems').innerHTML=tips.map(t=>`<div class="tip"><span class="tip-icon">${t.icon}</span><span>${t.text}</span></div>`).join('');
+document.getElementById('results').style.display='block';
+document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+function countSyllables(word){word=word.toLowerCase().replace(/[^a-z]/g,'');if(word.length<=3)return 1;let s=word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/,'').replace(/^y/,'').match(/[aeiouy]{1,2}/g);return s?s.length:1}
+</script>
+</body>
+</html>

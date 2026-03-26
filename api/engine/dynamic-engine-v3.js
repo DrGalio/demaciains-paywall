@@ -1984,11 +1984,369 @@ const DemaciainsEngine = (() => {
   }
 
   // ═══════════════════════════════════════════
+  //  SALES COPY GENERATOR
+  // ═══════════════════════════════════════════
+  function salesCopy(product = 'digital template pack') {
+    const seed = hashString(dateSeed() + product.toLowerCase());
+    const rng = mulberry32(seed);
+
+    const niches = ['ai productivity', 'automation tools', 'digital templates', 'saas', 'online courses', 'e-commerce', 'content creation', 'marketing', 'freelance tools', 'developer tools'];
+    const niche = pick(rng, niches);
+
+    const headlineFormulas = [
+      { formula: 'Urgency + Benefit', headline: `Stop Wasting ${randInt(rng,5,20)} Hours/Week — ${product.replace(/\b\w/g,c=>c.toUpperCase())} Does It in Minutes`, score: randFloat(rng,7.5,9.8).toFixed(1) },
+      { formula: 'Curiosity Gap', headline: `The ${pick(rng,['Secret','Hidden','Underground','Forgotten','Counterintuitive'])} ${niche.replace(/\b\w/g,c=>c.toUpperCase())} Strategy That ${pick(rng,['Top 1%','Industry Leaders','6-Figure','Smart','Successful'])} Creators Use`, score: randFloat(rng,7.0,9.5).toFixed(1) },
+      { formula: 'Social Proof', headline: `Join ${pick(rng,['2,000+','5,000+','10,000+','50,000+'])} ${pick(rng,['Creators','Entrepreneurs','Marketers','Builders','Freelancers'])} Who ${pick(rng,['Automated','Scaled','Simplified','Mastered','Revolutionized'])} Their ${niche.split(' ')[0]}`, score: randFloat(rng,7.2,9.3).toFixed(1) },
+      { formula: 'Before/After', headline: `From ${pick(rng,['Overwhelmed','Stuck','Frustrated','Burning Out','Losing Money'])} to ${pick(rng,['Automated','Profitable','Effortless','In Control','Scaling'])} — How ${product.replace(/\b\w/g,c=>c.toUpperCase())} Changed Everything`, score: randFloat(rng,7.8,9.6).toFixed(1) },
+      { formula: 'Scarcity + Value', headline: `Only ${randInt(rng,100,500)} Copies Available — Get the Complete ${product.replace(/\b\w/g,c=>c.toUpperCase())} System Before It Sells Out`, score: randFloat(rng,6.5,8.8).toFixed(1) },
+    ];
+
+    const heroSection = {
+      openingHook: pick(rng, [
+        `You're spending ${randInt(rng,10,40)} hours a week on tasks a template could do in ${randInt(rng,5,30)} minutes.`,
+        `What if you could skip the ${randInt(rng,6,18)}-month learning curve and start with a proven system?`,
+        `Every day without a system costs you $${randInt(rng,100,500)} in lost productivity. Here's the fix.`,
+        `You don't need more tools. You need the RIGHT template — built by someone who's already done it.`,
+        `The difference between ${pick(rng,['$1K','$5K','$10K'])}/month and ${pick(rng,['$10K','$50K','$100K'])}/month isn't effort. It's systems.`,
+      ]),
+      valueProposition: pick(rng, [
+        `A complete, ready-to-use system that eliminates ${randInt(rng,70,95)}% of the manual work in your ${niche} workflow.`,
+        `Battle-tested templates built from real results — not theory, not fluff, just what actually works.`,
+        `Everything you need to ${pick(rng,['automate','streamline','scale','optimize'])} your ${niche} in one download.`,
+        `Stop building from scratch. Start with a system that's already proven to ${pick(rng,['save 20+ hrs/week','generate $5K+/mo','cut costs 60%','triple output'])}.`,
+      ]),
+      cta: pick(rng, [
+        `Get Instant Access — $${pick(rng,['19','29','39','47','49'])} One-Time`,
+        `Download Now — Own It Forever`,
+        `Start Using It Today — No Subscription`,
+        `Grab Your Copy — Before the Price Goes Up`,
+      ]),
+    };
+
+    const bulletBenefits = [];
+    const benefitPool = [
+      `Save ${randInt(rng,10,30)}+ hours per week on ${pick(rng,['content creation','admin tasks','client work','reporting','scheduling','research','data entry','email management'])}`,
+      `Cut ${pick(rng,['software','tools','subscription','overhead'])} costs by ${randInt(rng,30,70)}% — everything runs on free tools`,
+      `Go from zero to ${pick(rng,['launch','live','automated','operational'])} in under ${randInt(rng,15,60)} minutes`,
+      `${pick(rng,['Eliminate','Remove','Cut out','Skip'])} the ${pick(rng,['tedious','boring','repetitive','time-consuming'])} ${pick(rng,['setup','configuration','research','planning'])} work`,
+      `Built-in ${pick(rng,['quality checks','error handling','best practices','industry standards','proven frameworks'])} — no guesswork`,
+      `${pick(rng,['Works','Integrates','Connects','Compatible'])} with ${pick(rng,['any platform','your existing tools','what you already use','all major platforms'])}`,
+      `Real ${pick(rng,['ROI','results','outcomes','impact'])} — users report ${pick(rng,[`$${randInt(rng,500,5000)}/mo in savings`,`${randInt(rng,20,50)}% productivity boost`,`3x faster output`,`zero learning curve`])}`,
+      `Step-by-step ${pick(rng,['setup guide','walkthrough','tutorial','documentation'])} — ${pick(rng,['no coding','no technical skills','beginner-friendly','zero experience'])} required`,
+      `${pick(rng,['Lifetime','Permanent','Ongoing','Continuous'])} value — ${pick(rng,['no subscriptions','no recurring fees','pay once','own it forever'])}`,
+      `${pick(rng,['Private','Exclusive','Members-only','Premium'])} ${pick(rng,['community','support','updates','resources'])} included`,
+    ];
+    const selected = shuffle(rng, benefitPool);
+    for (let i = 0; i < randInt(rng, 7, 10); i++) bulletBenefits.push(selected[i]);
+
+    const features = [];
+    const featurePool = [
+      { feature: `${pick(rng,['Complete','Full','Comprehensive','Ready-to-use'])} template pack`, benefit: `Skip months of trial and error — start with a proven system` },
+      { feature: `${pick(rng,['Customizable','Editable','Flexible','Adaptable'])} ${pick(rng,['spreadsheets','documents','workflows','configs','dashboards'])}`, benefit: `Make it yours in minutes, not hours` },
+      { feature: `${pick(rng,['Video','Written','Interactive','Step-by-step'])} setup guide`, benefit: `Follow along at your own pace — no confusion` },
+      { feature: `${pick(rng,['Real-time','Instant','Automatic','Built-in'])} ${pick(rng,['calculations','updates','sync','validation','scoring'])}`, benefit: `Never worry about manual errors or outdated data` },
+      { feature: `${pick(rng,['Multi-platform','Cross-platform','Universal','Platform-agnostic'])} support`, benefit: `Works with ${pick(rng,['Google Workspace','Notion','Airtable','Excel','any spreadsheet app'])}` },
+      { feature: `${pick(rng,['Free','No-cost','Zero-cost','Included'])} ${pick(rng,['updates','upgrades','new versions','expansions'])}`, benefit: `Your purchase gets better over time at no extra cost` },
+    ];
+    const selFeatures = shuffle(rng, featurePool);
+    for (let i = 0; i < randInt(rng, 4, 6); i++) features.push(selFeatures[i]);
+
+    const socialProofTemplates = [];
+    const proofPool = [
+      { quote: `"I went from ${pick(rng,['spending 20hrs/week on','constantly struggling with','overwhelmed by'])} ${niche} to having it ${pick(rng,['fully automated','running on autopilot','done in 2 hours'])}. This paid for itself in ${pick(rng,['the first day','one week','a single use'])}."`, name: pick(rng, ['Sarah M.', 'James K.', 'Priya R.', 'Alex T.', 'Maria L.']), role: pick(rng, ['Freelance Designer', 'SaaS Founder', 'Marketing Manager', 'E-commerce Owner', 'Content Creator']) },
+      { quote: `"${pick(rng,['Best','Smartest','Most valuable'])} $${randInt(rng,19,49)} I've ever spent. Period. The ${pick(rng,['templates','system','framework','toolkit'])} alone saved me ${pick(rng,['hundreds of hours','thousands of dollars','months of work'])}."`, name: pick(rng, ['David W.', 'Lisa C.', 'Tom B.', 'Nina P.', 'Chris H.']), role: pick(rng, ['Agency Owner', 'Consultant', 'Course Creator', 'Startup Founder', 'Side Hustler']) },
+      { quote: `"I've tried ${randInt(rng,5,20)} different ${pick(rng,['tools','approaches','solutions','frameworks'])} before this. Nothing came close. The ${pick(rng,['simplicity','depth','quality','completeness'])} is unreal."`, name: pick(rng, ['Mike R.', 'Jessica F.', 'Ryan L.', 'Emma S.', 'Carlos D.']), role: pick(rng, ['Product Manager', 'Digital Marketer', 'Business Coach', 'Online Educator', 'App Developer']) },
+    ];
+    const selProofs = shuffle(rng, proofPool);
+    for (let i = 0; i < randInt(rng, 2, 3); i++) socialProofTemplates.push(selProofs[i]);
+
+    const ctas = [
+      { cta: `Get ${product.replace(/\b\w/g,c=>c.toUpperCase())} — $${pick(rng,['19','29','39','47'])} One-Time`, style: 'Direct', conversionEstimate: randFloat(rng,2.5,5.5).toFixed(1) + '%' },
+      { cta: `Start Saving ${randInt(rng,10,30)}+ Hours/Week Today`, style: 'Benefit-Led', conversionEstimate: randFloat(rng,3.0,6.0).toFixed(1) + '%' },
+      { cta: `Download Now — Own It Forever, No Subscriptions`, style: 'Anti-SaaS', conversionEstimate: randFloat(rng,3.5,6.5).toFixed(1) + '%' },
+      { cta: `See What ${pick(rng,['2,000+','5,000+','10,000+'])} ${pick(rng,['Creators','Builders','Marketers'])} Already Know`, style: 'Social Proof', conversionEstimate: randFloat(rng,2.8,5.8).toFixed(1) + '%' },
+      { cta: `Try Risk-Free — ${randInt(rng,7,30)}-Day Money-Back Guarantee`, style: 'Risk Reversal', conversionEstimate: randFloat(rng,4.0,7.0).toFixed(1) + '%' },
+    ];
+
+    const pricingPsychology = {
+      recommendedPrice: '$' + pick(rng, ['19', '25', '29', '37', '39', '47', '49']),
+      charmPricing: pick(rng, ['$X7 endings (e.g., $27, $37, $47) convert 8-12% better than round numbers', '$X9 endings (e.g., $19, $29, $49) signal premium quality', 'Odd numbers ($25, $35) feel more carefully calculated']),
+      anchoring: pick(rng, [
+        `Show original price $${randInt(rng,79,199)} crossed out → makes current price feel like a steal`,
+        `Compare to hourly consulting rate ($${randInt(rng,100,300)}/hr) — "This would cost $${randInt(rng,1000,5000)} as a consulting engagement"`,
+        `"Worth $${randInt(rng,197,497)}. Today: $${randInt(rng,29,49)}" — value anchoring with scarcity`,
+      ]),
+      urgency: pick(rng, [
+        `Launch discount (first ${randInt(rng,50,200)} buyers get ${randInt(rng,20,40)}% off)`,
+        `Price increases $${randInt(rng,5,10)} every ${randInt(rng,50,100)} sales`,
+        `Limited to ${randInt(rng,500,2000)} copies — currently ${randInt(rng,50,200)} sold`,
+      ]),
+      guarantee: pick(rng, [
+        `${randInt(rng,14,30)}-day money-back guarantee — no questions asked`,
+        `"If it doesn't save you ${randInt(rng,5,20)} hours in the first week, I'll refund every penny"`,
+        `Full refund + keep the templates — zero risk`,
+      ]),
+    };
+
+    const objections = [
+      { objection: `"Is this really worth $${randInt(rng,19,49)}?"`, response: `One hour of your time is worth $${randInt(rng,50,150)}. This saves you ${randInt(rng,10,40)} hours. That's $${randInt(rng,500,6000)} in value for the price of a dinner.` },
+      { objection: `"I can probably build this myself"`, response: `You could. It would take ${randInt(rng,2,8)} weeks and $${randInt(rng,500,3000)} in your time. Or you can start using it in 10 minutes.` },
+      { objection: `"Will this work for MY specific ${pick(rng,['niche','industry','use case','situation'])}?"`, response: `The templates are designed to be ${pick(rng,['universal','modular','highly customizable','platform-agnostic'])}. ${randInt(rng,500,5000)}+ people in ${randInt(rng,10,50)}+ industries use them daily.` },
+      { objection: `"What if I need help setting it up?"`, response: `The included setup guide covers ${pick(rng,['every step','99% of scenarios','all common platforms'])}. Plus, our ${pick(rng,['email support','community','FAQ section','video walkthroughs'])} handle the rest.` },
+      { objection: `"I've been burned by template packs before"`, response: `That's why we offer a ${randInt(rng,14,30)}-day guarantee. If it doesn't deliver, you pay nothing. ${randInt(rng,95,99)}% of buyers keep it.` },
+    ];
+
+    const emailSubjects = [];
+    const subjectPool = [
+      `🚨 Your ${niche} is costing you $${randInt(rng,200,1000)}/week (here's the fix)`,
+      `"I saved ${randInt(rng,15,40)} hours this week" — here's how`,
+      `The $${randInt(rng,19,49)} tool that replaced my ${pick(rng,['$200/mo','$500/mo','$1,000/mo'])} subscription`,
+      `Stop. Building. From. Scratch.`,
+      `${pick(rng,['2,000+','5,000+','10,000+'])} people already have this. Do you?`,
+      `Last chance: ${product.replace(/\b\w/g,c=>c.toUpperCase())} at launch price`,
+      `This ${pick(rng,['template','system','toolkit','framework'])} just went viral. Here's why.`,
+      `I spent ${randInt(rng,100,500)} hours building this so you don't have to`,
+      `The ${pick(rng,['cheapest','fastest','smartest','easiest'])} way to ${pick(rng,['automate','scale','optimize','simplify'])} your ${niche}`,
+      `[Free sample] Try before you buy — ${pick(rng,['3 templates','1 workflow','sample toolkit'])}`,
+    ];
+    const selSubjects = shuffle(rng, subjectPool);
+    for (let i = 0; i < randInt(rng, 6, 10); i++) emailSubjects.push(selSubjects[i]);
+
+    const abTests = [
+      { test: 'Headline A/B', variantA: 'Benefit-focused headline', variantB: 'Curiosity-gap headline', metric: 'Scroll depth + time on page', expectedImpact: randFloat(rng,10,35).toFixed(0) + '% improvement' },
+      { test: 'CTA Button', variantA: 'Green "Get Instant Access"', variantB: 'Blue "Download Now — $X"', metric: 'Click-through rate', expectedImpact: randFloat(rng,8,25).toFixed(0) + '% improvement' },
+      { test: 'Social Proof Placement', variantA: 'Testimonials below features', variantB: 'Testimonials above the fold', metric: 'Conversion rate', expectedImpact: randFloat(rng,5,20).toFixed(0) + '% improvement' },
+      { test: 'Pricing Display', variantA: 'Single price point', variantB: 'Price + value anchor (was $XX)', metric: 'Purchase completion', expectedImpact: randFloat(rng,12,30).toFixed(0) + '% improvement' },
+      { test: 'Guarantee Visibility', variantA: 'Small text in footer', variantB: 'Bold badge near CTA', metric: 'Cart completion rate', expectedImpact: randFloat(rng,15,40).toFixed(0) + '% improvement' },
+    ];
+
+    return {
+      generatedAt: nowISO(),
+      product,
+      niche,
+      headlineFormulas,
+      heroSection,
+      bulletBenefits,
+      featuresVsBenefits: features,
+      socialProofTemplates,
+      ctaVariations: ctas,
+      pricingPsychology,
+      objectionHandling: objections,
+      emailSubjectLines: emailSubjects,
+      abTestSuggestions: abTests,
+      meta: {
+        copyScore: randFloat(rng, 72, 96).toFixed(0),
+        conversionEstimate: randFloat(rng, 1.8, 5.5).toFixed(1) + '%',
+        wordCountTarget: randInt(rng, 800, 2500),
+        recommendedSections: ['Hero', 'Problem', 'Solution', 'Features', 'Social Proof', 'Pricing', 'FAQ', 'CTA'],
+      }
+    };
+  }
+
+  // ═══════════════════════════════════════════
+  //  RETENTION STRATEGY ENGINE
+  // ═══════════════════════════════════════════
+  function retentionStrategy({ product = 'digital product', model = 'one-time', ltv = '$49' } = {}) {
+    const seed = hashString(dateSeed() + product.toLowerCase() + model);
+    const rng = mulberry32(seed);
+
+    const ltvNum = parseInt(ltv.replace(/[^0-9]/g, '')) || 49;
+
+    // Churn Risk Factors
+    const churnFactorPool = [
+      { factor: 'Onboarding Abandonment', description: `${randInt(rng,40,70)}% of buyers never complete initial setup. They buy with intent but lose momentum during configuration.`, severity: 'HIGH', mitigation: 'Create a "First 5 Minutes" quickstart that delivers one visible win before any complexity.', earlyWarningSignal: 'No login or file open within 48h of purchase' },
+      { factor: 'Value Realization Gap', description: `Buyers expect immediate results but the product requires ${randInt(rng,2,8)} hours of customization before delivering value.`, severity: 'HIGH', mitigation: 'Ship pre-configured templates that work out-of-the-box. Customization should be optional, not required.', earlyWarningSignal: 'Support tickets asking "how do I use this?" within first week' },
+      { factor: 'Single-Use Completion', description: `${pick(rng,['Templates','Workflows','Guides'])} are used once and then forgotten. No reason to return or expand usage.`, severity: 'MEDIUM', mitigation: `Add seasonal/quarterly update cycles. Free template drops every ${pick(rng,['month','quarter','6 weeks'])} create re-engagement.`, earlyWarningSignal: 'No return visits after day 7' },
+      { factor: 'Competitor Substitution', description: `Similar products at ${pick(rng,['lower prices','subscription models','bundled deals'])} attract switchers.`, severity: 'MEDIUM', mitigation: `Differentiate on depth, not breadth. Be the specialist in ${pick(rng,['one vertical','one use case','one platform'])}.`, earlyWarningSignal: 'Refund requests mentioning "found something cheaper"' },
+      { factor: 'Feature Overwhelm', description: `Product includes ${randInt(rng,15,50)}+ features/templates but ${randInt(rng,60,85)}% of users only use ${randInt(rng,2,5)} of them.`, severity: 'MEDIUM', mitigation: 'Progressive disclosure: show 3-5 core items first, unlock advanced features after mastery.', earlyWarningSignal: 'Support questions about "what does X do?"' },
+      { factor: 'No Community Connection', description: 'Isolated buyers have no peer interaction, reducing perceived value and switching cost.', severity: 'MEDIUM', mitigation: 'Launch a free Discord/Slack community. Buyers who join retain 3x better.', earlyWarningSignal: 'Zero engagement with community invitations' },
+      { factor: 'Stale Content', description: `Templates/guides not updated in ${randInt(rng,3,12)}+ months. Buyers perceive product as abandoned.`, severity: 'HIGH', mitigation: 'Visible "Last Updated" dates. Quarterly refresh cycles with changelog.', earlyWarningSignal: 'Reviews mentioning "outdated" or "doesn\'t work anymore"' },
+      { factor: 'Missing Advanced Use Cases', description: 'Power users hit ceiling quickly and need functionality not in the product.', severity: 'LOW', mitigation: 'Premium add-on packs for advanced users. Keep base product focused, upsell depth.', earlyWarningSignal: 'Feature requests from repeat buyers' },
+      { factor: 'No Outcome Tracking', description: 'Buyers can\'t measure whether the product actually saved them time/money.', severity: 'MEDIUM', mitigation: 'Include ROI calculator or time-tracking template WITH the product. Make value visible.', earlyWarningSignal: '"Is this actually working?" support messages' },
+      { factor: 'Refund Window Gaming', description: `${randInt(rng,5,15)}% of refunds happen on day ${randInt(rng,28,30)} — users consume content then refund.`, severity: 'LOW', mitigation: 'Drip content delivery: unlock modules over 7 days instead of full access.', earlyWarningSignal: 'Refund requests on last day of guarantee period' },
+    ];
+    const selectedRisks = shuffle(rng, churnFactorPool).slice(0, randInt(rng, 6, 9));
+
+    // Retention Strategies
+    const strategyPool = [
+      { strategy: 'Drip Content Delivery', description: `Instead of full download, deliver content over ${randInt(rng,3,7)} days. Each day unlocks new templates with a "how to use" email. Creates habitual engagement and reduces refund rates by ${randInt(rng,20,45)}%.`, impact: randFloat(rng, 7.5, 9.5).toFixed(1), effort: 'MEDIUM', timeline: `${randInt(rng,3,7)} days to implement`, cost: 'Free', kpi: 'Daily active users, refund rate reduction' },
+      { strategy: 'Quarterly Template Drops', description: `Ship ${randInt(rng,3,8)} new templates/updates every quarter for free to existing buyers. Creates "living product" perception and email re-engagement moments.`, impact: randFloat(rng, 8.0, 9.8).toFixed(1), effort: 'LOW', timeline: `Ongoing — ${randInt(rng,4,8)}hrs per quarter`, cost: 'Free', kpi: 'Return visit rate, repeat purchase rate' },
+      { strategy: 'Buyer Community', description: `Launch a ${pick(rng,['Discord server','Slack group','Circle community','private forum'])} where buyers share how they use the templates. Peer learning drives retention and creates social switching cost.`, impact: randFloat(rng, 8.5, 9.9).toFixed(1), effort: 'MEDIUM', timeline: `${randInt(rng,7,14)} days to launch`, cost: 'Free (Discord/Slack)', kpi: 'Community join rate, monthly active members' },
+      { strategy: 'Outcome Milestones', description: `Email sequence celebrating buyer achievements: "You've been using ${product} for 30 days — here's what you've likely saved." Quantify value retroactively.`, impact: randFloat(rng, 7.0, 9.0).toFixed(1), effort: 'LOW', timeline: `${randInt(rng,2,5)} days to build`, cost: 'Free (email automation)', kpi: 'Email open rate, testimonial submission rate' },
+      { strategy: 'Template Request Board', description: `Public board where buyers vote on next templates. Creates ownership and engagement. Top-voted templates get built in ${randInt(rng,1,3)} weeks.`, impact: randFloat(rng, 7.5, 9.2).toFixed(1), effort: 'LOW', timeline: `${randInt(rng,1,3)} days to set up`, cost: 'Free (GitHub Issues / Canny free tier)', kpi: 'Votes per month, feature request → ship cycle time' },
+      { strategy: 'Personalized Onboarding', description: `Auto-send a "which of these describes you?" survey after purchase. Route to specific quickstart paths based on use case. Reduces time-to-value by ${randInt(rng,40,70)}%.`, impact: randFloat(rng, 8.0, 9.5).toFixed(1), effort: 'MEDIUM', timeline: `${randInt(rng,3,7)} days to build`, cost: 'Free (Typeform/Google Forms)', kpi: 'Time to first value, setup completion rate' },
+      { strategy: 'Win-Back Bundle Offers', description: `After ${randInt(rng,60,120)} days of inactivity, email a "new templates added since you bought" summary with a ${randInt(rng,20,40)}% discount on a complementary product.`, impact: randFloat(rng, 6.5, 8.5).toFixed(1), effort: 'LOW', timeline: `${randInt(rng,1,2)} days to set up`, cost: 'Free (email + discount code)', kpi: 'Re-engagement rate, cross-sell conversion' },
+      { strategy: 'Usage Analytics Dashboard', description: `Provide buyers a personal dashboard showing: templates used, time saved estimate, ROI calculated from their usage data. Make value tangible.`, impact: randFloat(rng, 7.0, 9.0).toFixed(1), effort: 'HIGH', timeline: `${randInt(rng,7,14)} days to build`, cost: 'Free (Google Sheets / static HTML)', kpi: 'Dashboard visit frequency, NPS score' },
+      { strategy: 'Annual Upgrade Path', description: `Year ${pick(rng,['2','2027'])} version at ${randInt(rng,30,50)}% off for existing buyers. Creates anticipation and planned re-purchase cycle.`, impact: randFloat(rng, 7.5, 9.0).toFixed(1), effort: 'LOW', timeline: `${randInt(rng,1,3)} days to set up`, cost: 'Free (discount code)', kpi: 'Annual repurchase rate, upgrade conversion' },
+      { strategy: 'Peer Accountability Groups', description: `Match ${randInt(rng,3,6)} buyers into small accountability groups. Weekly check-ins on using templates. Social commitment drives completion rates up ${randInt(rng,50,80)}%.`, impact: randFloat(rng, 7.0, 8.8).toFixed(1), effort: 'MEDIUM', timeline: `${randInt(rng,5,10)} days to set up`, cost: 'Free (Discord channels)', kpi: 'Group retention rate, template usage increase' },
+    ];
+    const selectedStrategies = shuffle(rng, strategyPool).slice(0, randInt(rng, 6, 10));
+
+    // Re-Engagement Campaigns
+    const campaignPool = [
+      { campaign: 'The "First Win" Sequence', trigger: 'Immediately after purchase', description: 'Ensure every buyer gets a visible result within 24h of purchase.', sequence: [
+        { timing: 'Hour 0', message: 'Welcome email + "Start here" quickstart link' },
+        { timing: 'Hour 2', message: 'Quick tip: "Try this ONE template first — it takes 5 minutes"' },
+        { timing: 'Hour 12', message: '"How\'s it going?" check-in with troubleshooting link' },
+        { timing: 'Day 1', message: 'Case study: "How [Name] saved 10hrs in their first week"' },
+        { timing: 'Day 3', message: 'Pro tips email — advanced usage patterns' },
+      ], expectedRecovery: `${randInt(rng,15,30)}% improvement in setup completion` },
+      { campaign: 'The "We Miss You" Drip', trigger: `${randInt(rng,14,30)} days inactive`, description: 'Gentle re-engagement for buyers who purchased but haven\'t returned.', sequence: [
+        { timing: 'Day 14', message: '"New templates added!" — showcase recent updates' },
+        { timing: 'Day 21', message: 'Quick poll: "What would make this 10x more useful?"' },
+        { timing: 'Day 30', message: 'Exclusive: free bonus template for existing buyers' },
+        { timing: 'Day 45', message: '"Your account summary" — value delivered so far' },
+        { timing: 'Day 60', message: 'Final: last-chance offer on complementary product' },
+      ], expectedRecovery: `${randInt(rng,8,20)}% reactivation rate` },
+      { campaign: 'The "Upgrade Path" Nurture', trigger: `${randInt(rng,30,60)} days post-purchase`, description: 'Cross-sell complementary products to satisfied buyers.', sequence: [
+        { timing: 'Day 30', message: 'Results email: "Here\'s what you\'ve accomplished"' },
+        { timing: 'Day 37', message: 'Introduce complementary product with buyer testimonial' },
+        { timing: 'Day 44', message: `${randInt(rng,20,35)}% discount offer — 72hr window` },
+        { timing: 'Day 50', message: 'Last chance reminder with social proof' },
+        { timing: 'Day 60', message: 'Feedback request + review invitation' },
+      ], expectedRecovery: `${randInt(rng,5,15)}% cross-sell conversion` },
+      { campaign: 'The "Seasonal Refresh"', trigger: 'Quarterly (Jan/Apr/Jul/Oct)', description: 'Re-engage all buyers with fresh content and seasonal relevance.', sequence: [
+        { timing: 'Week 1', message: '"Q[X] Update" — new templates + industry changes' },
+        { timing: 'Week 2', message: 'Seasonal use case: "How to use [product] for [season]"' },
+        { timing: 'Week 3', message: 'Buyer showcase: best community submissions' },
+        { timing: 'Week 4', message: 'Early access offer for next quarter\'s expansion' },
+      ], expectedRecovery: `${randInt(rng,10,25)}% return visit rate per quarter` },
+    ];
+
+    // Loyalty Program
+    const tierColors = ['var(--yellow)', 'var(--accent)', 'var(--purple)', 'var(--pink)'];
+    const tierIcons = ['⭐', '💎', '🏆', '👑'];
+    const loyaltyProgram = {
+      name: pick(rng, ['Insider Circle', 'Template Collective', 'Builder\'s Guild', 'Creator Vault']),
+      description: `Reward buyers who engage, refer, and expand their usage. Every action earns points toward exclusive perks.`,
+      tiers: [
+        { name: 'Member', icon: tierIcons[0], color: tierColors[0], requirement: 'Purchase any product', benefits: ['All purchased templates', 'Free quarterly updates', 'Community access', 'Email support'], perkValue: `$${ltvNum} value` },
+        { name: 'Pro', icon: tierIcons[1], color: tierColors[1], requirement: `${randInt(rng,2,3)} purchases or 1 referral`, benefits: ['Everything in Member', `${randInt(rng,10,20)}% off all products`, 'Early access to new releases', 'Priority email support', 'Bonus template pack'], perkValue: `$${ltvNum * 2}-${ltvNum * 3} value` },
+        { name: 'Elite', icon: tierIcons[2], color: tierColors[2], requirement: `${randInt(rng,4,6)} purchases or ${randInt(rng,3,5)} referrals`, benefits: ['Everything in Pro', 'Free lifetime updates', `${randInt(rng,25,40)}% off all products`, 'Private Slack/Discord channel', 'Template request priority', 'Monthly office hours'], perkValue: `$${ltvNum * 4}-${ltvNum * 6} value` },
+        { name: 'Legend', icon: tierIcons[3], color: tierColors[3], requirement: `${randInt(rng,8,12)} purchases or ${randInt(rng,8,15)} referrals`, benefits: ['Everything in Elite', 'Free all future products', 'Co-creation opportunities', 'Revenue share on referrals', 'Annual strategy call', 'Featured case study'], perkValue: `$${ltvNum * 8}+ value` },
+      ],
+      milestones: [
+        { milestone: 'First Purchase', reward: `Welcome bonus: 1 exclusive template` },
+        { milestone: `${pick(rng,['30','60','90'])}-Day Active`, reward: `${randInt(rng,10,20)}% discount code` },
+        { milestone: 'First Referral', reward: `Free bonus pack ($${randInt(rng,9,19)} value)` },
+        { milestone: `${randInt(rng,3,5)} Purchases`, reward: `Pro tier upgrade + exclusive access` },
+        { milestone: 'Community Contributor', reward: `Featured buyer spotlight + $${randInt(rng,10,25)} credit` },
+        { milestone: `${randInt(rng,365,730)} Days Active`, reward: `Annual loyalty reward: free product of choice` },
+      ]
+    };
+
+    // Referral Mechanics
+    const referralPool = [
+      { mechanic: 'Give $X, Get $X', description: `Referrer gives friend a ${randInt(rng,15,30)}% discount. When friend buys, referrer gets the same discount on next purchase. Simple, fair, proven.`, referrerReward: `${randInt(rng,15,30)}% off next purchase`, friendReward: `${randInt(rng,15,30)}% off first purchase`, viralPotential: randFloat(rng, 6.5, 8.5).toFixed(1), implementation: `Unique referral links via ${pick(rng,['Gumroad','LemonSqueezy','custom redirect'])} + tracking spreadsheet` },
+      { mechanic: 'Free Template Per Referral', description: `Each successful referral unlocks an exclusive template from a "referral-only" collection. Creates aspirational rewards that don't cannibalize sales.`, referrerReward: `Exclusive template per referral`, friendReward: `${randInt(rng,10,25)}% discount`, viralPotential: randFloat(rng, 7.0, 9.0).toFixed(1), implementation: `Manual unlock via email automation or referral platform (ReferralCandy free tier)` },
+      { mechanic: 'Affiliate Commission', description: `Offer ${randInt(rng,20,40)}% commission to buyers who refer others. Especially powerful for creators and bloggers in your niche.`, referrerReward: `${randInt(rng,20,40)}% cash commission`, friendReward: `${randInt(rng,10,20)}% discount`, viralPotential: randFloat(rng, 7.5, 9.5).toFixed(1), implementation: `Gumroad affiliate program or ${pick(rng,['Rewardful','FirstPromoter','PartnerStack'])}` },
+      { mechanic: 'Bundle Unlock', description: `Refer ${randInt(rng,2,3)} friends → unlock a complete bundle for free. Gamifies referrals with tiered rewards.`, referrerReward: `Free bundle ($${ltvNum * randInt(rng,2,4)} value)`, friendReward: `${randInt(rng,15,25)}% discount`, viralPotential: randFloat(rng, 8.0, 9.8).toFixed(1), implementation: `Track via unique codes, auto-unlock at threshold` },
+      { mechanic: 'Social Share Bonus', description: `Share a genuine review/testimonial on social media → get a bonus template or discount. User-generated content drives organic discovery.`, referrerReward: `Bonus template + ${randInt(rng,10,20)}% discount`, friendReward: `${randInt(rng,10,15)}% discount from social proof`, viralPotential: randFloat(rng, 5.5, 7.5).toFixed(1), implementation: `Screenshot verification → manual code delivery or automated via Zapier` },
+      { mechanic: 'Leaderboard Competition', description: `Monthly leaderboard for most referrals. Top ${randInt(rng,3,10)} referrers get exclusive rewards. Creates competitive viral loops.`, referrerReward: `Top prize: free products for ${pick(rng,['6 months','1 year'])}`, friendReward: `${randInt(rng,10,20)}% discount`, viralPotential: randFloat(rng, 7.0, 9.0).toFixed(1), implementation: `Public leaderboard page + manual monthly rewards` },
+    ];
+    const selectedReferrals = shuffle(rng, referralPool).slice(0, randInt(rng, 4, 6));
+
+    // Health Score Framework
+    const healthMetrics = [
+      { metric: 'Setup Completion', description: '% of initial configuration finished', weight: randInt(rng, 15, 25), threshold: `${randInt(rng,80,100)}%` },
+      { metric: 'Time to First Value', description: 'Hours from purchase to first useful output', weight: randInt(rng, 15, 20), threshold: `< ${randInt(rng,1,24)}h` },
+      { metric: 'Feature Adoption Rate', description: '% of available features/templates used', weight: randInt(rng, 10, 20), threshold: `${randInt(rng,40,70)}%` },
+      { metric: 'Return Visit Frequency', description: 'Times buyer returns within 30 days', weight: randInt(rng, 10, 15), threshold: `${randInt(rng,3,8)}+ visits` },
+      { metric: 'Support Ticket Sentiment', description: 'Ratio of positive to negative support interactions', weight: randInt(rng, 5, 15), threshold: `> ${randFloat(rng, 3, 5).toFixed(1)}:1` },
+      { metric: 'NPS Score', description: 'Net Promoter Score from post-purchase survey', weight: randInt(rng, 10, 20), threshold: `> ${randInt(rng,40,70)}` },
+      { metric: 'Referral Activity', description: 'Has the buyer referred anyone?', weight: randInt(rng, 5, 10), threshold: `${randInt(rng,1,3)}+ referrals` },
+      { metric: 'Community Engagement', description: 'Posts, reactions, or contributions in buyer community', weight: randInt(rng, 5, 10), threshold: `${randInt(rng,2,5)}+ interactions/mo` },
+    ];
+
+    const healthScoreFramework = {
+      description: `Composite health score (0-100) combining ${healthMetrics.length} weighted metrics. Updated daily. Predicts churn ${randInt(rng,7,21)} days before it happens.`,
+      metrics: healthMetrics,
+      alerts: [
+        { level: 'HEALTHY', scoreRange: `${randInt(rng,70,80)}-100`, action: 'Celebrate! Send appreciation email. Ask for testimonial/review. Offer upgrade path.' },
+        { level: 'WATCH', scoreRange: `${randInt(rng,45,60)}-${randInt(rng,69,79)}`, action: 'Trigger "tips & tricks" email series. Offer free 15-min setup call. Share relevant case study.' },
+        { level: 'WARNING', scoreRange: `${randInt(rng,25,40)}-${randInt(rng,44,59)}`, action: 'Personal outreach from support. Send exclusive bonus template. Invite to community event.' },
+        { level: 'CRITICAL', scoreRange: `0-${randInt(rng,24,39)}`, action: 'High-touch intervention: personal email from founder. Offer full setup assistance. Consider refund-prevention offer.' },
+      ]
+    };
+
+    // Retention Metrics Benchmarks
+    const retentionMetrics = {
+      description: `Industry benchmarks for ${model} model digital products. Use these to set targets and measure progress.`,
+      benchmarks: [
+        { metric: '30-Day Retention', industryAvg: model === 'subscription' ? '35-45%' : '15-25%', good: model === 'subscription' ? '55-65%' : '30-40%', excellent: model === 'subscription' ? '75%+' : '50%+', target: model === 'subscription' ? `${randInt(rng,55,70)}%` : `${randInt(rng,30,45)}%` },
+        { metric: '90-Day Retention', industryAvg: model === 'subscription' ? '20-30%' : '5-15%', good: model === 'subscription' ? '40-50%' : '20-30%', excellent: model === 'subscription' ? '60%+' : '35%+', target: model === 'subscription' ? `${randInt(rng,40,55)}%` : `${randInt(rng,20,35)}%` },
+        { metric: 'Refund Rate', industryAvg: `${randInt(rng,5,12)}%`, good: `${randInt(rng,3,5)}%`, excellent: `< ${randInt(rng,1,3)}%`, target: `${randInt(rng,2,5)}%` },
+        { metric: 'Repeat Purchase Rate', industryAvg: `${randInt(rng,8,15)}%`, good: `${randInt(rng,20,30)}%`, excellent: `${randInt(rng,35,50)}%+`, target: `${randInt(rng,20,35)}%` },
+        { metric: 'NPS Score', industryAvg: `${randInt(rng,20,35)}`, good: `${randInt(rng,40,55)}`, excellent: `${randInt(rng,60,80)}+`, target: `${randInt(rng,45,65)}` },
+        { metric: 'Referral Rate', industryAvg: `${randInt(rng,2,8)}%`, good: `${randInt(rng,10,18)}%`, excellent: `${randInt(rng,20,35)}%+`, target: `${randInt(rng,12,25)}%` },
+        { metric: 'Time to First Value', industryAvg: `${randInt(rng,24,72)}h`, good: `${randInt(rng,4,12)}h`, excellent: `< ${randInt(rng,1,4)}h`, target: `< ${randInt(rng,2,8)}h` },
+        { metric: 'Support Ticket Rate', industryAvg: `${randInt(rng,15,30)}% of buyers`, good: `${randInt(rng,8,15)}%`, excellent: `< ${randInt(rng,3,8)}%`, target: `< ${randInt(rng,8,15)}%` },
+      ],
+      trackingCadence: [
+        { frequency: 'Daily', action: 'Monitor new purchases, setup completions, and support tickets' },
+        { frequency: 'Weekly', action: 'Review health scores, re-engagement campaign performance, community activity' },
+        { frequency: 'Monthly', action: 'Full retention cohort analysis, NPS survey, referral tracking, churn analysis' },
+        { frequency: 'Quarterly', action: 'Strategy review: update benchmarks, plan template drops, adjust loyalty tiers' },
+      ]
+    };
+
+    // Quick Wins
+    const quickWins = [
+      { action: 'Add "First 5 Minutes" Quickstart', description: `Create a single-page guide that gets buyers from download to first result in under 5 minutes. One template, one use case, one win.`, impact: 'HIGH', timeRequired: `${randInt(rng,1,3)} hours`, tools: 'Any text editor + your product files' },
+      { action: 'Set Up Post-Purchase Email Sequence', description: `3-email welcome series: (1) Welcome + quickstart, (2) Pro tips day 3, (3) Check-in day 7. Use ${pick(rng,['Mailchimp free','ConvertKit free','Gumroad built-in'])}.`, impact: 'HIGH', timeRequired: `${randInt(rng,2,4)} hours`, tools: pick(rng, ['Mailchimp', 'ConvertKit', 'Gumroad email']) },
+      { action: 'Add "Last Updated" to Product', description: `Put a visible "Updated: ${new Date().toISOString().slice(0,7)}" date on your product page. Buyers trust active products. Takes 2 minutes.`, impact: 'MEDIUM', timeRequired: '2 minutes', tools: 'Product listing editor' },
+      { action: 'Create Referral Discount Code', description: `Generate a ${randInt(rng,15,25)}% discount code that existing buyers can share. Simple, no tracking needed. Code: FRIEND${randInt(rng,10,99)}`, impact: 'MEDIUM', timeRequired: `${randInt(rng,5,15)} minutes`, tools: pick(rng, ['Gumroad', 'LemonSqueezy', 'Stripe']) + ' discount code generator' },
+      { action: 'Launch Free Buyer Community', description: `Create a ${pick(rng,['Discord server','Slack workspace','Telegram group'])} with channels for: template-showcase, questions, feature-requests, wins. Post invite link in product.`, impact: 'HIGH', timeRequired: `${randInt(rng,1,2)} hours`, tools: pick(rng, ['Discord', 'Slack', 'Telegram']) + ' (free)' },
+      { action: 'Add ROI Calculator to Product', description: `Include a simple "how much time/money did this save you?" calculator (Google Sheets or HTML). Makes value tangible and shareable.`, impact: 'HIGH', timeRequired: `${randInt(rng,1,3)} hours`, tools: 'Google Sheets or HTML' },
+      { action: 'Send "New Templates Added" Email', description: `Even if you just reorganized existing content, email all buyers saying "We added ${randInt(rng,2,5)} new templates!" — creates re-engagement moment.`, impact: 'MEDIUM', timeRequired: `${randInt(rng,15,30)} minutes`, tools: 'Email list + email client' },
+      { action: 'Create NPS Survey (3 Questions)', description: `"How likely to recommend? (0-10)" + "What's the ONE thing we should improve?" + "Can we share your feedback?" Send ${randInt(rng,7,14)} days post-purchase.`, impact: 'MEDIUM', timeRequired: `${randInt(rng,30,60)} minutes`, tools: pick(rng, ['Typeform free', 'Google Forms', 'Tally']) },
+    ];
+
+    const churnRate = model === 'subscription' ? randFloat(rng, 3, 12).toFixed(1) + '%' : randFloat(rng, 60, 85).toFixed(0) + '% (one-time)';
+    const revenueAtRisk = '$' + (ltvNum * randInt(rng, 50, 500)).toLocaleString();
+    const recoverableRevenue = '$' + Math.floor((ltvNum * randInt(rng, 50, 500)) * randFloat(rng, 0.15, 0.45)).toLocaleString();
+
+    return {
+      generatedAt: nowISO(),
+      product,
+      model,
+      ltv,
+      churnRisks: selectedRisks,
+      retentionStrategies: selectedStrategies,
+      reEngagementCampaigns: campaignPool.slice(0, randInt(rng, 3, 4)),
+      loyaltyProgram,
+      referralMechanics: selectedReferrals,
+      healthScoreFramework,
+      retentionMetrics,
+      quickWins,
+      meta: {
+        retentionScore: randFloat(rng, 45, 88).toFixed(0),
+        projectedChurnRate: churnRate,
+        revenueAtRisk,
+        recoverableRevenue,
+        situation: pick(rng, [
+          `${randInt(rng,20,40)}% of buyers never return after initial download — significant revenue left on the table.`,
+          `Retention is below industry average. Implementing top 3 strategies could recover ${randInt(rng,15,35)}% of at-risk revenue.`,
+          `Good initial conversion but poor post-purchase engagement. Focus on first-value delivery and community building.`,
+          `Product quality is strong but buyers lack connection to the brand. Loyalty program and referrals will create switching costs.`,
+        ]),
+        priorityAction: pick(rng, [
+          `Implement "First 5 Minutes" quickstart — highest-impact, lowest-effort retention lever.`,
+          `Launch post-purchase email sequence — automated re-engagement with zero ongoing effort.`,
+          `Create buyer community — social switching cost is the strongest retention mechanism.`,
+          `Set up drip content delivery — reduces refunds by ${randInt(rng,20,45)}% while increasing engagement.`,
+          `Add referral program — existing buyers become your best acquisition channel.`,
+        ]),
+      }
+    };
+  }
+
+  // ═══════════════════════════════════════════
   //  PUBLIC API
   // ═══════════════════════════════════════════
   return {
-    version: '3.7.0',
-    endpoints: ['market-gap', 'trends', 'competitor-gap', 'algo-report', 'startup-validator', 'pricing-strategy', 'revenue-forecast', 'go-to-market', 'content-strategy', 'competitive-intel', 'content-distribution', 'audience-profiler'],
+    version: '3.9.0',
+    endpoints: ['market-gap', 'trends', 'competitor-gap', 'algo-report', 'startup-validator', 'pricing-strategy', 'revenue-forecast', 'go-to-market', 'content-strategy', 'competitive-intel', 'content-distribution', 'audience-profiler', 'sales-copy', 'retention-strategy'],
     marketGap,
     trends,
     competitorGap,
@@ -2002,6 +2360,8 @@ const DemaciainsEngine = (() => {
     roiCalculator,
     contentDistribution,
     audienceProfiler,
+    salesCopy,
+    retentionStrategy,
     // Batch regenerate all
     regenerateAll(niche = 'ai agent tools', market = 'x402 agent commerce', idea = 'AI-powered productivity tool', product = 'digital template pack', businessType = 'small business', teamSize = 5) {
       return {
@@ -2018,6 +2378,8 @@ const DemaciainsEngine = (() => {
         'content-distribution': contentDistribution(product),
         'roi-calculator': roiCalculator(businessType || 'small business', teamSize || 5),
         'audience-profiler': audienceProfiler(product),
+        'sales-copy': salesCopy(product),
+        'retention-strategy': retentionStrategy({ product }),
       };
     }
   };

@@ -1,0 +1,81 @@
+{
+  "version": "1.0.0",
+  "type": "notion-template",
+  "name": "Freelancer Proposals & Contracts System",
+  "icon": "📋",
+  "description": "Complete proposal-to-payment pipeline for freelancers — proposals, contracts, onboarding, invoicing",
+  "pages": [
+    {
+      "title": "📋 Proposal Template",
+      "type": "template",
+      "content": "# Project Proposal: [PROJECT NAME]\n\n**Prepared for:** [CLIENT NAME]\n**Date:** [DATE]\n**Valid until:** [DATE + 30 DAYS]\n\n---\n\n## 🎯 Project Overview\n[Brief description of what you'll deliver]\n\n## 📐 Scope of Work\n\n### Included:\n- [Deliverable 1]\n- [Deliverable 2]\n- [Deliverable 3]\n\n### Not Included (available as add-ons):\n- [Additional service 1] — $[PRICE]\n- [Additional service 2] — $[PRICE]\n\n## 📅 Timeline\n\n| Phase | Duration | Deliverables | Date |\n|-------|----------|-------------|------|\n| Discovery | Week 1 | Requirements doc | [DATE] |\n| Design | Week 2-3 | Mockups/wireframes | [DATE] |\n| Build | Week 4-6 | Working product | [DATE] |\n| Review | Week 7 | Revisions | [DATE] |\n| Launch | Week 8 | Final delivery | [DATE] |\n\n## 💰 Investment\n\n| Item | Cost |\n|------|------|\n| [Service 1] | $[AMOUNT] |\n| [Service 2] | $[AMOUNT] |\n| **Total** | **$[TOTAL]** |\n\n**Payment terms:** 50% upfront, 50% on delivery\n**Accepted methods:** Bank transfer, PayPal, Wise\n\n## 📝 Terms & Conditions\n1. Two rounds of revisions included\n2. Additional revisions at $[RATE]/hour\n3. Project timeline starts upon receipt of deposit\n4. Client to provide all content/assets by [DATE]\n5. Ownership transfers upon final payment\n\n## ✅ Acceptance\n\nBy signing below, you agree to the scope, timeline, and investment outlined above.\n\n**Client signature:** _________________ **Date:** _________\n**Your signature:** _________________ **Date:** _________"
+    },
+    {
+      "title": "🗂️ Active Proposals",
+      "type": "table",
+      "columns": ["Client", "Project", "Value", "Sent Date", "Status", "Follow-up", "Win %"],
+      "rows": [
+        ["Acme Corp", "Website Redesign", "$8,500", "Mar 20", "🟡 Sent", "Mar 25", "60%"],
+        ["StartupXYZ", "MVP Development", "$15,000", "Mar 18", "🟢 In Review", "Mar 22", "75%"],
+        ["LocalBiz", "Branding Package", "$3,200", "Mar 15", "🔴 No Response", "Mar 22", "30%"],
+        ["TechCo", "API Integration", "$6,000", "Mar 22", "🟡 Sent", "Mar 27", "50%"],
+        ["Agency", "White-label Dev", "$12,000/mo", "Mar 10", "✅ Accepted", "—", "100%"]
+      ]
+    },
+    {
+      "title": "📝 Project Tracker",
+      "type": "table",
+      "columns": ["Project", "Client", "Status", "Deadline", "% Complete", "Next Milestone", "Hours Logged"],
+      "rows": [
+        ["Website Redesign", "Agency", "🟢 Active", "Apr 15", "35%", "Design review", "28/80 hrs"],
+        ["Mobile App UI", "StartupXYZ", "🟡 On Hold", "Apr 30", "60%", "Client feedback", "45/75 hrs"],
+        ["Logo Design", "LocalBiz", "🟢 Active", "Mar 28", "80%", "Final revisions", "12/15 hrs"],
+        ["E-commerce Setup", "RetailCo", "🔴 Blocked", "Apr 10", "20%", "Awaiting content", "8/40 hrs"]
+      ]
+    },
+    {
+      "title": "📨 Client Onboarding Checklist",
+      "type": "checklist",
+      "items": [
+        "☐ Contract signed and deposit received",
+        "☐ Client questionnaire completed",
+        "☐ Brand assets received (logo, colors, fonts)",
+        "☐ Content/copy delivered or scheduled",
+        "☐ Access credentials provided (hosting, domains, etc.)",
+        "☐ Communication channel set up (Slack/email/call schedule)",
+        "☐ Project kickoff call completed",
+        "☐ Shared folder/drive created",
+        "☐ Timeline confirmed with client",
+        "☐ First milestone payment due date set",
+        "☐ Feedback/approval process agreed",
+        "☐ Emergency contact info exchanged"
+      ]
+    },
+    {
+      "title": "💰 Invoice Tracker",
+      "type": "table",
+      "columns": ["Invoice #", "Client", "Amount", "Sent Date", "Due Date", "Status", "Paid Date"],
+      "rows": [
+        ["INV-001", "Agency", "$6,000", "Mar 1", "Mar 15", "✅ Paid", "Mar 12"],
+        ["INV-002", "StartupXYZ", "$7,500", "Mar 10", "Mar 25", "🟡 Sent", "—"],
+        ["INV-003", "LocalBiz", "$1,600", "Mar 15", "Mar 30", "🟡 Sent", "—"],
+        ["INV-004", "RetailCo", "$2,000", "Mar 20", "Apr 4", "🔴 Overdue", "—"],
+        ["INV-005", "Agency", "$6,000", "Mar 25", "Apr 8", "📋 Draft", "—"]
+      ]
+    },
+    {
+      "title": "📚 Contract Clause Library",
+      "type": "table",
+      "columns": ["Clause", "When to Use", "Risk Level", "Template Text"],
+      "rows": [
+        ["Scope Creep Protection", "All projects", "⚠️ Medium", "Any work outside the defined scope will be billed at $[RATE]/hour or require a new proposal."],
+        ["Kill Fee", "Large projects", "🔴 High", "If client terminates before completion, a kill fee of [X]% of remaining balance is due."],
+        ["Late Payment Penalty", "All projects", "⚠️ Medium", "Invoices unpaid after 15 days incur a 2% monthly late fee."],
+        ["IP Transfer", "All projects", "🔴 High", "All intellectual property transfers to client upon receipt of final payment."],
+        ["Revision Limit", "All projects", "🟢 Low", "Includes [X] rounds of revisions. Additional rounds billed at $[RATE]/hour."],
+        ["Force Majeure", "Long projects", "🟢 Low", "Neither party liable for delays caused by circumstances beyond reasonable control."],
+        ["Portfolio Rights", "All projects", "🟢 Low", "Freelancer may display completed work in portfolio unless NDA states otherwise."]
+      ]
+    }
+  ]
+}

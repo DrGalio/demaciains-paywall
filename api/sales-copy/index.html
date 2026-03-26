@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sales Copy Generator — Demaciains x402 API</title>
+<meta name="description" content="AI-powered sales copy generator: headlines, CTAs, social proof, pricing psychology, A/B tests, email subjects. $1.50 USDC via x402.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✍️</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e0e0e8;--dim:#888;--accent:#60a5fa;--green:#34d399;--yellow:#fbbf24;--orange:#fb923c;--purple:#a78bfa;--pink:#f472b6;--red:#f87171;--cyan:#22d3ee}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;padding:20px}
+.container{max-width:960px;margin:0 auto}
+header{text-align:center;padding:40px 0 30px;border-bottom:1px solid var(--border)}
+header h1{font-size:2.2em;margin-bottom:8px;background:linear-gradient(135deg,var(--accent),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--dim);font-size:1.1em}
+.badge{display:inline-block;background:var(--accent);color:#000;padding:2px 10px;border-radius:12px;font-size:.75em;font-weight:700;margin-left:8px;vertical-align:middle}
+.price-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.price-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:.85em}
+.price-chip strong{color:var(--green)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0}
+.card h3{color:var(--accent);margin-bottom:14px;font-size:1.15em}
+.param-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.param-row label{min-width:120px;color:var(--dim);font-size:.9em}
+.param-row input,.param-row select{background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;flex:1;min-width:180px;font-size:.95em}
+.param-row input:focus{outline:none;border-color:var(--accent)}
+.btn{background:linear-gradient(135deg,var(--accent),var(--pink));color:#000;border:none;padding:12px 28px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e}
+.row:last-child{border-bottom:none}
+.label{color:var(--dim);font-size:.9em}
+.val{font-weight:600;text-align:right}
+.score{display:inline-block;padding:3px 10px;border-radius:6px;font-weight:700;font-size:.85em}
+.score-high{background:rgba(52,211,153,.15);color:var(--green)}
+.score-mid{background:rgba(251,191,36,.15);color:var(--yellow)}
+.score-low{background:rgba(248,113,113,.15);color:var(--red)}
+.tab-bar{display:flex;gap:4px;margin:20px 0 0;flex-wrap:wrap}
+.tab{padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px 8px 0 0;cursor:pointer;font-size:.85em;color:var(--dim);transition:all .2s}
+.tab.active{background:#1a1a2e;color:var(--accent);border-bottom-color:#1a1a2e}
+.tab-content{display:none}
+.tab-content.active{display:block}
+#json-output{background:#0d0d14;border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.8em;max-height:500px;overflow:auto;white-space:pre-wrap;word-break:break-all;color:var(--green);margin-top:12px}
+.bullet{padding:8px 0;border-bottom:1px solid #1a1a2e;display:flex;gap:10px;align-items:flex-start}
+.bullet:last-child{border-bottom:none}
+.bullet::before{content:'✍️';flex-shrink:0}
+.cta-card{background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.cta-card .text{font-weight:600;font-size:1.05em}
+.cta-card .meta{color:var(--dim);font-size:.85em}
+.objection-card{background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0}
+.objection-card .q{color:var(--orange);font-weight:600;margin-bottom:6px}
+.objection-card .a{color:var(--text);font-size:.95em}
+.ab-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #1a1a2e}
+.ab-row:last-child{border-bottom:none}
+.ab-label{color:var(--accent);font-weight:600;font-size:.85em;margin-bottom:4px}
+footer{text-align:center;padding:40px 0 20px;color:var(--dim);font-size:.85em}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){header h1{font-size:1.6em}.ab-row{grid-template-columns:1fr}.param-row{flex-direction:column}.param-row label{min-width:auto}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>✍️ Sales Copy Generator <span class="badge">$1.50</span></h1>
+<p>Conversion-optimized headlines, CTAs, social proof, pricing psychology & A/B tests</p>
+<div class="price-bar">
+<span class="price-chip">Price: <strong>$1.50 USDC</strong></span>
+<span class="price-chip">Network: <strong>Base</strong></span>
+<span class="price-chip">x402: <strong>v2</strong></span>
+</div>
+</header>
+
+<div class="card">
+<h3>📋 Parameters</h3>
+<div class="param-row">
+<label>Product Name</label>
+<input type="text" id="product" placeholder="e.g. AI Prompt Pack, n8n Workflow Templates" value="digital template pack">
+</div>
+<div style="margin-top:16px">
+<button class="btn" id="generate-btn" onclick="generate()">Generate Sales Copy →</button>
+</div>
+</div>
+
+<div class="tab-bar">
+<div class="tab active" onclick="showTab('overview')">Overview</div>
+<div class="tab" onclick="showTab('headlines')">Headlines</div>
+<div class="tab" onclick="showTab('benefits')">Benefits</div>
+<div class="tab" onclick="showTab('ctas')">CTAs</div>
+<div class="tab" onclick="showTab('social')">Social Proof</div>
+<div class="tab" onclick="showTab('pricing')">Pricing</div>
+<div class="tab" onclick="showTab('objections')">Objections</div>
+<div class="tab" onclick="showTab('emails')">Emails</div>
+<div class="tab" onclick="showTab('ab')">A/B Tests</div>
+<div class="tab" onclick="showTab('json')">JSON</div>
+</div>
+
+<div id="tab-overview" class="tab-content active">
+<div class="card" id="overview-card">
+<p style="color:var(--dim);text-align:center;padding:40px">Click "Generate Sales Copy" to see results</p>
+</div>
+</div>
+
+<div id="tab-headlines" class="tab-content"><div class="card" id="headlines-card"></div></div>
+<div id="tab-benefits" class="tab-content"><div class="card" id="benefits-card"></div></div>
+<div id="tab-ctas" class="tab-content"><div class="card" id="ctas-card"></div></div>
+<div id="tab-social" class="tab-content"><div class="card" id="social-card"></div></div>
+<div id="tab-pricing" class="tab-content"><div class="card" id="pricing-card"></div></div>
+<div id="tab-objections" class="tab-content"><div class="card" id="objections-card"></div></div>
+<div id="tab-emails" class="tab-content"><div class="card" id="emails-card"></div></div>
+<div id="tab-ab" class="tab-content"><div class="card" id="ab-card"></div></div>
+<div id="tab-json" class="tab-content"><div id="json-output"></div></div>
+
+<footer>
+<p>Powered by <a href="/">Demaciains</a> Dynamic Engine v3.8.0 · x402 Protocol · Base Network</p>
+<p style="margin-top:8px"><a href="/api/">← API Explorer</a></p>
+</footer>
+</div>
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function generate(){
+  const product=document.getElementById('product').value.trim()||'digital template pack';
+  const btn=document.getElementById('generate-btn');
+  btn.disabled=true;btn.textContent='Generating...';
+  try{
+    const d=DemaciainsEngine.salesCopy(product);
+    renderOverview(d);
+    renderHeadlines(d);
+    renderBenefits(d);
+    renderCTAs(d);
+    renderSocial(d);
+    renderPricing(d);
+    renderObjections(d);
+    renderEmails(d);
+    renderAB(d);
+    document.getElementById('json-output').textContent=JSON.stringify(d,null,2);
+    btn.textContent='✓ Generated!';setTimeout(()=>{btn.textContent='Generate Sales Copy →';btn.disabled=false},2000);
+  }catch(e){
+    btn.textContent='Error — retry';btn.disabled=false;
+    console.error(e);
+  }
+}
+
+function renderOverview(d){
+  const el=document.getElementById('overview-card');
+  el.innerHTML=`
+    <h3>📊 Copy Score</h3>
+    <div style="text-align:center;margin:20px 0">
+      <div style="font-size:3em;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent">${d.meta.copyScore}/100</div>
+      <div style="color:var(--dim);margin-top:4px">Conversion Estimate: <strong style="color:var(--green)">${d.meta.conversionEstimate}</strong></div>
+      <div style="color:var(--dim)">Target Word Count: <strong>${d.meta.wordCountTarget} words</strong></div>
+    </div>
+    <h3 style="margin-top:24px">🏗️ Recommended Page Structure</h3>
+    ${d.meta.recommendedSections.map((s,i)=>`<div class="row"><span class="label">${i+1}. ${s}</span><span class="val" style="color:var(--dim)">Section</span></div>`).join('')}
+    <h3 style="margin-top:24px">🎯 Hero Section</h3>
+    <div style="background:#1a1a2e;border-radius:8px;padding:16px;margin-top:10px">
+      <div style="color:var(--orange);font-size:.85em;margin-bottom:6px">OPENING HOOK</div>
+      <div style="font-size:1.1em;font-weight:600;margin-bottom:12px">${d.heroSection.openingHook}</div>
+      <div style="color:var(--orange);font-size:.85em;margin-bottom:6px">VALUE PROPOSITION</div>
+      <div style="margin-bottom:12px">${d.heroSection.valueProposition}</div>
+      <div style="color:var(--orange);font-size:.85em;margin-bottom:6px">CTA</div>
+      <div style="font-weight:700;color:var(--green)">${d.heroSection.cta}</div>
+    </div>
+    <div style="margin-top:16px;color:var(--dim);font-size:.85em">Product: <strong>${d.product}</strong> · Niche: <strong>${d.niche}</strong> · Generated: ${d.generatedAt}</div>
+  `;
+}
+
+function renderHeadlines(d){
+  const el=document.getElementById('headlines-card');
+  el.innerHTML='<h3>📝 Headline Formulas</h3>'+d.headlineFormulas.map(h=>{
+    const sc=parseFloat(h.score);
+    const cls=sc>=8.5?'score-high':sc>=7?'score-mid':'score-low';
+    return `<div style="background:#1a1a2e;border-radius:8px;padding:16px;margin:10px 0">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="color:var(--accent);font-size:.85em;font-weight:600">${h.formula}</span>
+        <span class="score ${cls}">${h.score}/10</span>
+      </div>
+      <div style="font-size:1.1em;font-weight:600">${h.headline}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderBenefits(d){
+  const el=document.getElementById('benefits-card');
+  el.innerHTML=`<h3>✨ Bullet Point Benefits (${d.bulletBenefits.length})</h3>
+    ${d.bulletBenefits.map(b=>`<div class="bullet">${b}</div>`).join('')}
+    <h3 style="margin-top:24px">⚡ Features vs Benefits</h3>
+    ${d.featuresVsBenefits.map(f=>`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #1a1a2e">
+      <div><span style="color:var(--dim);font-size:.8em">FEATURE</span><br><strong>${f.feature}</strong></div>
+      <div><span style="color:var(--dim);font-size:.8em">→ BENEFIT</span><br>${f.benefit}</div>
+    </div>`).join('')}`;
+}
+
+function renderCTAs(d){
+  const el=document.getElementById('ctas-card');
+  el.innerHTML='<h3>🔘 Call-to-Action Variations</h3>'+d.ctaVariations.map(c=>{
+    const cv=parseFloat(c.conversionEstimate);
+    const cls=cv>=5?'score-high':cv>=3.5?'score-mid':'score-low';
+    return `<div class="cta-card">
+      <div><div class="text">${c.cta}</div><div class="meta">Style: ${c.style}</div></div>
+      <span class="score ${cls}">~${c.conversionEstimate} CVR</span>
+    </div>`;
+  }).join('');
+}
+
+function renderSocial(d){
+  const el=document.getElementById('social-card');
+  el.innerHTML='<h3>💬 Social Proof Templates</h3>'+d.socialProofTemplates.map(s=>`
+    <div style="background:#1a1a2e;border-radius:8px;padding:16px;margin:10px 0;border-left:3px solid var(--accent)">
+      <div style="font-style:italic;margin-bottom:8px">${s.quote}</div>
+      <div style="color:var(--dim);font-size:.85em">— ${s.name}, ${s.role}</div>
+    </div>`).join('');
+}
+
+function renderPricing(d){
+  const el=document.getElementById('pricing-card');
+  const p=d.pricingPsychology;
+  el.innerHTML=`<h3>💰 Pricing Psychology</h3>
+    <div style="text-align:center;margin:20px 0">
+      <div style="font-size:2.5em;font-weight:800;color:var(--green)">${p.recommendedPrice}</div>
+      <div style="color:var(--dim)">Recommended Price Point</div>
+    </div>
+    <div class="row"><span class="label">Charm Pricing</span><span class="val" style="color:var(--yellow)">${p.charmPricing}</span></div>
+    <div class="row"><span class="label">Anchoring</span><span class="val" style="color:var(--yellow)">${p.anchoring}</span></div>
+    <div class="row"><span class="label">Urgency</span><span class="val" style="color:var(--orange)">${p.urgency}</span></div>
+    <div class="row"><span class="label">Guarantee</span><span class="val" style="color:var(--green)">${p.guarantee}</span></div>`;
+}
+
+function renderObjections(d){
+  const el=document.getElementById('objections-card');
+  el.innerHTML='<h3>🛡️ Objection Handling</h3>'+d.objectionHandling.map(o=>`
+    <div class="objection-card">
+      <div class="q">${o.objection}</div>
+      <div class="a">${o.response}</div>
+    </div>`).join('');
+}
+
+function renderEmails(d){
+  const el=document.getElementById('emails-card');
+  el.innerHTML=`<h3>📧 Email Subject Lines (${d.emailSubjectLines.length})</h3>
+    ${d.emailSubjectLines.map((s,i)=>`<div class="row"><span class="label" style="min-width:30px;color:var(--accent)">${i+1}.</span><span class="val" style="text-align:left;font-weight:500">${s}</span></div>`).join('')}`;
+}
+
+function renderAB(d){
+  const el=document.getElementById('ab-card');
+  el.innerHTML=`<h3>🧪 A/B Test Suggestions</h3>
+    <div class="ab-row" style="color:var(--dim);font-size:.8em;font-weight:600"><div>TEST</div><div>VARIANTS</div><div>IMPACT</div></div>
+    ${d.abTestSuggestions.map(a=>`<div class="ab-row">
+      <div><div class="ab-label">${a.test}</div><div style="font-size:.85em">${a.metric}</div></div>
+      <div style="font-size:.85em"><strong>A:</strong> ${a.variantA}<br><strong>B:</strong> ${a.variantB}</div>
+      <div><span class="score score-high">${a.expectedImpact}</span></div>
+    </div>`).join('')}`;
+}
+
+// Auto-generate on load
+window.addEventListener('DOMContentLoaded',()=>{generate();});
+</script>
+</body>
+</html>

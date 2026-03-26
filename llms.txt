@@ -1,9 +1,9 @@
 # Demaciains Research Services
-> 9 pay-per-use API endpoints for AI agents and humans. Fresh dynamic data on every request. USDC on Base via x402 protocol.
+> 14 pay-per-use API endpoints for AI agents and humans. Fresh dynamic data on every request. USDC on Base via x402 protocol.
 
 ## API
 Base URL: https://drgalio.github.io/demaciains-paywall
-Engine: Demaciains Dynamic Data Engine v3.4 — Client-Side Seeded PRNG
+Engine: Demaciains Dynamic Data Engine v3.9 — Client-Side Seeded PRNG
 
 ## Endpoints
 
@@ -12,6 +12,7 @@ Engine: Demaciains Dynamic Data Engine v3.4 — Client-Side Seeded PRNG
 - GET /api/trends — $0.25 USDC — Top 5 trending pain points from Reddit, Hacker News, and Product Hunt. Updated hourly.
 - GET /api/competitor-gap?niche=... — $0.50 USDC — Competitor gap analysis for any product niche.
 - GET /api/algo-report?market=... — $2.00 USDC — Backtested pattern analysis on market signals or datasets.
+- GET /api/competitive-intel?product=...&niche=...&price=... — $1.50 USDC — Deep competitive intelligence: competitor profiles, battlefield analysis, positioning map, threat assessment, SWOT, strategic recommendations.
 
 ### Startup & Product
 - GET /api/startup-validator?idea=... — $1.50 USDC — Multi-dimensional startup idea validation: 8-factor scoring, market sizing, risk matrix.
@@ -21,7 +22,12 @@ Engine: Demaciains Dynamic Data Engine v3.4 — Client-Side Seeded PRNG
 ### Strategy & Growth
 - GET /api/go-to-market?product=...&niche=...&price=... — $1.50 USDC — Complete go-to-market strategy: positioning, channel prioritization, 4-phase launch plan.
 - GET /api/content-strategy?product=...&niche=...&audience=... — $1.50 USDC — Content strategy: topic clusters, SEO keywords, platform plans, 4-week calendar, distribution playbook.
+- GET /api/content-distribution?product=...&niche=...&audience=... — $1.50 USDC — Multi-platform content distribution: platform plans, repurposing matrix, 4-week calendar, channel benchmarks, automation workflows, KPI framework.
 - GET /api/audience-profiler?product=... — $1.50 USDC — Audience profiling: buyer personas, demographics, psychographics, pain points, messaging, market sizing (TAM/SAM/SOM), channel priority.
+- GET /api/sales-copy?product=... — $1.50 USDC — Sales copy generator: conversion-optimized headlines, CTAs, social proof, pricing psychology, email subjects, A/B test suggestions.
+
+### Retention & Loyalty
+- GET /api/retention-strategy?product=...&model=...&ltv=... — $1.50 USDC — Customer retention & churn prevention: churn risk assessment, retention strategies, re-engagement campaigns, loyalty program design, referral mechanics, health score framework, quick wins.
 
 ### Free
 - GET / — Homepage + product catalog

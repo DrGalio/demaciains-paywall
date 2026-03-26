@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "type": "notion-template",
+  "name": "365-Day Habit Tracker",
+  "icon": "🎯",
+  "description": "Track 12 habits across an entire year with streak counting and weekly reviews",
+  "pages": [
+    {
+      "title": "🎯 Habits to Track",
+      "type": "table",
+      "columns": ["Habit", "Category", "Target", "Current Streak", "Best Streak", "Completion Rate"],
+      "rows": [
+        ["Morning workout", "Health", "Daily", "12 days", "34 days", "78%"],
+        ["Read 30 min", "Learning", "Daily", "5 days", "21 days", "65%"],
+        ["Meditate 10 min", "Health", "Daily", "8 days", "45 days", "82%"],
+        ["Write 500 words", "Work", "Weekdays", "3 days", "18 days", "55%"],
+        ["No social media before noon", "Focus", "Daily", "0 days", "14 days", "42%"],
+        ["Drink 8 glasses water", "Health", "Daily", "20 days", "20 days", "71%"],
+        ["Review daily goals", "Productivity", "Daily", "30 days", "30 days", "88%"],
+        ["Practice coding 1hr", "Learning", "Weekdays", "7 days", "28 days", "60%"],
+        ["Journal before bed", "Personal", "Daily", "2 days", "15 days", "48%"],
+        ["Walk 10K steps", "Health", "Daily", "4 days", "22 days", "56%"],
+        ["Healthy lunch", "Health", "Daily", "15 days", "15 days", "73%"],
+        ["Plan tomorrow", "Productivity", "Daily", "25 days", "25 days", "85%"]
+      ]
+    },
+    {
+      "title": "📅 January 2026",
+      "type": "table",
+      "columns": ["Day", "AM Workout", "Read", "Meditate", "Write", "No SM", "Water", "Goals", "Code", "Journal", "Walk", "Lunch", "Plan", "Score"],
+      "rows": [
+        ["Jan 1", "✅", "✅", "✅", "—", "❌", "✅", "✅", "—", "✅", "✅", "✅", "✅", "9/12"],
+        ["Jan 2", "✅", "❌", "✅", "✅", "✅", "✅", "✅", "✅", "❌", "✅", "✅", "✅", "9/12"],
+        ["Jan 3", "✅", "✅", "✅", "✅", "❌", "❌", "✅", "✅", "✅", "❌", "✅", "✅", "8/12"],
+        ["Jan 4", "❌", "✅", "✅", "—", "✅", "✅", "✅", "—", "✅", "✅", "❌", "✅", "8/12"],
+        ["Jan 5", "✅", "✅", "❌", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "11/12"]
+      ]
+    },
+    {
+      "title": "📊 Weekly Review Template",
+      "type": "template",
+      "content": "## Week of [DATE]\n\n### Wins this week\n- \n- \n- \n\n### Habits I struggled with\n- \n- \n\n### Why I struggled\n- \n\n### Adjustments for next week\n- \n\n### Overall score: __/84 (12 habits × 7 days)\n\n### Energy level: ⬜⬜⬜⬜⬜\n### Mood average: ⬜⬜⬜⬜⬜"
+    },
+    {
+      "title": "🔄 Monthly Reflection",
+      "type": "template",
+      "content": "## [MONTH] 2026 Reflection\n\n### Best habit this month: __\n### Worst habit this month: __\n### Biggest improvement: __\n### What I learned about myself: __\n### Next month focus: __\n\n### Completion rates\n- Health habits: __%\n- Learning habits: __%\n- Productivity habits: __%\n- Personal habits: __%"
+    },
+    {
+      "title": "🏆 Achievements",
+      "type": "table",
+      "columns": ["Badge", "Requirement", "Earned?", "Date"],
+      "rows": [
+        ["🔥 First Streak", "7-day streak on any habit", "✅", "Jan 8"],
+        ["💪 Triple Threat", "7-day streak on 3 habits simultaneously", "✅", "Jan 15"],
+        ["📚 Bookworm", "Read 30 days in a row", "❌", "—"],
+        ["🧘 Zen Master", "Meditate 30 days in a row", "❌", "—"],
+        ["⚡ Perfect Week", "100% completion for 7 days", "❌", "—"],
+        ["🏆 Perfect Month", "100% completion for 30 days", "❌", "—"],
+        ["🎯 Century", "100 total habit completions", "✅", "Feb 5"],
+        ["🌟 Year of Growth", "365 days tracked", "❌", "—"]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "version": "1.0.0",
+  "type": "notion-template",
+  "name": "Freelancer CRM & Client Tracker",
+  "icon": "🗂️",
+  "description": "Complete client management system with project tracking, pipeline kanban, revenue dashboard, and per-client notes.",
+  "pages": [
+    {
+      "title": "Freelancer CRM",
+      "icon": "🗂️",
+      "children": [
+        {
+          "type": "callout",
+          "icon": { "type": "emoji", "emoji": "💡" },
+          "color": "blue_background",
+          "rich_text": [
+            { "type": "text", "text": { "content": "Welcome to your Freelancer CRM! Track clients from lead to archive, manage projects, monitor revenue, and keep everything organized in one place." } }
+          ]
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "📊 Revenue Dashboard" } }]
+        },
+        {
+          "type": "callout",
+          "icon": { "type": "emoji", "emoji": "💰" },
+          "color": "green_background",
+          "rich_text": [
+            { "type": "text", "text": { "content": "Monthly Revenue Target: $8,000 | Current Month: $5,400 | YTD: $28,750" } }
+          ]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "Revenue by Month" } }]
+        },
+        {
+          "type": "table",
+          "table_width": 4,
+          "has_column_header": true,
+          "has_row_header": false,
+          "children": [
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Month" } }], [{ "type": "text", "text": { "content": "Revenue" } }], [{ "type": "text", "text": { "content": "Expenses" } }], [{ "type": "text", "text": { "content": "Profit" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "January 2026" } }], [{ "type": "text", "text": { "content": "$7,200" } }], [{ "type": "text", "text": { "content": "$1,100" } }], [{ "type": "text", "text": { "content": "$6,100" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "February 2026" } }], [{ "type": "text", "text": { "content": "$8,500" } }], [{ "type": "text", "text": { "content": "$1,300" } }], [{ "type": "text", "text": { "content": "$7,200" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "March 2026" } }], [{ "type": "text", "text": { "content": "$5,400" } }], [{ "type": "text", "text": { "content": "$950" } }], [{ "type": "text", "text": { "content": "$4,450" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "April 2026" } }], [{ "type": "text", "text": { "content": "$7,650" } }], [{ "type": "text", "text": { "content": "$1,200" } }], [{ "type": "text", "text": { "content": "$6,450" } }]] }
+          ]
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "🗂️ Projects & Clients" } }]
+        },
+        {
+          "type": "table",
+          "table_width": 7,
+          "has_column_header": true,
+          "has_row_header": false,
+          "children": [
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Client" } }], [{ "type": "text", "text": { "content": "Project" } }], [{ "type": "text", "text": { "content": "Status" } }], [{ "type": "text", "text": { "content": "Deadline" } }], [{ "type": "text", "text": { "content": "Rate" } }], [{ "type": "text", "text": { "content": "Hours" } }], [{ "type": "text", "text": { "content": "Invoice Status" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Meridian Studios" } }], [{ "type": "text", "text": { "content": "Brand Refresh" } }], [{ "type": "text", "text": { "content": "🟢 Active" } }], [{ "type": "text", "text": { "content": "2026-04-15" } }], [{ "type": "text", "text": { "content": "$95/hr" } }], [{ "type": "text", "text": { "content": "32" } }], [{ "type": "text", "text": { "content": "🟡 Partial — $1,520 sent" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "TechFlow Inc." } }], [{ "type": "text", "text": { "content": "Dashboard Redesign" } }], [{ "type": "text", "text": { "content": "🟢 Active" } }], [{ "type": "text", "text": { "content": "2026-04-01" } }], [{ "type": "text", "text": { "content": "$120/hr" } }], [{ "type": "text", "text": { "content": "18" } }], [{ "type": "text", "text": { "content": "🔴 Unbilled" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Greenleaf Co." } }], [{ "type": "text", "text": { "content": "Website Overhaul" } }], [{ "type": "text", "text": { "content": "🔵 Proposal" } }], [{ "type": "text", "text": { "content": "2026-05-01" } }], [{ "type": "text", "text": { "content": "$110/hr" } }], [{ "type": "text", "text": { "content": "—" } }], [{ "type": "text", "text": { "content": "—" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Apex Ventures" } }], [{ "type": "text", "text": { "content": "Pitch Deck Design" } }], [{ "type": "text", "text": { "content": "✅ Complete" } }], [{ "type": "text", "text": { "content": "2026-03-10" } }], [{ "type": "text", "text": { "content": "$150/hr" } }], [{ "type": "text", "text": { "content": "12" } }], [{ "type": "text", "text": { "content": "✅ Paid — $1,800" } }]] },
+            { "type": "table_row", "cells": [[{ "type": "text", "text": { "content": "Solara Health" } }], [{ "type": "text", "text": { "content": "App UI/UX" } }], [{ "type": "text", "text": { "content": "🟡 Lead" } }], [{ "type": "text", "text": { "content": "TBD" } }], [{ "type": "text", "text": { "content": "$130/hr" } }], [{ "type": "text", "text": { "content": "—" } }], [{ "type": "text", "text": { "content": "—" } }]] }
+          ]
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "🔄 Pipeline Kanban" } }]
+        },
+        {
+          "type": "callout",
+          "icon": { "type": "emoji", "emoji": "📌" },
+          "color": "gray_background",
+          "rich_text": [
+            { "type": "text", "text": { "content": "Drag clients through stages: Lead → Proposal → Active → Complete → Archive" } }
+          ]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "🟡 Lead" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Solara Health — App UI/UX (Referral from Apex Ventures)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "NovaPay — Fintech Landing Page (Inbound via website)" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "🔵 Proposal" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Greenleaf Co. — Website Overhaul (Sent Mar 20, awaiting response)" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "🟢 Active" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Meridian Studios — Brand Refresh (32h logged)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "TechFlow Inc. — Dashboard Redesign (18h logged)" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "✅ Complete" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Apex Ventures — Pitch Deck Design (Paid $1,800)" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "📦 Archive" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Lumina Labs — Social Media Kit (Completed Q4 2025)" } }]
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "🔄 Recurring Tasks" } }]
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Send weekly status updates to active clients" } }],
+          "checked": false
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Review and send outstanding invoices (every Friday)" } }],
+          "checked": false
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Update time tracking logs" } }],
+          "checked": true
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Follow up on proposals older than 5 days" } }],
+          "checked": false
+        },
+        {
+          "type": "to_do",
+          "rich_text": [{ "type": "text", "text": { "content": "Monthly financial review & tax set-aside" } }],
+          "checked": false
+        },
+        {
+          "type": "divider",
+          "divider": {}
+        },
+        {
+          "type": "heading_1",
+          "rich_text": [{ "type": "text", "text": { "content": "📝 Client Notes" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "Meridian Studios" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Primary contact: Sarah Chen (sarah@meridian.studio)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Prefers async updates via Notion comments" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Brand colors: #2D5F8A, #F4A261, #E76F51" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "TechFlow Inc." } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Primary contact: James Okafor (james@techflow.io)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Weekly syncs on Tuesdays at 2pm EST" } }]
+        },
+        {
+          "type": "heading_2",
+          "rich_text": [{ "type": "text", "text": { "content": "Apex Ventures" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Primary contact: Maria Gonzalez (maria@apexvc.com)" } }]
+        },
+        {
+          "type": "bulleted_list_item",
+          "rich_text": [{ "type": "text", "text": { "content": "Happy with results — potential referral source for portfolio startups" } }]
+        }
+      ]
+    }
+  ]
+}

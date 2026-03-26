@@ -1,0 +1,578 @@
+{
+  "generatedAt": "2026-03-26T18:21:52.585Z",
+  "product": "digital product",
+  "model": "one-time",
+  "ltv": "$49",
+  "churnRisks": [
+    {
+      "factor": "Refund Window Gaming",
+      "description": "12% of refunds happen on day 29 — users consume content then refund.",
+      "severity": "LOW",
+      "mitigation": "Drip content delivery: unlock modules over 7 days instead of full access.",
+      "earlyWarningSignal": "Refund requests on last day of guarantee period"
+    },
+    {
+      "factor": "Value Realization Gap",
+      "description": "Buyers expect immediate results but the product requires 2 hours of customization before delivering value.",
+      "severity": "HIGH",
+      "mitigation": "Ship pre-configured templates that work out-of-the-box. Customization should be optional, not required.",
+      "earlyWarningSignal": "Support tickets asking \"how do I use this?\" within first week"
+    },
+    {
+      "factor": "No Outcome Tracking",
+      "description": "Buyers can't measure whether the product actually saved them time/money.",
+      "severity": "MEDIUM",
+      "mitigation": "Include ROI calculator or time-tracking template WITH the product. Make value visible.",
+      "earlyWarningSignal": "\"Is this actually working?\" support messages"
+    },
+    {
+      "factor": "Single-Use Completion",
+      "description": "Guides are used once and then forgotten. No reason to return or expand usage.",
+      "severity": "MEDIUM",
+      "mitigation": "Add seasonal/quarterly update cycles. Free template drops every quarter create re-engagement.",
+      "earlyWarningSignal": "No return visits after day 7"
+    },
+    {
+      "factor": "Stale Content",
+      "description": "Templates/guides not updated in 11+ months. Buyers perceive product as abandoned.",
+      "severity": "HIGH",
+      "mitigation": "Visible \"Last Updated\" dates. Quarterly refresh cycles with changelog.",
+      "earlyWarningSignal": "Reviews mentioning \"outdated\" or \"doesn't work anymore\""
+    },
+    {
+      "factor": "Competitor Substitution",
+      "description": "Similar products at subscription models attract switchers.",
+      "severity": "MEDIUM",
+      "mitigation": "Differentiate on depth, not breadth. Be the specialist in one vertical.",
+      "earlyWarningSignal": "Refund requests mentioning \"found something cheaper\""
+    },
+    {
+      "factor": "Missing Advanced Use Cases",
+      "description": "Power users hit ceiling quickly and need functionality not in the product.",
+      "severity": "LOW",
+      "mitigation": "Premium add-on packs for advanced users. Keep base product focused, upsell depth.",
+      "earlyWarningSignal": "Feature requests from repeat buyers"
+    }
+  ],
+  "retentionStrategies": [
+    {
+      "strategy": "Quarterly Template Drops",
+      "description": "Ship 7 new templates/updates every quarter for free to existing buyers. Creates \"living product\" perception and email re-engagement moments.",
+      "impact": "9.6",
+      "effort": "LOW",
+      "timeline": "Ongoing — 7hrs per quarter",
+      "cost": "Free",
+      "kpi": "Return visit rate, repeat purchase rate"
+    },
+    {
+      "strategy": "Personalized Onboarding",
+      "description": "Auto-send a \"which of these describes you?\" survey after purchase. Route to specific quickstart paths based on use case. Reduces time-to-value by 42%.",
+      "impact": "8.9",
+      "effort": "MEDIUM",
+      "timeline": "7 days to build",
+      "cost": "Free (Typeform/Google Forms)",
+      "kpi": "Time to first value, setup completion rate"
+    },
+    {
+      "strategy": "Buyer Community",
+      "description": "Launch a Discord server where buyers share how they use the templates. Peer learning drives retention and creates social switching cost.",
+      "impact": "8.8",
+      "effort": "MEDIUM",
+      "timeline": "7 days to launch",
+      "cost": "Free (Discord/Slack)",
+      "kpi": "Community join rate, monthly active members"
+    },
+    {
+      "strategy": "Usage Analytics Dashboard",
+      "description": "Provide buyers a personal dashboard showing: templates used, time saved estimate, ROI calculated from their usage data. Make value tangible.",
+      "impact": "8.9",
+      "effort": "HIGH",
+      "timeline": "13 days to build",
+      "cost": "Free (Google Sheets / static HTML)",
+      "kpi": "Dashboard visit frequency, NPS score"
+    },
+    {
+      "strategy": "Drip Content Delivery",
+      "description": "Instead of full download, deliver content over 5 days. Each day unlocks new templates with a \"how to use\" email. Creates habitual engagement and reduces refund rates by 30%.",
+      "impact": "9.4",
+      "effort": "MEDIUM",
+      "timeline": "7 days to implement",
+      "cost": "Free",
+      "kpi": "Daily active users, refund rate reduction"
+    },
+    {
+      "strategy": "Template Request Board",
+      "description": "Public board where buyers vote on next templates. Creates ownership and engagement. Top-voted templates get built in 3 weeks.",
+      "impact": "7.7",
+      "effort": "LOW",
+      "timeline": "2 days to set up",
+      "cost": "Free (GitHub Issues / Canny free tier)",
+      "kpi": "Votes per month, feature request → ship cycle time"
+    },
+    {
+      "strategy": "Peer Accountability Groups",
+      "description": "Match 4 buyers into small accountability groups. Weekly check-ins on using templates. Social commitment drives completion rates up 59%.",
+      "impact": "8.0",
+      "effort": "MEDIUM",
+      "timeline": "5 days to set up",
+      "cost": "Free (Discord channels)",
+      "kpi": "Group retention rate, template usage increase"
+    },
+    {
+      "strategy": "Win-Back Bundle Offers",
+      "description": "After 93 days of inactivity, email a \"new templates added since you bought\" summary with a 30% discount on a complementary product.",
+      "impact": "6.9",
+      "effort": "LOW",
+      "timeline": "2 days to set up",
+      "cost": "Free (email + discount code)",
+      "kpi": "Re-engagement rate, cross-sell conversion"
+    },
+    {
+      "strategy": "Outcome Milestones",
+      "description": "Email sequence celebrating buyer achievements: \"You've been using digital product for 30 days — here's what you've likely saved.\" Quantify value retroactively.",
+      "impact": "8.3",
+      "effort": "LOW",
+      "timeline": "4 days to build",
+      "cost": "Free (email automation)",
+      "kpi": "Email open rate, testimonial submission rate"
+    },
+    {
+      "strategy": "Annual Upgrade Path",
+      "description": "Year 2 version at 31% off for existing buyers. Creates anticipation and planned re-purchase cycle.",
+      "impact": "7.8",
+      "effort": "LOW",
+      "timeline": "1 days to set up",
+      "cost": "Free (discount code)",
+      "kpi": "Annual repurchase rate, upgrade conversion"
+    }
+  ],
+  "reEngagementCampaigns": [
+    {
+      "campaign": "The \"First Win\" Sequence",
+      "trigger": "Immediately after purchase",
+      "description": "Ensure every buyer gets a visible result within 24h of purchase.",
+      "sequence": [
+        {
+          "timing": "Hour 0",
+          "message": "Welcome email + \"Start here\" quickstart link"
+        },
+        {
+          "timing": "Hour 2",
+          "message": "Quick tip: \"Try this ONE template first — it takes 5 minutes\""
+        },
+        {
+          "timing": "Hour 12",
+          "message": "\"How's it going?\" check-in with troubleshooting link"
+        },
+        {
+          "timing": "Day 1",
+          "message": "Case study: \"How [Name] saved 10hrs in their first week\""
+        },
+        {
+          "timing": "Day 3",
+          "message": "Pro tips email — advanced usage patterns"
+        }
+      ],
+      "expectedRecovery": "25% improvement in setup completion"
+    },
+    {
+      "campaign": "The \"We Miss You\" Drip",
+      "trigger": "16 days inactive",
+      "description": "Gentle re-engagement for buyers who purchased but haven't returned.",
+      "sequence": [
+        {
+          "timing": "Day 14",
+          "message": "\"New templates added!\" — showcase recent updates"
+        },
+        {
+          "timing": "Day 21",
+          "message": "Quick poll: \"What would make this 10x more useful?\""
+        },
+        {
+          "timing": "Day 30",
+          "message": "Exclusive: free bonus template for existing buyers"
+        },
+        {
+          "timing": "Day 45",
+          "message": "\"Your account summary\" — value delivered so far"
+        },
+        {
+          "timing": "Day 60",
+          "message": "Final: last-chance offer on complementary product"
+        }
+      ],
+      "expectedRecovery": "17% reactivation rate"
+    },
+    {
+      "campaign": "The \"Upgrade Path\" Nurture",
+      "trigger": "46 days post-purchase",
+      "description": "Cross-sell complementary products to satisfied buyers.",
+      "sequence": [
+        {
+          "timing": "Day 30",
+          "message": "Results email: \"Here's what you've accomplished\""
+        },
+        {
+          "timing": "Day 37",
+          "message": "Introduce complementary product with buyer testimonial"
+        },
+        {
+          "timing": "Day 44",
+          "message": "20% discount offer — 72hr window"
+        },
+        {
+          "timing": "Day 50",
+          "message": "Last chance reminder with social proof"
+        },
+        {
+          "timing": "Day 60",
+          "message": "Feedback request + review invitation"
+        }
+      ],
+      "expectedRecovery": "11% cross-sell conversion"
+    }
+  ],
+  "loyaltyProgram": {
+    "name": "Creator Vault",
+    "description": "Reward buyers who engage, refer, and expand their usage. Every action earns points toward exclusive perks.",
+    "tiers": [
+      {
+        "name": "Member",
+        "icon": "⭐",
+        "color": "var(--yellow)",
+        "requirement": "Purchase any product",
+        "benefits": [
+          "All purchased templates",
+          "Free quarterly updates",
+          "Community access",
+          "Email support"
+        ],
+        "perkValue": "$49 value"
+      },
+      {
+        "name": "Pro",
+        "icon": "💎",
+        "color": "var(--accent)",
+        "requirement": "3 purchases or 1 referral",
+        "benefits": [
+          "Everything in Member",
+          "16% off all products",
+          "Early access to new releases",
+          "Priority email support",
+          "Bonus template pack"
+        ],
+        "perkValue": "$98-147 value"
+      },
+      {
+        "name": "Elite",
+        "icon": "🏆",
+        "color": "var(--purple)",
+        "requirement": "4 purchases or 3 referrals",
+        "benefits": [
+          "Everything in Pro",
+          "Free lifetime updates",
+          "37% off all products",
+          "Private Slack/Discord channel",
+          "Template request priority",
+          "Monthly office hours"
+        ],
+        "perkValue": "$196-294 value"
+      },
+      {
+        "name": "Legend",
+        "icon": "👑",
+        "color": "var(--pink)",
+        "requirement": "11 purchases or 8 referrals",
+        "benefits": [
+          "Everything in Elite",
+          "Free all future products",
+          "Co-creation opportunities",
+          "Revenue share on referrals",
+          "Annual strategy call",
+          "Featured case study"
+        ],
+        "perkValue": "$392+ value"
+      }
+    ],
+    "milestones": [
+      {
+        "milestone": "First Purchase",
+        "reward": "Welcome bonus: 1 exclusive template"
+      },
+      {
+        "milestone": "60-Day Active",
+        "reward": "20% discount code"
+      },
+      {
+        "milestone": "First Referral",
+        "reward": "Free bonus pack ($11 value)"
+      },
+      {
+        "milestone": "4 Purchases",
+        "reward": "Pro tier upgrade + exclusive access"
+      },
+      {
+        "milestone": "Community Contributor",
+        "reward": "Featured buyer spotlight + $16 credit"
+      },
+      {
+        "milestone": "628 Days Active",
+        "reward": "Annual loyalty reward: free product of choice"
+      }
+    ]
+  },
+  "referralMechanics": [
+    {
+      "mechanic": "Affiliate Commission",
+      "description": "Offer 33% commission to buyers who refer others. Especially powerful for creators and bloggers in your niche.",
+      "referrerReward": "39% cash commission",
+      "friendReward": "12% discount",
+      "viralPotential": "8.4",
+      "implementation": "Gumroad affiliate program or Rewardful"
+    },
+    {
+      "mechanic": "Give $X, Get $X",
+      "description": "Referrer gives friend a 20% discount. When friend buys, referrer gets the same discount on next purchase. Simple, fair, proven.",
+      "referrerReward": "20% off next purchase",
+      "friendReward": "17% off first purchase",
+      "viralPotential": "7.3",
+      "implementation": "Unique referral links via Gumroad + tracking spreadsheet"
+    },
+    {
+      "mechanic": "Social Share Bonus",
+      "description": "Share a genuine review/testimonial on social media → get a bonus template or discount. User-generated content drives organic discovery.",
+      "referrerReward": "Bonus template + 20% discount",
+      "friendReward": "13% discount from social proof",
+      "viralPotential": "6.1",
+      "implementation": "Screenshot verification → manual code delivery or automated via Zapier"
+    },
+    {
+      "mechanic": "Leaderboard Competition",
+      "description": "Monthly leaderboard for most referrals. Top 8 referrers get exclusive rewards. Creates competitive viral loops.",
+      "referrerReward": "Top prize: free products for 1 year",
+      "friendReward": "15% discount",
+      "viralPotential": "7.0",
+      "implementation": "Public leaderboard page + manual monthly rewards"
+    }
+  ],
+  "healthScoreFramework": {
+    "description": "Composite health score (0-100) combining 8 weighted metrics. Updated daily. Predicts churn 17 days before it happens.",
+    "metrics": [
+      {
+        "metric": "Setup Completion",
+        "description": "% of initial configuration finished",
+        "weight": 17,
+        "threshold": "84%"
+      },
+      {
+        "metric": "Time to First Value",
+        "description": "Hours from purchase to first useful output",
+        "weight": 20,
+        "threshold": "< 12h"
+      },
+      {
+        "metric": "Feature Adoption Rate",
+        "description": "% of available features/templates used",
+        "weight": 14,
+        "threshold": "67%"
+      },
+      {
+        "metric": "Return Visit Frequency",
+        "description": "Times buyer returns within 30 days",
+        "weight": 15,
+        "threshold": "5+ visits"
+      },
+      {
+        "metric": "Support Ticket Sentiment",
+        "description": "Ratio of positive to negative support interactions",
+        "weight": 12,
+        "threshold": "> 4.9:1"
+      },
+      {
+        "metric": "NPS Score",
+        "description": "Net Promoter Score from post-purchase survey",
+        "weight": 18,
+        "threshold": "> 53"
+      },
+      {
+        "metric": "Referral Activity",
+        "description": "Has the buyer referred anyone?",
+        "weight": 5,
+        "threshold": "1+ referrals"
+      },
+      {
+        "metric": "Community Engagement",
+        "description": "Posts, reactions, or contributions in buyer community",
+        "weight": 8,
+        "threshold": "4+ interactions/mo"
+      }
+    ],
+    "alerts": [
+      {
+        "level": "HEALTHY",
+        "scoreRange": "79-100",
+        "action": "Celebrate! Send appreciation email. Ask for testimonial/review. Offer upgrade path."
+      },
+      {
+        "level": "WATCH",
+        "scoreRange": "57-71",
+        "action": "Trigger \"tips & tricks\" email series. Offer free 15-min setup call. Share relevant case study."
+      },
+      {
+        "level": "WARNING",
+        "scoreRange": "26-52",
+        "action": "Personal outreach from support. Send exclusive bonus template. Invite to community event."
+      },
+      {
+        "level": "CRITICAL",
+        "scoreRange": "0-39",
+        "action": "High-touch intervention: personal email from founder. Offer full setup assistance. Consider refund-prevention offer."
+      }
+    ]
+  },
+  "retentionMetrics": {
+    "description": "Industry benchmarks for one-time model digital products. Use these to set targets and measure progress.",
+    "benchmarks": [
+      {
+        "metric": "30-Day Retention",
+        "industryAvg": "15-25%",
+        "good": "30-40%",
+        "excellent": "50%+",
+        "target": "33%"
+      },
+      {
+        "metric": "90-Day Retention",
+        "industryAvg": "5-15%",
+        "good": "20-30%",
+        "excellent": "35%+",
+        "target": "22%"
+      },
+      {
+        "metric": "Refund Rate",
+        "industryAvg": "12%",
+        "good": "4%",
+        "excellent": "< 3%",
+        "target": "3%"
+      },
+      {
+        "metric": "Repeat Purchase Rate",
+        "industryAvg": "9%",
+        "good": "25%",
+        "excellent": "49%+",
+        "target": "20%"
+      },
+      {
+        "metric": "NPS Score",
+        "industryAvg": "29",
+        "good": "46",
+        "excellent": "65+",
+        "target": "51"
+      },
+      {
+        "metric": "Referral Rate",
+        "industryAvg": "5%",
+        "good": "16%",
+        "excellent": "25%+",
+        "target": "12%"
+      },
+      {
+        "metric": "Time to First Value",
+        "industryAvg": "70h",
+        "good": "9h",
+        "excellent": "< 3h",
+        "target": "< 4h"
+      },
+      {
+        "metric": "Support Ticket Rate",
+        "industryAvg": "25% of buyers",
+        "good": "8%",
+        "excellent": "< 6%",
+        "target": "< 10%"
+      }
+    ],
+    "trackingCadence": [
+      {
+        "frequency": "Daily",
+        "action": "Monitor new purchases, setup completions, and support tickets"
+      },
+      {
+        "frequency": "Weekly",
+        "action": "Review health scores, re-engagement campaign performance, community activity"
+      },
+      {
+        "frequency": "Monthly",
+        "action": "Full retention cohort analysis, NPS survey, referral tracking, churn analysis"
+      },
+      {
+        "frequency": "Quarterly",
+        "action": "Strategy review: update benchmarks, plan template drops, adjust loyalty tiers"
+      }
+    ]
+  },
+  "quickWins": [
+    {
+      "action": "Add \"First 5 Minutes\" Quickstart",
+      "description": "Create a single-page guide that gets buyers from download to first result in under 5 minutes. One template, one use case, one win.",
+      "impact": "HIGH",
+      "timeRequired": "1 hours",
+      "tools": "Any text editor + your product files"
+    },
+    {
+      "action": "Set Up Post-Purchase Email Sequence",
+      "description": "3-email welcome series: (1) Welcome + quickstart, (2) Pro tips day 3, (3) Check-in day 7. Use ConvertKit free.",
+      "impact": "HIGH",
+      "timeRequired": "3 hours",
+      "tools": "Mailchimp"
+    },
+    {
+      "action": "Add \"Last Updated\" to Product",
+      "description": "Put a visible \"Updated: 2026-03\" date on your product page. Buyers trust active products. Takes 2 minutes.",
+      "impact": "MEDIUM",
+      "timeRequired": "2 minutes",
+      "tools": "Product listing editor"
+    },
+    {
+      "action": "Create Referral Discount Code",
+      "description": "Generate a 18% discount code that existing buyers can share. Simple, no tracking needed. Code: FRIEND95",
+      "impact": "MEDIUM",
+      "timeRequired": "12 minutes",
+      "tools": "LemonSqueezy discount code generator"
+    },
+    {
+      "action": "Launch Free Buyer Community",
+      "description": "Create a Telegram group with channels for: template-showcase, questions, feature-requests, wins. Post invite link in product.",
+      "impact": "HIGH",
+      "timeRequired": "1 hours",
+      "tools": "Slack (free)"
+    },
+    {
+      "action": "Add ROI Calculator to Product",
+      "description": "Include a simple \"how much time/money did this save you?\" calculator (Google Sheets or HTML). Makes value tangible and shareable.",
+      "impact": "HIGH",
+      "timeRequired": "3 hours",
+      "tools": "Google Sheets or HTML"
+    },
+    {
+      "action": "Send \"New Templates Added\" Email",
+      "description": "Even if you just reorganized existing content, email all buyers saying \"We added 4 new templates!\" — creates re-engagement moment.",
+      "impact": "MEDIUM",
+      "timeRequired": "18 minutes",
+      "tools": "Email list + email client"
+    },
+    {
+      "action": "Create NPS Survey (3 Questions)",
+      "description": "\"How likely to recommend? (0-10)\" + \"What's the ONE thing we should improve?\" + \"Can we share your feedback?\" Send 13 days post-purchase.",
+      "impact": "MEDIUM",
+      "timeRequired": "38 minutes",
+      "tools": "Tally"
+    }
+  ],
+  "meta": {
+    "retentionScore": "86",
+    "projectedChurnRate": "63% (one-time)",
+    "revenueAtRisk": "$7,889",
+    "recoverableRevenue": "$3,465",
+    "situation": "Product quality is strong but buyers lack connection to the brand. Loyalty program and referrals will create switching costs.",
+    "priorityAction": "Add referral program — existing buyers become your best acquisition channel."
+  }
+}

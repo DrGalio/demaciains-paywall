@@ -1,0 +1,199 @@
+{
+  "generatedAt": "2026-03-26T12:13:21.923Z",
+  "product": "digital template pack",
+  "niche": "digital templates",
+  "headlineFormulas": [
+    {
+      "formula": "Urgency + Benefit",
+      "headline": "Stop Wasting 10 Hours/Week — Digital Template Pack Does It in Minutes",
+      "score": "9.1"
+    },
+    {
+      "formula": "Curiosity Gap",
+      "headline": "The Hidden Digital Templates Strategy That Successful Creators Use",
+      "score": "8.0"
+    },
+    {
+      "formula": "Social Proof",
+      "headline": "Join 10,000+ Creators Who Automated Their digital",
+      "score": "7.8"
+    },
+    {
+      "formula": "Before/After",
+      "headline": "From Burning Out to Effortless — How Digital Template Pack Changed Everything",
+      "score": "9.1"
+    },
+    {
+      "formula": "Scarcity + Value",
+      "headline": "Only 118 Copies Available — Get the Complete Digital Template Pack System Before It Sells Out",
+      "score": "7.1"
+    }
+  ],
+  "heroSection": {
+    "openingHook": "You don't need more tools. You need the RIGHT template — built by someone who's already done it.",
+    "valueProposition": "Stop building from scratch. Start with a system that's already proven to generate $5K+/mo.",
+    "cta": "Download Now — Own It Forever"
+  },
+  "bulletBenefits": [
+    "Built-in industry standards — no guesswork",
+    "Save 26+ hours per week on research",
+    "Exclusive updates included",
+    "Cut out the repetitive configuration work",
+    "Works with what you already use",
+    "Continuous value — own it forever",
+    "Real results — users report $1912/mo in savings",
+    "Step-by-step documentation — zero experience required",
+    "Cut overhead costs by 59% — everything runs on free tools"
+  ],
+  "featuresVsBenefits": [
+    {
+      "feature": "Complete template pack",
+      "benefit": "Skip months of trial and error — start with a proven system"
+    },
+    {
+      "feature": "Free updates",
+      "benefit": "Your purchase gets better over time at no extra cost"
+    },
+    {
+      "feature": "Video setup guide",
+      "benefit": "Follow along at your own pace — no confusion"
+    },
+    {
+      "feature": "Adaptable documents",
+      "benefit": "Make it yours in minutes, not hours"
+    },
+    {
+      "feature": "Platform-agnostic support",
+      "benefit": "Works with Excel"
+    }
+  ],
+  "socialProofTemplates": [
+    {
+      "quote": "\"Smartest $20 I've ever spent. Period. The system alone saved me months of work.\"",
+      "name": "Tom B.",
+      "role": "Consultant"
+    },
+    {
+      "quote": "\"I've tried 11 different tools before this. Nothing came close. The quality is unreal.\"",
+      "name": "Jessica F.",
+      "role": "Online Educator"
+    }
+  ],
+  "ctaVariations": [
+    {
+      "cta": "Get Digital Template Pack — $19 One-Time",
+      "style": "Direct",
+      "conversionEstimate": "4.0%"
+    },
+    {
+      "cta": "Start Saving 15+ Hours/Week Today",
+      "style": "Benefit-Led",
+      "conversionEstimate": "3.9%"
+    },
+    {
+      "cta": "Download Now — Own It Forever, No Subscriptions",
+      "style": "Anti-SaaS",
+      "conversionEstimate": "4.9%"
+    },
+    {
+      "cta": "See What 10,000+ Marketers Already Know",
+      "style": "Social Proof",
+      "conversionEstimate": "4.2%"
+    },
+    {
+      "cta": "Try Risk-Free — 22-Day Money-Back Guarantee",
+      "style": "Risk Reversal",
+      "conversionEstimate": "4.4%"
+    }
+  ],
+  "pricingPsychology": {
+    "recommendedPrice": "$49",
+    "charmPricing": "Odd numbers ($25, $35) feel more carefully calculated",
+    "anchoring": "Compare to hourly consulting rate ($206/hr) — \"This would cost $1362 as a consulting engagement\"",
+    "urgency": "Launch discount (first 57 buyers get 39% off)",
+    "guarantee": "18-day money-back guarantee — no questions asked"
+  },
+  "objectionHandling": [
+    {
+      "objection": "\"Is this really worth $40?\"",
+      "response": "One hour of your time is worth $142. This saves you 10 hours. That's $4391 in value for the price of a dinner."
+    },
+    {
+      "objection": "\"I can probably build this myself\"",
+      "response": "You could. It would take 3 weeks and $992 in your time. Or you can start using it in 10 minutes."
+    },
+    {
+      "objection": "\"Will this work for MY specific use case?\"",
+      "response": "The templates are designed to be platform-agnostic. 3223+ people in 20+ industries use them daily."
+    },
+    {
+      "objection": "\"What if I need help setting it up?\"",
+      "response": "The included setup guide covers every step. Plus, our video walkthroughs handle the rest."
+    },
+    {
+      "objection": "\"I've been burned by template packs before\"",
+      "response": "That's why we offer a 19-day guarantee. If it doesn't deliver, you pay nothing. 99% of buyers keep it."
+    }
+  ],
+  "emailSubjectLines": [
+    "5,000+ people already have this. Do you?",
+    "\"I saved 25 hours this week\" — here's how",
+    "Stop. Building. From. Scratch.",
+    "The smartest way to automate your digital templates",
+    "Last chance: Digital Template Pack at launch price",
+    "[Free sample] Try before you buy — 1 workflow",
+    "This framework just went viral. Here's why."
+  ],
+  "abTestSuggestions": [
+    {
+      "test": "Headline A/B",
+      "variantA": "Benefit-focused headline",
+      "variantB": "Curiosity-gap headline",
+      "metric": "Scroll depth + time on page",
+      "expectedImpact": "18% improvement"
+    },
+    {
+      "test": "CTA Button",
+      "variantA": "Green \"Get Instant Access\"",
+      "variantB": "Blue \"Download Now — $X\"",
+      "metric": "Click-through rate",
+      "expectedImpact": "14% improvement"
+    },
+    {
+      "test": "Social Proof Placement",
+      "variantA": "Testimonials below features",
+      "variantB": "Testimonials above the fold",
+      "metric": "Conversion rate",
+      "expectedImpact": "19% improvement"
+    },
+    {
+      "test": "Pricing Display",
+      "variantA": "Single price point",
+      "variantB": "Price + value anchor (was $XX)",
+      "metric": "Purchase completion",
+      "expectedImpact": "15% improvement"
+    },
+    {
+      "test": "Guarantee Visibility",
+      "variantA": "Small text in footer",
+      "variantB": "Bold badge near CTA",
+      "metric": "Cart completion rate",
+      "expectedImpact": "39% improvement"
+    }
+  ],
+  "meta": {
+    "copyScore": "79",
+    "conversionEstimate": "2.7%",
+    "wordCountTarget": 2396,
+    "recommendedSections": [
+      "Hero",
+      "Problem",
+      "Solution",
+      "Features",
+      "Social Proof",
+      "Pricing",
+      "FAQ",
+      "CTA"
+    ]
+  }
+}
