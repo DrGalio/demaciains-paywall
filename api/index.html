@@ -121,6 +121,7 @@
       { id: 'content-strategy', name: 'Content Strategy', price: '$1.50', icon: '📝', desc: 'Content plans + SEO keywords' },
       { id: 'competitive-intel', name: 'Competitive Intel', price: '$1.50', icon: '🔎', desc: 'Competitor profiles & strategy' },
       { id: 'content-distribution', name: 'Content Distribution', price: '$1.50', icon: '📡', desc: 'Multi-platform distribution plans' },
+      { id: 'audience-profiler', name: 'Audience Profiler', price: '$1.50', icon: '🎯', desc: 'Buyer personas & market sizing' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -160,6 +161,7 @@
         case 'content-strategy': data = DemaciainsEngine.contentStrategy(getParam('product','AI productivity tool'), { niche: 'AI agents', audience: 'founders' }); break;
         case 'competitive-intel': data = DemaciainsEngine.competitiveIntel(getParam('product','AI productivity toolkit'), { niche: 'creators', price: 29 }); break;
         case 'content-distribution': data = DemaciainsEngine.contentDistribution(getParam('product','AI productivity toolkit'), { niche: 'creators' }); break;
+        case 'audience-profiler': data = DemaciainsEngine.audienceProfiler(getParam('product','AI productivity toolkit')); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);
@@ -179,6 +181,8 @@
       } else if (currentEndpoint === 'competitive-intel') {
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI toolkit)" value="${getParam('product','AI productivity toolkit')}" style="width:220px">`;
       } else if (currentEndpoint === 'content-distribution') {
+        paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI prompt pack)" value="${getParam('product','AI productivity toolkit')}" style="width:220px">`;
+      } else if (currentEndpoint === 'audience-profiler') {
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI prompt pack)" value="${getParam('product','AI productivity toolkit')}" style="width:220px">`;
       } else if (currentEndpoint === 'revenue-forecast') {
 

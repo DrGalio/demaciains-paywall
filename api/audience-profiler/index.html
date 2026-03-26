@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audience Profiler — Demaciains x402 API</title>
+<meta name="description" content="AI-powered audience profiling: buyer personas, market sizing, messaging frameworks, channel mapping, segmentation strategy. $1.50 USDC via x402.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e0e0e8;--dim:#888;--accent:#60a5fa;--green:#34d399;--yellow:#fbbf24;--orange:#fb923c;--purple:#a78bfa;--pink:#f472b6;--red:#f87171;--cyan:#22d3ee}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;padding:20px}
+.container{max-width:960px;margin:0 auto}
+header{text-align:center;padding:40px 0 30px;border-bottom:1px solid var(--border)}
+header h1{font-size:2.2em;margin-bottom:8px;background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--dim);font-size:1.1em}
+.badge{display:inline-block;background:var(--accent);color:#000;padding:2px 10px;border-radius:12px;font-size:.75em;font-weight:700;margin-left:8px;vertical-align:middle}
+.price-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.price-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:.85em}
+.price-chip strong{color:var(--green)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0}
+.card h3{color:var(--accent);margin-bottom:14px;font-size:1.15em}
+.param-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.param-row label{min-width:120px;color:var(--dim);font-size:.9em}
+.param-row input,.param-row select{background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;flex:1;min-width:180px;font-size:.95em}
+.param-row input:focus{outline:none;border-color:var(--accent)}
+.btn{background:linear-gradient(135deg,var(--accent),var(--cyan));color:#000;border:none;padding:12px 28px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e}
+.row .label{color:var(--dim);font-size:.9em}
+.row .val{color:var(--text);font-weight:500;text-align:right;max-width:60%}
+.output-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.oid{font-family:monospace;color:var(--dim);font-size:.8em}
+.ts{color:var(--dim);font-size:.8em}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}
+.kpi{background:#1a1a2e;border-radius:8px;padding:14px;text-align:center}
+.kpi .num{font-size:1.6em;font-weight:700;color:var(--green)}
+.kpi .lbl{font-size:.8em;color:var(--dim);margin-top:4px}
+.persona-card{background:#1a1a2e;border-radius:10px;padding:20px;margin:14px 0;border-left:4px solid var(--accent)}
+.persona-card h4{color:var(--cyan);margin-bottom:10px;font-size:1.05em}
+.persona-card .archetype{color:var(--purple);font-size:.9em;font-style:italic;margin-bottom:10px}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.demo-item{font-size:.85em;padding:4px 0}
+.demo-item .dl{color:var(--dim)}
+.demo-item .dv{color:var(--text);font-weight:500}
+.tag{display:inline-block;background:#2a2a3e;padding:2px 8px;border-radius:4px;font-size:.78em;margin:2px;color:var(--text)}
+.tag-green{background:#064e3b;color:var(--green)}
+.tag-yellow{background:#713f12;color:var(--yellow)}
+.tag-red{background:#450a0a;color:var(--red)}
+.tag-purple{background:#1e1b4b;color:var(--purple)}
+.pain-row{background:#0f0f1a;border-radius:6px;padding:10px;margin:6px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.pain-row .pain-name{color:var(--orange);font-weight:600;font-size:.9em}
+.pain-row .meta{display:flex;gap:8px;flex-wrap:wrap}
+.objection-card{background:#0f0f1a;border-radius:6px;padding:10px;margin:6px 0}
+.objection-card h5{color:var(--red);font-size:.88em;margin-bottom:4px}
+.objection-card p{color:var(--dim);font-size:.84em}
+.channel-card{background:#1a1a2e;border-radius:8px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.channel-card .ch-name{font-weight:600;color:var(--text)}
+.channel-card .ch-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:.82em;color:var(--dim)}
+.seg-card{background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0;border-left:3px solid var(--purple)}
+.seg-card h5{color:var(--purple);margin-bottom:6px;font-size:.95em}
+.msg-block{background:#0f0f1a;border-radius:8px;padding:14px;margin:8px 0}
+.msg-block h5{color:var(--cyan);font-size:.9em;margin-bottom:6px}
+.quick-win{padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.9em}
+.quick-win:last-child{border-bottom:none}
+.quick-win::before{content:'⚡ ';color:var(--yellow)}
+.json-box{background:#0d0d15;border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:.8em;color:var(--green);white-space:pre-wrap;max-height:400px;overflow-y:auto;margin-top:10px}
+footer{text-align:center;padding:40px 0 20px;color:var(--dim);font-size:.85em;border-top:1px solid var(--border);margin-top:30px}
+@media(max-width:600px){header h1{font-size:1.5em}.kpi-grid{grid-template-columns:1fr 1fr}.param-row{flex-direction:column}.param-row label{min-width:auto}.demo-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+<h1>🎯 Audience Profiler<span class="badge">x402</span></h1>
+<p>Buyer personas, market sizing, messaging frameworks & channel mapping — generated fresh per request</p>
+<div class="price-bar">
+<div class="price-chip">Price: <strong>$1.50 USDC</strong></div>
+<div class="price-chip">Network: <strong>Base</strong></div>
+<div class="price-chip">Engine: <strong>v3.7</strong></div>
+</div>
+</header>
+
+<!-- Input -->
+<div class="card">
+<h3>📋 Generate Audience Profile</h3>
+<div class="param-row">
+<label>Product:</label>
+<input id="productInput" type="text" value="" placeholder="e.g., AI prompt pack, SaaS tool, online course">
+</div>
+<div class="param-row">
+<button class="btn" onclick="generate()">Profile My Audience →</button>
+</div>
+</div>
+
+<!-- Output -->
+<div id="output" style="display:none">
+<div class="output-hdr">
+<span class="oid" id="oid">—</span>
+<span class="ts" id="genTs">—</span>
+</div>
+
+<!-- Executive Summary -->
+<div class="card">
+<h3>🎯 Executive Summary</h3>
+<div class="kpi-grid" id="summaryKpis"></div>
+<div id="summaryDetails"></div>
+</div>
+
+<!-- Buyer Personas -->
+<div class="card">
+<h3>👤 Buyer Personas</h3>
+<div id="personas"></div>
+</div>
+
+<!-- Market Sizing -->
+<div class="card">
+<h3>📊 Market Sizing</h3>
+<div class="kpi-grid" id="marketKpis"></div>
+<div id="marketDetails"></div>
+</div>
+
+<!-- Channel Priority -->
+<div class="card">
+<h3>📢 Channel Priority Matrix</h3>
+<div id="channels"></div>
+</div>
+
+<!-- Segmentation Strategy -->
+<div class="card">
+<h3>🧩 Segmentation Strategy</h3>
+<div id="segments"></div>
+</div>
+
+<!-- Messaging Framework -->
+<div class="card">
+<h3>💬 Messaging Framework</h3>
+<div id="messaging"></div>
+</div>
+
+<!-- Quick Wins -->
+<div class="card">
+<h3>⚡ Quick Wins</h3>
+<div id="quickWins"></div>
+</div>
+
+<!-- Raw JSON -->
+<div class="card">
+<h3>📦 Raw JSON Response</h3>
+<button class="btn" onclick="toggleJson()" id="jsonToggle">Show JSON</button>
+<div class="json-box" id="jsonBox" style="display:none"></div>
+</div>
+</div>
+
+<!-- API Info -->
+<div class="card">
+<h3>📡 API Usage</h3>
+<div class="row"><span class="label">Endpoint</span><span class="val">GET /api/audience-profiler?product=...</span></div>
+<div class="row"><span class="label">Price</span><span class="val">$1.50 USDC (x402 on Base)</span></div>
+<div class="row"><span class="label">Params</span><span class="val">product (required) — your product or service description</span></div>
+<div class="row"><span class="label">Response</span><span class="val">Buyer personas, market sizing, channel map, messaging framework & segmentation</span></div>
+<div class="row"><span class="label">Refresh</span><span class="val">Daily (date-seeded — same day = same seed)</span></div>
+<div class="row"><span class="label">Engine</span><span class="val">Demaciains Dynamic Engine v3.7.0</span></div>
+</div>
+
+<div class="card">
+<h3>🔗 Related Endpoints</h3>
+<div class="row"><span class="label"><a href="/api/go-to-market/" style="color:var(--accent)">/api/go-to-market</a></span><span class="val">$1.50 — GTM positioning & phases</span></div>
+<div class="row"><span class="label"><a href="/api/content-strategy/" style="color:var(--accent)">/api/content-strategy</a></span><span class="val">$1.50 — Content pillars & topic clusters</span></div>
+<div class="row"><span class="label"><a href="/api/content-distribution/" style="color:var(--accent)">/api/content-distribution</a></span><span class="val">$1.50 — Distribution plan & calendar</span></div>
+<div class="row"><span class="label"><a href="/api/competitive-intel/" style="color:var(--accent)">/api/competitive-intel</a></span><span class="val">$1.50 — Competitive intelligence</span></div>
+<div class="row"><span class="label"><a href="/api/market-gap/" style="color:var(--accent)">/api/market-gap</a></span><span class="val">$1.00 — Find underserved markets</span></div>
+<div class="row"><span class="label"><a href="/api/revenue-forecast/" style="color:var(--accent)">/api/revenue-forecast</a></span><span class="val">$1.25 — Revenue projections</span></div>
+</div>
+
+<footer>
+Demaciains Research Services · Powered by x402 Protocol · Base Network<br>
+Wallet: 0x83F31CE0F8b1f27a6Ad91693709febb728c71563
+</footer>
+
+</div><!-- /container -->
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function generate(){
+  const p=document.getElementById('productInput').value||'AI productivity toolkit';
+  const d=DemaciainsEngine.audienceProfiler(p,{});
+  render(d);
+}
+
+function render(d){
+  document.getElementById('output').style.display='block';
+  document.getElementById('oid').textContent='ID: '+d.report_id;
+  document.getElementById('genTs').textContent='Generated: '+d.generated;
+
+  // Executive summary
+  const s=d.executive_summary;
+  document.getElementById('summaryKpis').innerHTML=`
+    <div class="kpi"><div class="num" style="color:var(--cyan)">${s.total_personas}</div><div class="lbl">Buyer Personas</div></div>
+    <div class="kpi"><div class="num">${s.servicable_users}</div><div class="lbl">Servicable Users</div></div>
+    <div class="kpi"><div class="num" style="color:var(--green)">${s.avg_ltv_cac_ratio}</div><div class="lbl">LTV/CAC Ratio</div></div>
+    <div class="kpi"><div class="num" style="color:var(--purple)">${s.primary_acquisition_channel}</div><div class="lbl">Top Channel</div></div>
+  `;
+  document.getElementById('summaryDetails').innerHTML=`
+    <div class="row"><span class="label">Primary Persona</span><span class="val">${s.primary_persona}</span></div>
+    <div class="row"><span class="label">Total Addressable Market</span><span class="val">${s.total_addressable_market}</span></div>
+    <div class="row"><span class="label">Addressable Users</span><span class="val">${s.addressable_users}</span></div>
+  `;
+
+  // Personas
+  let ph='';
+  d.buyer_personas.forEach((p,i)=>{
+    const borderColor=i===0?'var(--cyan)':i===1?'var(--purple)':i===2?'var(--orange)':'var(--dim)';
+    ph+=`<div class="persona-card" style="border-left-color:${borderColor}">
+      <h4>${p.name} <span class="tag tag-green">${p.id}</span> ${i===0?'<span class="tag tag-yellow">PRIMARY</span>':''}</h4>
+      <div class="archetype">"${p.archetype}"</div>
+      <div class="demo-grid">
+        <div class="demo-item"><span class="dl">Age:</span> <span class="dv">${p.demographics.age_range}</span></div>
+        <div class="demo-item"><span class="dl">Income:</span> <span class="dv">${p.demographics.income_level}</span></div>
+        <div class="demo-item"><span class="dl">Education:</span> <span class="dv">${p.demographics.education}</span></div>
+        <div class="demo-item"><span class="dl">Location:</span> <span class="dv">${p.demographics.location_type}</span></div>
+        <div class="demo-item"><span class="dl">Company:</span> <span class="dv">${p.demographics.company_size}</span></div>
+        <div class="demo-item"><span class="dl">Tech Level:</span> <span class="dv">${p.psychographics.tech_savviness}</span></div>
+      </div>
+      <div style="margin:8px 0"><strong style="font-size:.85em;color:var(--dim)">Job Titles:</strong> ${p.demographics.job_title_examples.map(t=>'<span class="tag">'+t+'</span>').join(' ')}</div>
+      <div style="margin:8px 0"><strong style="font-size:.85em;color:var(--dim)">Values:</strong> ${p.psychographics.values.map(v=>'<span class="tag tag-purple">'+v+'</span>').join(' ')}</div>
+      <div style="margin:8px 0"><strong style="font-size:.85em;color:var(--dim)">Buying Behavior:</strong> ${p.psychographics.buying_behavior.map(b=>'<span class="tag">'+b+'</span>').join(' ')}</div>
+      <div style="margin:8px 0"><strong style="font-size:.85em;color:var(--dim)">Info Sources:</strong> ${p.psychographics.information_sources.map(s=>'<span class="tag">'+s+'</span>').join(' ')}</div>
+      <div style="margin:8px 0"><strong style="font-size:.85em;color:var(--dim)">Frustrations:</strong> ${p.psychographics.frustrations.map(f=>'<span class="tag tag-red">'+f+'</span>').join(' ')}</div>
+
+      <h5 style="color:var(--orange);margin:12px 0 6px;font-size:.9em">🔥 Pain Points</h5>
+      ${p.pain_points.map(pp=>`<div class="pain-row">
+        <span class="pain-name">${pp.pain}</span>
+        <div class="meta">
+          <span class="tag tag-red">${pp.severity}</span>
+          <span class="tag">${pp.frequency}</span>
+          <span class="tag">Current: ${pp.current_solution}</span>
+          <span class="tag tag-green">WTP: ${pp.willingness_to_pay}</span>
+        </div>
+      </div>`).join('')}
+
+      <h5 style="color:var(--red);margin:12px 0 6px;font-size:.9em">🛡️ Objections & Counters</h5>
+      ${p.objections.map(o=>`<div class="objection-card">
+        <h5>"${o.objection}"</h5>
+        <p>→ ${o.counter_strategy}</p>
+      </div>`).join('')}
+
+      <div style="margin:10px 0;padding:10px;background:#0f0f1a;border-radius:6px">
+        <strong style="font-size:.85em;color:var(--cyan)">💬 Messaging:</strong>
+        <div style="margin-top:6px"><span class="dl" style="color:var(--dim)">Headline:</span> <span style="color:var(--text)">${p.messaging.headline_formula}</span></div>
+        <div style="margin-top:4px"><span class="dl" style="color:var(--dim)">Value Prop:</span> <span style="color:var(--text)">${p.messaging.value_proposition}</span></div>
+        <div style="margin-top:4px"><span class="dl" style="color:var(--dim)">CTA Style:</span> <span style="color:var(--text)">${p.messaging.cta_style}</span></div>
+        <div style="margin-top:4px"><span class="dl" style="color:var(--dim)">Tone:</span> <span style="color:var(--text)">${p.messaging.tone}</span></div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
+        <div class="kpi" style="flex:1;min-width:100px"><div class="num" style="font-size:1.2em;color:var(--cyan)">${p.metrics.estimated_market_share}%</div><div class="lbl">Market Share</div></div>
+        <div class="kpi" style="flex:1;min-width:100px"><div class="num" style="font-size:1.2em;color:var(--green)">${p.metrics.estimated_lifetime_value}</div><div class="lbl">LTV</div></div>
+        <div class="kpi" style="flex:1;min-width:100px"><div class="num" style="font-size:1.2em;color:var(--orange)">${p.metrics.estimated_acquisition_cost}</div><div class="lbl">CAC</div></div>
+        <div class="kpi" style="flex:1;min-width:100px"><div class="num" style="font-size:1.2em">${p.metrics.estimated_conversion_rate}</div><div class="lbl">Conv. Rate</div></div>
+        <div class="kpi" style="flex:1;min-width:100px"><div class="num" style="font-size:1.2em;color:var(--purple)">${p.metrics.ltv_cac_ratio}</div><div class="lbl">LTV/CAC</div></div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('personas').innerHTML=ph;
+
+  // Market sizing
+  const m=d.market_sizing;
+  document.getElementById('marketKpis').innerHTML=`
+    <div class="kpi"><div class="num" style="font-size:1.3em;color:var(--cyan)">${m.total_market_size}</div><div class="lbl">Total Market</div></div>
+    <div class="kpi"><div class="num" style="font-size:1.3em">${m.addressable_market}</div><div class="lbl">Addressable (SAM)</div></div>
+    <div class="kpi"><div class="num" style="font-size:1.3em;color:var(--green)">${m.servicable_market}</div><div class="lbl">Servicable (SOM)</div></div>
+    <div class="kpi"><div class="num" style="font-size:1.3em;color:var(--yellow)">${m.growth_rate}</div><div class="lbl">Growth Rate</div></div>
+  `;
+  document.getElementById('marketDetails').innerHTML=`
+    <div class="row"><span class="label">TAM</span><span class="val">${m.tam}</span></div>
+    <div class="row"><span class="label">SAM</span><span class="val">${m.sam}</span></div>
+    <div class="row"><span class="label">SOM</span><span class="val">${m.som}</span></div>
+    <div class="row"><span class="label">Market Maturity</span><span class="val"><span class="tag tag-green">${m.market_maturity}</span></span></div>
+  `;
+
+  // Channels
+  let ch='';
+  d.channel_priority.forEach(c=>{
+    const priColor=c.priority==='Critical'?'var(--red)':c.priority==='High'?'var(--orange)':'var(--yellow)';
+    ch+=`<div class="channel-card">
+      <span class="ch-name">${c.channel}</span>
+      <div class="ch-meta">
+        <span class="tag" style="color:${priColor};border:1px solid ${priColor}">${c.priority}</span>
+        <span>👥 ${c.audience_reach}</span>
+        <span>💰 ${c.cost_level}</span>
+        <span>⏱ ${c.time_investment}</span>
+        <span>📈 ROI: ${c.roi_timeline}</span>
+      </div>
+    </div>`;
+  });
+  document.getElementById('channels').innerHTML=ch;
+
+  // Segments
+  let seg='';
+  d.segmentation_strategy.forEach(s=>{
+    seg+=`<div class="seg-card">
+      <h5>${s.segment_name} <span class="tag">${s.priority}</span></h5>
+      <div class="row"><span class="label">Size</span><span class="val">${s.size_estimate}</span></div>
+      <div class="row"><span class="label">Strategy</span><span class="val">${s.acquisition_strategy}</span></div>
+      <div class="row"><span class="label">CAC</span><span class="val">${s.estimated_cac}</span></div>
+      <div class="row"><span class="label">LTV</span><span class="val">${s.estimated_ltv}</span></div>
+    </div>`;
+  });
+  document.getElementById('segments').innerHTML=seg;
+
+  // Messaging
+  const mf=d.messaging_framework;
+  let msgh=`<div class="msg-block">
+    <h5>🎯 Universal Headline</h5>
+    <p style="font-size:1.05em;font-weight:600;color:var(--text)">${mf.universal_headline}</p>
+  </div>
+  <div class="msg-block">
+    <h5>💎 Universal Value Proposition</h5>
+    <p style="font-size:1.05em;font-weight:600;color:var(--text)">${mf.universal_value_prop}</p>
+  </div>
+  <div class="row"><span class="label">Recommended Tone</span><span class="val">${mf.recommended_tone}</span></div>
+  <div class="row"><span class="label">Best CTA Style</span><span class="val">${mf.best_cta_style}</span></div>`;
+  msgh+=`<h5 style="margin-top:16px;color:var(--purple);font-size:.95em">Per-Persona Messaging:</h5>`;
+  mf.persona_specific.forEach(ps=>{
+    msgh+=`<div class="msg-block">
+      <h5>${ps.persona}</h5>
+      <div style="font-size:.88em"><span style="color:var(--dim)">Headline:</span> ${ps.headline}</div>
+      <div style="font-size:.88em"><span style="color:var(--dim)">Value Prop:</span> ${ps.value_prop}</div>
+      <div style="font-size:.88em"><span style="color:var(--dim)">Tone:</span> ${ps.tone}</div>
+      <div style="font-size:.88em"><span style="color:var(--dim)">Best Channels:</span> ${ps.channels.join(', ')}</div>
+    </div>`;
+  });
+  document.getElementById('messaging').innerHTML=msgh;
+
+  // Quick wins
+  document.getElementById('quickWins').innerHTML=d.quick_wins.map(w=>'<div class="quick-win">'+w+'</div>').join('');
+
+  // JSON
+  document.getElementById('jsonBox').textContent=JSON.stringify(d,null,2);
+
+  document.getElementById('output').scrollIntoView({behavior:'smooth'});
+}
+
+function toggleJson(){
+  const box=document.getElementById('jsonBox');
+  const btn=document.getElementById('jsonToggle');
+  if(box.style.display==='none'){box.style.display='block';btn.textContent='Hide JSON';}
+  else{box.style.display='none';btn.textContent='Show JSON';}
+}
+
+// Auto-generate from URL params
+(function(){
+  const p=new URLSearchParams(location.search);
+  const product=p.get('product');
+  if(product){
+    document.getElementById('productInput').value=product;
+    generate();
+  }
+})();
+</script>
+</body>
+</html>

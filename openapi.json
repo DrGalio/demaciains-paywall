@@ -4,11 +4,18 @@
     "title": "Demaciains AI Tools",
     "version": "4.1.0",
     "description": "19 pay-per-use API tools for AI agents. Premium $2.44, Standard $1.39. USDC on Base via x402 protocol.",
-    "contact": { "email": "galio@sharebot.net" },
-    "license": { "name": "MIT" }
+    "contact": {
+      "email": "galio@sharebot.net"
+    },
+    "license": {
+      "name": "MIT"
+    }
   },
   "servers": [
-    { "url": "https://xpay-server.vercel.app", "description": "Production" }
+    {
+      "url": "https://xpay-server.vercel.app",
+      "description": "Production"
+    }
   ],
   "paths": {
     "/api/ai-detector": {
@@ -17,8 +24,25 @@
         "description": "Analyze text for AI-generated patterns using burstiness, vocabulary diversity, and sentence structure analysis.",
         "operationId": "aiDetector",
         "x-price": 2.44,
-        "parameters": [{ "name": "text", "in": "query", "required": true, "schema": { "type": "string", "minLength": 50 } }],
-        "responses": { "402": { "description": "Payment required (x402)" }, "200": { "description": "Analysis result" } }
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 50
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required (x402)"
+          },
+          "200": {
+            "description": "Analysis result"
+          }
+        }
       }
     },
     "/api/email-verify": {
@@ -27,8 +51,24 @@
         "description": "Verify email with DNS/MX checks, deliverability scoring, disposable/free/corporate detection.",
         "operationId": "emailVerify",
         "x-price": 2.44,
-        "parameters": [{ "name": "email", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Verification result" } }
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Verification result"
+          }
+        }
       }
     },
     "/api/company-enrich": {
@@ -37,8 +77,24 @@
         "description": "Company research via live web search. Returns firmographics, competitors, industry.",
         "operationId": "companyEnrich",
         "x-price": 2.44,
-        "parameters": [{ "name": "company", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Enrichment data" } }
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Enrichment data"
+          }
+        }
       }
     },
     "/api/web-intel": {
@@ -47,8 +103,24 @@
         "description": "Analyze a URL for page title, meta description, SEO signals, indexation.",
         "operationId": "webIntel",
         "x-price": 2.44,
-        "parameters": [{ "name": "url", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Intelligence data" } }
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Intelligence data"
+          }
+        }
       }
     },
     "/api/plagiarism": {
@@ -57,8 +129,25 @@
         "description": "Check text for plagiarism using n-gram fingerprinting. Returns originality score.",
         "operationId": "plagiarismCheck",
         "x-price": 2.44,
-        "parameters": [{ "name": "text", "in": "query", "required": true, "schema": { "type": "string", "minLength": 100 } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Originality report" } }
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 100
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Originality report"
+          }
+        }
       }
     },
     "/api/seo-audit": {
@@ -67,8 +156,24 @@
         "description": "Full SEO audit: title, meta, H1, images, links. Returns score and prioritized issues.",
         "operationId": "seoAudit",
         "x-price": 2.44,
-        "parameters": [{ "name": "url", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Audit report" } }
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Audit report"
+          }
+        }
       }
     },
     "/api/lead-score": {
@@ -77,8 +182,25 @@
         "description": "Score a lead for ICP fit: email quality, title seniority, company match.",
         "operationId": "leadScore",
         "x-price": 2.44,
-        "parameters": [{ "name": "lead", "in": "query", "required": true, "schema": { "type": "string" }, "description": "JSON: {email,company,title,industry}" }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Lead score" } }
+        "parameters": [
+          {
+            "name": "lead",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "JSON: {email,company,title,industry}"
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Lead score"
+          }
+        }
       }
     },
     "/api/social-audit": {
@@ -88,10 +210,36 @@
         "operationId": "socialAudit",
         "x-price": 2.44,
         "parameters": [
-          { "name": "handle", "in": "query", "required": true, "schema": { "type": "string" } },
-          { "name": "platform", "in": "query", "schema": { "type": "string", "enum": ["twitter","instagram","linkedin","tiktok"] } }
+          {
+            "name": "handle",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "twitter",
+                "instagram",
+                "linkedin",
+                "tiktok"
+              ]
+            }
+          }
         ],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Audit result" } }
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Audit result"
+          }
+        }
       }
     },
     "/api/tech-stack": {
@@ -100,8 +248,24 @@
         "description": "Detect CMS, frameworks, analytics, payments from live page analysis.",
         "operationId": "techStackDetect",
         "x-price": 2.44,
-        "parameters": [{ "name": "url", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Tech stack" } }
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Tech stack"
+          }
+        }
       }
     },
     "/api/market-gap": {
@@ -110,8 +274,23 @@
         "description": "Find underserved niches with revenue estimates and validation signals.",
         "operationId": "marketGap",
         "x-price": 1.39,
-        "parameters": [{ "name": "niche", "in": "query", "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Gap analysis" } }
+        "parameters": [
+          {
+            "name": "niche",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Gap analysis"
+          }
+        }
       }
     },
     "/api/trends": {
@@ -120,8 +299,23 @@
         "description": "Growth signals for hot sectors.",
         "operationId": "trends",
         "x-price": 1.39,
-        "parameters": [{ "name": "seed", "in": "query", "schema": { "type": "integer" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Trends data" } }
+        "parameters": [
+          {
+            "name": "seed",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Trends data"
+          }
+        }
       }
     },
     "/api/competitor-gap": {
@@ -130,8 +324,23 @@
         "description": "Competitor weaknesses to exploit.",
         "operationId": "competitorGap",
         "x-price": 1.39,
-        "parameters": [{ "name": "industry", "in": "query", "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Competitor analysis" } }
+        "parameters": [
+          {
+            "name": "industry",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Competitor analysis"
+          }
+        }
       }
     },
     "/api/algo-report": {
@@ -140,8 +349,31 @@
         "description": "Social platform ranking signals and optimization hacks.",
         "operationId": "algoReport",
         "x-price": 1.39,
-        "parameters": [{ "name": "platform", "in": "query", "required": true, "schema": { "type": "string", "enum": ["instagram","tiktok","youtube","linkedin","twitter"] } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Algorithm report" } }
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "instagram",
+                "tiktok",
+                "youtube",
+                "linkedin",
+                "twitter"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Algorithm report"
+          }
+        }
       }
     },
     "/api/startup-validator": {
@@ -150,8 +382,23 @@
         "description": "Multi-dimension idea scoring with BUILD/PROMISING/HIGH RISK verdict.",
         "operationId": "startupValidator",
         "x-price": 1.39,
-        "parameters": [{ "name": "idea", "in": "query", "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Validation result" } }
+        "parameters": [
+          {
+            "name": "idea",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Validation result"
+          }
+        }
       }
     },
     "/api/domain-intel": {
@@ -160,8 +407,24 @@
         "description": "Brandability, SEO potential, TLD authority, value estimate.",
         "operationId": "domainIntel",
         "x-price": 1.39,
-        "parameters": [{ "name": "domain", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Domain analysis" } }
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Domain analysis"
+          }
+        }
       }
     },
     "/api/prompt-optimize": {
@@ -170,8 +433,24 @@
         "description": "Score and rewrite AI prompts with best practices.",
         "operationId": "promptOptimize",
         "x-price": 1.39,
-        "parameters": [{ "name": "prompt", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Optimized prompt" } }
+        "parameters": [
+          {
+            "name": "prompt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Optimized prompt"
+          }
+        }
       }
     },
     "/api/content-score": {
@@ -180,8 +459,24 @@
         "description": "Readability, SEO metrics, word/sentence analysis.",
         "operationId": "contentScore",
         "x-price": 1.39,
-        "parameters": [{ "name": "text", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Content score" } }
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Content score"
+          }
+        }
       }
     },
     "/api/price-benchmark": {
@@ -190,8 +485,23 @@
         "description": "Tier pricing analysis by category.",
         "operationId": "priceBenchmark",
         "x-price": 1.39,
-        "parameters": [{ "name": "category", "in": "query", "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Benchmark data" } }
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Benchmark data"
+          }
+        }
       }
     },
     "/api/name-generator": {
@@ -200,8 +510,24 @@
         "description": "Business/product name ideas with brandability scores.",
         "operationId": "nameGenerator",
         "x-price": 1.39,
-        "parameters": [{ "name": "keywords", "in": "query", "required": true, "schema": { "type": "string" } }],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Name suggestions" } }
+        "parameters": [
+          {
+            "name": "keywords",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Name suggestions"
+          }
+        }
       }
     },
     "/api/content-strategy": {
@@ -209,13 +535,69 @@
         "summary": "Content Strategy Planner",
         "description": "Complete content strategy: topic clusters, SEO keyword strategy, platform-specific content plans, 4-week content calendar, distribution playbook & repurposing matrix.",
         "operationId": "contentStrategy",
-        "x-price": 1.50,
+        "x-price": 1.5,
         "parameters": [
-          { "name": "product", "in": "query", "schema": { "type": "string" } },
-          { "name": "niche", "in": "query", "schema": { "type": "string" } },
-          { "name": "audience", "in": "query", "schema": { "type": "string" } }
+          {
+            "name": "product",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "niche",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "audience",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
-        "responses": { "402": { "description": "Payment required" }, "200": { "description": "Content strategy" } }
+        "responses": {
+          "402": {
+            "description": "Payment required"
+          },
+          "200": {
+            "description": "Content strategy"
+          }
+        }
+      }
+    },
+    "/api/audience-profiler": {
+      "get": {
+        "operationId": "audienceProfiler",
+        "summary": "Target audience profiling with buyer personas & market sizing",
+        "description": "Generates 3-5 detailed buyer personas with demographics, psychographics, pain points, objections, messaging frameworks, market sizing (TAM/SAM/SOM), channel priority matrix, and segmentation strategy.",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Product or service to profile audience for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audience profile report"
+          },
+          "402": {
+            "description": "Payment required ($1.50 USDC on Base)"
+          }
+        },
+        "x402": {
+          "price": "1.50",
+          "currency": "USDC",
+          "network": "base"
+        }
       }
     }
   }

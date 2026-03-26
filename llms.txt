@@ -21,6 +21,7 @@ Engine: Demaciains Dynamic Data Engine v3.4 — Client-Side Seeded PRNG
 ### Strategy & Growth
 - GET /api/go-to-market?product=...&niche=...&price=... — $1.50 USDC — Complete go-to-market strategy: positioning, channel prioritization, 4-phase launch plan.
 - GET /api/content-strategy?product=...&niche=...&audience=... — $1.50 USDC — Content strategy: topic clusters, SEO keywords, platform plans, 4-week calendar, distribution playbook.
+- GET /api/audience-profiler?product=... — $1.50 USDC — Audience profiling: buyer personas, demographics, psychographics, pain points, messaging, market sizing (TAM/SAM/SOM), channel priority.
 
 ### Free
 - GET / — Homepage + product catalog
