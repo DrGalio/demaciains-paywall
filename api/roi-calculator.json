@@ -1,0 +1,203 @@
+{
+  "type": "ai_agent_roi_report",
+  "businessType": "small business",
+  "teamSize": 5,
+  "generated": "2026-03-25T21:03:31.270Z",
+  "summary": {
+    "currentManualHoursPerWeek": 50,
+    "projectedAutomationRate": "50%",
+    "hoursSavedPerWeek": 25,
+    "hoursSavedPerYear": 1300,
+    "monthlySavings": "$10125",
+    "monthlyCost": "$14",
+    "monthlyNetROI": "$10111",
+    "annualNetROI": "$121332",
+    "breakEvenDays": "1 days",
+    "annualROI": "36111%",
+    "hourlyRateAssumption": "$81"
+  },
+  "platformRecommendation": {
+    "platform": "Local LLM (Ollama/LM Studio)",
+    "costPer1kTokens": "$0",
+    "reliability": "85%",
+    "setupComplexity": "high",
+    "monthlyMinCost": "$0",
+    "features": [
+      "zero API cost",
+      "full privacy",
+      "offline",
+      "customizable"
+    ],
+    "whyThisPlatform": "Best cost-to-reliability ratio for small business workloads"
+  },
+  "taskBreakdown": [
+    {
+      "task": "lead qualification",
+      "currentHoursPerWeek": 8,
+      "automationRate": "74%",
+      "hoursSavedPerWeek": 6,
+      "monthlyValue": "$1918"
+    },
+    {
+      "task": "report generation",
+      "currentHoursPerWeek": 14,
+      "automationRate": "75%",
+      "hoursSavedPerWeek": 11,
+      "monthlyValue": "$3402"
+    },
+    {
+      "task": "appointment booking",
+      "currentHoursPerWeek": 8,
+      "automationRate": "54%",
+      "hoursSavedPerWeek": 4,
+      "monthlyValue": "$1400"
+    }
+  ],
+  "monthlyProjection": [
+    {
+      "month": 1,
+      "savings": "$3375",
+      "cost": "$14",
+      "netROI": "$3361",
+      "cumulativeROI": "$3193"
+    },
+    {
+      "month": 2,
+      "savings": "$6750",
+      "cost": "$14",
+      "netROI": "$6736",
+      "cumulativeROI": "$13472"
+    },
+    {
+      "month": 3,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$30333"
+    },
+    {
+      "month": 4,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$40444"
+    },
+    {
+      "month": 5,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$50555"
+    },
+    {
+      "month": 6,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$60666"
+    },
+    {
+      "month": 7,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$70777"
+    },
+    {
+      "month": 8,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$80888"
+    },
+    {
+      "month": 9,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$90999"
+    },
+    {
+      "month": 10,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$101110"
+    },
+    {
+      "month": 11,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$111221"
+    },
+    {
+      "month": 12,
+      "savings": "$10125",
+      "cost": "$14",
+      "netROI": "$10111",
+      "cumulativeROI": "$121332"
+    }
+  ],
+  "riskAssessment": [
+    {
+      "risk": "API cost spikes from unexpected usage",
+      "severity": "medium",
+      "mitigation": "Set usage caps and alerts at 80% of monthly budget"
+    },
+    {
+      "risk": "Data privacy compliance issues",
+      "severity": "high",
+      "mitigation": "Use local LLM for sensitive data, API for non-sensitive tasks"
+    },
+    {
+      "risk": "Integration breaking with platform API changes",
+      "severity": "medium",
+      "mitigation": "Abstract API layer with fallback to secondary provider"
+    },
+    {
+      "risk": "Vendor lock-in with single AI provider",
+      "severity": "medium",
+      "mitigation": "Use abstraction layer, test multi-provider from day 1"
+    },
+    {
+      "risk": "Team adoption resistance",
+      "severity": "medium",
+      "mitigation": "Start with highest-pain task, demonstrate quick win in week 1"
+    }
+  ],
+  "recommendations": [
+    "Revisit automation scope quarterly as team processes evolve",
+    "Document every automated workflow for team knowledge sharing",
+    "Start with the highest-hours task to maximize quick ROI wins",
+    "Set up automated cost alerts at $50, $100, $200 thresholds",
+    "Share ROI wins with team monthly to maintain adoption momentum",
+    "Create a \"human override\" process for edge cases in each workflow"
+  ],
+  "comparisonMatrix": {
+    "Build Custom": {
+      "cost": "$7368",
+      "time": "8 weeks",
+      "flexibility": "high",
+      "maintenance": "ongoing"
+    },
+    "Use Our Config Packs": {
+      "cost": "$29",
+      "time": "1 day",
+      "flexibility": "medium",
+      "maintenance": "minimal"
+    },
+    "Enterprise SaaS": {
+      "cost": "$1918/mo",
+      "time": "1-2 weeks",
+      "flexibility": "low",
+      "maintenance": "vendor-managed"
+    },
+    "Prompt Pack + API": {
+      "cost": "$19 + API costs",
+      "time": "2-3 days",
+      "flexibility": "medium",
+      "maintenance": "low"
+    }
+  }
+}

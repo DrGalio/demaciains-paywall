@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Agent ROI Calculator — Demaciains x402 API</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;background:#0a0a0a;color:#e0e0e0;padding:20px;max-width:960px;margin:0 auto}
+.hdr{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.hdr h1{color:#60a5fa;font-size:1.2em}.hdr .meta{color:#64748b;font-size:.8em;margin-top:4px}
+.live{display:inline-block;background:#064e3b;color:#6ee7b7;padding:2px 8px;border-radius:4px;font-size:.75em}
+.live::before{content:'';display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.card{background:#141414;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:12px}
+.card h3{color:#10b981;font-size:.95em;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:.85em}
+.row:last-child{border-bottom:none}.label{color:#64748b}.val{color:#e0e0e0;text-align:right;max-width:60%}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75em;margin:2px}
+.tag-high{background:#064e3b;color:#6ee7b7}.tag-medium{background:#713f12;color:#fbbf24}.tag-low{background:#1e1b4b;color:#a5b4fc}
+.platform{background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;padding:14px;margin-bottom:8px}
+.platform h4{color:#a78bfa;font-size:.85em;margin-bottom:8px}
+.platform .feat{font-size:.78em;color:#94a3b8;padding:3px 0}.platform .feat::before{content:'✦ '}
+.cta-box{background:linear-gradient(133deg,#1e1b4b,#0f172a);border:1px solid #6366f1;border-radius:8px;padding:16px;margin-top:16px;text-align:center}
+.cta-box h3{color:#a5b4fc;margin-bottom:8px}
+.cta-box .price{font-size:1.8em;color:#22c55e;font-weight:bold}
+.cta-box .sub{color:#64748b;font-size:.8em;margin-top:4px}
+.params{background:#141414;border:1px solid #333;border-radius:8px;padding:14px;margin-bottom:16px}
+.params h3{color:#f59e0b;font-size:.9em;margin-bottom:8px}
+.param-row{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.param-row label{color:#94a3b8;font-size:.8em;min-width:120px}
+.param-row input,.param-row select{background:#0a0a0a;border:1px solid #333;color:#e0e0e0;padding:6px 10px;border-radius:4px;font-family:inherit;font-size:.85em;flex:1;min-width:160px}
+select option{background:#0a0a0a;color:#e0e0e0}
+.btn{background:#6366f1;color:white;border:none;padding:8px 20px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:.85em}
+.btn:hover{background:#4f46e5}
+#output{display:none}
+.output-hdr{background:#064e3b;border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.output-hdr .oid{color:#6ee7b7;font-size:.85em}
+.output-hdr .ts{color:#64748b;font-size:.75em}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px}
+.kpi{background:#0f172a;border:1px solid #1e3a5f;border-radius:6px;padding:10px;text-align:center}
+.kpi .num{font-size:1.4em;font-weight:bold;margin-bottom:2px}
+.kpi .lbl{font-size:.7em;color:#64748b}
+.kpi.green .num{color:#22c55e}.kpi.blue .num{color:#60a5fa}.kpi.yellow .num{color:#f59e0b}.kpi.red .num{color:#ef4444}.kpi.purple .num{color:#a78bfa}
+.task{background:#141414;border-left:3px solid #6366f1;padding:8px 12px;margin:6px 0;font-size:.8em}
+.task .name{color:#e0e0e0;font-weight:bold}.task .detail{color:#94a3b8;font-size:.85em}
+.risk{background:#141414;border-left:3px solid #f59e0b;padding:8px 12px;margin:6px 0;font-size:.8em}
+.risk .title{color:#fbbf24;font-weight:bold}.risk .mit{color:#94a3b8;font-size:.85em;margin-top:3px}
+.month-row{display:grid;grid-template-columns:40px 1fr 1fr 1fr 1fr;gap:4px;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:.78em;align-items:center}
+.month-row.header{color:#64748b;font-weight:bold;border-bottom:1px solid #333}
+.month-row .cell{text-align:right}.month-row .mcell{text-align:left}
+.rec{background:#141414;border-radius:4px;padding:6px 10px;margin:4px 0;font-size:.8em;color:#94a3b8}
+.rec::before{content:'💡 ';font-size:.9em}
+.matrix{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.matrix-opt{background:#0f172a;border:1px solid #1e3a5f;border-radius:6px;padding:10px}
+.matrix-opt h4{color:#60a5fa;font-size:.85em;margin-bottom:6px}
+.matrix-opt .detail{font-size:.75em;color:#94a3b8;padding:2px 0}
+.raw{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-top:20px}
+.raw summary{color:#6366f1;cursor:pointer;font-size:.85em}
+.raw pre{color:#22c55e;font-size:.75em;overflow-x:auto;margin-top:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>🧮 AI Agent ROI Calculator <span class="live">LIVE</span></h1>
+<div class="meta">GET /api/roi-calculator • $1.00 USDC • x402 on Base • Generated: <span id="ts">—</span></div>
+</div>
+
+<div class="params" id="params">
+<h3>⚙️ Parameters</h3>
+<div class="param-row">
+<label>Business Type:</label>
+<select id="bizInput">
+<option value="small business">Small Business</option>
+<option value="e-commerce">E-Commerce</option>
+<option value="saas">SaaS</option>
+<option value="agency">Agency</option>
+<option value="consulting">Consulting</option>
+</select>
+</div>
+<div class="param-row">
+<label>Team Size:</label>
+<input id="teamInput" type="number" min="1" max="500" value="5" placeholder="Number of team members">
+</div>
+<div class="param-row">
+<label>Hourly Rate ($):</label>
+<input id="rateInput" type="number" min="5" max="500" value="" placeholder="Leave blank for auto">
+</div>
+<div class="param-row">
+<label>Manual Hours/Week:</label>
+<input id="hoursInput" type="number" min="1" max="168" value="" placeholder="Leave blank for auto">
+</div>
+<div class="param-row">
+<button class="btn" onclick="generate()">Calculate ROI →</button>
+</div>
+</div>
+
+<div id="output">
+<div class="output-hdr">
+<span class="oid" id="oid">—</span>
+<span class="ts" id="genTs">—</span>
+</div>
+
+<div class="card">
+<h3>📊 ROI Summary</h3>
+<div class="kpi-grid" id="kpis"></div>
+</div>
+
+<div class="card">
+<h3>🤖 Platform Recommendation</h3>
+<div id="platformRec"></div>
+</div>
+
+<div class="card">
+<h3>📋 Task Breakdown</h3>
+<div id="tasks"></div>
+</div>
+
+<div class="card">
+<h3>📈 12-Month Projection</h3>
+<div class="month-row header"><span class="mcell">Month</span><span class="cell">Savings</span><span class="cell">Cost</span><span class="cell">Net ROI</span><span class="cell">Cumulative</span></div>
+<div id="projection"></div>
+</div>
+
+<div class="card">
+<h3>⚠️ Risk Assessment</h3>
+<div id="risks"></div>
+</div>
+
+<div class="card">
+<h3>🎯 Build vs Buy Comparison</h3>
+<div class="matrix" id="matrix"></div>
+</div>
+
+<div class="card">
+<h3>💡 Recommendations</h3>
+<div id="recs"></div>
+</div>
+
+<details class="raw">
+<summary>📋 Raw JSON Response</summary>
+<pre id="rawJson"></pre>
+</details>
+</div>
+
+<div class="cta-box">
+<h3>Unlock Full ROI Analysis</h3>
+<div class="price">$1.00 USDC</div>
+<div class="sub">x402 protocol on Base network • Fresh data every request</div>
+</div>
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function generate(){
+  const biz=document.getElementById('bizInput').value||'small business';
+  const team=parseInt(document.getElementById('teamInput').value)||5;
+  const rate=parseInt(document.getElementById('rateInput').value)||undefined;
+  const hours=parseInt(document.getElementById('hoursInput').value)||undefined;
+  const d=DemaciainsEngine.roiCalculator(biz,team,{hourlyRate:rate,manualHours:hours});
+
+  document.getElementById('params').style.display='none';
+  document.getElementById('output').style.display='block';
+  document.getElementById('oid').textContent='🧮 '+d.type+'_'+Date.now().toString(36);
+  document.getElementById('ts').textContent=d.generated;
+  document.getElementById('genTs').textContent=d.generated;
+
+  const s=d.summary;
+  let h='';
+  h+=`<div class="kpi green"><div class="num">${s.monthlyNetROI}</div><div class="lbl">Monthly Net ROI</div></div>`;
+  h+=`<div class="kpi blue"><div class="num">${s.annualNetROI}</div><div class="lbl">Annual Net ROI</div></div>`;
+  h+=`<div class="kpi yellow"><div class="num">${s.annualROI}</div><div class="lbl">Return on Investment</div></div>`;
+  h+=`<div class="kpi purple"><div class="num">${s.breakEvenDays}</div><div class="lbl">Break-Even</div></div>`;
+  h+=`<div class="kpi green"><div class="num">${s.hoursSavedPerWeek}h</div><div class="lbl">Hours Saved/Week</div></div>`;
+  h+=`<div class="kpi blue"><div class="num">${s.hoursSavedPerYear}h</div><div class="lbl">Hours Saved/Year</div></div>`;
+  h+=`<div class="kpi"><div class="num">${s.projectedAutomationRate}</div><div class="lbl">Automation Rate</div></div>`;
+  h+=`<div class="kpi"><div class="num">${s.hourlyRateAssumption}</div><div class="lbl">Hourly Rate</div></div>`;
+  document.getElementById('kpis').innerHTML=h;
+
+  // Platform
+  const pr=d.platformRecommendation;
+  h=`<div class="platform"><h4>🎯 ${pr.platform}</h4>`;
+  h+=`<div class="row"><span class="label">Cost per 1K tokens</span><span class="val">${pr.costPer1kTokens}</span></div>`;
+  h+=`<div class="row"><span class="label">Reliability</span><span class="val">${pr.reliability}</span></div>`;
+  h+=`<div class="row"><span class="label">Setup Complexity</span><span class="val">${pr.setupComplexity}</span></div>`;
+  h+=`<div class="row"><span class="label">Monthly Min Cost</span><span class="val">${pr.monthlyMinCost}</span></div>`;
+  h+=`<div style="margin-top:8px;font-size:.8em;color:#94a3b8">${pr.whyThisPlatform}</div>`;
+  pr.features.forEach(f=>{h+=`<div class="feat">${f}</div>`;});
+  h+=`</div>`;
+  document.getElementById('platformRec').innerHTML=h;
+
+  // Tasks
+  h='';
+  d.taskBreakdown.forEach(t=>{
+    h+=`<div class="task"><span class="name">${t.task}</span><div class="detail">${t.currentHoursPerWeek}h/wk → ${t.automationRate} automated = ${t.hoursSavedPerWeek}h saved/wk → <span style="color:#22c55e">${t.monthlyValue}/mo</span></div></div>`;
+  });
+  document.getElementById('tasks').innerHTML=h;
+
+  // Projection
+  h='';
+  d.monthlyProjection.forEach(m=>{
+    h+=`<div class="month-row"><span class="mcell">${m.month}</span><span class="cell" style="color:#22c55e">${m.savings}</span><span class="cell" style="color:#ef4444">${m.cost}</span><span class="cell" style="color:#60a5fa">${m.netROI}</span><span class="cell" style="color:#a78bfa">${m.cumulativeROI}</span></div>`;
+  });
+  document.getElementById('projection').innerHTML=h;
+
+  // Risks
+  h='';
+  d.riskAssessment.forEach(r=>{
+    h+=`<div class="risk"><span class="title">${r.risk}</span> <span class="tag tag-${r.severity}">${r.severity}</span><div class="mit">Mitigation: ${r.mitigation}</div></div>`;
+  });
+  document.getElementById('risks').innerHTML=h;
+
+  // Matrix
+  h='';
+  for(const[k,v] of Object.entries(d.comparisonMatrix)){
+    h+=`<div class="matrix-opt"><h4>${k}</h4>`;
+    h+=`<div class="detail">Cost: ${v.cost}</div>`;
+    h+=`<div class="detail">Time: ${v.time}</div>`;
+    h+=`<div class="detail">Flexibility: ${v.flexibility}</div>`;
+    h+=`<div class="detail">Maintenance: ${v.maintenance}</div></div>`;
+  }
+  document.getElementById('matrix').innerHTML=h;
+
+  // Recommendations
+  h='';
+  d.recommendations.forEach(r=>{h+=`<div class="rec">${r}</div>`;});
+  document.getElementById('recs').innerHTML=h;
+
+  document.getElementById('rawJson').textContent=JSON.stringify(d,null,2);
+}
+document.getElementById('teamInput').addEventListener('keydown',e=>{if(e.key==='Enter')generate();});
+</script>
+</body>
+</html>

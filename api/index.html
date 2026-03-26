@@ -120,6 +120,7 @@
       { id: 'go-to-market', name: 'Go-to-Market', price: '$1.50', icon: '🚀', desc: 'Launch strategy + channels' },
       { id: 'content-strategy', name: 'Content Strategy', price: '$1.50', icon: '📝', desc: 'Content plans + SEO keywords' },
       { id: 'competitive-intel', name: 'Competitive Intel', price: '$1.50', icon: '🔎', desc: 'Competitor profiles & strategy' },
+      { id: 'content-distribution', name: 'Content Distribution', price: '$1.50', icon: '📡', desc: 'Multi-platform distribution plans' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -158,6 +159,7 @@
         case 'go-to-market': data = DemaciainsEngine.goToMarket(getParam('product','AI productivity tool'), { niche: 'creators', price: 29 }); break;
         case 'content-strategy': data = DemaciainsEngine.contentStrategy(getParam('product','AI productivity tool'), { niche: 'AI agents', audience: 'founders' }); break;
         case 'competitive-intel': data = DemaciainsEngine.competitiveIntel(getParam('product','AI productivity toolkit'), { niche: 'creators', price: 29 }); break;
+        case 'content-distribution': data = DemaciainsEngine.contentDistribution(getParam('product','AI productivity toolkit'), { niche: 'creators' }); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);
@@ -176,6 +178,8 @@
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI prompt pack)" value="${getParam('product','AI productivity tool')}" style="width:220px">`;
       } else if (currentEndpoint === 'competitive-intel') {
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI toolkit)" value="${getParam('product','AI productivity toolkit')}" style="width:220px">`;
+      } else if (currentEndpoint === 'content-distribution') {
+        paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI prompt pack)" value="${getParam('product','AI productivity toolkit')}" style="width:220px">`;
       } else if (currentEndpoint === 'revenue-forecast') {
 
       view.innerHTML = `

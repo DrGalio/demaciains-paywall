@@ -1,7 +1,7 @@
 {
   "name": "Demaciains Research Services",
   "description": "Market research, gap analysis, trend signals, algorithm reports, startup validation, and pricing strategy for AI agents and humans. ALL endpoints generate fresh dynamic data on every request. Payments via x402 protocol on Base network.",
-  "version": "3.5.0",
+  "version": "3.7.0",
   "engine": "Demaciains Dynamic Data Engine v3.5 \u2014 Client-Side Seeded PRNG",
   "data_refresh": {
     "market-gap": "daily (date-seeded)",
@@ -178,6 +178,18 @@
         "price"
       ],
       "description": "Deep competitive intelligence: competitor profiles, battlefield analysis, positioning map, threat assessment, SWOT, and strategic recommendations for any product niche."
+    },
+    {
+      "endpoint": "/api/content-distribution",
+      "method": "GET",
+      "price": "1.50",
+      "currency": "USDC",
+      "params": [
+        "product",
+        "niche",
+        "audience"
+      ],
+      "description": "Multi-platform content distribution strategy: platform plans, repurposing matrix, 4-week calendar, channel benchmarks, automation workflows, and KPI framework."
     }
   ],
   "capabilities": [

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Content Distribution Strategy — Demaciains x402 API</title>
+<meta name="description" content="AI-powered multi-platform content distribution strategy. Platform plans, repurposing matrix, 4-week calendar, channel benchmarks, automation opportunities. $1.50 USDC via x402.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e0e0e8;--dim:#888;--accent:#60a5fa;--green:#34d399;--yellow:#fbbf24;--orange:#fb923c;--purple:#a78bfa;--pink:#f472b6;--red:#f87171}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;padding:20px}
+.container{max-width:960px;margin:0 auto}
+header{text-align:center;padding:40px 0 30px;border-bottom:1px solid var(--border)}
+header h1{font-size:2.2em;margin-bottom:8px;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--dim);font-size:1.1em}
+.badge{display:inline-block;background:var(--accent);color:#000;padding:2px 10px;border-radius:12px;font-size:.75em;font-weight:700;margin-left:8px;vertical-align:middle}
+.price-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.price-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:.85em}
+.price-chip strong{color:var(--green)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0}
+.card h3{color:var(--accent);margin-bottom:14px;font-size:1.15em}
+.param-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.param-row label{min-width:120px;color:var(--dim);font-size:.9em}
+.param-row input,.param-row select{background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;flex:1;min-width:180px;font-size:.95em}
+.param-row input:focus{outline:none;border-color:var(--accent)}
+.btn{background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e}
+.row .label{color:var(--dim);font-size:.9em}
+.row .val{color:var(--text);font-weight:500;text-align:right;max-width:60%}
+.output-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.oid{font-family:monospace;color:var(--dim);font-size:.8em}
+.ts{color:var(--dim);font-size:.8em}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}
+.kpi{background:#1a1a2e;border-radius:8px;padding:14px;text-align:center}
+.kpi .num{font-size:1.6em;font-weight:700;color:var(--green)}
+.kpi .lbl{font-size:.8em;color:var(--dim);margin-top:4px}
+.platform-card{background:#1a1a2e;border-radius:8px;padding:16px;margin:10px 0;border-left:3px solid var(--accent)}
+.platform-card h4{color:var(--accent);margin-bottom:8px;font-size:1em}
+.platform-card .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.85em;color:var(--dim);margin-bottom:8px}
+.tag{display:inline-block;background:#2a2a3e;padding:2px 8px;border-radius:4px;font-size:.78em;margin:2px;color:var(--text)}
+.week-card{background:#1a1a2e;border-radius:8px;padding:16px;margin:10px 0}
+.week-card h4{color:var(--yellow);margin-bottom:10px;font-size:.95em}
+.day-row{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid #252535;font-size:.88em;flex-wrap:wrap}
+.day-row:last-child{border-bottom:none}
+.day-label{color:var(--purple);min-width:90px;font-weight:600}
+.chain-flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chain-arrow{background:var(--accent);color:#000;padding:4px 12px;border-radius:6px;font-size:.82em;font-weight:600}
+.chain-arrow::after{content:' →';margin-left:4px}
+.chain-arrow:last-child::after{content:''}
+.auto-card{background:#1a1a2e;border-radius:8px;padding:12px;margin:6px 0}
+.auto-card h5{color:var(--green);font-size:.9em;margin-bottom:4px}
+.tactic{background:#1a1a2e;border-radius:8px;padding:12px;margin:6px 0}
+.tactic h5{color:var(--orange);font-size:.9em;margin-bottom:4px}
+.quick-win{padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.9em}
+.quick-win:last-child{border-bottom:none}
+.quick-win::before{content:'⚡ ';color:var(--yellow)}
+.bench-table{width:100%;border-collapse:collapse;font-size:.85em}
+.bench-table th{color:var(--dim);text-align:left;padding:8px;border-bottom:1px solid var(--border)}
+.bench-table td{padding:8px;border-bottom:1px solid #1a1a2e}
+.json-box{background:#0d0d15;border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:.8em;color:var(--green);white-space:pre-wrap;max-height:400px;overflow-y:auto;margin-top:10px}
+.kpi-list{list-style:none;padding:0}
+.kpi-list li{padding:4px 0;font-size:.88em}
+.kpi-list li::before{content:'📊 ';color:var(--accent)}
+footer{text-align:center;padding:40px 0 20px;color:var(--dim);font-size:.85em;border-top:1px solid var(--border);margin-top:30px}
+@media(max-width:600px){header h1{font-size:1.5em}.kpi-grid{grid-template-columns:1fr 1fr}.param-row{flex-direction:column}.param-row label{min-width:auto}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+<h1>📡 Content Distribution Strategy<span class="badge">x402</span></h1>
+<p>Multi-platform distribution plan with repurposing matrix, 4-week calendar & automation workflows</p>
+<div class="price-bar">
+<div class="price-chip">Price: <strong>$1.50 USDC</strong></div>
+<div class="price-chip">Network: <strong>Base</strong></div>
+<div class="price-chip">Engine: <strong>v3.6</strong></div>
+</div>
+</header>
+
+<!-- Input -->
+<div class="card">
+<h3>📋 Generate Distribution Strategy</h3>
+<div class="param-row">
+<label>Product:</label>
+<input id="productInput" type="text" value="" placeholder="e.g., AI prompt pack, SaaS tool, course">
+</div>
+<div class="param-row">
+<label>Niche (optional):</label>
+<input id="nicheInput" type="text" value="" placeholder="e.g., creators, developers, small business">
+</div>
+<div class="param-row">
+<label>Audience (optional):</label>
+<select id="audienceInput">
+<option value="">Auto-detect</option>
+<option value="creators">Creators</option>
+<option value="developers">Developers</option>
+<option value="marketers">Marketers</option>
+<option value="founders">Founders</option>
+<option value="small business owners">Small Business Owners</option>
+<option value="freelancers">Freelancers</option>
+<option value="agencies">Agencies</option>
+</select>
+</div>
+<div class="param-row">
+<button class="btn" onclick="generate()">Generate Strategy →</button>
+</div>
+</div>
+
+<!-- Output -->
+<div id="output" style="display:none">
+<div class="output-hdr">
+<span class="oid" id="oid">—</span>
+<span class="ts" id="genTs">—</span>
+</div>
+
+<!-- Executive Summary -->
+<div class="card">
+<h3>🎯 Executive Summary</h3>
+<div class="kpi-grid" id="summaryKpis"></div>
+<div id="summaryDetails"></div>
+</div>
+
+<!-- Platform Distribution Plan -->
+<div class="card">
+<h3>📱 Platform Distribution Plan</h3>
+<div id="platforms"></div>
+</div>
+
+<!-- Repurposing Matrix -->
+<div class="card">
+<h3>♻️ Content Repurposing Matrix</h3>
+<div id="repurposing"></div>
+</div>
+
+<!-- 4-Week Calendar -->
+<div class="card">
+<h3>📅 4-Week Distribution Calendar</h3>
+<div id="calendar"></div>
+</div>
+
+<!-- Channel Benchmarks -->
+<div class="card">
+<h3>📊 Channel Benchmarks</h3>
+<div style="overflow-x:auto"><table class="bench-table" id="benchmarks">
+<thead><tr><th>Platform</th><th>Engagement</th><th>CTR</th><th>Growth/mo</th><th>Cost</th><th>ROI Timeline</th><th>Difficulty</th></tr></thead>
+<tbody></tbody>
+</table></div>
+</div>
+
+<!-- Distribution Tactics -->
+<div class="card">
+<h3>🚀 Distribution Tactics</h3>
+<div id="tactics"></div>
+</div>
+
+<!-- Automation -->
+<div class="card">
+<h3>⚙️ Automation Opportunities</h3>
+<div id="automations"></div>
+</div>
+
+<!-- KPI Framework -->
+<div class="card">
+<h3>📐 KPI Framework</h3>
+<div id="kpis"></div>
+</div>
+
+<!-- Quick Wins -->
+<div class="card">
+<h3>⚡ Quick Wins</h3>
+<div id="quickWins"></div>
+</div>
+
+<!-- Raw JSON -->
+<div class="card">
+<h3>📦 Raw JSON Response</h3>
+<button class="btn" onclick="toggleJson()" id="jsonToggle">Show JSON</button>
+<div class="json-box" id="jsonBox" style="display:none"></div>
+</div>
+</div>
+
+<!-- API Info -->
+<div class="card">
+<h3>📡 API Usage</h3>
+<div class="row"><span class="label">Endpoint</span><span class="val">GET /api/content-distribution?product=...&niche=...&audience=...</span></div>
+<div class="row"><span class="label">Price</span><span class="val">$1.50 USDC (x402 on Base)</span></div>
+<div class="row"><span class="label">Params</span><span class="val">product (required), niche (optional), audience (optional)</span></div>
+<div class="row"><span class="label">Response</span><span class="val">Multi-platform distribution strategy with calendar, benchmarks & automation</span></div>
+<div class="row"><span class="label">Refresh</span><span class="val">Daily (date-seeded — same day = same seed)</span></div>
+<div class="row"><span class="label">Engine</span><span class="val">Demaciains Dynamic Engine v3.6.0</span></div>
+</div>
+
+<div class="card">
+<h3>🔗 Related Endpoints</h3>
+<div class="row"><span class="label"><a href="/api/content-strategy/" style="color:var(--accent)">/api/content-strategy</a></span><span class="val">$1.50 — Content pillars & topic clusters</span></div>
+<div class="row"><span class="label"><a href="/api/go-to-market/" style="color:var(--accent)">/api/go-to-market</a></span><span class="val">$1.50 — GTM positioning & phases</span></div>
+<div class="row"><span class="label"><a href="/api/market-gap/" style="color:var(--accent)">/api/market-gap</a></span><span class="val">$1.00 — Find underserved markets</span></div>
+<div class="row"><span class="label"><a href="/api/pricing-strategy/" style="color:var(--accent)">/api/pricing-strategy</a></span><span class="val">$0.75 — Optimize your pricing</span></div>
+<div class="row"><span class="label"><a href="/api/revenue-forecast/" style="color:var(--accent)">/api/revenue-forecast</a></span><span class="val">$1.25 — Revenue projections</span></div>
+<div class="row"><span class="label"><a href="/api/competitive-intel/" style="color:var(--accent)">/api/competitive-intel</a></span><span class="val">$1.50 — Competitive intelligence</span></div>
+</div>
+
+<footer>
+Demaciains Research Services · Powered by x402 Protocol · Base Network<br>
+Wallet: 0x83F31CE0F8b1f27a6Ad91693709febb728c71563
+</footer>
+
+</div><!-- /container -->
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+function generate(){
+  const p=document.getElementById('productInput').value||'AI productivity toolkit';
+  const n=document.getElementById('nicheInput').value||'';
+  const a=document.getElementById('audienceInput').value||'';
+  const opts={};
+  if(n) opts.niche=n;
+  if(a) opts.audience=a;
+  const d=DemaciainsEngine.contentDistribution(p,opts);
+  render(d);
+}
+
+function render(d){
+  document.getElementById('output').style.display='block';
+  document.getElementById('oid').textContent='ID: '+d.report_id;
+  document.getElementById('genTs').textContent='Generated: '+d.generated;
+
+  // Executive summary
+  const s=d.executive_summary;
+  document.getElementById('summaryKpis').innerHTML=`
+    <div class="kpi"><div class="num" style="color:var(--accent)">${s.primary_platform}</div><div class="lbl">Primary Platform</div></div>
+    <div class="kpi"><div class="num">${s.estimated_weekly_time_investment}</div><div class="lbl">Hours/Week</div></div>
+    <div class="kpi"><div class="num" style="color:var(--green)">${s.estimated_reach_multiplier}x</div><div class="lbl">Reach Multiplier</div></div>
+    <div class="kpi"><div class="num">${s.recommended_platforms.length}</div><div class="lbl">Platforms</div></div>
+  `;
+  document.getElementById('summaryDetails').innerHTML=`
+    <div class="row"><span class="label">Rationale</span><span class="val">${s.primary_rationale}</span></div>
+    <div class="row"><span class="label">Platforms</span><span class="val">${s.recommended_platforms.join(', ')}</span></div>
+    <div class="row"><span class="label">Repurposing Ratio</span><span class="val">${s.content_repurposing_ratio}</span></div>
+  `;
+
+  // Platforms
+  let ph='';
+  d.platform_distribution_plan.forEach(p=>{
+    ph+=`<div class="platform-card">
+      <h4>${p.platform} <span class="tag">${p.type}</span> <span class="tag">${p.viral_potential} viral</span></h4>
+      <div class="meta">
+        <span>👥 ${p.target_audience}</span>
+        <span>📅 ${p.posting_frequency}</span>
+        <span>👀 Reach: ${p.estimated_reach_rate}</span>
+        <span>⏳ ${p.content_lifespan}</span>
+      </div>
+      <div style="margin:6px 0"><strong style="font-size:.85em;color:var(--dim)">Formats:</strong> ${p.recommended_formats.map(f=>'<span class="tag">'+f+'</span>').join(' ')}</div>
+      <div style="margin:6px 0"><strong style="font-size:.85em;color:var(--dim)">Best Times:</strong> ${p.best_posting_times.join(', ')}</div>
+      <div style="margin:6px 0"><strong style="font-size:.85em;color:var(--dim)">Content Ideas:</strong><ul style="margin:4px 0 0 20px;font-size:.88em">${p.content_ideas.map(c=>'<li>'+c+'</li>').join('')}</ul></div>
+      <div style="margin:6px 0"><strong style="font-size:.85em;color:var(--dim)">KPIs:</strong> ${p.kpis.map(k=>'<span class="tag">'+k+'</span>').join(' ')}</div>
+    </div>`;
+  });
+  document.getElementById('platforms').innerHTML=ph;
+
+  // Repurposing
+  const r=d.repurposing_matrix;
+  let rh=`<div class="row"><span class="label">Source Format</span><span class="val">${r.source_format}</span></div>`;
+  rh+=`<div class="row"><span class="label">Reach Multiplier</span><span class="val" style="color:var(--green)">${r.estimated_reach_multiplier}x</span></div>`;
+  rh+=`<div class="row"><span class="label">Time Investment</span><span class="val">${r.time_investment}</span></div>`;
+  rh+=`<div class="row"><span class="label">Automation Possible</span><span class="val">${r.automation_possible}</span></div>`;
+  rh+=`<div style="margin:12px 0"><strong style="font-size:.85em;color:var(--dim)">Repurposing Chain:</strong><div class="chain-flow">${r.repurposing_chain.map(c=>'<span class="chain-arrow">'+c+'</span>').join('')}</div></div>`;
+  rh+=`<div><strong style="font-size:.85em;color:var(--dim)">Tools Needed:</strong> ${r.tools_needed.map(t=>'<span class="tag">'+t+'</span>').join(' ')}</div>`;
+  document.getElementById('repurposing').innerHTML=rh;
+
+  // Calendar
+  let calh='';
+  d.distribution_calendar.forEach(w=>{
+    calh+=`<div class="week-card"><h4>${w.week} — ${w.theme} (${w.estimated_hours}h)</h4>`;
+    w.schedule.forEach(day=>{
+      calh+=`<div class="day-row"><span class="day-label">${day.day}</span><span class="tag">${day.platform}</span><span class="tag">${day.content_type}</span><span style="flex:1">${day.topic}</span><span style="color:var(--dim);min-width:60px">${day.estimated_time}</span></div>`;
+    });
+    calh+=`</div>`;
+  });
+  document.getElementById('calendar').innerHTML=calh;
+
+  // Benchmarks
+  const tbody=document.querySelector('#benchmarks tbody');
+  tbody.innerHTML='';
+  d.channel_benchmarks.forEach(b=>{
+    tbody.innerHTML+=`<tr><td><strong>${b.platform}</strong></td><td>${b.avg_engagement_rate}</td><td>${b.avg_click_through_rate}</td><td>${b.follower_growth_rate_monthly}</td><td>${b.cost_per_engagement}</td><td>${b.roi_timeline}</td><td><span class="tag">${b.difficulty}</span></td></tr>`;
+  });
+
+  // Tactics
+  let tach='';
+  d.distribution_tactics.forEach(t=>{
+    tach+=`<div class="tactic"><h5>${t.name}</h5><p style="font-size:.88em;color:var(--dim)">${t.description}</p>`;
+    if(t.expected_impact) tach+=`<div style="margin-top:6px;font-size:.82em"><span class="tag">Impact: ${t.expected_impact}</span> <span class="tag">Effort: ${t.effort_level||'Medium'}</span></div>`;
+    tach+=`</div>`;
+  });
+  document.getElementById('tactics').innerHTML=tach;
+
+  // Automations
+  let autoh='';
+  d.automation_opportunities.forEach(a=>{
+    autoh+=`<div class="auto-card"><h5>${a.name}</h5><p style="font-size:.88em;color:var(--dim)">${a.description}</p>`;
+    if(a.tools) autoh+=`<div style="margin-top:4px;font-size:.82em"><span class="tag">Tools: ${Array.isArray(a.tools)?a.tools.join(', '):a.tools}</span></div>`;
+    if(a.time_saved) autoh+=`<div style="margin-top:4px;font-size:.82em;color:var(--green)">⏱ ${a.time_saved}</div>`;
+    autoh+=`</div>`;
+  });
+  document.getElementById('automations').innerHTML=autoh;
+
+  // KPIs
+  const k=d.kpi_framework;
+  let kpih=`<div class="kpi-grid">
+    <div class="kpi"><div class="num" style="font-size:1.2em">${k.awareness_metrics.length}</div><div class="lbl">Awareness Metrics</div></div>
+    <div class="kpi"><div class="num" style="font-size:1.2em">${k.engagement_metrics.length}</div><div class="lbl">Engagement Metrics</div></div>
+    <div class="kpi"><div class="num" style="font-size:1.2em">${k.conversion_metrics.length}</div><div class="lbl">Conversion Metrics</div></div>
+    <div class="kpi"><div class="num" style="font-size:1.2em">${k.efficiency_metrics.length}</div><div class="lbl">Efficiency Metrics</div></div>
+  </div>`;
+  kpih+=`<div class="row"><span class="label">Reporting Cadence</span><span class="val">${k.reporting_cadence}</span></div>`;
+  kpih+=`<div class="row"><span class="label">Recommended Tool</span><span class="val">${k.recommended_tool}</span></div>`;
+  kpih+=`<div style="margin-top:12px"><strong style="font-size:.85em;color:var(--dim)">Awareness:</strong> ${k.awareness_metrics.map(m=>'<span class="tag">'+m+'</span>').join(' ')}</div>`;
+  kpih+=`<div style="margin-top:6px"><strong style="font-size:.85em;color:var(--dim)">Engagement:</strong> ${k.engagement_metrics.map(m=>'<span class="tag">'+m+'</span>').join(' ')}</div>`;
+  kpih+=`<div style="margin-top:6px"><strong style="font-size:.85em;color:var(--dim)">Conversion:</strong> ${k.conversion_metrics.map(m=>'<span class="tag">'+m+'</span>').join(' ')}</div>`;
+  kpih+=`<div style="margin-top:6px"><strong style="font-size:.85em;color:var(--dim)">Efficiency:</strong> ${k.efficiency_metrics.map(m=>'<span class="tag">'+m+'</span>').join(' ')}</div>`;
+  document.getElementById('kpis').innerHTML=kpih;
+
+  // Quick wins
+  document.getElementById('quickWins').innerHTML=d.quick_wins.map(w=>'<div class="quick-win">'+w+'</div>').join('');
+
+  // JSON
+  document.getElementById('jsonBox').textContent=JSON.stringify(d,null,2);
+
+  document.getElementById('output').scrollIntoView({behavior:'smooth'});
+}
+
+function toggleJson(){
+  const box=document.getElementById('jsonBox');
+  const btn=document.getElementById('jsonToggle');
+  if(box.style.display==='none'){box.style.display='block';btn.textContent='Hide JSON';}
+  else{box.style.display='none';btn.textContent='Show JSON';}
+}
+
+// Auto-generate from URL params
+(function(){
+  const p=new URLSearchParams(location.search);
+  const product=p.get('product');
+  if(product){
+    document.getElementById('productInput').value=product;
+    if(p.get('niche')) document.getElementById('nicheInput').value=p.get('niche');
+    if(p.get('audience')) document.getElementById('audienceInput').value=p.get('audience');
+    generate();
+  }
+})();
+</script>
+</body>
+</html>
