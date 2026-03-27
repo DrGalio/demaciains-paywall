@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SEO Strategy & AI Search Visibility — Demaciains x402 API</title>
+<meta name="description" content="AI-powered SEO strategy: technical audit, keyword research, AI search visibility (ChatGPT, Perplexity, Google AI Overviews), content gaps, backlink opportunities, and 4-week content calendar. $1.50 USDC via x402.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e0e0e8;--dim:#888;--accent:#60a5fa;--green:#34d399;--yellow:#fbbf24;--orange:#fb923c;--purple:#a78bfa;--pink:#f472b6;--red:#f87171;--cyan:#22d3ee}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;padding:20px}
+.container{max-width:960px;margin:0 auto}
+header{text-align:center;padding:40px 0 30px;border-bottom:1px solid var(--border)}
+header h1{font-size:2.2em;margin-bottom:8px;background:linear-gradient(135deg,var(--cyan),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--dim);font-size:1.1em}
+.badge{display:inline-block;background:var(--cyan);color:#000;padding:2px 10px;border-radius:12px;font-size:.75em;font-weight:700;margin-left:8px;vertical-align:middle}
+.price-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.price-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:.85em}
+.price-chip strong{color:var(--cyan)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0}
+.card h3{color:var(--accent);margin-bottom:14px;font-size:1.15em}
+.param-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.param-row label{min-width:140px;color:var(--dim);font-size:.9em}
+.param-row input,.param-row select{background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;flex:1;min-width:180px;font-size:.95em}
+.param-row input:focus{outline:none;border-color:var(--accent)}
+.btn{background:linear-gradient(135deg,var(--cyan),var(--accent));color:#000;border:none;padding:12px 28px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e}
+.row:last-child{border-bottom:none}
+.label{color:var(--dim);font-size:.9em}
+.val{font-weight:600;text-align:right}
+.score{display:inline-block;padding:3px 10px;border-radius:6px;font-weight:700;font-size:.85em}
+.score-high{background:rgba(52,211,153,.15);color:var(--green)}
+.score-mid{background:rgba(251,191,36,.15);color:var(--yellow)}
+.score-low{background:rgba(248,113,113,.15);color:var(--red)}
+.tab-bar{display:flex;gap:4px;margin:20px 0 0;flex-wrap:wrap}
+.tab{padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px 8px 0 0;cursor:pointer;font-size:.85em;color:var(--dim);transition:all .2s}
+.tab.active{background:#1a1a2e;color:var(--accent);border-bottom-color:#1a1a2e}
+.tab-content{display:none}
+.tab-content.active{display:block}
+#json-output{background:#0d0d14;border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.8em;max-height:500px;overflow:auto;white-space:pre-wrap;word-break:break-all;color:var(--green);margin-top:12px}
+.keyword-row{display:grid;grid-template-columns:2fr 1fr 60px 60px 70px;gap:8px;padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.85em;align-items:center}
+.keyword-row:last-child{border-bottom:none}
+.keyword-row .head{color:var(--dim);font-weight:600;font-size:.75em;text-transform:uppercase}
+.intent-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75em;font-weight:600}
+.intent-informational{background:rgba(96,165,250,.15);color:var(--accent)}
+.intent-commercial{background:rgba(167,139,250,.15);color:var(--purple)}
+.intent-transactional{background:rgba(52,211,153,.15);color:var(--green)}
+.intent-navigational{background:rgba(251,191,36,.15);color:var(--yellow)}
+.platform-card{background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0;border-left:3px solid var(--cyan)}
+.platform-card .name{font-weight:700;margin-bottom:4px}
+.gap-card{background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0;border-left:3px solid var(--orange)}
+.gap-card .title{font-weight:700;margin-bottom:4px}
+.backlink-card{background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0;border-left:3px solid var(--purple)}
+.check-row{display:grid;grid-template-columns:2fr 60px 80px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.85em;align-items:center}
+.check-row:last-child{border-bottom:none}
+.check-row .head{color:var(--dim);font-weight:600;font-size:.75em;text-transform:uppercase}
+.status-pass{color:var(--green)}
+.status-warning{color:var(--yellow)}
+.status-fail{color:var(--red)}
+.calendar-day{background:#1a1a2e;border-radius:6px;padding:10px;margin:4px 0;font-size:.85em}
+.calendar-day .day{font-weight:700;color:var(--accent)}
+.calendar-day .task{color:var(--text)}
+.calendar-day .plat{color:var(--dim);font-size:.8em}
+footer{text-align:center;padding:40px 0 20px;color:var(--dim);font-size:.85em}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){header h1{font-size:1.6em}.param-row{flex-direction:column}.param-row label{min-width:auto}.keyword-row,.check-row{grid-template-columns:1fr;font-size:.8em}.tab-bar{gap:2px}.tab{padding:6px 10px;font-size:.75em}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🔍 SEO Strategy & AI Search Visibility <span class="badge">$1.50</span></h1>
+<p>Technical audit, keyword research, AI search visibility, content gaps, backlink opportunities & 4-week content calendar</p>
+<div class="price-bar">
+<span class="price-chip">Price: <strong>$1.50 USDC</strong></span>
+<span class="price-chip">Network: <strong>Base</strong></span>
+<span class="price-chip">x402: <strong>v2</strong></span>
+</div>
+</header>
+
+<div class="card">
+<h3>📋 Parameters</h3>
+<div class="param-row">
+<label>Product / Niche</label>
+<input type="text" id="product" placeholder="e.g. AI productivity tool, SaaS template, digital course" value="AI productivity tool">
+</div>
+<div class="param-row">
+<label>Domain (optional)</label>
+<input type="text" id="domain" placeholder="e.g. myproduct.com">
+</div>
+<div class="param-row">
+<label>Target Niche (optional)</label>
+<input type="text" id="niche" placeholder="e.g. small business, freelancers, developers">
+</div>
+<div style="margin-top:16px">
+<button class="btn" id="generate-btn" onclick="generateReport()">⚡ Generate SEO Strategy</button>
+</div>
+</div>
+
+<div id="loading" style="display:none;text-align:center;padding:40px;color:var(--dim)">
+<div style="font-size:2em;margin-bottom:10px">🔄</div>
+Generating your SEO strategy...
+</div>
+
+<div id="results" style="display:none">
+
+<!-- Score Overview -->
+<div class="card" id="score-overview"></div>
+
+<!-- Tabs -->
+<div class="tab-bar">
+<div class="tab active" data-tab="technical" onclick="switchTab('technical')">🔧 Technical Audit</div>
+<div class="tab" data-tab="keywords" onclick="switchTab('keywords')">🔑 Keywords</div>
+<div class="tab" data-tab="ai-search" onclick="switchTab('ai-search')">🤖 AI Search</div>
+<div class="tab" data-tab="content-gaps" onclick="switchTab('content-gaps')">📝 Content Gaps</div>
+<div class="tab" data-tab="backlinks" onclick="switchTab('backlinks')">🔗 Backlinks</div>
+<div class="tab" data-tab="calendar" onclick="switchTab('calendar')">📅 Calendar</div>
+<div class="tab" data-tab="competitors" onclick="switchTab('competitors')">⚔️ Competitors</div>
+<div class="tab" data-tab="quick-wins" onclick="switchTab('quick-wins')">⚡ Quick Wins</div>
+<div class="tab" data-tab="json" onclick="switchTab('json')">{ } JSON</div>
+</div>
+
+<div class="tab-content active" id="tab-technical"></div>
+<div class="tab-content" id="tab-keywords"></div>
+<div class="tab-content" id="tab-ai-search"></div>
+<div class="tab-content" id="tab-content-gaps"></div>
+<div class="tab-content" id="tab-backlinks"></div>
+<div class="tab-content" id="tab-calendar"></div>
+<div class="tab-content" id="tab-competitors"></div>
+<div class="tab-content" id="tab-quick-wins"></div>
+<div class="tab-content" id="tab-json"><pre id="json-output"></pre></div>
+
+</div>
+
+<footer>
+Built by <a href="https://drgalio.github.io/demaciains-paywall/">Demaciains</a> · x402 Protocol · Base Network · Dynamic Data Engine v3.10
+</footer>
+</div>
+
+<script src="../engine/dynamic-engine-v3.js"></script>
+<script>
+let currentData = null;
+
+function generateReport() {
+  const product = document.getElementById('product').value || 'AI productivity tool';
+  const domain = document.getElementById('domain').value || '';
+  const niche = document.getElementById('niche').value || '';
+
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('results').style.display = 'none';
+
+  setTimeout(() => {
+    const options = {};
+    if (domain) options.domain = domain;
+    if (niche) options.niche = niche;
+    currentData = DemaciainsEngine.seoStrategy(product, options);
+    renderReport(currentData);
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+  }, 600);
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.toggle('active', t.id === 'tab-' + name));
+}
+
+function scoreClass(score) { return score >= 70 ? 'score-high' : score >= 45 ? 'score-mid' : 'score-low'; }
+function statusClass(status) { return status === 'PASS' ? 'status-pass' : status === 'WARNING' ? 'status-warning' : 'status-fail'; }
+
+function renderReport(d) {
+  // Score Overview
+  document.getElementById('score-overview').innerHTML = `
+    <h3>📊 SEO Strategy Overview</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:12px">
+      <div style="text-align:center;padding:16px;background:#1a1a2e;border-radius:8px">
+        <div style="font-size:2em;font-weight:700" class="${scoreClass(d.meta.overallSeoScore)}">${d.meta.overallSeoScore}</div>
+        <div style="color:var(--dim);font-size:.85em">Overall SEO Score</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#1a1a2e;border-radius:8px">
+        <div style="font-size:2em;font-weight:700" class="${scoreClass(d.technicalAudit.score)}">${d.technicalAudit.grade}</div>
+        <div style="color:var(--dim);font-size:.85em">Technical Grade (${d.technicalAudit.score}/100)</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#1a1a2e;border-radius:8px">
+        <div style="font-size:2em;font-weight:700;color:var(--cyan)">${d.aiSearchVisibility.overallScore}</div>
+        <div style="color:var(--dim);font-size:.85em">AI Search Score</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#1a1a2e;border-radius:8px">
+        <div style="font-size:2em;font-weight:700;color:var(--accent)">${d.keywordStrategy.totalKeywords}</div>
+        <div style="color:var(--dim);font-size:.85em">Keywords Tracked</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:12px;background:#1a1a2e;border-radius:8px;border-left:3px solid var(--cyan)">
+      <strong>Biggest Opportunity:</strong> ${d.meta.biggestOpportunity}
+    </div>
+    <div style="margin-top:8px;padding:12px;background:#1a1a2e;border-radius:8px;border-left:3px solid var(--green)">
+      <strong>Competitive Advantage:</strong> ${d.meta.competitiveAdvantage}
+    </div>
+  `;
+
+  // Technical Audit
+  const techRows = d.technicalAudit.checks.map(tc => `
+    <div class="check-row">
+      <div>${tc.check}</div>
+      <div class="${statusClass(tc.status)}">${tc.status}</div>
+      <div><span class="score ${scoreClass(tc.score)}">${tc.score}%</span></div>
+      <div style="color:var(--dim);font-size:.8em">${tc.recommendation}</div>
+    </div>
+  `).join('');
+  document.getElementById('tab-technical').innerHTML = `
+    <div class="card">
+      <h3>🔧 Technical SEO Audit — Score: ${d.technicalAudit.score}/100 (${d.technicalAudit.grade})</h3>
+      <div style="margin-bottom:12px;color:var(--dim)">${d.technicalAudit.criticalIssues} critical issues, ${d.technicalAudit.warnings} warnings</div>
+      <div class="check-row"><div class="head">Check</div><div class="head">Status</div><div class="head">Score</div><div class="head">Action</div></div>
+      ${techRows}
+    </div>
+  `;
+
+  // Keywords
+  const kwRows = d.keywordStrategy.keywords.map(k => `
+    <div class="keyword-row">
+      <div>${k.keyword}</div>
+      <div><span class="intent-tag intent-${k.intent}">${k.intent}</span></div>
+      <div>${k.volume.toLocaleString()}</div>
+      <div>${k.difficulty}</div>
+      <div><span class="score ${scoreClass(parseFloat(k.opportunity)*100)}">${k.opportunity}</span></div>
+    </div>
+  `).join('');
+  document.getElementById('tab-keywords').innerHTML = `
+    <div class="card">
+      <h3>🔑 Keyword Strategy — ${d.keywordStrategy.totalKeywords} Keywords</h3>
+      <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap;color:var(--dim);font-size:.85em">
+        <span>📖 Informational: ${d.keywordStrategy.byIntent.informational}</span>
+        <span>💰 Commercial: ${d.keywordStrategy.byIntent.commercial}</span>
+        <span>🛒 Transactional: ${d.keywordStrategy.byIntent.transactional}</span>
+        <span>🧭 Navigational: ${d.keywordStrategy.byIntent.navigational}</span>
+      </div>
+      <div class="keyword-row"><div class="head">Keyword</div><div class="head">Intent</div><div class="head">Volume</div><div class="head">Diff</div><div class="head">Opp</div></div>
+      ${kwRows}
+    </div>
+  `;
+
+  // AI Search
+  const platformCards = d.aiSearchPlatforms.map(p => `
+    <div class="platform-card">
+      <div class="name">${p.platform}</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin:6px 0;font-size:.85em">
+        <span>Visibility: <strong>${p.visibility}</strong></span>
+        <span>Mentions: <strong>${p.brandMentions}</strong></span>
+      </div>
+      <div style="color:var(--dim);font-size:.85em;margin:4px 0">${p.topCitation}</div>
+      <div style="color:var(--accent);font-size:.85em">→ ${p.actionItems[0]}</div>
+    </div>
+  `).join('');
+  const factorRows = d.aiSearchVisibility.keyFactors.map(f => `
+    <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a1a2e">
+      <span>${f.factor}</span>
+      <span class="score ${scoreClass(f.importance*10)}">${f.importance}/10</span>
+    </div>
+  `).join('');
+  document.getElementById('tab-ai-search').innerHTML = `
+    <div class="card">
+      <h3>🤖 AI Search Visibility — Score: ${d.aiSearchVisibility.overallScore}/100</h3>
+      <div style="padding:12px;background:#1a1a2e;border-radius:8px;border-left:3px solid var(--cyan);margin-bottom:16px">
+        <strong>Recommendation:</strong> ${d.aiSearchVisibility.recommendation}
+      </div>
+      <h3 style="margin-top:20px">Key AI Ranking Factors</h3>
+      ${factorRows}
+      <h3 style="margin-top:20px">Platform Visibility</h3>
+      ${platformCards}
+    </div>
+  `;
+
+  // Content Gaps
+  const gapCards = d.contentGaps.map(g => `
+    <div class="gap-card">
+      <div class="title">${g.topic}</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin:6px 0;font-size:.85em">
+        <span>Type: <strong>${g.contentType}</strong></span>
+        <span>Traffic: <strong>${g.estimatedTraffic}/mo</strong></span>
+        <span>Difficulty: <strong>${g.difficulty}</strong></span>
+        <span class="score ${g.priority==='HIGH'?'score-high':g.priority==='MEDIUM'?'score-mid':'score-low'}">${g.priority}</span>
+      </div>
+      <div style="color:var(--dim);font-size:.85em">Competition: ${g.competitorCoverage}</div>
+    </div>
+  `).join('');
+  document.getElementById('tab-content-gaps').innerHTML = `
+    <div class="card">
+      <h3>📝 Content Gap Analysis — ${d.contentGaps.length} Opportunities</h3>
+      ${gapCards}
+    </div>
+  `;
+
+  // Backlinks
+  const blCards = d.backlinkOpportunities.targets.map(b => `
+    <div class="backlink-card">
+      <div style="font-weight:700">${b.type}</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin:6px 0;font-size:.85em">
+        <span>Difficulty: <strong>${b.difficulty}</strong></span>
+        <span>DA: <strong>${b.domainAuthority}</strong></span>
+        <span>Impact: <strong>${b.estimatedImpact}/10</strong></span>
+      </div>
+      <div style="color:var(--dim);font-size:.85em">→ ${b.approach}</div>
+    </div>
+  `).join('');
+  document.getElementById('tab-backlinks').innerHTML = `
+    <div class="card">
+      <h3>🔗 Backlink Opportunities — Score: ${d.backlinkOpportunities.totalOpportunityScore}/10</h3>
+      <div style="margin-bottom:12px;color:var(--dim);font-size:.85em">Priority (easy wins): ${d.backlinkOpportunities.priorityActions.join(', ')}</div>
+      ${blCards}
+    </div>
+  `;
+
+  // Calendar
+  const calWeeks = d.contentCalendar.map(w => {
+    const days = w.days.map(day => `
+      <div class="calendar-day">
+        <span class="day">${day.day}</span> — <span class="task">${day.task}</span>
+        <span class="plat">[${day.platform}]</span>
+      </div>
+    `).join('');
+    return `<div style="margin:16px 0"><h3 style="color:var(--accent);margin-bottom:8px">Week ${w.week}: ${w.theme}</h3>${days}</div>`;
+  }).join('');
+  document.getElementById('tab-calendar').innerHTML = `
+    <div class="card">
+      <h3>📅 4-Week Content Calendar</h3>
+      ${calWeeks}
+    </div>
+  `;
+
+  // Competitors
+  const compCards = d.competitorAnalysis.map(c => `
+    <div style="background:#1a1a2e;border-radius:8px;padding:16px;margin:8px 0">
+      <div style="font-weight:700;font-size:1.05em">${c.name} <span style="color:var(--dim);font-size:.8em">(${c.domain})</span></div>
+      <div style="margin:6px 0;font-size:.85em">
+        <span>Traffic: <strong>${c.estimatedTraffic}</strong></span> · 
+        <span>Strategy: <strong>${c.contentStrategy}</strong></span>
+      </div>
+      <div style="margin:6px 0;font-size:.85em">
+        <span style="color:var(--green)">✅ ${c.strengths}</span><br>
+        <span style="color:var(--red)">❌ ${c.weaknesses}</span>
+      </div>
+      <div style="color:var(--cyan);font-size:.85em;margin-top:4px">💡 Gap: ${c.gapOpportunity}</div>
+    </div>
+  `).join('');
+  document.getElementById('tab-competitors').innerHTML = `
+    <div class="card">
+      <h3>⚔️ Competitor SEO Analysis — ${d.competitorAnalysis.length} Competitors</h3>
+      ${compCards}
+    </div>
+  `;
+
+  // Quick Wins
+  const qwCards = d.quickWins.map(q => `
+    <div style="background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0;border-left:3px solid ${q.impact==='HIGH'?'var(--green)':'var(--yellow)'}">
+      <div style="font-weight:700">${q.action}</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0;font-size:.85em;color:var(--dim)">
+        <span>Impact: <strong style="color:${q.impact==='HIGH'?'var(--green)':'var(--yellow)'}">${q.impact}</strong></span>
+        <span>Time: <strong>${q.time}</strong></span>
+        <span>Result: <strong style="color:var(--text)">${q.result}</strong></span>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('tab-quick-wins').innerHTML = `
+    <div class="card">
+      <h3>⚡ Quick Wins — ${d.quickWins.length} Actions</h3>
+      <div style="margin-bottom:12px;padding:12px;background:#1a1a2e;border-radius:8px;color:var(--dim);font-size:.85em">
+        Estimated time to ROI: <strong style="color:var(--text)">${d.meta.estimatedTimeToROI}</strong> · Investment: <strong style="color:var(--green)">Zero cost — time only</strong>
+      </div>
+      ${qwCards}
+    </div>
+  `;
+
+  // JSON
+  document.getElementById('json-output').textContent = JSON.stringify(d, null, 2);
+}
+
+// Auto-generate on load
+window.addEventListener('DOMContentLoaded', generateReport);
+</script>
+</body>
+</html>

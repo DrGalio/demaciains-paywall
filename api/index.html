@@ -124,6 +124,7 @@
       { id: 'audience-profiler', name: 'Audience Profiler', price: '$1.50', icon: '🎯', desc: 'Buyer personas & market sizing' },
       { id: 'sales-copy', name: 'Sales Copy Generator', price: '$1.50', icon: '✍️', desc: 'Headlines, CTAs & conversion copy' },
       { id: 'retention-strategy', name: 'Retention Strategy', price: '$1.50', icon: '🔄', desc: 'Churn prevention & loyalty' },
+      { id: 'seo-strategy', name: 'SEO Strategy', price: '$1.50', icon: '🔍', desc: 'Technical audit, keywords & AI search visibility' },
     ];
 
     let currentEndpoint = 'market-gap';
@@ -166,6 +167,7 @@
         case 'audience-profiler': data = DemaciainsEngine.audienceProfiler(getParam('product','AI productivity toolkit')); break;
         case 'sales-copy': data = DemaciainsEngine.salesCopy(getParam('product','digital template pack')); break;
         case 'retention-strategy': data = DemaciainsEngine.retentionStrategy({ product: getParam('product','digital product'), model: 'one-time', ltv: '$49' }); break;
+        case 'seo-strategy': data = DemaciainsEngine.seoStrategy(getParam('product','AI productivity tool')); break;
       }
 
       const jsonStr = JSON.stringify(data, null, 2);
@@ -192,6 +194,8 @@
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. digital template pack)" value="${getParam('product','digital template pack')}" style="width:220px">`;
       } else if (currentEndpoint === 'retention-strategy') {
         paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. SaaS tool)" value="${getParam('product','digital product')}" style="width:220px">`;
+      } else if (currentEndpoint === 'seo-strategy') {
+        paramHTML = `<input type="text" id="param-product" placeholder="product (e.g. AI SEO tool)" value="${getParam('product','AI productivity tool')}" style="width:220px">`;
       } else if (currentEndpoint === 'revenue-forecast') {
 
       view.innerHTML = `

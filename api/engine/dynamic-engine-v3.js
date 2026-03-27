@@ -2342,10 +2342,301 @@ const DemaciainsEngine = (() => {
   }
 
   // ═══════════════════════════════════════════
+  //  SEO STRATEGY & AI SEARCH VISIBILITY
+  // ═══════════════════════════════════════════
+  const SEO_INTENTS = ['informational', 'commercial', 'transactional', 'navigational'];
+  const SEO_PLATFORMS = ['Google Organic', 'Google AI Overviews', 'ChatGPT', 'Perplexity', 'Bing Copilot', 'Claude', 'YouTube', 'Reddit'];
+  const SEO_CONTENT_TYPES = ['blog post', 'landing page', 'comparison page', 'how-to guide', 'case study', 'free tool', 'template page', 'video tutorial', 'glossary', 'listicle'];
+  const SEO_TECHNICAL_CHECKS = [
+    { check: 'Core Web Vitals (LCP, FID, CLS)', weight: 15 },
+    { check: 'Mobile responsiveness', weight: 12 },
+    { check: 'HTTPS / SSL certificate', weight: 8 },
+    { check: 'XML sitemap present and valid', weight: 7 },
+    { check: 'Robots.txt properly configured', weight: 5 },
+    { check: 'Structured data / Schema.org markup', weight: 10 },
+    { check: 'Canonical tags on all pages', weight: 6 },
+    { check: 'Internal linking structure', weight: 8 },
+    { check: 'Page speed (< 3s load time)', weight: 10 },
+    { check: '404 error handling', weight: 4 },
+    { check: 'Hreflang tags (if multilingual)', weight: 3 },
+    { check: 'Image optimization (alt tags, compression)', weight: 7 },
+    { check: 'Meta title & description uniqueness', weight: 5 },
+  ];
+  const SEO_BACKLINK_TYPES = ['Guest post on niche blog', 'Resource page inclusion', 'HARO / Connectively pitch', 'Tool/template embed link', 'Reddit/Forum discussion link', 'Product Hunt / directory listing', 'Podcast guest appearance', 'Industry report citation', 'Comparison/alternative page mention', 'Social profile optimization'];
+  const SEO_AI_SEARCH_FACTORS = [
+    { factor: 'Brand mention frequency in training data', importance: 9.2 },
+    { factor: 'Structured data completeness', importance: 8.8 },
+    { factor: 'Content freshness and update frequency', importance: 8.5 },
+    { factor: 'Expertise signals (author bios, credentials)', importance: 8.3 },
+    { factor: 'Topical authority (depth of coverage)', importance: 8.1 },
+    { factor: 'User engagement metrics (dwell time, CTR)', importance: 7.8 },
+    { factor: 'Citation-worthy statistics and data points', importance: 7.5 },
+    { factor: 'FAQ-style content structure', importance: 7.2 },
+    { factor: 'Cross-platform presence and consistency', importance: 6.9 },
+    { factor: 'Review and testimonial signals', importance: 6.5 },
+  ];
+
+  function seoStrategy(product = 'AI productivity tool', options = {}) {
+    const seed = options.seed || nicheSeed(product);
+    const rng = mulberry32(seed);
+    const niche = options.niche || pick(rng, NICHES).name;
+    const domain = options.domain || `${product.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`;
+
+    // Technical SEO Audit
+    const techChecks = SEO_TECHNICAL_CHECKS.map(tc => ({
+      check: tc.check,
+      weight: tc.weight,
+      status: pick(rng, ['PASS', 'PASS', 'PASS', 'WARNING', 'FAIL']),
+      score: randInt(rng, 40, 100),
+      recommendation: pick(rng, [
+        'Already optimized — maintain current implementation.',
+        `Needs improvement: ${pick(rng, ['reduce render-blocking resources', 'compress images to WebP', 'minify CSS/JS', 'implement lazy loading', 'add preconnect hints', 'optimize font loading', 'defer non-critical scripts'])}.`,
+        `Critical issue: ${pick(rng, ['missing on 40% of pages', 'deprecated format detected', 'conflicting directives found', 'not implemented at all', 'blocking search crawlers'])}. Fix within 48h.`,
+      ]),
+    }));
+    const techScore = Math.round(techChecks.reduce((sum, tc) => sum + (tc.score * tc.weight / 100), 0) / techChecks.reduce((s, t) => s + t.weight, 0) * 100);
+
+    // Keyword Strategy
+    const keywordCategories = [
+      { intent: 'informational', prefix: pick(rng, ['how to', 'what is', 'guide to', 'best way to']), volumeRange: [500, 12000], difficultyRange: [20, 65] },
+      { intent: 'commercial', prefix: pick(rng, ['best', 'top', 'review', 'vs', 'alternative to']), volumeRange: [200, 8000], difficultyRange: [35, 80] },
+      { intent: 'transactional', prefix: pick(rng, ['buy', 'pricing', 'discount', 'deal', 'coupon']), volumeRange: [100, 3000], difficultyRange: [25, 70] },
+      { intent: 'navigational', prefix: pick(rng, ['login', 'signup', 'dashboard', 'api docs']), volumeRange: [50, 1500], difficultyRange: [10, 40] },
+    ];
+    const keywords = [];
+    keywordCategories.forEach(cat => {
+      for (let i = 0; i < randInt(rng, 3, 6); i++) {
+        const suffix = pick(rng, [product, niche, `${product} tool`, `${product} software`, `${product} template`, `${niche} automation`, `${product} for ${pick(rng, ['freelancers', 'small business', 'agencies', 'developers', 'marketers'])}`]);
+        keywords.push({
+          keyword: `${cat.prefix} ${suffix}`,
+          intent: cat.intent,
+          volume: randInt(rng, cat.volumeRange[0], cat.volumeRange[1]),
+          difficulty: randInt(rng, cat.difficultyRange[0], cat.difficultyRange[1]),
+          cpc: `$${randFloat(rng, 0.5, 8.0).toFixed(2)}`,
+          opportunity: randFloat(rng, 0.3, 0.95).toFixed(2),
+          currentRank: pick(rng, ['Not ranking', `#${randInt(rng, 11, 100)}`, `#${randInt(rng, 4, 10)}`, `#${randInt(rng, 1, 3)}`]),
+        });
+      }
+    });
+    keywords.sort((a, b) => parseFloat(b.opportunity) - parseFloat(a.opportunity));
+
+    // AI Search Visibility
+    const aiSearchPlatforms = SEO_PLATFORMS.map(platform => ({
+      platform,
+      visibility: pick(rng, ['Strong', 'Moderate', 'Weak', 'Not present', 'Emerging']),
+      brandMentions: randInt(rng, 0, 50),
+      topCitation: pick(rng, [
+        'Listed in top 5 results for primary keywords',
+        'Mentioned in 2-3 AI-generated responses',
+        'Not cited in any AI responses yet',
+        'Appears in competitor comparison answers',
+        'Featured in "best tools" recommendations',
+        'Zero visibility — needs content and authority building',
+      ]),
+      actionItems: [
+        pick(rng, [
+          `Create comprehensive ${pick(rng, ['comparison', 'how-to', 'review', 'resource'])} page targeting AI citation`,
+          `Add structured data markup (FAQ, HowTo, Product schema)`,
+          `Publish data-driven content with original statistics`,
+          `Build topical authority with ${randInt(rng, 5, 15)}+ interconnected articles`,
+          `Get cited on high-authority sites that AI models reference`,
+          `Create FAQ-style content answering common ${niche} questions`,
+        ]),
+      ],
+    }));
+
+    // Content Gap Analysis
+    const contentGaps = [];
+    for (let i = 0; i < randInt(rng, 5, 8); i++) {
+      contentGaps.push({
+        topic: pick(rng, [
+          `${product} vs ${pick(rng, ['competitor A', 'competitor B', 'alternative solution', 'manual process'])}`,
+          `How to ${pick(rng, ['get started with', 'optimize', 'automate', 'scale with', 'integrate'])} ${product}`,
+          `${niche} ${pick(rng, ['best practices', 'common mistakes', 'ROI calculator', 'checklist', 'workflow template'])}`,
+          `${pick(rng, ['2026', 'complete', 'beginner\'s', 'advanced'])} guide to ${product}`,
+          `${product} ${pick(rng, ['pricing comparison', 'feature matrix', 'use cases', 'case studies', 'tutorials'])}`,
+          `Top ${randInt(rng, 5, 15)} ${pick(rng, ['tools for', 'strategies for', 'mistakes in', 'trends in'])} ${niche}`,
+        ]),
+        contentType: pick(rng, SEO_CONTENT_TYPES),
+        estimatedTraffic: randInt(rng, 100, 5000),
+        difficulty: randInt(rng, 15, 75),
+        competitorCoverage: pick(rng, ['None cover this', '2 competitors have weak coverage', '1 competitor dominates', 'Saturated — need unique angle', 'Emerging topic, low competition']),
+        priority: pick(rng, ['HIGH', 'HIGH', 'MEDIUM', 'MEDIUM', 'LOW']),
+      });
+    }
+    contentGaps.sort((a, b) => (a.priority === 'HIGH' ? 0 : a.priority === 'MEDIUM' ? 1 : 2) - (b.priority === 'HIGH' ? 0 : b.priority === 'MEDIUM' ? 1 : 2));
+
+    // Backlink Opportunities
+    const backlinks = SEO_BACKLINK_TYPES.map(type => ({
+      type,
+      targetSites: [
+        pick(rng, [
+          `${pick(rng, ['blog.', 'resources.', 'tools.', 'community.', 'www.'])}${pick(rng, ['industry-leader', 'niche-blog', 'tool-directory', 'resource-hub', 'media-outlet'])}.com`,
+          `${pick(rng, ['dev', 'tech', 'startup', 'marketing', 'product'])}${pick(rng, ['blog', 'news', 'review', 'directory', 'magazine'])}.com`,
+        ]),
+      ],
+      difficulty: pick(rng, ['Easy', 'Easy', 'Medium', 'Medium', 'Hard']),
+      domainAuthority: randInt(rng, 20, 95),
+      estimatedImpact: randFloat(rng, 3.0, 9.5).toFixed(1),
+      approach: pick(rng, [
+        'Pitch a guest post with original data/research',
+        'Submit tool to directory with unique description',
+        'Offer expert quote for their upcoming article',
+        'Create a resource they\'d naturally want to link to',
+        'Engage authentically in community discussions',
+        'Partner on a co-branded research report',
+      ]),
+    }));
+
+    // Content Calendar (4-week)
+    const calendarWeeks = [];
+    for (let w = 1; w <= 4; w++) {
+      const days = [];
+      const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+      weekDays.forEach(day => {
+        days.push({
+          day,
+          task: pick(rng, [
+            `Publish: ${pick(rng, SEO_CONTENT_TYPES)} targeting "${pick(rng, keywords).keyword}"`,
+            `Update: Refresh ${pick(rng, ['top-performing', 'underperforming', 'outdated'])} article with new data`,
+            `Outreach: ${pick(rng, ['Send 5 guest post pitches', 'Follow up on pending collaborations', 'Submit to 3 directories', 'Engage on 10 Reddit threads'])}`,
+            `Optimize: ${pick(rng, ['Add internal links to', 'Improve meta descriptions for', 'Add schema markup to', 'Update images on'])} ${randInt(rng, 3, 8)} pages`,
+            `Research: ${pick(rng, ['Analyze competitor content gaps', 'Monitor keyword ranking changes', 'Review AI search citations', 'Audit backlink profile'])}`,
+            `Create: ${pick(rng, ['Social proof compilation', 'FAQ page update', 'Comparison chart', 'Data visualization', 'Video script'])}`,
+          ]),
+          platform: pick(rng, ['Website', 'Blog', 'YouTube', 'Reddit', 'LinkedIn', 'Twitter/X', 'Medium']),
+        });
+      });
+      calendarWeeks.push({ week: w, theme: pick(rng, ['Foundation Building', 'Content Expansion', 'Authority Growth', 'Optimization & Scale', 'Community Engagement', 'Link Acquisition']), days });
+    }
+
+    // Competitor SEO Analysis
+    const seoCompetitors = [];
+    for (let i = 0; i < randInt(rng, 3, 5); i++) {
+      seoCompetitors.push({
+        name: pick(rng, ['CompetitorAlpha', 'RivalTools', 'MarketLeader', 'NichePlayer', 'EmergingThreat', 'LegacyProvider']),
+        domain: `competitor${i + 1}.com`,
+        estimatedTraffic: `${randInt(rng, 5, 500)}K monthly visits`,
+        topKeywords: keywords.slice(0, 3).map(k => k.keyword),
+        contentStrategy: pick(rng, ['Heavy blog (20+ posts/mo)', 'Tool-focused (free calculators)', 'Community-driven (forums/UGC)', 'Video-first (YouTube + shorts)', 'Data/research reports']),
+        strengths: pick(rng, [
+          'Strong domain authority and backlink profile',
+          'Massive content library covering all sub-topics',
+          'Active community generating UGC and links',
+          'First-mover advantage with established rankings',
+          'Superior technical SEO and site architecture',
+        ]),
+        weaknesses: pick(rng, [
+          'Thin content — volume over quality',
+          'Outdated articles not refreshed in 12+ months',
+          'Poor mobile experience hurting Core Web Vitals',
+          'No structured data or schema markup',
+          'Weak internal linking — pages in silos',
+        ]),
+        gapOpportunity: pick(rng, [
+          `They cover breadth but lack depth on ${niche} specifics`,
+          `No AI search optimization — first-mover advantage exists`,
+          `Missing ${pick(rng, ['comparison pages', 'calculators', 'templates', 'video content', 'community'])} — we can own this`,
+          `Their ${pick(rng, ['pricing', 'features', 'use cases', 'integrations'])} content is thin — we go deeper`,
+        ]),
+      });
+    }
+
+    // ROI & Impact Projections
+    const projectedTrafficIncrease = randInt(rng, 25, 180);
+    const projectedMonths = randInt(rng, 3, 9);
+    const roiProjection = {
+      currentMonthlyTraffic: randInt(rng, 200, 5000),
+      projectedTrafficAt6Months: randInt(rng, 500, 15000),
+      projectedTrafficAt12Months: randInt(rng, 1000, 30000),
+      estimatedRevenueImpact: `$${randInt(rng, 200, 5000)}/mo organic traffic value`,
+      timeToFirstResults: `${randInt(rng, 2, 8)} weeks`,
+      timeToSignificantResults: `${projectedMonths} months`,
+      investmentRequired: 'Zero cost — time investment only',
+      comparisonVsPaid: `Organic traffic at $0 CPC vs equivalent paid spend of $${randInt(rng, 500, 5000)}/mo`,
+    };
+
+    // Quick Wins
+    const quickWins = [
+      { action: 'Fix All Meta Titles & Descriptions', impact: 'HIGH', time: `${randInt(rng, 1, 3)} hours`, result: `${randInt(rng, 5, 15)}% CTR improvement` },
+      { action: 'Add FAQ Schema to Top 10 Pages', impact: 'HIGH', time: `${randInt(rng, 1, 2)} hours`, result: 'Rich snippets in Google + AI citation boost' },
+      { action: 'Create Comparison Page: "Your Product vs Top 3 Alternatives"', impact: 'HIGH', time: `${randInt(rng, 2, 4)} hours`, result: `Captures ${randInt(rng, 500, 3000)} monthly searches` },
+      { action: 'Set Up Google Search Console + Submit Sitemap', impact: 'MEDIUM', time: '15 minutes', result: 'Full indexing visibility' },
+      { action: 'Add Internal Links from Top 5 Pages to Key Landing Pages', impact: 'MEDIUM', time: `${randInt(rng, 30, 60)} minutes`, result: `${randInt(rng, 10, 25)}% authority flow improvement` },
+      { action: 'Publish One Data-Driven Blog Post with Original Statistics', impact: 'HIGH', time: `${randInt(rng, 3, 6)} hours`, result: 'Citation magnet for AI search + backlinks' },
+      { action: 'Optimize Images (WebP + Alt Tags) Across Site', impact: 'MEDIUM', time: `${randInt(rng, 1, 3)} hours`, result: `${randInt(rng, 20, 40)}% page speed improvement` },
+      { action: 'Create Free Tool/Calculator Page (Link Magnet)', impact: 'HIGH', time: `${randInt(rng, 3, 8)} hours`, result: `${randInt(rng, 20, 100)}+ natural backlinks over 6 months` },
+    ];
+
+    return {
+      generatedAt: nowISO(),
+      product,
+      niche,
+      domain,
+      technicalAudit: {
+        score: techScore,
+        grade: techScore >= 80 ? 'A' : techScore >= 65 ? 'B' : techScore >= 50 ? 'C' : techScore >= 35 ? 'D' : 'F',
+        checks: techChecks,
+        criticalIssues: techChecks.filter(tc => tc.status === 'FAIL').length,
+        warnings: techChecks.filter(tc => tc.status === 'WARNING').length,
+      },
+      keywordStrategy: {
+        totalKeywords: keywords.length,
+        keywords: keywords.slice(0, 20),
+        topOpportunity: keywords[0],
+        byIntent: {
+          informational: keywords.filter(k => k.intent === 'informational').length,
+          commercial: keywords.filter(k => k.intent === 'commercial').length,
+          transactional: keywords.filter(k => k.intent === 'transactional').length,
+          navigational: keywords.filter(k => k.intent === 'navigational').length,
+        },
+      },
+      aiSearchVisibility: {
+        platforms: aiSearchPlatforms,
+        overallScore: randInt(rng, 15, 85),
+        keyFactors: SEO_AI_SEARCH_FACTORS.sort((a, b) => b.importance - a.importance).slice(0, 5),
+        recommendation: pick(rng, [
+          'Focus on structured data and FAQ content — AI models prioritize well-organized, citation-worthy content.',
+          'Build topical authority first — create 10+ interconnected articles on your core topic before optimizing for AI search.',
+          'Original data and statistics are the #1 driver of AI citations. Publish research.',
+          'Cross-platform presence matters — AI models pull from multiple sources. Be visible on Reddit, YouTube, and industry publications.',
+          'Expertise signals (author bios, credentials, citations) are critical for AI search trust scoring.',
+        ]),
+      },
+      contentGaps,
+      backlinkOpportunities: {
+        targets: backlinks.slice(0, 8),
+        priorityActions: backlinks.filter(b => b.difficulty === 'Easy').slice(0, 3).map(b => b.type),
+        totalOpportunityScore: randFloat(rng, 5.5, 9.2).toFixed(1),
+      },
+      contentCalendar: calendarWeeks,
+      competitorAnalysis: seoCompetitors,
+      roiProjection,
+      quickWins: quickWins.slice(0, randInt(rng, 5, 8)),
+      meta: {
+        overallSeoScore: randInt(rng, 35, 78),
+        biggestOpportunity: pick(rng, [
+          `AI Search Visibility — ${pick(rng, SEO_PLATFORMS)} is an untapped channel with minimal competition`,
+          `Content Gap: "${contentGaps[0]?.topic}" has ${contentGaps[0]?.estimatedTraffic} estimated monthly searches with weak competitor coverage`,
+          `Technical SEO: Fixing ${techChecks.find(tc => tc.status === 'FAIL')?.check || 'Core Web Vitals'} would improve rankings across all pages`,
+          `Backlink Strategy: ${backlinks.find(b => b.difficulty === 'Easy')?.type} is the highest-ROI, lowest-effort link building tactic`,
+        ]),
+        estimatedTimeToROI: `${randInt(rng, 2, 6)} months`,
+        competitiveAdvantage: pick(rng, [
+          `AI search optimization is a first-mover window — competitors haven't adapted yet`,
+          `Content depth in ${niche} is our moat — go 10x deeper than any competitor`,
+          `Free tools/calculators create natural backlink magnets that compound over time`,
+          `Community-driven content (Reddit, forums) builds authentic authority signals`,
+        ]),
+      }
+    };
+  }
+
+  // ═══════════════════════════════════════════
   //  PUBLIC API
   // ═══════════════════════════════════════════
   return {
-    version: '3.9.0',
+    version: '3.10.0',
     endpoints: ['market-gap', 'trends', 'competitor-gap', 'algo-report', 'startup-validator', 'pricing-strategy', 'revenue-forecast', 'go-to-market', 'content-strategy', 'competitive-intel', 'content-distribution', 'audience-profiler', 'sales-copy', 'retention-strategy'],
     marketGap,
     trends,
@@ -2362,6 +2653,7 @@ const DemaciainsEngine = (() => {
     audienceProfiler,
     salesCopy,
     retentionStrategy,
+    seoStrategy,
     // Batch regenerate all
     regenerateAll(niche = 'ai agent tools', market = 'x402 agent commerce', idea = 'AI-powered productivity tool', product = 'digital template pack', businessType = 'small business', teamSize = 5) {
       return {
@@ -2380,6 +2672,7 @@ const DemaciainsEngine = (() => {
         'audience-profiler': audienceProfiler(product),
         'sales-copy': salesCopy(product),
         'retention-strategy': retentionStrategy({ product }),
+        'seo-strategy': seoStrategy(product),
       };
     }
   };

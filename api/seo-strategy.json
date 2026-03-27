@@ -1,0 +1,718 @@
+{
+  "generatedAt": "2026-03-27T00:11:07.898Z",
+  "product": "AI productivity tool",
+  "niche": "AI Healthcare Diagnostics",
+  "domain": "aiproductivitytool.com",
+  "technicalAudit": {
+    "score": 67,
+    "grade": "B",
+    "checks": [
+      {
+        "check": "Core Web Vitals (LCP, FID, CLS)",
+        "weight": 15,
+        "status": "PASS",
+        "score": 71,
+        "recommendation": "Already optimized — maintain current implementation."
+      },
+      {
+        "check": "Mobile responsiveness",
+        "weight": 12,
+        "status": "WARNING",
+        "score": 73,
+        "recommendation": "Critical issue: missing on 40% of pages. Fix within 48h."
+      },
+      {
+        "check": "HTTPS / SSL certificate",
+        "weight": 8,
+        "status": "WARNING",
+        "score": 56,
+        "recommendation": "Already optimized — maintain current implementation."
+      },
+      {
+        "check": "XML sitemap present and valid",
+        "weight": 7,
+        "status": "PASS",
+        "score": 53,
+        "recommendation": "Needs improvement: implement lazy loading."
+      },
+      {
+        "check": "Robots.txt properly configured",
+        "weight": 5,
+        "status": "WARNING",
+        "score": 49,
+        "recommendation": "Critical issue: deprecated format detected. Fix within 48h."
+      },
+      {
+        "check": "Structured data / Schema.org markup",
+        "weight": 10,
+        "status": "FAIL",
+        "score": 89,
+        "recommendation": "Needs improvement: implement lazy loading."
+      },
+      {
+        "check": "Canonical tags on all pages",
+        "weight": 6,
+        "status": "PASS",
+        "score": 95,
+        "recommendation": "Needs improvement: implement lazy loading."
+      },
+      {
+        "check": "Internal linking structure",
+        "weight": 8,
+        "status": "FAIL",
+        "score": 77,
+        "recommendation": "Needs improvement: add preconnect hints."
+      },
+      {
+        "check": "Page speed (< 3s load time)",
+        "weight": 10,
+        "status": "PASS",
+        "score": 48,
+        "recommendation": "Needs improvement: reduce render-blocking resources."
+      },
+      {
+        "check": "404 error handling",
+        "weight": 4,
+        "status": "FAIL",
+        "score": 57,
+        "recommendation": "Already optimized — maintain current implementation."
+      },
+      {
+        "check": "Hreflang tags (if multilingual)",
+        "weight": 3,
+        "status": "FAIL",
+        "score": 88,
+        "recommendation": "Needs improvement: reduce render-blocking resources."
+      },
+      {
+        "check": "Image optimization (alt tags, compression)",
+        "weight": 7,
+        "status": "PASS",
+        "score": 42,
+        "recommendation": "Needs improvement: optimize font loading."
+      },
+      {
+        "check": "Meta title & description uniqueness",
+        "weight": 5,
+        "status": "PASS",
+        "score": 66,
+        "recommendation": "Needs improvement: reduce render-blocking resources."
+      }
+    ],
+    "criticalIssues": 4,
+    "warnings": 3
+  },
+  "keywordStrategy": {
+    "totalKeywords": 14,
+    "keywords": [
+      {
+        "keyword": "signup AI productivity tool",
+        "intent": "navigational",
+        "volume": 191,
+        "difficulty": 22,
+        "cpc": "$5.32",
+        "opportunity": "0.91",
+        "currentRank": "#7"
+      },
+      {
+        "keyword": "vs AI productivity tool tool",
+        "intent": "commercial",
+        "volume": 5753,
+        "difficulty": 58,
+        "cpc": "$6.80",
+        "opportunity": "0.89",
+        "currentRank": "#5"
+      },
+      {
+        "keyword": "signup AI Healthcare Diagnostics",
+        "intent": "navigational",
+        "volume": 946,
+        "difficulty": 22,
+        "cpc": "$6.01",
+        "opportunity": "0.84",
+        "currentRank": "#10"
+      },
+      {
+        "keyword": "vs AI productivity tool for marketers",
+        "intent": "commercial",
+        "volume": 2060,
+        "difficulty": 50,
+        "cpc": "$6.83",
+        "opportunity": "0.81",
+        "currentRank": "Not ranking"
+      },
+      {
+        "keyword": "vs AI productivity tool tool",
+        "intent": "commercial",
+        "volume": 2954,
+        "difficulty": 52,
+        "cpc": "$3.78",
+        "opportunity": "0.60",
+        "currentRank": "#6"
+      },
+      {
+        "keyword": "best way to AI Healthcare Diagnostics",
+        "intent": "informational",
+        "volume": 9782,
+        "difficulty": 24,
+        "cpc": "$2.54",
+        "opportunity": "0.54",
+        "currentRank": "#91"
+      },
+      {
+        "keyword": "best way to AI productivity tool for developers",
+        "intent": "informational",
+        "volume": 8096,
+        "difficulty": 47,
+        "cpc": "$0.75",
+        "opportunity": "0.48",
+        "currentRank": "Not ranking"
+      },
+      {
+        "keyword": "vs AI productivity tool tool",
+        "intent": "commercial",
+        "volume": 1462,
+        "difficulty": 41,
+        "cpc": "$3.39",
+        "opportunity": "0.40",
+        "currentRank": "#70"
+      },
+      {
+        "keyword": "deal AI Healthcare Diagnostics",
+        "intent": "transactional",
+        "volume": 621,
+        "difficulty": 43,
+        "cpc": "$7.01",
+        "opportunity": "0.37",
+        "currentRank": "Not ranking"
+      },
+      {
+        "keyword": "deal AI Healthcare Diagnostics automation",
+        "intent": "transactional",
+        "volume": 682,
+        "difficulty": 32,
+        "cpc": "$6.94",
+        "opportunity": "0.36",
+        "currentRank": "Not ranking"
+      },
+      {
+        "keyword": "deal AI productivity tool tool",
+        "intent": "transactional",
+        "volume": 2193,
+        "difficulty": 51,
+        "cpc": "$4.57",
+        "opportunity": "0.34",
+        "currentRank": "#7"
+      },
+      {
+        "keyword": "signup AI Healthcare Diagnostics automation",
+        "intent": "navigational",
+        "volume": 381,
+        "difficulty": 37,
+        "cpc": "$4.27",
+        "opportunity": "0.34",
+        "currentRank": "#5"
+      },
+      {
+        "keyword": "best way to AI productivity tool template",
+        "intent": "informational",
+        "volume": 3039,
+        "difficulty": 48,
+        "cpc": "$2.96",
+        "opportunity": "0.32",
+        "currentRank": "Not ranking"
+      },
+      {
+        "keyword": "signup AI Healthcare Diagnostics",
+        "intent": "navigational",
+        "volume": 1458,
+        "difficulty": 18,
+        "cpc": "$5.07",
+        "opportunity": "0.32",
+        "currentRank": "#10"
+      }
+    ],
+    "topOpportunity": {
+      "keyword": "signup AI productivity tool",
+      "intent": "navigational",
+      "volume": 191,
+      "difficulty": 22,
+      "cpc": "$5.32",
+      "opportunity": "0.91",
+      "currentRank": "#7"
+    },
+    "byIntent": {
+      "informational": 3,
+      "commercial": 4,
+      "transactional": 3,
+      "navigational": 4
+    }
+  },
+  "aiSearchVisibility": {
+    "platforms": [
+      {
+        "platform": "Google Organic",
+        "visibility": "Moderate",
+        "brandMentions": 19,
+        "topCitation": "Appears in competitor comparison answers",
+        "actionItems": [
+          "Build topical authority with 15+ interconnected articles"
+        ]
+      },
+      {
+        "platform": "Google AI Overviews",
+        "visibility": "Moderate",
+        "brandMentions": 20,
+        "topCitation": "Listed in top 5 results for primary keywords",
+        "actionItems": [
+          "Create comprehensive resource page targeting AI citation"
+        ]
+      },
+      {
+        "platform": "ChatGPT",
+        "visibility": "Moderate",
+        "brandMentions": 20,
+        "topCitation": "Mentioned in 2-3 AI-generated responses",
+        "actionItems": [
+          "Add structured data markup (FAQ, HowTo, Product schema)"
+        ]
+      },
+      {
+        "platform": "Perplexity",
+        "visibility": "Weak",
+        "brandMentions": 45,
+        "topCitation": "Not cited in any AI responses yet",
+        "actionItems": [
+          "Create FAQ-style content answering common AI Healthcare Diagnostics questions"
+        ]
+      },
+      {
+        "platform": "Bing Copilot",
+        "visibility": "Not present",
+        "brandMentions": 33,
+        "topCitation": "Featured in \"best tools\" recommendations",
+        "actionItems": [
+          "Build topical authority with 10+ interconnected articles"
+        ]
+      },
+      {
+        "platform": "Claude",
+        "visibility": "Strong",
+        "brandMentions": 30,
+        "topCitation": "Mentioned in 2-3 AI-generated responses",
+        "actionItems": [
+          "Get cited on high-authority sites that AI models reference"
+        ]
+      },
+      {
+        "platform": "YouTube",
+        "visibility": "Moderate",
+        "brandMentions": 27,
+        "topCitation": "Zero visibility — needs content and authority building",
+        "actionItems": [
+          "Publish data-driven content with original statistics"
+        ]
+      },
+      {
+        "platform": "Reddit",
+        "visibility": "Not present",
+        "brandMentions": 6,
+        "topCitation": "Mentioned in 2-3 AI-generated responses",
+        "actionItems": [
+          "Create comprehensive how-to page targeting AI citation"
+        ]
+      }
+    ],
+    "overallScore": 22,
+    "keyFactors": [
+      {
+        "factor": "Brand mention frequency in training data",
+        "importance": 9.2
+      },
+      {
+        "factor": "Structured data completeness",
+        "importance": 8.8
+      },
+      {
+        "factor": "Content freshness and update frequency",
+        "importance": 8.5
+      },
+      {
+        "factor": "Expertise signals (author bios, credentials)",
+        "importance": 8.3
+      },
+      {
+        "factor": "Topical authority (depth of coverage)",
+        "importance": 8.1
+      }
+    ],
+    "recommendation": "Expertise signals (author bios, credentials, citations) are critical for AI search trust scoring."
+  },
+  "contentGaps": [
+    {
+      "topic": "How to optimize AI productivity tool",
+      "contentType": "free tool",
+      "estimatedTraffic": 4667,
+      "difficulty": 61,
+      "competitorCoverage": "2 competitors have weak coverage",
+      "priority": "HIGH"
+    },
+    {
+      "topic": "AI Healthcare Diagnostics best practices",
+      "contentType": "landing page",
+      "estimatedTraffic": 4811,
+      "difficulty": 56,
+      "competitorCoverage": "1 competitor dominates",
+      "priority": "MEDIUM"
+    },
+    {
+      "topic": "complete guide to AI productivity tool",
+      "contentType": "template page",
+      "estimatedTraffic": 1583,
+      "difficulty": 74,
+      "competitorCoverage": "1 competitor dominates",
+      "priority": "MEDIUM"
+    },
+    {
+      "topic": "How to integrate AI productivity tool",
+      "contentType": "video tutorial",
+      "estimatedTraffic": 4117,
+      "difficulty": 74,
+      "competitorCoverage": "1 competitor dominates",
+      "priority": "MEDIUM"
+    },
+    {
+      "topic": "AI productivity tool use cases",
+      "contentType": "free tool",
+      "estimatedTraffic": 3187,
+      "difficulty": 72,
+      "competitorCoverage": "Emerging topic, low competition",
+      "priority": "MEDIUM"
+    }
+  ],
+  "backlinkOpportunities": {
+    "targets": [
+      {
+        "type": "Guest post on niche blog",
+        "targetSites": [
+          "community.niche-blog.com"
+        ],
+        "difficulty": "Medium",
+        "domainAuthority": 92,
+        "estimatedImpact": "7.8",
+        "approach": "Pitch a guest post with original data/research"
+      },
+      {
+        "type": "Resource page inclusion",
+        "targetSites": [
+          "marketingmagazine.com"
+        ],
+        "difficulty": "Easy",
+        "domainAuthority": 76,
+        "estimatedImpact": "7.2",
+        "approach": "Partner on a co-branded research report"
+      },
+      {
+        "type": "HARO / Connectively pitch",
+        "targetSites": [
+          "startupnews.com"
+        ],
+        "difficulty": "Hard",
+        "domainAuthority": 23,
+        "estimatedImpact": "6.1",
+        "approach": "Pitch a guest post with original data/research"
+      },
+      {
+        "type": "Tool/template embed link",
+        "targetSites": [
+          "productnews.com"
+        ],
+        "difficulty": "Medium",
+        "domainAuthority": 57,
+        "estimatedImpact": "7.2",
+        "approach": "Engage authentically in community discussions"
+      },
+      {
+        "type": "Reddit/Forum discussion link",
+        "targetSites": [
+          "devblog.com"
+        ],
+        "difficulty": "Medium",
+        "domainAuthority": 28,
+        "estimatedImpact": "5.0",
+        "approach": "Pitch a guest post with original data/research"
+      },
+      {
+        "type": "Product Hunt / directory listing",
+        "targetSites": [
+          "resources.tool-directory.com"
+        ],
+        "difficulty": "Medium",
+        "domainAuthority": 33,
+        "estimatedImpact": "5.0",
+        "approach": "Partner on a co-branded research report"
+      },
+      {
+        "type": "Podcast guest appearance",
+        "targetSites": [
+          "technews.com"
+        ],
+        "difficulty": "Easy",
+        "domainAuthority": 85,
+        "estimatedImpact": "8.4",
+        "approach": "Engage authentically in community discussions"
+      },
+      {
+        "type": "Industry report citation",
+        "targetSites": [
+          "startupdirectory.com"
+        ],
+        "difficulty": "Medium",
+        "domainAuthority": 29,
+        "estimatedImpact": "4.8",
+        "approach": "Pitch a guest post with original data/research"
+      }
+    ],
+    "priorityActions": [
+      "Resource page inclusion",
+      "Podcast guest appearance"
+    ],
+    "totalOpportunityScore": "7.2"
+  },
+  "contentCalendar": [
+    {
+      "week": 1,
+      "theme": "Optimization & Scale",
+      "days": [
+        {
+          "day": "Monday",
+          "task": "Update: Refresh top-performing article with new data",
+          "platform": "YouTube"
+        },
+        {
+          "day": "Tuesday",
+          "task": "Update: Refresh underperforming article with new data",
+          "platform": "Twitter/X"
+        },
+        {
+          "day": "Wednesday",
+          "task": "Optimize: Add internal links to 8 pages",
+          "platform": "Medium"
+        },
+        {
+          "day": "Thursday",
+          "task": "Research: Monitor keyword ranking changes",
+          "platform": "Blog"
+        },
+        {
+          "day": "Friday",
+          "task": "Optimize: Improve meta descriptions for 5 pages",
+          "platform": "Medium"
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "theme": "Authority Growth",
+      "days": [
+        {
+          "day": "Monday",
+          "task": "Create: Video script",
+          "platform": "LinkedIn"
+        },
+        {
+          "day": "Tuesday",
+          "task": "Optimize: Update images on 5 pages",
+          "platform": "Twitter/X"
+        },
+        {
+          "day": "Wednesday",
+          "task": "Create: Data visualization",
+          "platform": "YouTube"
+        },
+        {
+          "day": "Thursday",
+          "task": "Optimize: Add internal links to 4 pages",
+          "platform": "Website"
+        },
+        {
+          "day": "Friday",
+          "task": "Outreach: Engage on 10 Reddit threads",
+          "platform": "Medium"
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "theme": "Community Engagement",
+      "days": [
+        {
+          "day": "Monday",
+          "task": "Outreach: Engage on 10 Reddit threads",
+          "platform": "YouTube"
+        },
+        {
+          "day": "Tuesday",
+          "task": "Update: Refresh top-performing article with new data",
+          "platform": "Blog"
+        },
+        {
+          "day": "Wednesday",
+          "task": "Optimize: Add schema markup to 6 pages",
+          "platform": "LinkedIn"
+        },
+        {
+          "day": "Thursday",
+          "task": "Optimize: Add internal links to 5 pages",
+          "platform": "Blog"
+        },
+        {
+          "day": "Friday",
+          "task": "Update: Refresh underperforming article with new data",
+          "platform": "Reddit"
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "theme": "Community Engagement",
+      "days": [
+        {
+          "day": "Monday",
+          "task": "Update: Refresh top-performing article with new data",
+          "platform": "Website"
+        },
+        {
+          "day": "Tuesday",
+          "task": "Research: Review AI search citations",
+          "platform": "Reddit"
+        },
+        {
+          "day": "Wednesday",
+          "task": "Outreach: Engage on 10 Reddit threads",
+          "platform": "Twitter/X"
+        },
+        {
+          "day": "Thursday",
+          "task": "Research: Review AI search citations",
+          "platform": "Twitter/X"
+        },
+        {
+          "day": "Friday",
+          "task": "Optimize: Add internal links to 4 pages",
+          "platform": "Blog"
+        }
+      ]
+    }
+  ],
+  "competitorAnalysis": [
+    {
+      "name": "EmergingThreat",
+      "domain": "competitor1.com",
+      "estimatedTraffic": "451K monthly visits",
+      "topKeywords": [
+        "signup AI productivity tool",
+        "vs AI productivity tool tool",
+        "signup AI Healthcare Diagnostics"
+      ],
+      "contentStrategy": "Heavy blog (20+ posts/mo)",
+      "strengths": "Active community generating UGC and links",
+      "weaknesses": "Poor mobile experience hurting Core Web Vitals",
+      "gapOpportunity": "Missing comparison pages — we can own this"
+    },
+    {
+      "name": "MarketLeader",
+      "domain": "competitor2.com",
+      "estimatedTraffic": "497K monthly visits",
+      "topKeywords": [
+        "signup AI productivity tool",
+        "vs AI productivity tool tool",
+        "signup AI Healthcare Diagnostics"
+      ],
+      "contentStrategy": "Tool-focused (free calculators)",
+      "strengths": "Superior technical SEO and site architecture",
+      "weaknesses": "Weak internal linking — pages in silos",
+      "gapOpportunity": "No AI search optimization — first-mover advantage exists"
+    },
+    {
+      "name": "EmergingThreat",
+      "domain": "competitor3.com",
+      "estimatedTraffic": "244K monthly visits",
+      "topKeywords": [
+        "signup AI productivity tool",
+        "vs AI productivity tool tool",
+        "signup AI Healthcare Diagnostics"
+      ],
+      "contentStrategy": "Community-driven (forums/UGC)",
+      "strengths": "Massive content library covering all sub-topics",
+      "weaknesses": "Thin content — volume over quality",
+      "gapOpportunity": "Their use cases content is thin — we go deeper"
+    }
+  ],
+  "roiProjection": {
+    "currentMonthlyTraffic": 4286,
+    "projectedTrafficAt6Months": 12939,
+    "projectedTrafficAt12Months": 19783,
+    "estimatedRevenueImpact": "$864/mo organic traffic value",
+    "timeToFirstResults": "3 weeks",
+    "timeToSignificantResults": "4 months",
+    "investmentRequired": "Zero cost — time investment only",
+    "comparisonVsPaid": "Organic traffic at $0 CPC vs equivalent paid spend of $2917/mo"
+  },
+  "quickWins": [
+    {
+      "action": "Fix All Meta Titles & Descriptions",
+      "impact": "HIGH",
+      "time": "1 hours",
+      "result": "12% CTR improvement"
+    },
+    {
+      "action": "Add FAQ Schema to Top 10 Pages",
+      "impact": "HIGH",
+      "time": "2 hours",
+      "result": "Rich snippets in Google + AI citation boost"
+    },
+    {
+      "action": "Create Comparison Page: \"Your Product vs Top 3 Alternatives\"",
+      "impact": "HIGH",
+      "time": "4 hours",
+      "result": "Captures 552 monthly searches"
+    },
+    {
+      "action": "Set Up Google Search Console + Submit Sitemap",
+      "impact": "MEDIUM",
+      "time": "15 minutes",
+      "result": "Full indexing visibility"
+    },
+    {
+      "action": "Add Internal Links from Top 5 Pages to Key Landing Pages",
+      "impact": "MEDIUM",
+      "time": "36 minutes",
+      "result": "21% authority flow improvement"
+    },
+    {
+      "action": "Publish One Data-Driven Blog Post with Original Statistics",
+      "impact": "HIGH",
+      "time": "3 hours",
+      "result": "Citation magnet for AI search + backlinks"
+    },
+    {
+      "action": "Optimize Images (WebP + Alt Tags) Across Site",
+      "impact": "MEDIUM",
+      "time": "3 hours",
+      "result": "35% page speed improvement"
+    },
+    {
+      "action": "Create Free Tool/Calculator Page (Link Magnet)",
+      "impact": "HIGH",
+      "time": "7 hours",
+      "result": "71+ natural backlinks over 6 months"
+    }
+  ],
+  "meta": {
+    "overallSeoScore": 54,
+    "biggestOpportunity": "Content Gap: \"How to optimize AI productivity tool\" has 4667 estimated monthly searches with weak competitor coverage",
+    "estimatedTimeToROI": "2 months",
+    "competitiveAdvantage": "Free tools/calculators create natural backlink magnets that compound over time"
+  }
+}
