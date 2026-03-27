@@ -2633,11 +2633,163 @@ const DemaciainsEngine = (() => {
   }
 
   // ═══════════════════════════════════════════
+  //  PRODUCT LAUNCH CHECKLIST
+  // ═══════════════════════════════════════════
+  function launchChecklist(product = 'AI productivity tool', options = {}) {
+    const rng = mulberry32(dateSeed() + hashString(product));
+    const now = new Date();
+    const launchDate = new Date(now);
+    launchDate.setDate(launchDate.getDate() + randInt(rng, 7, 21));
+    const formatDate = (d) => d.toISOString().split('T')[0];
+
+    const productTypes = [
+      'digital template pack', 'SaaS tool', 'AI agent config', 'prompt pack',
+      'automation workflow kit', 'online course', 'ebook/guide', 'browser extension',
+      'CLI tool', 'Notion template', 'mobile app', 'API service', 'community/membership'
+    ];
+    const detectedType = productTypes.find(t => product.toLowerCase().includes(t.split(' ')[0])) || pick(rng, productTypes);
+
+    const launchPlatforms = [
+      { name: 'Product Hunt', prep: '7 days', effort: 'High', impact: 'Very High', url: 'producthunt.com' },
+      { name: 'Hacker News (Show HN)', prep: '2 days', effort: 'Medium', impact: 'High', url: 'news.ycombinator.com' },
+      { name: 'Reddit (niche subreddits)', prep: '3 days', effort: 'Medium', impact: 'High', url: 'reddit.com' },
+      { name: 'Twitter/X Thread', prep: '1 day', effort: 'Low', impact: 'Medium', url: 'x.com' },
+      { name: 'LinkedIn Post', prep: '1 day', effort: 'Low', impact: 'Medium', url: 'linkedin.com' },
+      { name: 'Indie Hackers', prep: '3 days', effort: 'Medium', impact: 'Medium', url: 'indiehackers.com' },
+      { name: 'Dev.to Article', prep: '2 days', effort: 'Medium', impact: 'Medium', url: 'dev.to' },
+      { name: 'YouTube Demo Video', prep: '5 days', effort: 'High', impact: 'High', url: 'youtube.com' },
+      { name: 'Gumroad/Lemon Squeezy', prep: '1 day', effort: 'Low', impact: 'High', url: 'gumroad.com' },
+      { name: 'BetaList', prep: '5 days', effort: 'Low', impact: 'Medium', url: 'betalist.com' },
+      { name: 'TAAFT Submission', prep: '1 day', effort: 'Low', impact: 'High', url: 'theresanaiforthat.com' },
+      { name: 'AlternativeTo', prep: '1 day', effort: 'Low', impact: 'Medium', url: 'alternativeto.net' },
+    ];
+    const selectedPlatforms = [];
+    const platformCount = randInt(rng, 4, 7);
+    const shuffled = shuffle(rng, [...launchPlatforms]);
+    for (let i = 0; i < platformCount && i < shuffled.length; i++) {
+      selectedPlatforms.push(shuffled[i]);
+    }
+
+    const preLaunchTasks = [
+      { task: 'Create landing page / sales page', priority: 'Critical', hours: 4, category: 'Assets' },
+      { task: 'Write product description (50, 100, 200 word versions)', priority: 'Critical', hours: 2, category: 'Copy' },
+      { task: 'Create 3-5 product screenshots / demo GIFs', priority: 'Critical', hours: 3, category: 'Assets' },
+      { task: 'Record 60-second demo video', priority: 'High', hours: 2, category: 'Assets' },
+      { task: 'Write "About" and FAQ sections', priority: 'High', hours: 2, category: 'Copy' },
+      { task: 'Set up analytics (Plausible/Umami/Google)', priority: 'High', hours: 1, category: 'Setup' },
+      { task: 'Configure payment processing (Stripe/Gumroad)', priority: 'Critical', hours: 2, category: 'Setup' },
+      { task: 'Create social media accounts if needed', priority: 'Medium', hours: 1, category: 'Setup' },
+      { task: 'Prepare 10 social media post variations', priority: 'High', hours: 3, category: 'Copy' },
+      { task: 'Write Product Hunt maker comment', priority: 'High', hours: 1, category: 'Copy' },
+      { task: 'Prepare Reddit post (follow subreddit rules)', priority: 'High', hours: 1, category: 'Copy' },
+      { task: 'Create email announcement for existing audience', priority: 'Medium', hours: 2, category: 'Copy' },
+      { task: 'Set up email capture / lead magnet', priority: 'Medium', hours: 2, category: 'Setup' },
+      { task: 'Test all purchase/download flows end-to-end', priority: 'Critical', hours: 2, category: 'QA' },
+      { task: 'Check mobile responsiveness of all pages', priority: 'High', hours: 1, category: 'QA' },
+      { task: 'Verify SEO meta tags and Open Graph images', priority: 'Medium', hours: 1, category: 'SEO' },
+      { task: 'Prepare "launch day" email sequence', priority: 'Medium', hours: 2, category: 'Copy' },
+      { task: 'Brief 5-10 friends/colleagues to upvote on launch day', priority: 'High', hours: 1, category: 'Outreach' },
+      { task: 'Create comparison table vs competitors', priority: 'Medium', hours: 2, category: 'Copy' },
+      { task: 'Write 3 blog post topics for post-launch content', priority: 'Low', hours: 1, category: 'Content' },
+    ];
+    const selectedTasks = [];
+    const taskCount = randInt(rng, 12, 18);
+    const taskShuffled = shuffle(rng, [...preLaunchTasks]);
+    for (let i = 0; i < taskCount && i < taskShuffled.length; i++) {
+      selectedTasks.push({ ...taskShuffled[i], done: false, deadline: formatDate(new Date(launchDate.getTime() - (taskCount - i) * 86400000 * 0.7)) });
+    }
+    selectedTasks.sort((a, b) => {
+      const pri = { Critical: 0, High: 1, Medium: 2, Low: 3 };
+      return (pri[a.priority] || 4) - (pri[b.priority] || 4);
+    });
+
+    const launchDayTimeline = [
+      { time: 'T-2h', action: 'Final QA check — all links, downloads, payments work', channel: 'Internal' },
+      { time: 'T-1h', action: 'Post on Twitter/X — "Launching in 1 hour" teaser', channel: 'Twitter/X' },
+      { time: 'T-30m', action: 'Brief launch supporters — share upvote links', channel: 'DM/Email' },
+      { time: 'T-0 (LAUNCH)', action: 'Submit to Product Hunt / post on primary platform', channel: 'Product Hunt' },
+      { time: 'T+15m', action: 'Share on personal social media — all platforms', channel: 'Multi' },
+      { time: 'T+30m', action: 'Post in relevant Slack/Discord communities', channel: 'Communities' },
+      { time: 'T+1h', action: 'Send email announcement to list', channel: 'Email' },
+      { time: 'T+2h', action: 'Post on Reddit (follow timing rules)', channel: 'Reddit' },
+      { time: 'T+4h', action: 'Engage with all comments and feedback', channel: 'All' },
+      { time: 'T+8h', action: 'Share milestone update ("100 upvotes!")', channel: 'Twitter/X' },
+      { time: 'T+12h', action: 'Second email — for those who haven\'t opened', channel: 'Email' },
+      { time: 'T+24h', action: 'Post launch recap / thank you thread', channel: 'Twitter/X' },
+    ];
+
+    const postLaunchWeek = [
+      { day: 'Day 1-2', focus: 'Feedback Collection', tasks: ['Monitor all channels for bug reports', 'Respond to every comment within 2 hours', 'Log feature requests in spreadsheet', 'Fix critical bugs immediately', 'Thank early buyers publicly'] },
+      { day: 'Day 3-4', focus: 'Content Amplification', tasks: ['Publish launch story on blog/Medium', 'Create "lessons learned" Twitter thread', 'Submit to additional directories (AlternativeTo, TAAFT)', 'Reach out to 10 micro-influencers', 'Post case study / early results'] },
+      { day: 'Day 5-7', focus: 'Conversion Optimization', tasks: ['Analyze traffic sources and conversion rates', 'A/B test headline on landing page', 'Add social proof (testimonials, usage numbers)', 'Create limited-time launch offer if needed', 'Plan next week\'s content calendar'] },
+      { day: 'Day 8-14', focus: 'Sustainable Growth', tasks: ['Publish 2 SEO blog posts targeting buyer keywords', 'Set up retargeting ads if budget allows', 'Create referral/affiliate program structure', 'Build email nurture sequence for non-buyers', 'Start building v2 feature list from feedback'] },
+    ];
+
+    const successMetrics = [
+      { metric: 'Day 1 Unique Visitors', target: randInt(rng, 200, 2000), unit: 'visitors' },
+      { metric: 'Day 1 Conversion Rate', target: randFloat(rng, 1.5, 5.0), unit: '%' },
+      { metric: 'Week 1 Revenue', target: `$${randInt(rng, 100, 2000)}`, unit: '' },
+      { metric: 'Product Hunt Upvotes', target: randInt(rng, 50, 500), unit: 'votes' },
+      { metric: 'Email Signups (Week 1)', target: randInt(rng, 30, 300), unit: 'signups' },
+      { metric: 'Social Media Impressions', target: `${randInt(rng, 5, 100)}K`, unit: 'impressions' },
+      { metric: 'Refund Rate', target: `<${randInt(rng, 3, 8)}`, unit: '%' },
+      { metric: 'NPS Score', target: `>${randInt(rng, 40, 70)}`, unit: '' },
+    ];
+
+    const riskMitigations = [
+      { risk: 'Low launch day traffic', probability: 'Medium', mitigation: 'Have 3+ launch channels ready; don\'t rely solely on Product Hunt', impact: 'High' },
+      { risk: 'Payment processing fails', probability: 'Low', mitigation: 'Test all flows 48h before launch; have backup payment link ready', impact: 'Critical' },
+      { risk: 'Site goes down from traffic spike', probability: 'Medium', mitigation: 'Use static hosting (GitHub Pages, Vercel) — handles spikes natively', impact: 'High' },
+      { risk: 'Negative early reviews', probability: 'Low', mitigation: 'Offer instant support channel; fix issues within hours; reach out privately', impact: 'Medium' },
+      { risk: 'Product Hunt launch gets buried', probability: 'Medium', mitigation: 'Launch on Tuesday-Thursday; have 20+ supporters ready at midnight PT', impact: 'Medium' },
+      { risk: 'Copycat appears within 48h', probability: 'Low', mitigation: 'Ship fast, build community, add unique data/insights competitors can\'t copy', impact: 'Low' },
+    ];
+
+    const emailSequence = [
+      { email: 'Pre-Launch Teaser', timing: 'T-3 days', subject: `Something big is coming for ${detectedType} lovers`, openRate: randFloat(rng, 35, 55) },
+      { email: 'Launch Announcement', timing: 'T-0', subject: `It\'s LIVE: ${product} is here 🚀`, openRate: randFloat(rng, 40, 65) },
+      { email: 'Social Proof', timing: 'T+2 days', subject: `"This saved me 10 hours/week" — early buyer feedback`, openRate: randFloat(rng, 25, 45) },
+      { email: 'Last Chance', timing: 'T+5 days', subject: `Launch pricing ends tomorrow`, openRate: randFloat(rng, 30, 50) },
+      { email: 'Case Study', timing: 'T+7 days', subject: `How [Name] used ${product} to [result]`, openRate: randFloat(rng, 20, 40) },
+    ];
+
+    return {
+      meta: {
+        product,
+        productType: detectedType,
+        generatedAt: nowISO(),
+        engine: 'Demaciains Launch Checklist Engine v1.0',
+        dataFreshness: 'daily (date-seeded)',
+      },
+      launchPlan: {
+        recommendedLaunchDate: formatDate(launchDate),
+        daysUntilLaunch: Math.ceil((launchDate - now) / 86400000),
+        totalPrepHours: selectedTasks.reduce((s, t) => s + t.hours, 0),
+        readinessScore: randInt(rng, 45, 85),
+      },
+      preLaunchChecklist: selectedTasks,
+      launchPlatforms: selectedPlatforms,
+      launchDayTimeline,
+      postLaunchWeek,
+      emailSequence,
+      successMetrics,
+      riskMitigations,
+      quickWins: [
+        `Add "Launched on Product Hunt" badge to landing page — increases trust by 15-25%`,
+        `Create a "What's New" changelog page — shows active development, reduces refund requests`,
+        `Set up a simple feedback form (Typeform/Google Form) — captures feature requests systematically`,
+        `Add social proof counter ("${randInt(rng, 10, 200)}+ users") as soon as you hit double digits`,
+        `Write a personal "Why I built this" story — authenticity converts 2-3x better than features list`,
+      ],
+    };
+  }
+
+  // ═══════════════════════════════════════════
   //  PUBLIC API
   // ═══════════════════════════════════════════
   return {
-    version: '3.10.0',
-    endpoints: ['market-gap', 'trends', 'competitor-gap', 'algo-report', 'startup-validator', 'pricing-strategy', 'revenue-forecast', 'go-to-market', 'content-strategy', 'competitive-intel', 'content-distribution', 'audience-profiler', 'sales-copy', 'retention-strategy'],
+    version: '3.11.0',
+    endpoints: ['market-gap', 'trends', 'competitor-gap', 'algo-report', 'startup-validator', 'pricing-strategy', 'revenue-forecast', 'go-to-market', 'content-strategy', 'competitive-intel', 'content-distribution', 'audience-profiler', 'sales-copy', 'retention-strategy', 'launch-checklist'],
     marketGap,
     trends,
     competitorGap,
@@ -2654,6 +2806,7 @@ const DemaciainsEngine = (() => {
     salesCopy,
     retentionStrategy,
     seoStrategy,
+    launchChecklist,
     // Batch regenerate all
     regenerateAll(niche = 'ai agent tools', market = 'x402 agent commerce', idea = 'AI-powered productivity tool', product = 'digital template pack', businessType = 'small business', teamSize = 5) {
       return {
@@ -2673,6 +2826,7 @@ const DemaciainsEngine = (() => {
         'sales-copy': salesCopy(product),
         'retention-strategy': retentionStrategy({ product }),
         'seo-strategy': seoStrategy(product),
+        'launch-checklist': launchChecklist(product),
       };
     }
   };

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product Launch Checklist — Demaciains x402 API</title>
+<meta name="description" content="AI-powered product launch execution plan: pre-launch checklist, launch day timeline, platform strategy, email sequences, success metrics, and risk mitigation. $1.50 USDC via x402.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e0e0e8;--dim:#888;--accent:#60a5fa;--green:#34d399;--yellow:#fbbf24;--orange:#fb923c;--purple:#a78bfa;--pink:#f472b6;--red:#f87171;--cyan:#22d3ee}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;padding:20px}
+.container{max-width:960px;margin:0 auto}
+header{text-align:center;padding:40px 0 30px;border-bottom:1px solid var(--border)}
+header h1{font-size:2.2em;margin-bottom:8px;background:linear-gradient(135deg,var(--orange),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--dim);font-size:1.1em}
+.badge{display:inline-block;background:var(--orange);color:#000;padding:2px 10px;border-radius:12px;font-size:.75em;font-weight:700;margin-left:8px;vertical-align:middle}
+.price-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.price-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:.85em}
+.price-chip strong{color:var(--orange)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0}
+.card h3{color:var(--accent);margin-bottom:14px;font-size:1.15em}
+.param-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.param-row label{min-width:140px;color:var(--dim);font-size:.9em}
+.param-row input,.param-row select{background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;flex:1;min-width:180px;font-size:.95em}
+.param-row input:focus{outline:none;border-color:var(--accent)}
+.btn{background:linear-gradient(135deg,var(--orange),var(--pink));color:#000;border:none;padding:12px 28px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e}
+.row:last-child{border-bottom:none}
+.label{color:var(--dim);font-size:.9em}
+.val{font-weight:600;text-align:right}
+.score{display:inline-block;padding:3px 10px;border-radius:6px;font-weight:700;font-size:.85em}
+.score-high{background:rgba(52,211,153,.15);color:var(--green)}
+.score-mid{background:rgba(251,191,36,.15);color:var(--yellow)}
+.score-low{background:rgba(248,113,113,.15);color:var(--red)}
+.tab-bar{display:flex;gap:4px;margin:20px 0 0;flex-wrap:wrap}
+.tab{padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px 8px 0 0;cursor:pointer;font-size:.85em;color:var(--dim);transition:all .2s}
+.tab.active{background:#1a1a2e;color:var(--orange);border-bottom-color:#1a1a2e}
+.tab-content{display:none}
+.tab-content.active{display:block}
+#json-output{background:#0d0d14;border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.8em;max-height:500px;overflow:auto;white-space:pre-wrap;word-break:break-all;color:var(--green);margin-top:12px}
+.task-row{display:grid;grid-template-columns:30px 2fr 80px 60px 100px;gap:8px;padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.85em;align-items:center}
+.task-row:last-child{border-bottom:none}
+.task-row .head{color:var(--dim);font-weight:600;font-size:.75em;text-transform:uppercase}
+.priority-critical{color:var(--red);font-weight:700}
+.priority-high{color:var(--orange)}
+.priority-medium{color:var(--yellow)}
+.priority-low{color:var(--dim)}
+.platform-card{background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0;border-left:3px solid var(--orange)}
+.platform-card .name{font-weight:700;margin-bottom:4px}
+.timeline-row{display:grid;grid-template-columns:70px 1fr 100px;gap:10px;padding:10px 0;border-bottom:1px solid #1a1a2e;font-size:.85em;align-items:start}
+.timeline-row:last-child{border-bottom:none}
+.timeline-row .time{font-weight:700;color:var(--orange);font-family:monospace}
+.timeline-row .channel{color:var(--dim);font-size:.8em;text-align:right}
+.post-week{background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0}
+.post-week .day{font-weight:700;color:var(--pink);margin-bottom:6px}
+.post-week ul{margin-left:16px;color:var(--dim);font-size:.85em}
+.post-week li{margin:3px 0}
+.email-row{display:grid;grid-template-columns:1fr 80px 1fr 60px;gap:8px;padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.85em;align-items:center}
+.email-row:last-child{border-bottom:none}
+.email-row .head{color:var(--dim);font-weight:600;font-size:.75em;text-transform:uppercase}
+.risk-card{background:#1a1a2e;border-radius:8px;padding:14px;margin:8px 0;border-left:3px solid var(--red)}
+.risk-card .title{font-weight:700;margin-bottom:4px}
+.metric-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e}
+.metric-row:last-child{border-bottom:none}
+footer{text-align:center;padding:40px 0 20px;color:var(--dim);font-size:.85em}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){header h1{font-size:1.6em}.param-row{flex-direction:column}.param-row label{min-width:auto}.task-row,.timeline-row,.email-row{grid-template-columns:1fr;font-size:.8em}.tab-bar{gap:2px}.tab{padding:6px 10px;font-size:.75em}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🚀 Product Launch Checklist <span class="badge">$1.50</span></h1>
+<p>Pre-launch checklist, launch day timeline, platform strategy, email sequences, success metrics & risk mitigation</p>
+<div class="price-bar">
+<span class="price-chip">Price: <strong>$1.50 USDC</strong></span>
+<span class="price-chip">Network: <strong>Base</strong></span>
+<span class="price-chip">x402: <strong>v2</strong></span>
+</div>
+</header>
+
+<div class="card">
+<h3>⚡ Generate Launch Plan</h3>
+<div class="param-row">
+<label>Product Name</label>
+<input type="text" id="product" placeholder="AI Prompt Pack" value="AI Prompt Pack">
+</div>
+<div class="param-row" style="justify-content:flex-end">
+<button class="btn" id="generate-btn" onclick="generate()">🚀 Generate Launch Plan</button>
+</div>
+</div>
+
+<div id="results" style="display:none">
+<div class="card">
+<h3>📋 Launch Overview</h3>
+<div class="row"><span class="label">Product</span><span class="val" id="r-product"></span></div>
+<div class="row"><span class="label">Product Type</span><span class="val" id="r-type"></span></div>
+<div class="row"><span class="label">Recommended Launch Date</span><span class="val" id="r-date" style="color:var(--orange)"></span></div>
+<div class="row"><span class="label">Days Until Launch</span><span class="val" id="r-days"></span></div>
+<div class="row"><span class="label">Total Prep Hours</span><span class="val" id="r-hours"></span></div>
+<div class="row"><span class="label">Readiness Score</span><span class="val" id="r-readiness"></span></div>
+</div>
+
+<div class="tab-bar">
+<div class="tab active" onclick="showTab('checklist')">✅ Pre-Launch</div>
+<div class="tab" onclick="showTab('platforms')">📡 Platforms</div>
+<div class="tab" onclick="showTab('timeline')">⏰ Launch Day</div>
+<div class="tab" onclick="showTab('postlaunch')">📅 Post-Launch</div>
+<div class="tab" onclick="showTab('emails')">✉️ Emails</div>
+<div class="tab" onclick="showTab('metrics')">📊 Metrics</div>
+<div class="tab" onclick="showTab('risks')">⚠️ Risks</div>
+<div class="tab" onclick="showTab('json')">{ } JSON</div>
+</div>
+
+<div id="tab-checklist" class="tab-content active">
+<div class="card">
+<h3>✅ Pre-Launch Checklist</h3>
+<div id="checklist-content"></div>
+</div>
+</div>
+
+<div id="tab-platforms" class="tab-content">
+<div class="card">
+<h3>📡 Launch Platforms</h3>
+<div id="platforms-content"></div>
+</div>
+</div>
+
+<div id="tab-timeline" class="tab-content">
+<div class="card">
+<h3>⏰ Launch Day Timeline</h3>
+<div id="timeline-content"></div>
+</div>
+</div>
+
+<div id="tab-postlaunch" class="tab-content">
+<div class="card">
+<h3>📅 Post-Launch Week Plan</h3>
+<div id="postlaunch-content"></div>
+</div>
+</div>
+
+<div id="tab-emails" class="tab-content">
+<div class="card">
+<h3>✉️ Email Sequence</h3>
+<div id="emails-content"></div>
+</div>
+</div>
+
+<div id="tab-metrics" class="tab-content">
+<div class="card">
+<h3>📊 Success Metrics</h3>
+<div id="metrics-content"></div>
+</div>
+</div>
+
+<div id="tab-risks" class="tab-content">
+<div class="card">
+<h3>⚠️ Risk Mitigation</h3>
+<div id="risks-content"></div>
+<div style="margin-top:20px">
+<h3 style="color:var(--green);margin-bottom:10px">⚡ Quick Wins</h3>
+<div id="quickwins-content"></div>
+</div>
+</div>
+</div>
+
+<div id="tab-json" class="tab-content">
+<div class="card">
+<h3>📦 Raw JSON Output</h3>
+<p style="color:var(--dim);margin-bottom:10px">Copy this JSON for your x402 agent or integration</p>
+<div id="json-output"></div>
+</div>
+</div>
+</div>
+
+<footer>
+<p>Powered by <a href="https://drgalio.github.io/demaciains-paywall/">Demaciains Research Services</a> — Dynamic Data Engine v3.11</p>
+<p>Payments via <a href="https://x402.org">x402 protocol</a> on Base network</p>
+<p style="margin-top:8px"><a href="/api/">← API Explorer</a> · <a href="/">← Home</a></p>
+</footer>
+</div>
+
+<script src="/api/engine/dynamic-engine-v3.js"></script>
+<script>
+let lastData=null;
+
+function showTab(id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function scoreClass(s){return s>=70?'score-high':s>=40?'score-mid':'score-low'}
+function priorityClass(p){return 'priority-'+p.toLowerCase()}
+
+function generate(){
+  const product=document.getElementById('product').value.trim()||'AI Prompt Pack';
+  const btn=document.getElementById('generate-btn');
+  btn.disabled=true;btn.textContent='⏳ Generating...';
+  
+  try{
+    const data=DemaciainsEngine.launchChecklist(product);
+    lastData=data;
+    render(data);
+    document.getElementById('results').style.display='block';
+    btn.textContent='🔄 Regenerate';
+  }catch(e){
+    console.error(e);
+    btn.textContent='❌ Error — try again';
+  }
+  btn.disabled=false;
+}
+
+function render(d){
+  document.getElementById('r-product').textContent=d.meta.product;
+  document.getElementById('r-type').textContent=d.meta.productType;
+  document.getElementById('r-date').textContent=d.launchPlan.recommendedLaunchDate;
+  document.getElementById('r-days').textContent=d.launchPlan.daysUntilLaunch+' days';
+  document.getElementById('r-hours').textContent=d.launchPlan.totalPrepHours+' hours';
+  const rs=d.launchPlan.readinessScore;
+  document.getElementById('r-readiness').innerHTML=`<span class="score ${scoreClass(rs)}">${rs}/100</span>`;
+
+  // Checklist
+  let ch='<div class="task-row"><div class="head"></div><div class="head">Task</div><div class="head">Priority</div><div class="head">Hours</div><div class="head">Deadline</div></div>';
+  d.preLaunchChecklist.forEach(t=>{
+    ch+=`<div class="task-row"><span>☐</span><span>${t.task}</span><span class="${priorityClass(t.priority)}">${t.priority}</span><span>${t.hours}h</span><span style="color:var(--dim);font-size:.8em">${t.deadline}</span></div>`;
+  });
+  document.getElementById('checklist-content').innerHTML=ch;
+
+  // Platforms
+  let pl='';
+  d.launchPlatforms.forEach(p=>{
+    pl+=`<div class="platform-card"><div class="name">${p.name}</div><div style="color:var(--dim);font-size:.85em">Prep: ${p.prep} · Effort: ${p.effort} · Impact: ${p.impact}</div><div style="font-size:.8em;color:var(--accent)">${p.url}</div></div>`;
+  });
+  document.getElementById('platforms-content').innerHTML=pl;
+
+  // Timeline
+  let tl='<div class="timeline-row"><div class="time head">Time</div><div class="head">Action</div><div class="channel head">Channel</div></div>';
+  d.launchDayTimeline.forEach(t=>{
+    tl+=`<div class="timeline-row"><div class="time">${t.time}</div><div>${t.action}</div><div class="channel">${t.channel}</div></div>`;
+  });
+  document.getElementById('timeline-content').innerHTML=tl;
+
+  // Post-launch
+  let pw='';
+  d.postLaunchWeek.forEach(w=>{
+    let tasks=w.tasks.map(t=>`<li>${t}</li>`).join('');
+    pw+=`<div class="post-week"><div class="day">${w.day}: ${w.focus}</div><ul>${tasks}</ul></div>`;
+  });
+  document.getElementById('postlaunch-content').innerHTML=pw;
+
+  // Emails
+  let em='<div class="email-row"><div class="head">Email</div><div class="head">Timing</div><div class="head">Subject</div><div class="head">Open %</div></div>';
+  d.emailSequence.forEach(e=>{
+    em+=`<div class="email-row"><span>${e.email}</span><span style="color:var(--dim)">${e.timing}</span><span style="font-style:italic">"${e.subject}"</span><span style="color:var(--green)">${e.openRate}%</span></div>`;
+  });
+  document.getElementById('emails-content').innerHTML=em;
+
+  // Metrics
+  let mt='';
+  d.successMetrics.forEach(m=>{
+    mt+=`<div class="metric-row"><span class="label">${m.metric}</span><span class="val">${typeof m.target==='string'?m.target:m.target} ${m.unit}</span></div>`;
+  });
+  document.getElementById('metrics-content').innerHTML=mt;
+
+  // Risks
+  let rk='';
+  d.riskMitigations.forEach(r=>{
+    rk+=`<div class="risk-card"><div class="title">${r.risk} <span style="font-size:.8em;color:var(--dim)">(Probability: ${r.probability}, Impact: ${r.impact})</span></div><div style="color:var(--dim);font-size:.85em">→ ${r.mitigation}</div></div>`;
+  });
+  document.getElementById('risks-content').innerHTML=rk;
+
+  // Quick wins
+  let qw='';
+  d.quickWins.forEach(w=>{qw+=`<div style="padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.85em">⚡ ${w}</div>`;});
+  document.getElementById('quickwins-content').innerHTML=qw;
+
+  // JSON
+  document.getElementById('json-output').textContent=JSON.stringify(d,null,2);
+}
+
+// Auto-generate on load
+window.addEventListener('DOMContentLoaded',generate);
+</script>
+</body>
+</html>

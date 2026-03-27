@@ -1,0 +1,409 @@
+{
+  "meta": {
+    "product": "AI Prompt Pack",
+    "productType": "prompt pack",
+    "generatedAt": "2026-03-27T03:33:01.470Z",
+    "engine": "Demaciains Launch Checklist Engine v1.0",
+    "dataFreshness": "daily (date-seeded)"
+  },
+  "launchPlan": {
+    "recommendedLaunchDate": "2026-04-08",
+    "daysUntilLaunch": 12,
+    "totalPrepHours": 28,
+    "readinessScore": 65
+  },
+  "preLaunchChecklist": [
+    {
+      "task": "Write Product Hunt maker comment",
+      "priority": "High",
+      "hours": 1,
+      "category": "Copy",
+      "done": false,
+      "deadline": "2026-03-27"
+    },
+    {
+      "task": "Brief 5-10 friends/colleagues to upvote on launch day",
+      "priority": "High",
+      "hours": 1,
+      "category": "Outreach",
+      "done": false,
+      "deadline": "2026-04-01"
+    },
+    {
+      "task": "Prepare Reddit post (follow subreddit rules)",
+      "priority": "High",
+      "hours": 1,
+      "category": "Copy",
+      "done": false,
+      "deadline": "2026-04-03"
+    },
+    {
+      "task": "Set up analytics (Plausible/Umami/Google)",
+      "priority": "High",
+      "hours": 1,
+      "category": "Setup",
+      "done": false,
+      "deadline": "2026-04-03"
+    },
+    {
+      "task": "Write \"About\" and FAQ sections",
+      "priority": "High",
+      "hours": 2,
+      "category": "Copy",
+      "done": false,
+      "deadline": "2026-04-04"
+    },
+    {
+      "task": "Record 60-second demo video",
+      "priority": "High",
+      "hours": 2,
+      "category": "Assets",
+      "done": false,
+      "deadline": "2026-04-06"
+    },
+    {
+      "task": "Check mobile responsiveness of all pages",
+      "priority": "High",
+      "hours": 1,
+      "category": "QA",
+      "done": false,
+      "deadline": "2026-04-07"
+    },
+    {
+      "task": "Create social media accounts if needed",
+      "priority": "Medium",
+      "hours": 1,
+      "category": "Setup",
+      "done": false,
+      "deadline": "2026-03-28"
+    },
+    {
+      "task": "Create comparison table vs competitors",
+      "priority": "Medium",
+      "hours": 2,
+      "category": "Copy",
+      "done": false,
+      "deadline": "2026-03-30"
+    },
+    {
+      "task": "Set up email capture / lead magnet",
+      "priority": "Medium",
+      "hours": 2,
+      "category": "Setup",
+      "done": false,
+      "deadline": "2026-03-31"
+    },
+    {
+      "task": "Verify SEO meta tags and Open Graph images",
+      "priority": "Medium",
+      "hours": 1,
+      "category": "SEO",
+      "done": false,
+      "deadline": "2026-04-01"
+    },
+    {
+      "task": "Prepare \"launch day\" email sequence",
+      "priority": "Medium",
+      "hours": 2,
+      "category": "Copy",
+      "done": false,
+      "deadline": "2026-04-02"
+    },
+    {
+      "task": "Create email announcement for existing audience",
+      "priority": "Medium",
+      "hours": 2,
+      "category": "Copy",
+      "done": false,
+      "deadline": "2026-04-05"
+    },
+    {
+      "task": "Create 3-5 product screenshots / demo GIFs",
+      "priority": "Critical",
+      "hours": 3,
+      "category": "Assets",
+      "done": false,
+      "deadline": "2026-03-29"
+    },
+    {
+      "task": "Test all purchase/download flows end-to-end",
+      "priority": "Critical",
+      "hours": 2,
+      "category": "QA",
+      "done": false,
+      "deadline": "2026-03-30"
+    },
+    {
+      "task": "Create landing page / sales page",
+      "priority": "Critical",
+      "hours": 4,
+      "category": "Assets",
+      "done": false,
+      "deadline": "2026-04-06"
+    }
+  ],
+  "launchPlatforms": [
+    {
+      "name": "Indie Hackers",
+      "prep": "3 days",
+      "effort": "Medium",
+      "impact": "Medium",
+      "url": "indiehackers.com"
+    },
+    {
+      "name": "BetaList",
+      "prep": "5 days",
+      "effort": "Low",
+      "impact": "Medium",
+      "url": "betalist.com"
+    },
+    {
+      "name": "AlternativeTo",
+      "prep": "1 day",
+      "effort": "Low",
+      "impact": "Medium",
+      "url": "alternativeto.net"
+    },
+    {
+      "name": "Gumroad/Lemon Squeezy",
+      "prep": "1 day",
+      "effort": "Low",
+      "impact": "High",
+      "url": "gumroad.com"
+    },
+    {
+      "name": "Hacker News (Show HN)",
+      "prep": "2 days",
+      "effort": "Medium",
+      "impact": "High",
+      "url": "news.ycombinator.com"
+    }
+  ],
+  "launchDayTimeline": [
+    {
+      "time": "T-2h",
+      "action": "Final QA check — all links, downloads, payments work",
+      "channel": "Internal"
+    },
+    {
+      "time": "T-1h",
+      "action": "Post on Twitter/X — \"Launching in 1 hour\" teaser",
+      "channel": "Twitter/X"
+    },
+    {
+      "time": "T-30m",
+      "action": "Brief launch supporters — share upvote links",
+      "channel": "DM/Email"
+    },
+    {
+      "time": "T-0 (LAUNCH)",
+      "action": "Submit to Product Hunt / post on primary platform",
+      "channel": "Product Hunt"
+    },
+    {
+      "time": "T+15m",
+      "action": "Share on personal social media — all platforms",
+      "channel": "Multi"
+    },
+    {
+      "time": "T+30m",
+      "action": "Post in relevant Slack/Discord communities",
+      "channel": "Communities"
+    },
+    {
+      "time": "T+1h",
+      "action": "Send email announcement to list",
+      "channel": "Email"
+    },
+    {
+      "time": "T+2h",
+      "action": "Post on Reddit (follow timing rules)",
+      "channel": "Reddit"
+    },
+    {
+      "time": "T+4h",
+      "action": "Engage with all comments and feedback",
+      "channel": "All"
+    },
+    {
+      "time": "T+8h",
+      "action": "Share milestone update (\"100 upvotes!\")",
+      "channel": "Twitter/X"
+    },
+    {
+      "time": "T+12h",
+      "action": "Second email — for those who haven't opened",
+      "channel": "Email"
+    },
+    {
+      "time": "T+24h",
+      "action": "Post launch recap / thank you thread",
+      "channel": "Twitter/X"
+    }
+  ],
+  "postLaunchWeek": [
+    {
+      "day": "Day 1-2",
+      "focus": "Feedback Collection",
+      "tasks": [
+        "Monitor all channels for bug reports",
+        "Respond to every comment within 2 hours",
+        "Log feature requests in spreadsheet",
+        "Fix critical bugs immediately",
+        "Thank early buyers publicly"
+      ]
+    },
+    {
+      "day": "Day 3-4",
+      "focus": "Content Amplification",
+      "tasks": [
+        "Publish launch story on blog/Medium",
+        "Create \"lessons learned\" Twitter thread",
+        "Submit to additional directories (AlternativeTo, TAAFT)",
+        "Reach out to 10 micro-influencers",
+        "Post case study / early results"
+      ]
+    },
+    {
+      "day": "Day 5-7",
+      "focus": "Conversion Optimization",
+      "tasks": [
+        "Analyze traffic sources and conversion rates",
+        "A/B test headline on landing page",
+        "Add social proof (testimonials, usage numbers)",
+        "Create limited-time launch offer if needed",
+        "Plan next week's content calendar"
+      ]
+    },
+    {
+      "day": "Day 8-14",
+      "focus": "Sustainable Growth",
+      "tasks": [
+        "Publish 2 SEO blog posts targeting buyer keywords",
+        "Set up retargeting ads if budget allows",
+        "Create referral/affiliate program structure",
+        "Build email nurture sequence for non-buyers",
+        "Start building v2 feature list from feedback"
+      ]
+    }
+  ],
+  "emailSequence": [
+    {
+      "email": "Pre-Launch Teaser",
+      "timing": "T-3 days",
+      "subject": "Something big is coming for prompt pack lovers",
+      "openRate": 40.19
+    },
+    {
+      "email": "Launch Announcement",
+      "timing": "T-0",
+      "subject": "It's LIVE: AI Prompt Pack is here 🚀",
+      "openRate": 52.92
+    },
+    {
+      "email": "Social Proof",
+      "timing": "T+2 days",
+      "subject": "\"This saved me 10 hours/week\" — early buyer feedback",
+      "openRate": 42.49
+    },
+    {
+      "email": "Last Chance",
+      "timing": "T+5 days",
+      "subject": "Launch pricing ends tomorrow",
+      "openRate": 38.28
+    },
+    {
+      "email": "Case Study",
+      "timing": "T+7 days",
+      "subject": "How [Name] used AI Prompt Pack to [result]",
+      "openRate": 26.27
+    }
+  ],
+  "successMetrics": [
+    {
+      "metric": "Day 1 Unique Visitors",
+      "target": 751,
+      "unit": "visitors"
+    },
+    {
+      "metric": "Day 1 Conversion Rate",
+      "target": 4.49,
+      "unit": "%"
+    },
+    {
+      "metric": "Week 1 Revenue",
+      "target": "$1611",
+      "unit": ""
+    },
+    {
+      "metric": "Product Hunt Upvotes",
+      "target": 107,
+      "unit": "votes"
+    },
+    {
+      "metric": "Email Signups (Week 1)",
+      "target": 127,
+      "unit": "signups"
+    },
+    {
+      "metric": "Social Media Impressions",
+      "target": "71K",
+      "unit": "impressions"
+    },
+    {
+      "metric": "Refund Rate",
+      "target": "<4",
+      "unit": "%"
+    },
+    {
+      "metric": "NPS Score",
+      "target": ">67",
+      "unit": ""
+    }
+  ],
+  "riskMitigations": [
+    {
+      "risk": "Low launch day traffic",
+      "probability": "Medium",
+      "mitigation": "Have 3+ launch channels ready; don't rely solely on Product Hunt",
+      "impact": "High"
+    },
+    {
+      "risk": "Payment processing fails",
+      "probability": "Low",
+      "mitigation": "Test all flows 48h before launch; have backup payment link ready",
+      "impact": "Critical"
+    },
+    {
+      "risk": "Site goes down from traffic spike",
+      "probability": "Medium",
+      "mitigation": "Use static hosting (GitHub Pages, Vercel) — handles spikes natively",
+      "impact": "High"
+    },
+    {
+      "risk": "Negative early reviews",
+      "probability": "Low",
+      "mitigation": "Offer instant support channel; fix issues within hours; reach out privately",
+      "impact": "Medium"
+    },
+    {
+      "risk": "Product Hunt launch gets buried",
+      "probability": "Medium",
+      "mitigation": "Launch on Tuesday-Thursday; have 20+ supporters ready at midnight PT",
+      "impact": "Medium"
+    },
+    {
+      "risk": "Copycat appears within 48h",
+      "probability": "Low",
+      "mitigation": "Ship fast, build community, add unique data/insights competitors can't copy",
+      "impact": "Low"
+    }
+  ],
+  "quickWins": [
+    "Add \"Launched on Product Hunt\" badge to landing page — increases trust by 15-25%",
+    "Create a \"What's New\" changelog page — shows active development, reduces refund requests",
+    "Set up a simple feedback form (Typeform/Google Form) — captures feature requests systematically",
+    "Add social proof counter (\"152+ users\") as soon as you hit double digits",
+    "Write a personal \"Why I built this\" story — authenticity converts 2-3x better than features list"
+  ]
+}
